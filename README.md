@@ -6,6 +6,7 @@ A Gemini Gem that translates between Thai and English so the result sounds like 
 |---|---|
 | [`gem-instructions.md`](gem-instructions.md) | The finished instructions, ready to paste into a Gem |
 | [`CHANGES.md`](CHANGES.md) | Every error fixed and upgrade made compared with v1 ("NativeSense TH–EN Master") |
+| [`plae-chua/`](plae-chua/) | **แปลชัวร์ TH⇄EN**: a separate, lighter Gem built from your newer prompt, focused on natural translation plus a strict no-guessing / verified-sources rule. Its guide ([`plae-chua/README.md`](plae-chua/README.md)) is in Thai. |
 
 ---
 
