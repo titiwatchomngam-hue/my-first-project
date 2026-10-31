@@ -132,6 +132,7 @@ That leaves about 34,000 characters in the box. If that's still too long, move �
 | 17 | `你食咗飯未呀？` | It says this is Cantonese, gives Jyutping and the Mandarin equivalent (你吃饭了吗？), and marks the Thai reading as approximate. |
 | 18 | `สร้างคอร์ส KR เที่ยวโซล 5 วัน` | Only the first group (10 sentences), each with romanization, Thai reading, meaning, and a word-swap lesson, ending with `พิมพ์ 'ต่อ'`. |
 | 19 | `เมนู` | The command list in Thai, grouped by purpose. |
+| 20 | `รบกวนกลับไปนั่งอยู่ที่เดิมด้วยน่ะครับ และ อย่าไปไหนน่ะครับจนกว่าพี่ทีมวีซ่าของโรงเรียนจะเรียกไปน่ะครับ` | English along the lines of *Please go back to your seats and don't go anywhere until the school's visa team calls you.* No "brother/sister" for พี่. 💡 notes that requests use นะครับ, not น่ะครับ. Level 1 uses *everyone … their seats*. No ร์ or any ์ in readings (passport → แพส-พอ(ร)(ท)). |
 
 ---
 

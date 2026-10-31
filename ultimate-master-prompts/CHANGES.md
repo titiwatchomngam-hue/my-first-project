@@ -27,6 +27,13 @@ v1 is the PDF *คัมภีร์พรอมต์แปลภาษาแ�
 - The wording works on both platforms: "Knowledge or project files", "if you can search the web".
 - Two new tests: the English bracket and bold rules, and ไม่ต้อง.
 
+**After your first Gemini test (§16)**
+- The Gem wrote แพส-พอร์(ท): ร์ is now named explicitly as banned, with passport → แพส-พอ(ร)(ท) as the example.
+- It labeled sentence blocks "กริยาที่ 1/2", which reads like กริยาช่อง 1/2. Blocks are now named by their job.
+- It wrote *Could everyone please return to your seats*. There's now a pronoun-agreement rule (everyone → their).
+- It said the present tense after *until* is used "always" (เสมอ). Grammar rules must now state their real scope.
+- New test #20 uses your test sentence.
+
 ---
 
 The rest of this file describes v1 → v2.
