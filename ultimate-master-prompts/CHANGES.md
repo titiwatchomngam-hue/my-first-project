@@ -1,6 +1,19 @@
-# What changed: from the PDF (Version 1) to คัมภีร์แปล 5 ภาษา (Version 2)
+# What changed: from the PDF (Version 1) to NativeSense Polyglot (Complete Edition)
 
-Version 1 is the PDF *คัมภีร์พรอมต์แปลภาษาและโค้ชสอนภาษาฉบับสมบูรณ์*: a universal prompt (§0), four language prompts (§1 EN, §2 JP, §3 KR, §4 CN), and three add-on modes (§5). Version 2 is [`master-prompt.md`](master-prompt.md): one complete prompt, ready for a Gemini Gem (or a Claude Project). It was built in three rounds, listed newest first.
+Version 1 is the PDF *คัมภีร์พรอมต์แปลภาษาและโค้ชสอนภาษาฉบับสมบูรณ์*: a universal prompt (§0), four language prompts (§1 EN, §2 JP, §3 KR, §4 CN), and three add-on modes (§5). The Complete Edition is [`master-prompt.md`](master-prompt.md): one complete prompt, ready for a Gemini Gem (or a Claude Project). It was built in four rounds, listed newest first.
+
+## Round 4: Complete Edition, after the JP, KR, and CN tests
+
+Every fix is built into its own section.
+- **Name:** the Gem is now **NativeSense Polyglot** (your original brand), with an English description in the README.
+- **Japanese:** Hepburn keeps ii and ei as written (kuwashii and kiite, not kuwashī and kīte). Romaji must match the kana syllable for syllable; one test reply wrote *wakarain da* for わからないんだ. The g sound is always ก (が = กะ), since one reply wrote งะ and โกะ in the same answer. When talking to outsiders, colleagues get no さん, and that choice must stay the same across every level and note; the test used さん in the main sentence while its own 💡 said to drop it.
+- **Korean:** Hangul pronunciation brackets appear only when the sound changes, and they must match the romanization and Thai. The test showed [보조 직원] next to ji-gwon instead of [보조 지권]. Tense consonants close the syllable before them (씨께 ซีก-เก).
+- **Chinese:** zh and ch touch behind the gum ridge, while sh and r don't (the test's tip said none of them touch). 我 is always หว่อ; the test wrote it two ways.
+- **Thai readings:** ไ ใ เ-า ำ can't take a final consonant, so the extra sound goes in brackets (ไน(น), ไอ(ม)). A final ร is read as น, like ล. Apologize is อะ-พา-ละ-ไจ(ซ). Finals Thai already reads correctly aren't bracketed (ทีม, not ที(ม)).
+- **Kanji and hanzi:** memory hooks are labeled วิธีจำ and never presented as a character's real origin. Simplified characters are explained with simplified components (详 = 讠 + 羊).
+- **English:** Thai names go by first name or nickname (Khun Ing-Ing); Ms. goes with a surname, not a nickname.
+- **→ meanings:** two test replies added มาช่วย where the sentence only said *here to look after*. The rule now carries that example.
+- The final check (§15) covers all of the above.
 
 ## Round 3: after your first Gemini test
 
@@ -34,7 +47,7 @@ All fixes are built into their own sections; there's nothing to append.
 - `แปลด่วน` keeps any ⚠️ line.
 
 **Gem packaging**
-- The Gem name (คัมภีร์แปล 5 ภาษา) is in the first line and in §1. The name, the Description, the setup steps, and a fallback for Gemini's instruction box (moving §10 into a Knowledge file) are in the README.
+- The Gem name is in the first line and in §1 (renamed NativeSense Polyglot in round 4). The name, the Description, the setup steps, and a fallback for Gemini's instruction box (moving §10 into a Knowledge file) are in the README.
 - The wording works on both platforms: "Knowledge or project files", "if you can search the web".
 - Two new tests: the English bracket and bold rules, and ไม่ต้อง.
 

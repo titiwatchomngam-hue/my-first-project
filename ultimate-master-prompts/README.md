@@ -1,4 +1,4 @@
-# คัมภีร์แปล 5 ภาษา (Version 2)
+# NativeSense Polyglot (Complete Edition)
 
 A single set of instructions that turns a **Gemini Gem** (or a Claude Project) into a translator and language coach for **Thai, English, Japanese, Korean, and Chinese**, in any direction. Every foreign sentence comes with a pronunciation guide (romanization plus a Thai-script reading), three politeness levels, a short lesson in Thai, and ready-to-send replies. It's built on your PDF *คัมภีร์พรอมต์แปลภาษาและโค้ชสอนภาษาฉบับสมบูรณ์* plus your brief.
 
@@ -11,27 +11,25 @@ A single set of instructions that turns a **Gemini Gem** (or a Claude Project) i
 
 ## 1. Gem name and description (copy and paste)
 
-**Name** (recommended)
+**Name**
 
 ```
-คัมภีร์แปล 5 ภาษา
+NativeSense Polyglot
 ```
 
 Why this name:
-- It's the title of your own PDF (คัมภีร์…ฉบับสมบูรณ์), so it signals "the complete one".
-- It says what the Gem does (แปล) and its scope (5 ภาษา) at a glance, and it's short enough not to be cut off in the Gem list.
-- It won't be confused with your two TH⇄EN Gems, แปลเนียน and แปลชัวร์.
+- **NativeSense** was the name of your very first Gem (NativeSense TH–EN Master), so it keeps your brand and states the main promise: it sounds like a native speaker.
+- **Polyglot** means someone who speaks many languages, so it covers all five.
+- It's short enough not to be cut off in the Gem list.
 
-Alternatives:
-- **แปลเนียน 5 ภาษา** continues the name of your first Gem.
-- **เนียนชัวร์ 5 ภาษา** means "natural + sure", your two top priorities.
+Alternatives: **Polyglot Coach TH·EN·JP·KR·CN** (says exactly what it does) · **NativeSense 5** (shortest).
 
-If you pick another name, change it in two places in `master-prompt.md`: the first line, and "You are **คัมภีร์แปล 5 ภาษา**" in §1.
+If you pick another name, change it in two places in `master-prompt.md`: the first line, and "You are **NativeSense Polyglot**" in §1.
 
 **Description**
 
 ```
-แปลไทย อังกฤษ ญี่ปุ่น เกาหลี จีน ได้ทุกคู่ภาษา เป็นธรรมชาติแบบเจ้าของภาษา พร้อมคำอ่านภาษาไทย ระดับภาษา 3 แบบ และบทเรียนสั้น ๆ ที่ใช้ได้จริง · ไม่เดา ไม่มั่ว ไม่แน่ใจตรงไหนจะบอกตรง ๆ
+Native-sounding translation between Thai, English, Japanese, Korean, and Chinese, in any direction, with Thai-script pronunciation, three politeness levels, and short lessons in Thai. Never guesses: anything uncertain is clearly marked.
 ```
 
 ---
@@ -55,10 +53,10 @@ A computer is easiest, because you'll paste a long text. Once saved, the Gem als
 **If Gemini won't accept the full text, or cuts it off**
 
 The file is about 47,000 characters. Google doesn't publish an official length limit for Gem instructions; one third-party site claims about 4,000 characters, but your แปลชัวร์ Gem (about 30,000 characters, on another branch of this repo) was tested in Gemini, so that figure doesn't match practice. If the box still refuses this longer text:
-1. Cut §10, from `## 10. Language packs` up to (but not including) `## 11. Content types`, and paste it into a Google Doc named `คัมภีร์แปล 5 ภาษา – language packs`.
+1. Cut §10, from `## 10. Language packs` up to (but not including) `## 11. Content types`, and paste it into a Google Doc named `NativeSense Polyglot – language packs`.
 2. Under **Knowledge**, click **Add files** and choose that Doc from Google Drive.
 3. Add this line at the very top of the Instructions:
-   `Section 10 (Language packs) is in the Knowledge file "คัมภีร์แปล 5 ภาษา – language packs". Read it and apply it in every reply, exactly as if it were written here.`
+   `Section 10 (Language packs) is in the Knowledge file "NativeSense Polyglot – language packs". Read it and apply it in every reply, exactly as if it were written here.`
 
 That leaves about 34,000 characters in the box. If that's still too long, move §11 (Content types) into the same Doc as well (about 29,700 left) and change the line to say "Sections 10–11".
 
