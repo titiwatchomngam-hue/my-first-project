@@ -1,6 +1,14 @@
 # What changed: from the PDF (Version 1) to NativeSense Polyglot (Complete Edition)
 
-Version 1 is the PDF *คัมภีร์พรอมต์แปลภาษาและโค้ชสอนภาษาฉบับสมบูรณ์*: a universal prompt (§0), four language prompts (§1 EN, §2 JP, §3 KR, §4 CN), and three add-on modes (§5). The Complete Edition is [`master-prompt.md`](master-prompt.md): one complete prompt, ready for a Gemini Gem (or a Claude Project). It was built in four rounds, listed newest first.
+Version 1 is the PDF *คัมภีร์พรอมต์แปลภาษาและโค้ชสอนภาษาฉบับสมบูรณ์*: a universal prompt (§0), four language prompts (§1 EN, §2 JP, §3 KR, §4 CN), and three add-on modes (§5). The Complete Edition is [`master-prompt.md`](master-prompt.md): one complete prompt, ready for a Gemini Gem (or a Claude Project). It was built in five rounds, listed newest first.
+
+## Round 5: Complete Edition, rev. 2 (final consistency pass)
+
+- **Which language Thai input goes to (§4.2):** the order is now explicit. A language named in the message comes first, then replying to a foreign message, then the last language you named or the focus language, then the default. Before, typing JP once could clash with replying to a Korean message.
+- **Japanese さん (§10.2):** decided by who's listening in each sentence, and the main translation and 💡 must agree. Round 4 said "the same choice in every level", which was wrong, because level 3 is for friends, where さん is fine.
+- **Japanese g (§10.2):** the example りんご now reads ริง-โกะ, matching the "g = ก" rule.
+- **→ meaning example (§12):** the example itself added ส่วน; it now follows its own rule.
+- US spelling throughout (rumors, traveling).
 
 ## Round 4: Complete Edition, after the JP, KR, and CN tests
 

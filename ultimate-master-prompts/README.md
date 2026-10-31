@@ -1,4 +1,4 @@
-# NativeSense Polyglot (Complete Edition)
+# NativeSense Polyglot (Complete Edition, rev. 2)
 
 A single set of instructions that turns a **Gemini Gem** (or a Claude Project) into a translator and language coach for **Thai, English, Japanese, Korean, and Chinese**, in any direction. Every foreign sentence comes with a pronunciation guide (romanization plus a Thai-script reading), three politeness levels, a short lesson in Thai, and ready-to-send replies. It's built on your PDF *คัมภีร์พรอมต์แปลภาษาและโค้ชสอนภาษาฉบับสมบูรณ์* plus your brief.
 
