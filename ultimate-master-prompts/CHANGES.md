@@ -1,12 +1,23 @@
-# What changed: from the PDF (v1) to คัมภีร์แปล 5 ภาษา (v2.1)
+# What changed: from the PDF (Version 1) to คัมภีร์แปล 5 ภาษา (Version 2)
 
-v1 is the PDF *คัมภีร์พรอมต์แปลภาษาและโค้ชสอนภาษาฉบับสมบูรณ์*: a universal prompt (§0), four language prompts (§1 EN, §2 JP, §3 KR, §4 CN), and three add-on modes (§5). v2 turned it into one master prompt for Claude Projects. v2.1 (this round) is the same prompt reviewed again and made ready for a Gemini Gem: [`master-prompt.md`](master-prompt.md).
+Version 1 is the PDF *คัมภีร์พรอมต์แปลภาษาและโค้ชสอนภาษาฉบับสมบูรณ์*: a universal prompt (§0), four language prompts (§1 EN, §2 JP, §3 KR, §4 CN), and three add-on modes (§5). Version 2 is [`master-prompt.md`](master-prompt.md): one complete prompt, ready for a Gemini Gem (or a Claude Project). It was built in three rounds, listed newest first.
 
-## v2.1: Gemini Gem edition
+## Round 3: after your first Gemini test
+
+All fixes are built into their own sections; there's nothing to append.
+- The Gem wrote แพส-พอร์(ท). §9 now bans ร์ by name, with passport → แพส-พอ(ร)(ท) as the example.
+- No stress marks showed up in the reply you pasted. §9 now says exactly what to bold: the stressed syllable of every English word with two or more syllables (**เอ**-นี-แว(ร), อัน-**ทิ(ล)**).
+- It wrote *Could everyone please return to your seats*. §10.1 now has a pronoun-agreement rule (everyone → their).
+- Its tip for the *th* in *the* described air only. §10.1 now separates voiced *th* (the, this, there) from voiceless (think, thank).
+- It labeled sentence blocks "กริยาที่ 1/2", which reads like กริยาช่อง 1/2, and it called the present tense after *until* "always" (เสมอ). §12 now names blocks by their job and requires grammar rules to state their real scope.
+- The final check (§15) now covers examples as well as the main translation.
+- New test #20 in the README uses your test sentence.
+
+## Round 2: second review and Gemini Gem edition
 
 **Errors found in a second review and corrected**
 - 辛苦了 was glossed "ขอบคุณที่เหนื่อย", which isn't natural Thai. Now: "เหนื่อยหน่อยนะ / ขอบคุณที่ทุ่มเท".
-- For an unknown speaker, v2 said to write ครับ/ค่ะ everywhere, which is misspelled in questions. Now: ครับ/ค่ะ in statements, ครับ/คะ in questions.
+- For an unknown speaker, round 1 said to write ครับ/ค่ะ everywhere, which is misspelled in questions. Now: ครับ/ค่ะ in statements, ครับ/คะ in questions.
 - The repeat mark was written without spaces (เบาๆ, จริงๆ). It now follows the Royal Society spacing (เบา ๆ, จริง ๆ), matching the prompt's own spelling rule.
 - The Japanese old-man speech style ("ข้า…นะ เจ้าหนุ่ม style") was unclear. Now: ข้า/เจ้า in an elder's voice (…หรอก, เจ้าหนุ่ม).
 - The Japanese k/t/p rule now covers ち too: ช at the start of a word, จ inside one (こんにちは คน-นิ-จิ-วะ).
@@ -15,7 +26,7 @@ v1 is the PDF *คัมภีร์พรอมต์แปลภาษาแ�
 **Carried over from your แปลชัวร์ Gem, which was tested in Gemini**
 - Brackets: the letters outside the brackets must read correctly on their own: feel → ฟี(ล) (ฟีล would be read ฟีน), like → ไล(ค).
 - Bold stress on every English reading line, in every format.
-- No ์ anywhere in a reading (v2 banned it only on sounds that must be heard).
+- No ์ anywhere in a reading (round 1 banned it only on sounds that must be heard).
 - No ครับ/ค่ะ in the Gem's own explanations. If you want them back, see the README.
 - No phone numbers, websites, prices, or agency policies unless they were verified in that chat. Scam warnings explain only from the signs in the text and never offer reply options.
 - Every → meaning line must match its sentence exactly: nothing added, nothing dropped.
@@ -27,18 +38,9 @@ v1 is the PDF *คัมภีร์พรอมต์แปลภาษาแ�
 - The wording works on both platforms: "Knowledge or project files", "if you can search the web".
 - Two new tests: the English bracket and bold rules, and ไม่ต้อง.
 
-**After your first Gemini test (§16)**
-- The Gem wrote แพส-พอร์(ท): ร์ is now named explicitly as banned, with passport → แพส-พอ(ร)(ท) as the example.
-- It labeled sentence blocks "กริยาที่ 1/2", which reads like กริยาช่อง 1/2. Blocks are now named by their job.
-- It wrote *Could everyone please return to your seats*. There's now a pronoun-agreement rule (everyone → their).
-- It said the present tense after *until* is used "always" (เสมอ). Grammar rules must now state their real scope.
-- New test #20 uses your test sentence.
+## Round 1: rebuild from the PDF
 
----
-
-The rest of this file describes v1 → v2.
-
-## What was kept
+### What was kept
 
 - Your role paragraph is §1, almost word for word.
 - Your 4-part answer and its Thai headings are Format A in §12: คำแปล (with the detected context) → ระดับภาษา → ห้องเรียนภาษา (สูตรต่อเลโก้, คำศัพท์และสำนวน, เรดาร์วัฒนธรรม) → ตอบกลับพร้อมใช้.
@@ -46,13 +48,13 @@ The rest of this file describes v1 → v2.
 - Everything from the four language prompts (keigo, omitted subjects, furigana, batchim linking, K-slang, tone sandhi, wuxia terms, chengyu) is in the matching language pack (§10).
 - The three add-ons are now built-in commands: `โหมดเกม`, `โหมดข่าว`, and `สร้างคอร์ส` (§13). You no longer need to paste them.
 
-## Structural change: 5 prompts became 1
+### Structural change: 5 prompts became 1
 
-The four language prompts each repeated the core rules, and each had different gaps: only §1 had "Zero Hallucination", only §0 had "Ambiguity Handling", and only §2 handled omitted subjects. v2 has one shared core (§1–§9, §11–§15) plus five language packs (§10.1 EN, §10.2 JP, §10.3 KR, §10.4 CN, §10.5 TH), so every language gets every safeguard. The `ตั้งค่า: โฟกัส JP` setting replaces switching between prompts. If you want a lighter single-language version, delete the packs you don't need (see the README).
+The four language prompts each repeated the core rules, and each had different gaps: only §1 had "Zero Hallucination", only §0 had "Ambiguity Handling", and only §2 handled omitted subjects. Version 2 has one shared core (§1–§9, §11–§15) plus five language packs (§10.1 EN, §10.2 JP, §10.3 KR, §10.4 CN, §10.5 TH), so every language gets every safeguard. The `ตั้งค่า: โฟกัส JP` setting replaces switching between prompts. If you want a lighter single-language version, delete the packs you don't need (see the README).
 
-## Errors fixed
+### Errors fixed
 
-| # | Where | In v1 | Problem → fix in v2 |
+| # | Where | In the PDF | Problem → fix |
 |---|---|---|---|
 | 1 | §0 | Covers "Thai <-> English, Japanese, Korean, and Chinese" | Nothing says which language a **Thai** message should go into. → §4.2 decides in this order: a target named in the message, the focus language, the language of the message you're replying to, then English with a one-line offer of the others. You can also type `EN` / `JP` / `KR` / `CN`. |
 | 2 | End of §0–§4 | "Please acknowledge in Thai that you are ready…" and "พร้อมแปล… ส่งข้อความมาได้เลย!" | In Project instructions there's no separate setup message, so the model can answer your first real text with "พร้อมแล้วครับ" instead of translating it. → A greeting gets a short welcome; text gets translated right away (§4.6). |
@@ -69,7 +71,7 @@ The four language prompts each repeated the core rules, and each had different g
 | 13 | Throughout | ครับ hard-coded; nothing on the speaker's gender | Wrong Thai particles and pronouns, and the wrong 僕 / 私 / あたし in Japanese. → A gender setting with neutral forms by default; fiction follows the character. |
 | 14 | Small | "ห้ามแปลตรงตัวแบบที่อาจเด็ดขาด" (garbled), "and促音" (missing space), "พรอมต์รวมมิตร **4** ภาษา" (it covers 5), romanization systems not named, "โต-เคียว" | → Wording fixed. Systems named: Hepburn with macrons, Revised Romanization of the pronounced form, Hanyu Pinyin. Japanese k/t/p follow the Thai transcription habit: ค/ท/พ at the start of a word, ก/ต/ป inside one (โต-เกียว). |
 
-## Gaps closed
+### Gaps closed
 
 **From your new brief**
 - Any pair among the five languages, not just X⇄Thai (JP→EN, KR⇄CN…), with a one-line Thai meaning.
