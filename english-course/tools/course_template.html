@@ -1,0 +1,727 @@
+<title>NativeSense English Starter</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anuphan:wght@500;600;700&family=IBM+Plex+Sans+Thai:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+/* Layout: a single reading column (a phrasebook page) under a sticky top bar; lessons open as tabbed sections. */
+:root {
+  --bg: #F4F6F9;
+  --surface: #FFFFFF;
+  --ink: #16212E;
+  --ink-2: #485467;
+  --ink-3: #6B7789;
+  --line: #DAE0E8;
+  --accent: #2851D6;
+  --accent-ink: #FFFFFF;
+  --accent-soft: #E7ECFC;
+  --mark: #FFE66B;
+  --mark-ink: #16212E;
+  --good: #1B7A48;
+  --good-soft: #E0F3E8;
+  --bad: #B3261E;
+  --bad-soft: #FCE7E5;
+  --spk-a: #2851D6;
+  --spk-b: #A8336F;
+  --font-display: "Anuphan", "IBM Plex Sans Thai", "Sarabun", system-ui, sans-serif;
+  --font-body: "IBM Plex Sans Thai", "Sarabun", "Leelawadee UI", system-ui, sans-serif;
+  --font-en: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+  --radius: 14px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0E141C; --surface: #161F2B; --ink: #E6ECF3; --ink-2: #AEB9C7; --ink-3: #8C98A8; --line: #283546;
+    --accent: #87A5FF; --accent-ink: #0E141C; --accent-soft: #1B2842; --mark: #5E5013; --mark-ink: #FFF1A8;
+    --good: #5FCB90; --good-soft: #13301F; --bad: #FF8D80; --bad-soft: #3B1714; --spk-a: #87A5FF; --spk-b: #F08DC2;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0E141C; --surface: #161F2B; --ink: #E6ECF3; --ink-2: #AEB9C7; --ink-3: #8C98A8; --line: #283546;
+  --accent: #87A5FF; --accent-ink: #0E141C; --accent-soft: #1B2842; --mark: #5E5013; --mark-ink: #FFF1A8;
+  --good: #5FCB90; --good-soft: #13301F; --bad: #FF8D80; --bad-soft: #3B1714; --spk-a: #87A5FF; --spk-b: #F08DC2;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { background: var(--bg); }
+body { color: var(--ink); font-family: var(--font-body); font-size: 16px; line-height: 1.6; -webkit-text-size-adjust: 100%; }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 20; background: var(--surface); }
+button, input { font: inherit; color: inherit; }
+button { cursor: pointer; }
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; border-radius: 8px; }
+h1, h2, h3 { font-family: var(--font-display); line-height: 1.3; text-wrap: balance; margin: 0; }
+.en { font-family: var(--font-en); }
+mark { background: var(--mark); color: var(--mark-ink); border-radius: 4px; padding: 0 3px; }
+.wrap { max-width: 760px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+
+/* top bar */
+.top { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 10; background: var(--surface); border-bottom: 1px solid var(--line); }
+.top-inner { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-block: 10px; }
+.brand { display: flex; flex-direction: column; min-width: 0; text-decoration: none; color: inherit; }
+.brand b { font-family: var(--font-display); font-size: 1.08rem; line-height: 1.2; }
+.brand span { color: var(--ink-3); font-size: 0.78rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.topnav { display: flex; gap: 6px; flex: none; }
+.navbtn { border: 1px solid var(--line); background: var(--surface); border-radius: 999px; padding: 6px 12px; font-size: 0.88rem; min-height: 38px; color: var(--ink-2); text-decoration: none; display: inline-flex; align-items: center; }
+.navbtn[aria-current="page"] { border-color: var(--accent); color: var(--accent); background: var(--accent-soft); font-weight: 600; }
+
+main.wrap { padding-block: 18px 48px; display: grid; gap: 16px; }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 18px; min-width: 0; }
+.muted { color: var(--ink-3); }
+.small { font-size: 0.86rem; }
+.row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.btn { border: 1px solid var(--line); background: var(--surface); border-radius: 10px; padding: 8px 14px; min-height: 42px; display: inline-flex; align-items: center; gap: 6px; font-weight: 500; text-decoration: none; color: inherit; }
+.btn.primary { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+.btn.ghost { background: transparent; }
+.btn svg { width: 18px; height: 18px; flex: none; }
+.btn[disabled] { opacity: 0.45; cursor: not-allowed; }
+.iconbtn { border: 1px solid var(--line); background: var(--surface); border-radius: 999px; width: 40px; height: 40px; display: inline-grid; place-items: center; flex: none; color: var(--accent); }
+.iconbtn svg { width: 18px; height: 18px; }
+.chip { display: inline-flex; align-items: center; gap: 4px; border-radius: 999px; padding: 2px 10px; font-size: 0.78rem; border: 1px solid var(--line); color: var(--ink-2); background: var(--surface); }
+.chip.ok { border-color: var(--good); color: var(--good); background: var(--good-soft); }
+.meter { height: 8px; background: var(--line); border-radius: 99px; overflow: hidden; }
+.meter i { display: block; height: 100%; width: 0; background: var(--accent); }
+
+/* home */
+.hero { display: grid; gap: 10px; }
+.hero h1 { font-size: clamp(1.45rem, 5.4vw, 2rem); }
+.hero p { margin: 0; color: var(--ink-2); max-width: 62ch; }
+.stats { display: flex; gap: 18px; flex-wrap: wrap; font-size: 0.9rem; color: var(--ink-2); }
+.stats b { font-family: var(--font-en); font-size: 1.15rem; color: var(--ink); font-variant-numeric: tabular-nums; }
+.module { display: grid; gap: 10px; }
+.module-head { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+.module-head h2 { font-size: 1.12rem; }
+.module-head .en { color: var(--ink-3); font-size: 0.85rem; }
+.lessons { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 330px), 1fr)); gap: 10px; }
+.lesson-card { display: grid; grid-template-columns: auto 1fr; gap: 4px 12px; align-items: start; text-decoration: none; color: inherit; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 13px 14px; min-width: 0; }
+.lesson-card:hover { border-color: var(--accent); }
+.num { grid-row: span 3; width: 38px; height: 38px; border-radius: 50%; display: grid; place-items: center; font-family: var(--font-en); font-weight: 600; background: var(--accent-soft); color: var(--accent); font-variant-numeric: tabular-nums; }
+.lesson-card.done .num { background: var(--good); color: var(--surface); }
+.lesson-card h3 { font-size: 1rem; }
+.lesson-card .en { color: var(--ink-3); font-size: 0.8rem; }
+.lesson-card .chips { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 4px; }
+
+/* lesson */
+.crumb { color: var(--ink-3); font-size: 0.85rem; display: flex; gap: 6px; flex-wrap: wrap; }
+.crumb a { color: var(--accent); text-decoration: none; }
+.lesson-head h1 { font-size: clamp(1.35rem, 5vw, 1.8rem); margin-top: 2px; }
+.lesson-head .en-title { font-family: var(--font-en); color: var(--ink-3); }
+.goal { margin: 10px 0 0; padding: 10px 12px; border-radius: 10px; background: var(--accent-soft); }
+.goal b { color: var(--accent); }
+.tabs { position: sticky; top: calc(env(safe-area-inset-top, 0px) + var(--toph, 61px)); z-index: 5; background: var(--bg); padding-block: 8px; display: flex; gap: 6px; overflow-x: auto; scrollbar-width: none; }
+.tabs::-webkit-scrollbar { display: none; }
+.tab { flex: none; border: 1px solid var(--line); background: var(--surface); border-radius: 999px; padding: 6px 13px; font-size: 0.88rem; min-height: 38px; color: var(--ink-2); }
+.tab[aria-selected="true"] { background: var(--ink); color: var(--surface); border-color: var(--ink); font-weight: 600; }
+.toolbar { display: flex; flex-wrap: wrap; gap: 10px 14px; align-items: center; justify-content: space-between; }
+.toggle { display: inline-flex; align-items: center; gap: 6px; font-size: 0.88rem; color: var(--ink-2); }
+.toggle input { width: 18px; height: 18px; accent-color: var(--accent); }
+
+.line { display: grid; grid-template-columns: 1fr auto; gap: 4px 10px; padding-block: 12px; border-top: 1px solid var(--line); }
+.line:first-child { border-top: 0; padding-top: 0; }
+.line .say { font-family: var(--font-en); font-size: 1.12rem; font-weight: 500; margin: 0; overflow-wrap: anywhere; }
+.line .reading { margin: 0; color: var(--ink); overflow-wrap: anywhere; }
+.line .reading b { color: var(--accent); }
+.line .th { margin: 0; color: var(--ink-2); }
+.line .note { margin: 2px 0 0; font-size: 0.84rem; color: var(--ink-3); }
+.line .acts { grid-row: 1 / span 4; grid-column: 2; display: flex; flex-direction: column; gap: 6px; }
+.hide-reading .reading { display: none !important; }
+.hide-th .th { display: none !important; }
+
+.scene { color: var(--ink-3); font-size: 0.88rem; margin: 0 0 8px; }
+.cast { display: flex; gap: 12px; flex-wrap: wrap; font-size: 0.86rem; color: var(--ink-2); margin-bottom: 6px; }
+.who { display: inline-grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; font-family: var(--font-en); font-weight: 600; font-size: 0.8rem; color: var(--surface); flex: none; }
+.who.A { background: var(--spk-a); }
+.who.B { background: var(--spk-b); }
+.dline { display: grid; grid-template-columns: auto 1fr auto; gap: 4px 10px; padding-block: 10px; border-top: 1px solid var(--line); align-items: start; }
+.dline:first-child { border-top: 0; }
+.dline.playing { background: var(--accent-soft); border-radius: 10px; }
+.dline .body { min-width: 0; display: grid; gap: 2px; }
+.dline .say { font-family: var(--font-en); font-weight: 500; margin: 0; overflow-wrap: anywhere; }
+.dline .reading { margin: 0; overflow-wrap: anywhere; }
+.dline .reading b { color: var(--accent); }
+.dline .th { margin: 0; color: var(--ink-2); font-size: 0.94rem; }
+.covered .say, .covered .reading { filter: blur(6px); user-select: none; }
+.reveal-hint { font-size: 0.8rem; color: var(--accent); }
+
+.formula { font-family: var(--font-en); font-size: 1.12rem; font-weight: 600; padding: 12px 14px; border: 2px dashed var(--accent); border-radius: 12px; overflow-wrap: anywhere; }
+.trap { display: grid; gap: 8px; }
+.wrong { color: var(--bad); text-decoration: line-through; text-decoration-thickness: 2px; font-family: var(--font-en); margin: 0; }
+.right { color: var(--good); font-family: var(--font-en); font-weight: 600; margin: 0; }
+.label { font-size: 0.78rem; letter-spacing: 0.04em; color: var(--ink-3); font-weight: 600; }
+.wordchips { display: flex; flex-wrap: wrap; gap: 8px; }
+.wordchip { display: grid; gap: 0; text-align: left; border: 1px solid var(--line); background: var(--surface); border-radius: 10px; padding: 7px 12px; min-height: 44px; }
+.wordchip .en { font-weight: 600; color: var(--ink); }
+.wordchip .r { font-size: 0.86rem; color: var(--ink-2); }
+.wordchip .r b { color: var(--accent); }
+
+/* quiz */
+.qhead { display: flex; justify-content: space-between; align-items: center; gap: 8px; color: var(--ink-3); font-size: 0.85rem; }
+.dots { display: flex; gap: 4px; }
+.dots i { width: 8px; height: 8px; border-radius: 50%; background: var(--line); display: block; }
+.dots i.on { background: var(--accent); }
+.dots i.ok { background: var(--good); }
+.dots i.no { background: var(--bad); }
+.qtitle { margin: 12px 0 4px; font-size: 0.86rem; color: var(--ink-3); font-weight: 600; }
+.qprompt { font-family: var(--font-display); font-size: clamp(1.15rem, 4.4vw, 1.35rem); font-weight: 600; margin: 0 0 12px; overflow-wrap: anywhere; }
+.qprompt.en { font-family: var(--font-en); }
+.opts { display: grid; gap: 8px; }
+.opt { text-align: left; border: 1.5px solid var(--line); background: var(--surface); border-radius: 11px; padding: 11px 13px; min-height: 48px; line-height: 1.45; overflow-wrap: anywhere; }
+.opt.en { font-family: var(--font-en); }
+.opt:hover:not([disabled]) { border-color: var(--accent); }
+.opt.correct { border-color: var(--good); background: var(--good-soft); }
+.opt.wrongpick { border-color: var(--bad); background: var(--bad-soft); }
+.opt[disabled] { cursor: default; }
+.tiles { display: flex; flex-wrap: wrap; gap: 8px; min-height: 48px; padding: 8px; border: 1.5px dashed var(--line); border-radius: 11px; }
+.tile { font-family: var(--font-en); border: 1px solid var(--line); background: var(--surface); border-radius: 8px; padding: 6px 11px; min-height: 40px; }
+.tile.used { visibility: hidden; }
+.answer-line { min-height: 48px; padding: 8px; border-bottom: 2px solid var(--accent); display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 10px; }
+.feedback { margin-top: 12px; padding: 12px; border-radius: 11px; display: grid; gap: 4px; }
+.feedback.ok { background: var(--good-soft); }
+.feedback.no { background: var(--bad-soft); }
+.feedback .verdict { font-weight: 700; margin: 0; }
+.feedback.ok .verdict { color: var(--good); }
+.feedback.no .verdict { color: var(--bad); }
+.feedback .say { font-family: var(--font-en); font-weight: 500; margin: 0; }
+.feedback .reading { margin: 0; }
+.feedback .reading b { color: var(--accent); }
+.big-listen { display: flex; gap: 10px; justify-content: center; margin: 6px 0 14px; flex-wrap: wrap; }
+.big-listen .btn { min-height: 54px; padding: 10px 20px; font-size: 1.02rem; }
+.result h2 { font-size: 1.6rem; margin: 6px 0; }
+
+/* teacher */
+.steps { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; counter-reset: step; }
+.steps li { display: grid; grid-template-columns: auto 1fr; gap: 2px 12px; }
+.steps .t { grid-row: span 2; font-family: var(--font-en); font-variant-numeric: tabular-nums; font-weight: 600; color: var(--accent); min-width: 52px; }
+.steps b { font-family: var(--font-display); }
+.rolecards { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)); gap: 10px; }
+.rolecard { border: 1.5px solid var(--line); border-radius: 12px; padding: 12px; display: grid; gap: 6px; }
+.rolecard h3 { font-size: 1rem; display: flex; align-items: center; gap: 8px; }
+
+.legend { font-size: 0.86rem; color: var(--ink-2); display: grid; gap: 6px; }
+.legend p { margin: 0; }
+.legend b { color: var(--accent); }
+.sync { font-size: 0.8rem; color: var(--ink-3); text-align: center; }
+.warn { color: var(--bad); }
+.pairs { display: grid; gap: 10px; }
+.pair { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.pairbtn { display: grid; text-align: left; gap: 0; border: 1px solid var(--line); background: var(--surface); border-radius: 10px; padding: 9px 12px; min-height: 56px; min-width: 0; }
+.pairbtn .en { font-weight: 600; }
+.pairbtn .r { font-size: 0.88rem; color: var(--ink-2); overflow-wrap: anywhere; }
+.pairbtn .r b { color: var(--accent); }
+.pairbtn .m { font-size: 0.8rem; color: var(--ink-3); }
+.nextbar { display: flex; justify-content: flex-end; gap: 8px; flex-wrap: wrap; }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; scroll-behavior: auto !important; } }
+@media (max-width: 420px) {
+  .card { padding: 15px 14px; }
+  .brand span { display: none; }
+}
+</style>
+
+<div class="app" id="app">
+  <header class="top">
+    <div class="wrap top-inner">
+      <a class="brand" href="#home" aria-label="หน้าแรกของคอร์ส"><b>NativeSense English Starter</b><span>ภาษาอังกฤษเพื่อการสื่อสาร สำหรับคนเริ่มต้น</span></a>
+      <nav class="topnav" aria-label="เมนูหลัก">
+        <a class="navbtn" id="navHome" href="#home">บทเรียน</a>
+        <a class="navbtn" id="navReview" href="#review">ทบทวน</a>
+      </nav>
+    </div>
+  </header>
+  <main class="wrap" id="main" tabindex="-1"></main>
+</div>
+
+<script>
+const DATA = __DATA__;
+const $ = (s, el = document) => el.querySelector(s);
+const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+const bold = s => esc(s).replace(/\*\*(.+?)\*\*/g, '<b>$1</b>');
+const shuffle = a => { const b = a.slice(); for (let i = b.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [b[i], b[j]] = [b[j], b[i]]; } return b; };
+const LESSONS = DATA.lessons;
+const byN = n => LESSONS.find(l => l.n === n);
+const MOD = Object.fromEntries(DATA.modules.map(m => [m[0], m]));
+
+/* ---------------- progress: this browser, plus the viewer's own account when available ---------------- */
+const LS_KEY = 'nse-progress-v1', OPT_KEY = 'nse-options-v1';
+function lsGet(k) { try { return JSON.parse(localStorage.getItem(k) || 'null'); } catch (e) { return null; } }
+function lsSet(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) { /* storage blocked */ } }
+function emptyProgress() { return { done: {}, quiz: {}, mission: {}, known: {} }; }
+function merge(a, b) {
+  const out = emptyProgress();
+  for (const src of [a || {}, b || {}]) {
+    for (const k of ['done', 'mission', 'known']) for (const [key, v] of Object.entries(src[k] || {})) if (v === true) out[k][key] = true;
+    for (const [key, v] of Object.entries(src.quiz || {})) if (typeof v === 'number') out.quiz[key] = Math.max(out.quiz[key] || 0, v);
+  }
+  return out;
+}
+let P = merge(emptyProgress(), lsGet(LS_KEY));
+const OPT = Object.assign({ reading: true, meaning: true }, lsGet(OPT_KEY) || {});
+let remote = null, syncNote = 'local', saveTimer = null, saving = Promise.resolve(), dirty = false;
+function save() {
+  lsSet(LS_KEY, P);
+  if (!remote) return;
+  dirty = true;
+  clearTimeout(saveTimer);
+  saveTimer = setTimeout(flush, 800);
+}
+function flush() {
+  if (!dirty || !remote) return;
+  dirty = false;
+  const body = JSON.parse(JSON.stringify(Object.assign({ v: 1 }, P)));
+  saving = saving.then(() => remote && remote.set(body)).catch(e => {
+    const c = e && e.code;
+    if (c === 'invalid_argument' || c === 'revoked' || c === 'not_granted' || c === 'capability_disabled') { remote = null; syncNote = 'local'; renderSync(); }
+  });
+}
+async function initRemote() {
+  if (!window.claude || typeof window.claude.use !== 'function') return;
+  try {
+    const [db, user] = await Promise.all([window.claude.use('db'), window.claude.use('user')]);
+    if (!db || !user) return;
+    const id = await user.id();
+    if (!id) return;
+    const ref = db.doc('data/users/' + id + '/progress');
+    const snap = await Promise.race([ref.get(), new Promise(r => setTimeout(() => r('timeout'), 10000))]);
+    if (snap === 'timeout') { syncNote = 'slow'; renderSync(); return; }
+    if (snap.exists) P = merge(P, snap.data());
+    lsSet(LS_KEY, P);
+    remote = ref; syncNote = 'account';
+    const h = location.hash.replace('#', '');
+    if (h === '' || h === 'home') renderHome(); else renderSync();
+  } catch (e) { /* keep local progress */ }
+}
+function renderSync() {
+  const el = $('#syncNote'); if (!el) return;
+  el.textContent = syncNote === 'account' ? 'ความคืบหน้าบันทึกในบัญชีของคุณ เปิดจากเครื่องอื่นก็เรียนต่อได้'
+    : syncNote === 'slow' ? 'ยังเชื่อมต่อบัญชีไม่ได้ ความคืบหน้าบันทึกไว้ในเบราว์เซอร์นี้ก่อน'
+    : 'ความคืบหน้าบันทึกไว้ในเบราว์เซอร์นี้';
+}
+
+/* ---------------- speech (device voices, US English) ---------------- */
+const TTS = {
+  ok: typeof window.speechSynthesis !== 'undefined' && typeof window.SpeechSynthesisUtterance !== 'undefined',
+  voices: [],
+  load() {
+    if (!this.ok) return;
+    try {
+      const all = window.speechSynthesis.getVoices() || [];
+      const us = all.filter(v => /^en[-_]US/i.test(v.lang));
+      this.voices = us.length ? us : all.filter(v => /^en/i.test(v.lang));
+    } catch (e) { this.voices = []; }
+  },
+  stop() { if (this.ok) try { window.speechSynthesis.cancel(); } catch (e) {} },
+  say(text, opts = {}) {
+    if (!this.ok) { if (opts.onend) opts.onend(); return; }
+    try {
+      const u = new SpeechSynthesisUtterance(text);
+      u.lang = 'en-US';
+      const second = opts.who === 'B';
+      const v = this.voices[second && this.voices.length > 1 ? 1 : 0];
+      if (v) u.voice = v;
+      u.pitch = second && this.voices.length < 2 ? 0.8 : 1;
+      u.rate = opts.slow ? 0.62 : 0.92;
+      if (opts.onend) { u.onend = opts.onend; u.onerror = opts.onend; }
+      window.speechSynthesis.speak(u);
+    } catch (e) { if (opts.onend) opts.onend(); }
+  },
+};
+TTS.load();
+if (TTS.ok && 'onvoiceschanged' in window.speechSynthesis) window.speechSynthesis.onvoiceschanged = () => TTS.load();
+const SPEAK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M18.5 5.5a9 9 0 0 1 0 13"/></svg>';
+const SLOW = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4z"/><path d="M16 12h5"/></svg>';
+const PLAY = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>';
+const SPEAKTEXT = {};
+let sayId = 0;
+function sayBtns(text, cls = 'iconbtn') {
+  if (!TTS.ok) return '';
+  const id = 's' + (++sayId); SPEAKTEXT[id] = text;
+  return `<button class="${cls}" data-say="${id}" aria-label="ฟังเสียง">${SPEAK}</button><button class="${cls}" data-say="${id}" data-slow="1" aria-label="ฟังเสียงช้า">${SLOW}</button>`;
+}
+document.addEventListener('click', e => {
+  const b = e.target.closest('[data-say]');
+  if (!b) return;
+  TTS.stop(); clearPlaying();
+  TTS.say(SPEAKTEXT[b.dataset.say], { slow: b.dataset.slow === '1', who: b.dataset.who });
+});
+
+/* ---------------- shared bits ---------------- */
+function lineHTML(en, r, th, note) {
+  return `<div class="line"><p class="say en">${esc(en)}</p><p class="reading">${bold(r)}</p>${th ? `<p class="th">${esc(th)}</p>` : ''}${note ? `<p class="note">${esc(note)}</p>` : ''}<div class="acts">${sayBtns(en)}</div></div>`;
+}
+function readToggles() {
+  return `<div class="toolbar"><div class="row"><label class="toggle"><input type="checkbox" id="optReading" ${OPT.reading ? 'checked' : ''}> แสดงคำอ่านไทย</label>
+    <label class="toggle"><input type="checkbox" id="optMeaning" ${OPT.meaning ? 'checked' : ''}> แสดงความหมาย</label></div></div>`;
+}
+function bindToggles() {
+  const r = $('#optReading'), m = $('#optMeaning');
+  if (r) r.onchange = () => { OPT.reading = r.checked; lsSet(OPT_KEY, OPT); applyOpts(); };
+  if (m) m.onchange = () => { OPT.meaning = m.checked; lsSet(OPT_KEY, OPT); applyOpts(); };
+  applyOpts();
+}
+function applyOpts() { const app = $('#app'); app.classList.toggle('hide-reading', !OPT.reading); app.classList.toggle('hide-th', !OPT.meaning); }
+function legendHTML() {
+  return `<section class="card legend" aria-label="วิธีอ่านคำอ่านไทย"><p><strong>วิธีอ่าน</strong> คำอ่านไทยเป็นเสียงโดยประมาณ (สำเนียงอเมริกัน) ใช้ฝึกได้แต่แทนเสียงจริงไม่ได้ 100% กดฟังทุกครั้ง</p>
+    <p><b>ตัวหนา</b> = ลงเสียงหนัก · (ส) (ล) (ท) (ร) = เสียงท้ายเบา ๆ ที่ต้องออก · - = แบ่งพยางค์</p>
+    ${TTS.ok ? '<p class="muted">ปุ่มลำโพงใช้เสียงอ่านของเครื่องคุณ ถ้าไม่มีเสียงหรือเสียงไม่ใช่ภาษาอังกฤษ ให้เพิ่มเสียงภาษาอังกฤษในการตั้งค่าเครื่อง หรือเปิดใน Chrome หรือ Safari</p>'
+      : '<p class="warn">เบราว์เซอร์นี้อ่านออกเสียงไม่ได้ ลองเปิดใน Chrome หรือ Safari</p>'}
+    <p class="sync" id="syncNote"></p></section>`;
+}
+let playToken = 0;
+function clearPlaying() { playToken++; document.querySelectorAll('.dline.playing').forEach(x => x.classList.remove('playing')); }
+function setNav(which) {
+  $('#navHome').toggleAttribute('aria-current', which === 'home'); if (which === 'home') $('#navHome').setAttribute('aria-current', 'page');
+  $('#navReview').toggleAttribute('aria-current', which === 'review'); if (which === 'review') $('#navReview').setAttribute('aria-current', 'page');
+}
+
+/* ---------------- home ---------------- */
+function renderHome() {
+  setNav('home');
+  const done = LESSONS.filter(l => P.done[l.n]).length;
+  const missions = LESSONS.filter(l => P.mission[l.n]).length;
+  const next = LESSONS.find(l => !P.done[l.n]);
+  let html = `<section class="hero"><h1>พูดอังกฤษให้สื่อสารได้ ทีละบท</h1><p>${esc(DATA.course.intro)}</p>
+    <div class="stats"><span><b>${done}</b>/24 บทที่เรียนจบ</span><span><b>${missions}</b>/24 ภารกิจพูด</span><span><b>${Object.keys(P.known).length}</b> ประโยคที่จำได้</span></div>
+    <div class="meter" aria-hidden="true"><i style="width:${(done / 24) * 100}%"></i></div>
+    <div class="row">${next ? `<a class="btn primary" href="#lesson-${next.n}">${done ? 'เรียนต่อ' : 'เริ่มบทที่ 1'}: ${esc(next.th)}</a>` : '<span class="chip ok">เรียนครบทั้ง 24 บทแล้ว</span>'}
+      <a class="btn" href="#start">บทเริ่มต้น: เสียงที่คนไทยมักพลาด</a></div></section>`;
+  for (const [m, th, en] of DATA.modules) {
+    html += `<section class="module"><div class="module-head"><h2>หมวด ${m}: ${esc(th)}</h2><span class="en">${esc(en)}</span></div><div class="lessons">`;
+    for (const l of LESSONS.filter(x => x.mod === m)) {
+      const chips = [];
+      if (P.done[l.n]) chips.push('<span class="chip ok">เรียนแล้ว</span>');
+      if (P.quiz[l.n] != null) chips.push(`<span class="chip">แบบฝึก ${P.quiz[l.n]}/10</span>`);
+      if (P.mission[l.n]) chips.push('<span class="chip ok">ภารกิจพูด</span>');
+      html += `<a class="lesson-card${P.done[l.n] ? ' done' : ''}" href="#lesson-${l.n}"><span class="num">${l.n}</span><h3>${esc(l.th)}</h3><span class="en">${esc(l.en)}</span><span class="small muted">${esc(l.goal)}</span>${chips.length ? `<span class="chips" style="grid-column:2">${chips.join('')}</span>` : ''}</a>`;
+    }
+    html += '</div></section>';
+  }
+  html += `<section class="card"><h2 style="font-size:1.05rem">สำหรับผู้สอน</h2><p class="muted small" style="margin:6px 0 0">ทุกบทมีแผนการสอน 45 นาที คำถามอุ่นเครื่อง และการ์ดบทบาทสมมติ A/B อยู่ในแท็บ <strong>ผู้สอน</strong> ของแต่ละบท ใช้สอนเป็นกลุ่มหรือจับคู่ฝึกได้</p></section>`;
+  html += legendHTML();
+  $('#main').innerHTML = html;
+  renderSync();
+}
+
+/* ---------------- lesson 0: sounds ---------------- */
+function renderStart() {
+  setNav('home');
+  const L0 = DATA.lesson0;
+  let html = `<div class="crumb"><a href="#home">บทเรียน</a><span>›</span><span>บทเริ่มต้น</span></div>
+    <section class="lesson-head"><h1>${esc(L0.title)}</h1><div class="goal"><b>หลังจบบทนี้:</b> อ่านคำอ่านไทยในคอร์สได้ และได้ยินความต่างของเสียงที่คนไทยมักพลาด</div></section>
+    <section class="card legend">${L0.how.map(h => `<p>${bold(h)}</p>`).join('')}</section>`;
+  html += `<section class="card"><h2 style="font-size:1.1rem;margin-bottom:10px">7 เสียงที่ต้องฟังให้ออก</h2><div class="pairs">`;
+  DATA.sounds.forEach((g, gi) => {
+    html += `<div><h3 style="font-size:1rem">${gi + 1}. ${esc(g.t)}</h3><p class="muted small" style="margin:2px 0 8px">${esc(g.d)}</p>`;
+    for (const p of g.pairs) {
+      html += `<div class="pair" style="margin-bottom:8px">
+        <button class="pairbtn" data-say="${regSay(p.a)}" aria-label="ฟัง ${esc(p.a)}"><span class="en">${esc(p.a)}</span><span class="r">${bold(p.ar)}</span><span class="m">${esc(p.am)}</span></button>
+        <button class="pairbtn" data-say="${regSay(p.b)}" aria-label="ฟัง ${esc(p.b)}"><span class="en">${esc(p.b)}</span><span class="r">${bold(p.br)}</span><span class="m">${esc(p.bm)}</span></button></div>`;
+    }
+    html += '</div>';
+  });
+  html += `</div></section><section class="card" id="earGame"></section>${legendHTML()}`;
+  $('#main').innerHTML = html;
+  renderSync();
+  earGame();
+}
+function regSay(text) { const id = 's' + (++sayId); SPEAKTEXT[id] = text; return id; }
+function earGame() {
+  const box = $('#earGame');
+  if (!TTS.ok) { box.innerHTML = '<h2 style="font-size:1.1rem">เกมฝึกหู</h2><p class="warn">เบราว์เซอร์นี้อ่านออกเสียงไม่ได้ จึงเล่นเกมฟังไม่ได้</p>'; return; }
+  const pairs = DATA.sounds.flatMap(g => g.pairs);
+  const rounds = shuffle(pairs).slice(0, 10).map(p => ({ p, pick: Math.random() < 0.5 ? 'a' : 'b' }));
+  let i = 0, score = 0;
+  const draw = (answered, chosen) => {
+    if (i >= rounds.length) {
+      box.innerHTML = `<div class="result"><p class="muted">จบเกมฝึกหู</p><h2>ได้ ${score} จาก ${rounds.length}</h2><p class="muted small">เสียงคู่ไหนยังแยกไม่ออก ให้กดฟังคู่นั้นซ้ำด้านบนหลาย ๆ รอบ</p><button class="btn primary" id="earAgain">เล่นอีกรอบ</button></div>`;
+      $('#earAgain').onclick = earGame; return;
+    }
+    const { p, pick } = rounds[i];
+    const word = pick === 'a' ? p.a : p.b;
+    box.innerHTML = `<div class="qhead"><span>เกมฝึกหู ข้อ ${i + 1}/${rounds.length}</span><span>ถูก ${score}</span></div>
+      <p class="qtitle">ฟังแล้วเลือกคำที่ได้ยิน</p>
+      <div class="big-listen"><button class="btn primary" data-say="${regSay(word)}">${SPEAK}ฟังอีกครั้ง</button><button class="btn" data-say="${regSay(word)}" data-slow="1">${SLOW}ฟังช้า</button></div>
+      <div class="opts">${['a', 'b'].map(k => {
+        const w = k === 'a' ? p.a : p.b, m = k === 'a' ? p.am : p.bm;
+        let cls = 'opt en'; if (answered) { if (k === pick) cls += ' correct'; else if (k === chosen) cls += ' wrongpick'; }
+        return `<button class="${cls}" data-k="${k}" ${answered ? 'disabled' : ''}>${esc(w)} <span class="muted small">(${esc(m)})</span></button>`;
+      }).join('')}</div>
+      ${answered ? `<div class="feedback ${chosen === pick ? 'ok' : 'no'}"><p class="verdict">${chosen === pick ? 'ถูกต้อง' : 'ยังไม่ใช่'}</p><p>เสียงที่เล่นคือ <span class="en">${esc(word)}</span></p></div><div class="nextbar" style="margin-top:10px"><button class="btn primary" id="earNext">ข้อต่อไป</button></div>` : ''}`;
+    box.querySelectorAll('[data-k]').forEach(b => b.onclick = () => { const k = b.dataset.k; if (k === pick) score++; draw(true, k); });
+    const nb = $('#earNext'); if (nb) { nb.onclick = () => { i++; draw(false); const r = rounds[i]; if (r) TTS.say(r.pick === 'a' ? r.p.a : r.p.b); }; nb.focus(); }
+  };
+  box.innerHTML = '<h2 style="font-size:1.1rem">เกมฝึกหู</h2><p class="muted small">ระบบจะเล่นเสียง 1 คำจากคู่ด้านบน ให้เลือกว่าได้ยินคำไหน 10 ข้อ</p><button class="btn primary" id="earStart">เริ่มเกม</button>';
+  $('#earStart').onclick = () => { draw(false); TTS.say(rounds[0].pick === 'a' ? rounds[0].p.a : rounds[0].p.b); };
+}
+
+/* ---------------- lesson ---------------- */
+const TABS = [['phrases', 'ประโยคหลัก'], ['dialogue', 'บทสนทนา'], ['pattern', 'สูตรประโยค'], ['sound', 'ออกเสียงและจุดพลาด'], ['quiz', 'แบบฝึก'], ['mission', 'ภารกิจพูด'], ['teach', 'ผู้สอน']];
+let curTab = 'phrases';
+function renderLesson(n) {
+  setNav('home');
+  const L = byN(n);
+  if (!L) { location.hash = '#home'; return; }
+  const m = MOD[L.mod];
+  $('#main').innerHTML = `<div class="crumb"><a href="#home">บทเรียน</a><span>›</span><span>หมวด ${m[0]}: ${esc(m[1])}</span></div>
+    <section class="lesson-head"><span class="muted small">บทที่ ${L.n} จาก 24</span><h1>${esc(L.th)}</h1><div class="en-title">${esc(L.en)}</div>
+      <div class="goal"><b>หลังจบบทนี้:</b> ${esc(L.goal)}</div></section>
+    <nav class="tabs" role="tablist" aria-label="ส่วนของบทเรียน">${TABS.map(([k, t]) => `<button class="tab" role="tab" data-tab="${k}" aria-selected="${k === curTab}">${t}</button>`).join('')}</nav>
+    <section class="card" id="panel" role="tabpanel"></section>
+    <div class="nextbar">${L.n > 1 ? `<a class="btn" href="#lesson-${L.n - 1}">← บทที่ ${L.n - 1}</a>` : '<a class="btn" href="#start">← บทเริ่มต้น</a>'}${L.n < 24 ? `<a class="btn" href="#lesson-${L.n + 1}">บทที่ ${L.n + 1} →</a>` : ''}</div>
+    ${legendHTML()}`;
+  document.querySelectorAll('.tab').forEach(b => b.onclick = () => { TTS.stop(); clearPlaying(); curTab = b.dataset.tab; document.querySelectorAll('.tab').forEach(x => x.setAttribute('aria-selected', String(x === b))); renderPanel(L); b.scrollIntoView({ block: 'nearest', inline: 'center' }); });
+  renderPanel(L);
+  renderSync();
+}
+function nextTabBtn(L) {
+  const i = TABS.findIndex(t => t[0] === curTab);
+  const nx = TABS[i + 1];
+  if (!nx || nx[0] === 'teach') return '';
+  return `<div class="nextbar" style="margin-top:14px"><button class="btn primary" data-goto="${nx[0]}">ต่อไป: ${nx[1]} →</button></div>`;
+}
+function bindGoto(L) {
+  document.querySelectorAll('[data-goto]').forEach(b => b.onclick = () => {
+    curTab = b.dataset.goto;
+    document.querySelectorAll('.tab').forEach(x => x.setAttribute('aria-selected', String(x.dataset.tab === curTab)));
+    renderPanel(L);
+    $('.tabs').scrollIntoView({ block: 'start' });
+  });
+}
+function renderPanel(L) {
+  const box = $('#panel');
+  let html = '';
+  if (curTab === 'phrases') {
+    html = readToggles() + '<div style="margin-top:12px">' + L.phrases.map(p => lineHTML(p.en, p.r, p.th, p.note)).join('') + '</div>';
+  } else if (curTab === 'dialogue') {
+    const cast = Object.entries(L.cast).map(([k, c]) => `<span class="row" style="gap:6px"><span class="who ${k}">${k}</span>${esc(c.name === 'Driver' ? 'คนขับ' : c.name === 'Pharmacist' ? 'เภสัชกร' : c.name)} · ${esc(c.role)}</span>`).join('');
+    html = `<p class="scene">สถานการณ์: ${esc(L.scene)}</p><div class="cast">${cast}</div>${readToggles()}
+      <div class="row" style="margin:12px 0">${TTS.ok ? `<button class="btn primary" id="playAll">${PLAY}เล่นทั้งบท</button>` : ''}<label class="toggle"><input type="checkbox" id="practiceB"> ฝึกพูดเป็น B (ปิดบทพูดของ B)</label></div>
+      <div id="dlines">${L.dialogue.map((d, i) => `<div class="dline" data-i="${i}" data-who="${d.who}"><span class="who ${d.who}">${d.who}</span><div class="body"><p class="say">${esc(d.en)}</p><p class="reading">${bold(d.r)}</p><p class="th">${esc(d.th)}</p><span class="reveal-hint" hidden>แตะเพื่อดูประโยคของ B</span></div><div class="row" style="flex-direction:column">${TTS.ok ? `<button class="iconbtn" data-say="${regSay(d.en)}" data-who="${d.who}" aria-label="ฟังเสียง">${SPEAK}</button>` : ''}</div></div>`).join('')}</div>`;
+  } else if (curTab === 'pattern') {
+    const f = esc(L.pattern.f).replace(/\[([^\]]+)\]/g, '<mark>[$1]</mark>');
+    html = `<p class="label">สูตรประโยค</p><div class="formula">${f}</div><p style="margin:10px 0 4px">${esc(L.pattern.ex)}</p>
+      <p class="label" style="margin-top:14px">ตัวอย่าง</p>${L.pattern.examples.map(x => lineHTML(x.en, x.r, x.th)).join('')}
+      <p class="muted small" style="margin-top:12px">ลองเปลี่ยนส่วนที่ไฮไลต์ แล้วพูดประโยคใหม่ของคุณเองออกเสียงดัง ๆ อย่างน้อย 2 ประโยค</p>`;
+  } else if (curTab === 'sound') {
+    html = `<p class="label">ออกเสียง</p><h2 style="font-size:1.1rem;margin:2px 0 4px">${esc(L.sound.t)}</h2><p style="margin:0 0 10px">${esc(L.sound.d)}</p>
+      <div class="wordchips">${L.sound.words.map(w => `<button class="wordchip" data-say="${regSay(w.en)}" aria-label="ฟัง ${esc(w.en)}"><span class="en">${esc(w.en)}</span><span class="r">${bold(w.r)}</span></button>`).join('')}</div>
+      <div class="trap" style="margin-top:22px"><p class="label">จุดที่คนไทยมักพลาด</p>
+        <p class="wrong">${esc(L.trap.wrong)}</p><p class="right">${esc(L.trap.right)}</p><p style="margin:0">${esc(L.trap.why)}</p></div>`;
+  } else if (curTab === 'quiz') {
+    box.innerHTML = '<div id="quizBox"></div>';
+    startQuiz(L);
+    return;
+  } else if (curTab === 'mission') {
+    html = `<p class="label">ภารกิจพูด</p><h2 style="font-size:1.1rem;margin:2px 0 8px">${esc(L.mission.task)}</h2>
+      <p class="muted small">พูดออกเสียงดัง ๆ ด้วยประโยคของคุณเองก่อน แล้วค่อยกดดูตัวอย่าง</p>
+      <button class="btn" id="showModel">ดูตัวอย่างคำตอบ</button><div id="model" hidden style="margin-top:10px">${L.mission.model.map(x => lineHTML(x.en, x.r, '')).join('')}</div>
+      <div class="row" style="margin-top:14px"><label class="toggle"><input type="checkbox" id="missionDone" ${P.mission[L.n] ? 'checked' : ''}> ทำภารกิจพูดของบทนี้แล้ว</label></div>`;
+  } else if (curTab === 'teach') {
+    const steps = DATA.steps.map(([t, min, d]) => `<li><span class="t">${min} นาที</span><b>${esc(t)}</b><span class="small">${esc(t === 'อุ่นเครื่อง' ? d + ' · คำถาม: ' + L.teach.warm : d)}</span></li>`).join('');
+    const key = L.phrases.slice(0, 4).map(p => `<li class="en small">${esc(p.en)}</li>`).join('');
+    html = `<p class="label">แผนการสอน 45 นาที</p><ol class="steps">${steps}</ol>
+      <p class="label" style="margin-top:18px">การ์ดบทบาทสมมติ (ให้ผู้เรียนคนละใบ แล้วสลับกัน)</p>
+      <div class="rolecards"><div class="rolecard"><h3><span class="who A">A</span>บทบาท A</h3><p style="margin:0">${esc(L.teach.A)}</p></div>
+        <div class="rolecard"><h3><span class="who B">B</span>บทบาท B</h3><p style="margin:0">${esc(L.teach.B)}</p></div></div>
+      <p class="label" style="margin-top:18px">ประโยคที่ผู้เรียนควรใช้ได้</p><ul style="margin:6px 0 0;padding-left:20px">${key}</ul>
+      <p class="label" style="margin-top:18px">เช็กลิสต์ท้ายบท</p><p style="margin:4px 0 0">${esc(L.goal)}</p>`;
+  }
+  box.innerHTML = html + nextTabBtn(L);
+  bindToggles(); bindGoto(L);
+  if (curTab === 'dialogue') bindDialogue(L);
+  if (curTab === 'mission') {
+    $('#showModel').onclick = () => { $('#model').hidden = false; $('#showModel').hidden = true; };
+    $('#missionDone').onchange = e => { if (e.target.checked) P.mission[L.n] = true; else delete P.mission[L.n]; save(); };
+  }
+}
+function bindDialogue(L) {
+  const lines = [...document.querySelectorAll('.dline')];
+  const pb = $('#practiceB');
+  pb.onchange = () => lines.forEach(el => {
+    const isB = el.dataset.who === 'B';
+    el.classList.toggle('covered', pb.checked && isB);
+    $('.reveal-hint', el).hidden = !(pb.checked && isB);
+  });
+  lines.forEach(el => el.addEventListener('click', e => { if (!e.target.closest('button') && el.classList.contains('covered')) { el.classList.remove('covered'); $('.reveal-hint', el).hidden = true; } }));
+  const btn = $('#playAll');
+  if (btn) btn.onclick = () => {
+    TTS.stop(); clearPlaying();
+    const token = playToken;
+    let i = 0;
+    const step = () => {
+      if (token !== playToken) return;
+      lines.forEach(x => x.classList.remove('playing'));
+      if (i >= L.dialogue.length) return;
+      const d = L.dialogue[i], el = lines[i];
+      el.classList.add('playing');
+      el.scrollIntoView({ block: 'nearest' });
+      i++;
+      TTS.say(d.en, { who: d.who, onend: () => setTimeout(step, 350) });
+    };
+    step();
+  };
+}
+
+/* ---------------- quiz ---------------- */
+const STOP = new Set(['the', 'a', 'an', 'to', 'of', 'and', 'or', 'in', 'on', 'at', 'is', 'are', 'it', 'you', 'your', 'i', 'me', 'my', 'we', 'he', 'she', 'they', 'this', 'that', 'for', 'be', 'do', 'please']);
+const clean = s => s.replace(/[.,!?]/g, '').trim();
+function buildQuiz(L) {
+  const lines = []; const seen = new Set();
+  for (const x of L.phrases.concat(L.dialogue)) if (!seen.has(x.en)) { seen.add(x.en); lines.push(x); }
+  const thPool = [...new Set(lines.map(x => x.th))];
+  const pickTh = (right) => shuffle([right, ...shuffle(thPool.filter(t => t !== right)).slice(0, 3)]);
+  const pickEn = (right, pool) => shuffle([right, ...shuffle(pool.filter(t => t !== right)).slice(0, 3)]);
+  const qs = [];
+  shuffle(lines).slice(0, 3).forEach(x => qs.push({ type: TTS.ok ? 'listen' : 'readmean', item: x, opts: pickTh(x.th) }));
+  const enPool = [...new Set(lines.map(x => x.en))];
+  shuffle(L.phrases).slice(0, 3).forEach(x => qs.push({ type: 'th2en', item: x, opts: pickEn(x.en, enPool) }));
+  const orderable = L.phrases.concat(L.pattern.examples).filter(x => { const n = clean(x.en).split(/\s+/).length; return n >= 3 && n <= 8 && !/\d/.test(x.en); });
+  shuffle(orderable).slice(0, 2).forEach(x => qs.push({ type: 'order', item: x }));
+  const fillable = L.pattern.examples.concat(L.phrases).map(x => {
+    const words = clean(x.en).split(/\s+/);
+    const cands = words.filter(w => /^[A-Za-z']{3,}$/.test(w) && !STOP.has(w.toLowerCase()));
+    return cands.length ? { x, word: cands.sort((a, b) => b.length - a.length)[0] } : null;
+  }).filter(Boolean);
+  if (fillable.length) {
+    const f = shuffle(fillable)[0];
+    const others = [...new Set(lines.flatMap(y => clean(y.en).split(/\s+/)).filter(w => /^[A-Za-z']{3,}$/.test(w) && w.toLowerCase() !== f.word.toLowerCase() && !STOP.has(w.toLowerCase())))];
+    qs.push({ type: 'fill', item: f.x, word: f.word, opts: shuffle([f.word, ...shuffle(others).slice(0, 3)]) });
+  }
+  const pairs = [];
+  for (let i = 0; i + 1 < L.dialogue.length; i++) if (L.dialogue[i].who !== L.dialogue[i + 1].who && clean(L.dialogue[i + 1].en).split(/\s+/).length >= 3) pairs.push([L.dialogue[i], L.dialogue[i + 1]]);
+  if (pairs.length) {
+    const [a, b] = shuffle(pairs)[0];
+    const pool = LESSONS.filter(o => o.mod !== L.mod).flatMap(o => o.dialogue).map(d => d.en).filter(t => clean(t).split(/\s+/).length >= 4 && t !== b.en);
+    qs.push({ type: 'reply', item: a, answer: b, opts: shuffle([b.en, ...shuffle(pool).slice(0, 3)]) });
+  }
+  return shuffle(qs).slice(0, 10);
+}
+function startQuiz(L) {
+  const qs = buildQuiz(L);
+  const marks = [];
+  let i = 0, right = 0;
+  const box = $('#quizBox');
+  const finish = () => {
+    P.quiz[L.n] = Math.max(P.quiz[L.n] || 0, Math.round(right * 10 / qs.length));
+    P.done[L.n] = true;
+    save();
+    box.innerHTML = `<div class="result"><p class="muted">จบแบบฝึกของบทที่ ${L.n}</p><h2>ได้ ${right} จาก ${qs.length}</h2>
+      <p class="muted small">บันทึกว่าเรียนบทนี้แล้ว คะแนนที่ดีที่สุด ${P.quiz[L.n]}/10</p>
+      <div class="row"><button class="btn primary" id="again">ทำอีกรอบ</button><button class="btn" data-goto="mission">ต่อไป: ภารกิจพูด →</button></div></div>`;
+    $('#again').onclick = () => startQuiz(L);
+    bindGoto(L);
+  };
+  const show = () => {
+    if (i >= qs.length) return finish();
+    const q = qs[i];
+    const dots = qs.map((_, k) => `<i class="${k < marks.length ? (marks[k] ? 'ok' : 'no') : k === i ? 'on' : ''}"></i>`).join('');
+    let head = `<div class="qhead"><span>ข้อ ${i + 1}/${qs.length}</span><span class="dots" aria-hidden="true">${dots}</span></div>`;
+    let body = '';
+    if (q.type === 'listen') {
+      body = `<p class="qtitle">ฟังแล้วเลือกความหมาย</p><div class="big-listen"><button class="btn primary" data-say="${regSay(q.item.en)}">${SPEAK}ฟังอีกครั้ง</button><button class="btn" data-say="${regSay(q.item.en)}" data-slow="1">${SLOW}ฟังช้า</button></div>
+        <div class="opts">${q.opts.map(o => `<button class="opt" data-v="${esc(o)}">${esc(o)}</button>`).join('')}</div>`;
+    } else if (q.type === 'readmean') {
+      body = `<p class="qtitle">ประโยคนี้แปลว่าอะไร</p><p class="qprompt en">${esc(q.item.en)}</p><div class="opts">${q.opts.map(o => `<button class="opt" data-v="${esc(o)}">${esc(o)}</button>`).join('')}</div>`;
+    } else if (q.type === 'th2en') {
+      body = `<p class="qtitle">พูดเป็นภาษาอังกฤษว่าอะไร</p><p class="qprompt">${esc(q.item.th)}</p><div class="opts">${q.opts.map(o => `<button class="opt en" data-v="${esc(o)}">${esc(o)}</button>`).join('')}</div>`;
+    } else if (q.type === 'fill') {
+      const shown = esc(q.item.en).replace(new RegExp('\\b' + q.word.replace(/'/g, "'") + '\\b'), '_____');
+      body = `<p class="qtitle">เติมคำในช่องว่าง</p><p class="qprompt en">${shown}</p><p class="th muted small" style="margin:-6px 0 12px">${esc(q.item.th)}</p><div class="opts">${q.opts.map(o => `<button class="opt en" data-v="${esc(o)}">${esc(o)}</button>`).join('')}</div>`;
+    } else if (q.type === 'reply') {
+      body = `<p class="qtitle">ถ้าอีกฝ่ายพูดแบบนี้ ควรตอบว่าอะไร</p><p class="qprompt en">${esc(q.item.en)}</p><p class="th muted small" style="margin:-6px 0 12px">${esc(q.item.th)}</p><div class="opts">${q.opts.map(o => `<button class="opt en" data-v="${esc(o)}">${esc(o)}</button>`).join('')}</div>`;
+    } else if (q.type === 'order') {
+      const words = clean(q.item.en).split(/\s+/);
+      q.tiles = q.tiles || shuffle(words.map((w, k) => ({ w, k })));
+      q.picked = q.picked || [];
+      body = `<p class="qtitle">เรียงคำให้เป็นประโยค</p><p class="qprompt">${esc(q.item.th)}</p>
+        <div class="answer-line" id="ans" aria-live="polite">${q.picked.map(t => `<button class="tile" data-back="${t.k}">${esc(t.w)}</button>`).join('')}</div>
+        <div class="tiles">${q.tiles.map(t => `<button class="tile${q.picked.includes(t) ? ' used' : ''}" data-k="${t.k}">${esc(t.w)}</button>`).join('')}</div>
+        <div class="row" style="margin-top:10px"><button class="btn primary" id="check" ${q.picked.length === words.length ? '' : 'disabled'}>ตรวจคำตอบ</button><button class="btn ghost" id="reset">เริ่มเรียงใหม่</button></div>`;
+    }
+    box.innerHTML = head + body;
+    if (q.type === 'order') {
+      box.querySelectorAll('.tiles .tile').forEach(b => b.onclick = () => { const t = q.tiles.find(x => String(x.k) === b.dataset.k); if (!q.picked.includes(t)) { q.picked.push(t); show(); } });
+      box.querySelectorAll('#ans .tile').forEach(b => b.onclick = () => { q.picked = q.picked.filter(t => String(t.k) !== b.dataset.back); show(); });
+      $('#reset').onclick = () => { q.picked = []; show(); };
+      $('#check').onclick = () => {
+        const ok = q.picked.map(t => t.w).join(' ').toLowerCase() === clean(q.item.en).toLowerCase();
+        answer(ok, q.item);
+      };
+    } else {
+      box.querySelectorAll('.opt').forEach(b => b.onclick = () => {
+        const v = b.dataset.v;
+        const correct = q.type === 'listen' || q.type === 'readmean' ? q.item.th : q.type === 'th2en' ? q.item.en : q.type === 'fill' ? q.word : q.answer.en;
+        const ok = v === correct;
+        box.querySelectorAll('.opt').forEach(x => { x.disabled = true; if (x.dataset.v === correct) x.classList.add('correct'); else if (x === b) x.classList.add('wrongpick'); });
+        answer(ok, q.type === 'reply' ? q.answer : q.item);
+      });
+    }
+  };
+  const answer = (ok, item) => {
+    marks.push(ok); if (ok) right++;
+    const fb = document.createElement('div');
+    fb.className = 'feedback ' + (ok ? 'ok' : 'no');
+    fb.innerHTML = `<p class="verdict">${ok ? 'ถูกต้อง' : 'ยังไม่ใช่ ประโยคที่ถูกคือ'}</p><p class="say">${esc(item.en)}</p><p class="reading">${bold(item.r)}</p><p class="th">${esc(item.th)}</p>
+      <div class="row">${sayBtns(item.en, 'btn')}<button class="btn primary" id="qnext">${i + 1 < qs.length ? 'ข้อต่อไป' : 'ดูผล'}</button></div>`;
+    box.appendChild(fb);
+    const cb = $('#check'); if (cb) cb.disabled = true;
+    box.querySelectorAll('.tile').forEach(t => t.disabled = true);
+    const nb = $('#qnext');
+    nb.onclick = () => { i++; show(); const q = qs[i]; if (q && q.type === 'listen') TTS.say(q.item.en); };
+    nb.focus();
+  };
+  box.innerHTML = `<p class="qtitle">แบบฝึกบทที่ ${L.n}</p><p style="margin:0 0 12px">10 ข้อ ผสมกัน: ฟังแล้วเลือกความหมาย · เลือกประโยคภาษาอังกฤษ · เรียงคำ · เติมคำ · เลือกคำตอบในบทสนทนา</p><button class="btn primary" id="qstart">เริ่มทำแบบฝึก</button>`;
+  $('#qstart').onclick = () => { show(); const q = qs[0]; if (q && q.type === 'listen') TTS.say(q.item.en); };
+}
+
+/* ---------------- review ---------------- */
+function renderReview() {
+  setNav('review');
+  const doneSet = LESSONS.filter(l => P.done[l.n]);
+  const src = doneSet.length ? doneSet : [];
+  let pool = src.flatMap(l => l.phrases.map((p, k) => Object.assign({ key: l.n + '-' + k, n: l.n }, p)));
+  $('#main').innerHTML = `<section class="hero"><h1>ทบทวนประโยค</h1><p>สุ่มประโยคหลักจากบทที่เรียนจบแล้ว ดูภาษาไทยแล้วพูดเป็นภาษาอังกฤษ จากนั้นกดดูคำตอบ ประโยคที่ยังจำไม่ได้จะกลับมาให้ฝึกก่อน</p></section>
+    <section class="card" id="rv"></section>${legendHTML()}`;
+  renderSync();
+  const box = $('#rv');
+  if (!pool.length) {
+    box.innerHTML = `<p style="margin:0 0 10px">ยังไม่มีบทที่เรียนจบ (ทำแบบฝึกของบทให้ครบ 1 รอบก่อน) หรือจะลองทบทวนทุกประโยคเลยก็ได้</p><div class="row"><a class="btn primary" href="#lesson-1">เริ่มบทที่ 1</a><button class="btn" id="rvAll">ทบทวนทุกประโยค</button></div>`;
+    $('#rvAll').onclick = () => run(LESSONS.flatMap(l => l.phrases.map((p, k) => Object.assign({ key: l.n + '-' + k, n: l.n }, p))));
+    return;
+  }
+  run(pool);
+  function run(items) {
+    const queue = shuffle(items.filter(x => !P.known[x.key])).concat(shuffle(items.filter(x => P.known[x.key])));
+    let i = 0, shown = false;
+    const draw = () => {
+      if (i >= queue.length) { box.innerHTML = `<p style="margin:0 0 10px">ครบทุกประโยคในรอบนี้แล้ว (${queue.length} ประโยค)</p><button class="btn primary" id="rvAgain">สุ่มรอบใหม่</button>`; $('#rvAgain').onclick = () => run(items); return; }
+      const x = queue[i];
+      const known = Object.keys(P.known).length;
+      box.innerHTML = `<div class="qhead"><span>ประโยคที่ ${i + 1}/${queue.length} · จากบทที่ ${x.n}</span><span>จำได้แล้ว ${known}</span></div>
+        <p class="qtitle">พูดเป็นภาษาอังกฤษ</p><p class="qprompt">${esc(x.th)}</p>
+        ${shown ? `<div class="feedback ok" style="background:var(--accent-soft)"><p class="say">${esc(x.en)}</p><p class="reading">${bold(x.r)}</p><div class="row">${sayBtns(x.en, 'btn')}</div></div>
+          <div class="row" style="margin-top:12px"><button class="btn" id="rvNo">ยังจำไม่ได้</button><button class="btn primary" id="rvYes">จำได้แล้ว</button></div>`
+          : '<button class="btn primary" id="rvShow">ดูคำตอบ</button>'}`;
+      if (!shown) { $('#rvShow').onclick = () => { shown = true; draw(); TTS.say(x.en); }; return; }
+      $('#rvYes').onclick = () => { P.known[x.key] = true; save(); i++; shown = false; draw(); };
+      $('#rvNo').onclick = () => { if (P.known[x.key]) { delete P.known[x.key]; save(); } queue.push(x); i++; shown = false; draw(); };
+    };
+    draw();
+  }
+}
+
+/* ---------------- router ---------------- */
+function route() {
+  TTS.stop(); clearPlaying();
+  const h = location.hash.replace('#', '');
+  const m = /^lesson-(\d+)$/.exec(h);
+  if (m) { const n = Number(m[1]); if (renderLesson.last !== n) curTab = 'phrases'; renderLesson.last = n; renderLesson(n); }
+  else if (h === 'start') renderStart();
+  else if (h === 'review') renderReview();
+  else renderHome();
+  applyOpts();
+}
+window.addEventListener('hashchange', () => { route(); window.scrollTo(0, 0); });
+const setTop = () => document.documentElement.style.setProperty('--toph', $('.top').offsetHeight + 'px');
+window.addEventListener('resize', setTop);
+setTop();
+route();
+initRemote();
+</script>

@@ -91,7 +91,7 @@ English gets only a Thai reading (no romanization). Default US; show UK only whe
 |---|---|---|
 | iː | see, team, please | อี: ซี · ทีม · พลี(ซ) |
 | ɪ | it, minute, visit | อิ: อิท · **มิ**-นิท · **วิ**-ซิท |
-| e | yet, ten, ready | เอ็ / เอ: เย็ท · เท็น · **เร**-ดี |
+| e | yet, ten, ready | เ-็ before a final, เ- when open: เย็ท · เท็น · **เร**-ดี |
 | æ | back, have, thanks | แอ: แบ็ก · แฮ(ฟ) · แธง(ค)(ส) |
 | ʌ | done, come, much | อะ/อั: ดัน · คัม · มั(ช) |
 | ɑː (and US "short o") | watch, hot (US), sorry (US) | อา: วา(ช) · ฮาท · **ซา**-รี |
@@ -190,7 +190,7 @@ Linking:
 | signature | **ซิก**-นะ-เชอ(ร) | **ซิก**-นะ-เชอะ | |
 | appointment | อะ-**พอย(น)**-เมิน(ท) | | the t is usually silent |
 | interview | **อิน**-เทอ(ร)-วิว | **อิน**-เทอะ-วิว | |
-| schedule | **สเก็**-จู(ล) | **เช็**-จู(ล) | many UK speakers also say สเก็-จู(ล) |
+| schedule | **สเก**-จู(ล) | **เช**-จู(ล) | many UK speakers also say **สเก**-จู(ล) |
 | deadline | **เด็ด**-ไล(น) | | |
 | staff | สแต(ฟ) | สตา(ฟ) | |
 | student | **สตู**-เดิน(ท) | **สติว**-เดิน(ท) | |

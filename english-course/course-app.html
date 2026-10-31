@@ -1,0 +1,727 @@
+<title>NativeSense English Starter</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anuphan:wght@500;600;700&family=IBM+Plex+Sans+Thai:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+/* Layout: a single reading column (a phrasebook page) under a sticky top bar; lessons open as tabbed sections. */
+:root {
+  --bg: #F4F6F9;
+  --surface: #FFFFFF;
+  --ink: #16212E;
+  --ink-2: #485467;
+  --ink-3: #6B7789;
+  --line: #DAE0E8;
+  --accent: #2851D6;
+  --accent-ink: #FFFFFF;
+  --accent-soft: #E7ECFC;
+  --mark: #FFE66B;
+  --mark-ink: #16212E;
+  --good: #1B7A48;
+  --good-soft: #E0F3E8;
+  --bad: #B3261E;
+  --bad-soft: #FCE7E5;
+  --spk-a: #2851D6;
+  --spk-b: #A8336F;
+  --font-display: "Anuphan", "IBM Plex Sans Thai", "Sarabun", system-ui, sans-serif;
+  --font-body: "IBM Plex Sans Thai", "Sarabun", "Leelawadee UI", system-ui, sans-serif;
+  --font-en: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+  --radius: 14px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0E141C; --surface: #161F2B; --ink: #E6ECF3; --ink-2: #AEB9C7; --ink-3: #8C98A8; --line: #283546;
+    --accent: #87A5FF; --accent-ink: #0E141C; --accent-soft: #1B2842; --mark: #5E5013; --mark-ink: #FFF1A8;
+    --good: #5FCB90; --good-soft: #13301F; --bad: #FF8D80; --bad-soft: #3B1714; --spk-a: #87A5FF; --spk-b: #F08DC2;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0E141C; --surface: #161F2B; --ink: #E6ECF3; --ink-2: #AEB9C7; --ink-3: #8C98A8; --line: #283546;
+  --accent: #87A5FF; --accent-ink: #0E141C; --accent-soft: #1B2842; --mark: #5E5013; --mark-ink: #FFF1A8;
+  --good: #5FCB90; --good-soft: #13301F; --bad: #FF8D80; --bad-soft: #3B1714; --spk-a: #87A5FF; --spk-b: #F08DC2;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { background: var(--bg); }
+body { color: var(--ink); font-family: var(--font-body); font-size: 16px; line-height: 1.6; -webkit-text-size-adjust: 100%; }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 20; background: var(--surface); }
+button, input { font: inherit; color: inherit; }
+button { cursor: pointer; }
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; border-radius: 8px; }
+h1, h2, h3 { font-family: var(--font-display); line-height: 1.3; text-wrap: balance; margin: 0; }
+.en { font-family: var(--font-en); }
+mark { background: var(--mark); color: var(--mark-ink); border-radius: 4px; padding: 0 3px; }
+.wrap { max-width: 760px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+
+/* top bar */
+.top { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 10; background: var(--surface); border-bottom: 1px solid var(--line); }
+.top-inner { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-block: 10px; }
+.brand { display: flex; flex-direction: column; min-width: 0; text-decoration: none; color: inherit; }
+.brand b { font-family: var(--font-display); font-size: 1.08rem; line-height: 1.2; }
+.brand span { color: var(--ink-3); font-size: 0.78rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.topnav { display: flex; gap: 6px; flex: none; }
+.navbtn { border: 1px solid var(--line); background: var(--surface); border-radius: 999px; padding: 6px 12px; font-size: 0.88rem; min-height: 38px; color: var(--ink-2); text-decoration: none; display: inline-flex; align-items: center; }
+.navbtn[aria-current="page"] { border-color: var(--accent); color: var(--accent); background: var(--accent-soft); font-weight: 600; }
+
+main.wrap { padding-block: 18px 48px; display: grid; gap: 16px; }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 18px; min-width: 0; }
+.muted { color: var(--ink-3); }
+.small { font-size: 0.86rem; }
+.row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.btn { border: 1px solid var(--line); background: var(--surface); border-radius: 10px; padding: 8px 14px; min-height: 42px; display: inline-flex; align-items: center; gap: 6px; font-weight: 500; text-decoration: none; color: inherit; }
+.btn.primary { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+.btn.ghost { background: transparent; }
+.btn svg { width: 18px; height: 18px; flex: none; }
+.btn[disabled] { opacity: 0.45; cursor: not-allowed; }
+.iconbtn { border: 1px solid var(--line); background: var(--surface); border-radius: 999px; width: 40px; height: 40px; display: inline-grid; place-items: center; flex: none; color: var(--accent); }
+.iconbtn svg { width: 18px; height: 18px; }
+.chip { display: inline-flex; align-items: center; gap: 4px; border-radius: 999px; padding: 2px 10px; font-size: 0.78rem; border: 1px solid var(--line); color: var(--ink-2); background: var(--surface); }
+.chip.ok { border-color: var(--good); color: var(--good); background: var(--good-soft); }
+.meter { height: 8px; background: var(--line); border-radius: 99px; overflow: hidden; }
+.meter i { display: block; height: 100%; width: 0; background: var(--accent); }
+
+/* home */
+.hero { display: grid; gap: 10px; }
+.hero h1 { font-size: clamp(1.45rem, 5.4vw, 2rem); }
+.hero p { margin: 0; color: var(--ink-2); max-width: 62ch; }
+.stats { display: flex; gap: 18px; flex-wrap: wrap; font-size: 0.9rem; color: var(--ink-2); }
+.stats b { font-family: var(--font-en); font-size: 1.15rem; color: var(--ink); font-variant-numeric: tabular-nums; }
+.module { display: grid; gap: 10px; }
+.module-head { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+.module-head h2 { font-size: 1.12rem; }
+.module-head .en { color: var(--ink-3); font-size: 0.85rem; }
+.lessons { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 330px), 1fr)); gap: 10px; }
+.lesson-card { display: grid; grid-template-columns: auto 1fr; gap: 4px 12px; align-items: start; text-decoration: none; color: inherit; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 13px 14px; min-width: 0; }
+.lesson-card:hover { border-color: var(--accent); }
+.num { grid-row: span 3; width: 38px; height: 38px; border-radius: 50%; display: grid; place-items: center; font-family: var(--font-en); font-weight: 600; background: var(--accent-soft); color: var(--accent); font-variant-numeric: tabular-nums; }
+.lesson-card.done .num { background: var(--good); color: var(--surface); }
+.lesson-card h3 { font-size: 1rem; }
+.lesson-card .en { color: var(--ink-3); font-size: 0.8rem; }
+.lesson-card .chips { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 4px; }
+
+/* lesson */
+.crumb { color: var(--ink-3); font-size: 0.85rem; display: flex; gap: 6px; flex-wrap: wrap; }
+.crumb a { color: var(--accent); text-decoration: none; }
+.lesson-head h1 { font-size: clamp(1.35rem, 5vw, 1.8rem); margin-top: 2px; }
+.lesson-head .en-title { font-family: var(--font-en); color: var(--ink-3); }
+.goal { margin: 10px 0 0; padding: 10px 12px; border-radius: 10px; background: var(--accent-soft); }
+.goal b { color: var(--accent); }
+.tabs { position: sticky; top: calc(env(safe-area-inset-top, 0px) + var(--toph, 61px)); z-index: 5; background: var(--bg); padding-block: 8px; display: flex; gap: 6px; overflow-x: auto; scrollbar-width: none; }
+.tabs::-webkit-scrollbar { display: none; }
+.tab { flex: none; border: 1px solid var(--line); background: var(--surface); border-radius: 999px; padding: 6px 13px; font-size: 0.88rem; min-height: 38px; color: var(--ink-2); }
+.tab[aria-selected="true"] { background: var(--ink); color: var(--surface); border-color: var(--ink); font-weight: 600; }
+.toolbar { display: flex; flex-wrap: wrap; gap: 10px 14px; align-items: center; justify-content: space-between; }
+.toggle { display: inline-flex; align-items: center; gap: 6px; font-size: 0.88rem; color: var(--ink-2); }
+.toggle input { width: 18px; height: 18px; accent-color: var(--accent); }
+
+.line { display: grid; grid-template-columns: 1fr auto; gap: 4px 10px; padding-block: 12px; border-top: 1px solid var(--line); }
+.line:first-child { border-top: 0; padding-top: 0; }
+.line .say { font-family: var(--font-en); font-size: 1.12rem; font-weight: 500; margin: 0; overflow-wrap: anywhere; }
+.line .reading { margin: 0; color: var(--ink); overflow-wrap: anywhere; }
+.line .reading b { color: var(--accent); }
+.line .th { margin: 0; color: var(--ink-2); }
+.line .note { margin: 2px 0 0; font-size: 0.84rem; color: var(--ink-3); }
+.line .acts { grid-row: 1 / span 4; grid-column: 2; display: flex; flex-direction: column; gap: 6px; }
+.hide-reading .reading { display: none !important; }
+.hide-th .th { display: none !important; }
+
+.scene { color: var(--ink-3); font-size: 0.88rem; margin: 0 0 8px; }
+.cast { display: flex; gap: 12px; flex-wrap: wrap; font-size: 0.86rem; color: var(--ink-2); margin-bottom: 6px; }
+.who { display: inline-grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; font-family: var(--font-en); font-weight: 600; font-size: 0.8rem; color: var(--surface); flex: none; }
+.who.A { background: var(--spk-a); }
+.who.B { background: var(--spk-b); }
+.dline { display: grid; grid-template-columns: auto 1fr auto; gap: 4px 10px; padding-block: 10px; border-top: 1px solid var(--line); align-items: start; }
+.dline:first-child { border-top: 0; }
+.dline.playing { background: var(--accent-soft); border-radius: 10px; }
+.dline .body { min-width: 0; display: grid; gap: 2px; }
+.dline .say { font-family: var(--font-en); font-weight: 500; margin: 0; overflow-wrap: anywhere; }
+.dline .reading { margin: 0; overflow-wrap: anywhere; }
+.dline .reading b { color: var(--accent); }
+.dline .th { margin: 0; color: var(--ink-2); font-size: 0.94rem; }
+.covered .say, .covered .reading { filter: blur(6px); user-select: none; }
+.reveal-hint { font-size: 0.8rem; color: var(--accent); }
+
+.formula { font-family: var(--font-en); font-size: 1.12rem; font-weight: 600; padding: 12px 14px; border: 2px dashed var(--accent); border-radius: 12px; overflow-wrap: anywhere; }
+.trap { display: grid; gap: 8px; }
+.wrong { color: var(--bad); text-decoration: line-through; text-decoration-thickness: 2px; font-family: var(--font-en); margin: 0; }
+.right { color: var(--good); font-family: var(--font-en); font-weight: 600; margin: 0; }
+.label { font-size: 0.78rem; letter-spacing: 0.04em; color: var(--ink-3); font-weight: 600; }
+.wordchips { display: flex; flex-wrap: wrap; gap: 8px; }
+.wordchip { display: grid; gap: 0; text-align: left; border: 1px solid var(--line); background: var(--surface); border-radius: 10px; padding: 7px 12px; min-height: 44px; }
+.wordchip .en { font-weight: 600; color: var(--ink); }
+.wordchip .r { font-size: 0.86rem; color: var(--ink-2); }
+.wordchip .r b { color: var(--accent); }
+
+/* quiz */
+.qhead { display: flex; justify-content: space-between; align-items: center; gap: 8px; color: var(--ink-3); font-size: 0.85rem; }
+.dots { display: flex; gap: 4px; }
+.dots i { width: 8px; height: 8px; border-radius: 50%; background: var(--line); display: block; }
+.dots i.on { background: var(--accent); }
+.dots i.ok { background: var(--good); }
+.dots i.no { background: var(--bad); }
+.qtitle { margin: 12px 0 4px; font-size: 0.86rem; color: var(--ink-3); font-weight: 600; }
+.qprompt { font-family: var(--font-display); font-size: clamp(1.15rem, 4.4vw, 1.35rem); font-weight: 600; margin: 0 0 12px; overflow-wrap: anywhere; }
+.qprompt.en { font-family: var(--font-en); }
+.opts { display: grid; gap: 8px; }
+.opt { text-align: left; border: 1.5px solid var(--line); background: var(--surface); border-radius: 11px; padding: 11px 13px; min-height: 48px; line-height: 1.45; overflow-wrap: anywhere; }
+.opt.en { font-family: var(--font-en); }
+.opt:hover:not([disabled]) { border-color: var(--accent); }
+.opt.correct { border-color: var(--good); background: var(--good-soft); }
+.opt.wrongpick { border-color: var(--bad); background: var(--bad-soft); }
+.opt[disabled] { cursor: default; }
+.tiles { display: flex; flex-wrap: wrap; gap: 8px; min-height: 48px; padding: 8px; border: 1.5px dashed var(--line); border-radius: 11px; }
+.tile { font-family: var(--font-en); border: 1px solid var(--line); background: var(--surface); border-radius: 8px; padding: 6px 11px; min-height: 40px; }
+.tile.used { visibility: hidden; }
+.answer-line { min-height: 48px; padding: 8px; border-bottom: 2px solid var(--accent); display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 10px; }
+.feedback { margin-top: 12px; padding: 12px; border-radius: 11px; display: grid; gap: 4px; }
+.feedback.ok { background: var(--good-soft); }
+.feedback.no { background: var(--bad-soft); }
+.feedback .verdict { font-weight: 700; margin: 0; }
+.feedback.ok .verdict { color: var(--good); }
+.feedback.no .verdict { color: var(--bad); }
+.feedback .say { font-family: var(--font-en); font-weight: 500; margin: 0; }
+.feedback .reading { margin: 0; }
+.feedback .reading b { color: var(--accent); }
+.big-listen { display: flex; gap: 10px; justify-content: center; margin: 6px 0 14px; flex-wrap: wrap; }
+.big-listen .btn { min-height: 54px; padding: 10px 20px; font-size: 1.02rem; }
+.result h2 { font-size: 1.6rem; margin: 6px 0; }
+
+/* teacher */
+.steps { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; counter-reset: step; }
+.steps li { display: grid; grid-template-columns: auto 1fr; gap: 2px 12px; }
+.steps .t { grid-row: span 2; font-family: var(--font-en); font-variant-numeric: tabular-nums; font-weight: 600; color: var(--accent); min-width: 52px; }
+.steps b { font-family: var(--font-display); }
+.rolecards { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)); gap: 10px; }
+.rolecard { border: 1.5px solid var(--line); border-radius: 12px; padding: 12px; display: grid; gap: 6px; }
+.rolecard h3 { font-size: 1rem; display: flex; align-items: center; gap: 8px; }
+
+.legend { font-size: 0.86rem; color: var(--ink-2); display: grid; gap: 6px; }
+.legend p { margin: 0; }
+.legend b { color: var(--accent); }
+.sync { font-size: 0.8rem; color: var(--ink-3); text-align: center; }
+.warn { color: var(--bad); }
+.pairs { display: grid; gap: 10px; }
+.pair { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.pairbtn { display: grid; text-align: left; gap: 0; border: 1px solid var(--line); background: var(--surface); border-radius: 10px; padding: 9px 12px; min-height: 56px; min-width: 0; }
+.pairbtn .en { font-weight: 600; }
+.pairbtn .r { font-size: 0.88rem; color: var(--ink-2); overflow-wrap: anywhere; }
+.pairbtn .r b { color: var(--accent); }
+.pairbtn .m { font-size: 0.8rem; color: var(--ink-3); }
+.nextbar { display: flex; justify-content: flex-end; gap: 8px; flex-wrap: wrap; }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; scroll-behavior: auto !important; } }
+@media (max-width: 420px) {
+  .card { padding: 15px 14px; }
+  .brand span { display: none; }
+}
+</style>
+
+<div class="app" id="app">
+  <header class="top">
+    <div class="wrap top-inner">
+      <a class="brand" href="#home" aria-label="หน้าแรกของคอร์ส"><b>NativeSense English Starter</b><span>ภาษาอังกฤษเพื่อการสื่อสาร สำหรับคนเริ่มต้น</span></a>
+      <nav class="topnav" aria-label="เมนูหลัก">
+        <a class="navbtn" id="navHome" href="#home">บทเรียน</a>
+        <a class="navbtn" id="navReview" href="#review">ทบทวน</a>
+      </nav>
+    </div>
+  </header>
+  <main class="wrap" id="main" tabindex="-1"></main>
+</div>
+
+<script>
+const DATA = {"course":{"name":"NativeSense English Starter","th_name":"ภาษาอังกฤษเพื่อการสื่อสาร สำหรับคนเริ่มต้น","intro":"คอร์สนี้สำหรับคนที่ภาษาอังกฤษยังไม่แข็งแรงแต่อยากพูดสื่อสารได้จริง มี 24 บท แบ่งเป็น 6 หมวด บทละประมาณ 15–20 นาที ทุกบทมีประโยคหลัก บทสนทนา สูตรประโยค จุดที่คนไทยมักพลาด แบบฝึก และภารกิจพูด ทุกประโยคมีคำอ่านไทยและปุ่มฟังเสียง แนะนำให้เริ่มจากบทเริ่มต้นเรื่องเสียงก่อน"},"modules":[[1,"เปิดปากพูด","First words"],[2,"เอาตัวรอดในชีวิตประจำวัน","Everyday survival"],[3,"ที่ทำงานและโรงเรียน","Work and school"],[4,"คุยเล่นและผูกมิตร","Small talk and friends"],[5,"เล่าเรื่องและแสดงความเห็น","Stories and opinions"],[6,"เมื่อมีปัญหา","When things go wrong"]],"steps":[["อุ่นเครื่อง",5,"ถามคำถามอุ่นเครื่องของบทนี้ ให้ตอบเป็นภาษาไทยก่อนก็ได้ แล้วบอกเป้าหมายของบท"],["ฟังและพูดตาม",10,"เปิดเสียงประโยคหลักทีละประโยค ให้พูดตาม 2 รอบ (ปกติ แล้วช้า) จากนั้นสุ่มพูดภาษาไทยให้ผู้เรียนตอบเป็นภาษาอังกฤษ"],["สูตรประโยค",10,"อธิบายสูตร แล้วให้แต่ละคนเปลี่ยนส่วนในวงเล็บ สร้างประโยคใหม่ของตัวเองคนละ 2 ประโยค"],["บทบาทสมมติ",15,"ฟังบทสนทนา 1 รอบ แล้วจับคู่เล่นตามการ์ด A/B ของบทนี้ จากนั้นสลับบทบาท"],["ปิดบท",5,"ทำแบบฝึกในแอป ทวนจุดที่คนไทยมักพลาด และให้ทำภารกิจพูดเป็นการบ้าน"]],"lesson0":{"title":"เริ่มต้นที่นี่: อ่านคำอ่านไทยและ 7 เสียงที่คนไทยมักพลาด","how":["คำอ่านไทยเป็นเสียงโดยประมาณ ใช้ฝึกได้แต่แทนเสียงจริงไม่ได้ 100% กดปุ่มฟังทุกครั้ง แล้วพูดตามออกเสียงดัง ๆ","ตัวหนา = พยางค์ที่ต้องลงเสียงหนัก เช่น **แพส**-พอ(ร)(ท) (passport)","ตัวในวงเล็บ = เสียงท้ายที่ต้องออกเบา ๆ แต่ห้ามหาย เช่น ไน(ส) (nice), ฟี(ล) (feel)","ขีด (-) แบ่งพยางค์ในคำเดียวกัน และเว้นวรรคระหว่างคำ","เสียงที่คำอ่านเป็นสำเนียงอเมริกัน (US) เช่น t ระหว่างสระออกเสียงคล้าย ด: water → **วอ**-เดอ(ร)"]},"sounds":[{"t":"เสียงท้ายคำต้องมี","d":"ออกเสียงท้ายเบา ๆ แต่ห้ามหาย เพราะเปลี่ยนความหมาย: หนึ่งชิ้นกับหลายชิ้น ปัจจุบันกับอดีต","pairs":[{"a":"cat","ar":"แค็ท","am":"แมว 1 ตัว","b":"cats","br":"แค็ท(ส)","bm":"แมวหลายตัว"},{"a":"play","ar":"เพล","am":"เล่น","b":"played","br":"เพลด","bm":"เล่นแล้ว"},{"a":"like","ar":"ไล(ค)","am":"ชอบ","b":"likes","br":"ไล(ค)(ส)","bm":"ชอบ (เขาชอบ)"}]},{"t":"th ไม่ใช่ ท หรือ ซ","d":"ปลายลิ้นแตะใต้ฟันบนเบา ๆ แล้วเป่าลม (think, three) หรือออกเสียงให้คอสั่น (they, that)","pairs":[{"a":"think","ar":"ธิง(ค)","am":"คิด","b":"sink","br":"ซิง(ค)","bm":"อ่างล้างจาน"},{"a":"three","ar":"ธรี","am":"สาม","b":"tree","br":"ทรี","bm":"ต้นไม้"},{"a":"they","ar":"เด","am":"พวกเขา","b":"day","br":"เด","bm":"วัน"}]},{"t":"v กับ w","d":"v ฟันบนแตะริมฝีปากล่างแล้วออกเสียงให้คอสั่น · w ห่อปากกลม ไม่แตะฟัน คำอ่านไทยใช้ ว ทั้งคู่ จึงต้องฟังเสียงจริง","pairs":[{"a":"vest","ar":"เวส(ท)","am":"เสื้อกั๊ก","b":"west","br":"เวส(ท)","bm":"ทิศตะวันตก"},{"a":"vine","ar":"ไว(น)","am":"เถาวัลย์","b":"wine","br":"ไว(น)","bm":"ไวน์"}]},{"t":"r กับ l","d":"r ห่อปากเล็กน้อย ม้วนลิ้นขึ้นโดยไม่แตะเพดาน · l ปลายลิ้นแตะปุ่มเหงือกหลังฟันบน","pairs":[{"a":"right","ar":"ไร(ท)","am":"ขวา, ถูกต้อง","b":"light","br":"ไล(ท)","bm":"ไฟ, เบา"},{"a":"road","ar":"โรด","am":"ถนน","b":"load","br":"โลด","bm":"ของที่บรรทุก"}]},{"t":"s กับ z","d":"z คือเสียง ซ ที่คอสั่น เหมือนเสียงผึ้ง","pairs":[{"a":"ice","ar":"ไอ(ส)","am":"น้ำแข็ง","b":"eyes","br":"ไอ(ซ)","bm":"ดวงตา"},{"a":"price","ar":"ไพร(ส)","am":"ราคา","b":"prize","br":"ไพร(ซ)","bm":"รางวัล"}]},{"t":"สระสั้นกับสระยาว","d":"สระสั้นพูดเร็ว สระยาวลากเสียง ถ้าสลับกันความหมายเปลี่ยน","pairs":[{"a":"ship","ar":"ชิพ","am":"เรือ","b":"sheep","br":"ชีพ","bm":"แกะ"},{"a":"live","ar":"ลิ(ฟ)","am":"อาศัยอยู่","b":"leave","br":"ลี(ฟ)","bm":"ออกไป"}]},{"t":"เสียงหนักในคำ","d":"คำที่มีหลายพยางค์ต้องลงเสียงหนักให้ถูกพยางค์ ตัวหนาในคำอ่านคือพยางค์ที่ต้องเน้น","pairs":[{"a":"thirteen","ar":"เธอ(ร)-**ทีน**","am":"13","b":"thirty","br":"**เธอ(ร)**-ดี","bm":"30"},{"a":"fifteen","ar":"ฟิ(ฟ)-**ทีน**","am":"15","b":"fifty","br":"**ฟิ(ฟ)**-ที","bm":"50"}]}],"lessons":[{"n":1,"mod":1,"th":"ทักทายและแนะนำตัว","en":"Greetings and introductions","goal":"ทักทาย บอกชื่อ บอกว่ามาจากไหน และถามกลับได้","scene":"วันแรกของครูใหม่ที่โรงเรียน","cast":{"A":{"name":"Nok","g":"f","role":"เจ้าหน้าที่ฝ่ายวีซ่าของโรงเรียน"},"B":{"name":"Ken","g":"m","role":"ครูใหม่จากญี่ปุ่น"}},"phrases":[{"en":"Hi! I'm Nok.","r":"ไฮ! ไอ(ม) นก","th":"สวัสดี ฉันชื่อนก","note":"I'm = I am"},{"en":"What's your name?","r":"วัท(ส) ยอ(ร) เนม?","th":"คุณชื่ออะไร","note":""},{"en":"Nice to meet you.","r":"ไน(ส) ทะ มี-ชู","th":"ยินดีที่ได้รู้จัก","note":"พูดตอนเจอกันครั้งแรก"},{"en":"Nice to meet you, too.","r":"ไน(ส) ทะ มี-ชู, ทู","th":"ยินดีที่ได้รู้จักเช่นกัน","note":""},{"en":"Where are you from?","r":"แว(ร) อา(ร) ยู ฟรัม?","th":"คุณมาจากไหน","note":""},{"en":"I'm from Thailand.","r":"ไอ(ม) เฟริม **ไท**-แลน(ด)","th":"ฉันมาจากประเทศไทย","note":""},{"en":"How are you?","r":"ฮาว อา(ร) ยู?","th":"สบายดีไหม","note":"เป็นคำทักทาย ตอบสั้น ๆ ก็พอ"},{"en":"I'm good, thanks. And you?","r":"ไอ(ม) กุด, แธง(ค)(ส). แอน(ด) ยู?","th":"สบายดี ขอบคุณ แล้วคุณล่ะ","note":"เป็นกันเองกว่า I'm fine, thank you."}],"dialogue":[{"who":"A","en":"Hi! I'm Nok. What's your name?","r":"ไฮ! ไอ(ม) นก. วัท(ส) ยอ(ร) เนม?","th":"สวัสดีค่ะ ฉันชื่อนก คุณชื่ออะไรคะ"},{"who":"B","en":"Hi, Nok. I'm Ken.","r":"ไฮ, นก. ไอ(ม) เค็น","th":"สวัสดีครับนก ผมชื่อเคน"},{"who":"A","en":"Nice to meet you, Ken.","r":"ไน(ส) ทะ มี-ชู, เค็น","th":"ยินดีที่ได้รู้จักค่ะเคน"},{"who":"B","en":"Nice to meet you, too.","r":"ไน(ส) ทะ มี-ชู, ทู","th":"ยินดีที่ได้รู้จักเช่นกันครับ"},{"who":"A","en":"Where are you from?","r":"แว(ร) อา(ร) ยู ฟรัม?","th":"คุณมาจากไหนคะ"},{"who":"B","en":"I'm from Japan. And you?","r":"ไอ(ม) เฟริม จะ-**แพน**. แอน(ด) ยู?","th":"ผมมาจากญี่ปุ่นครับ แล้วคุณล่ะครับ"},{"who":"A","en":"I'm from Bangkok.","r":"ไอ(ม) เฟริม แบง-**คาก**","th":"ฉันมาจากกรุงเทพฯ ค่ะ"}],"pattern":{"f":"I'm + [ชื่อ / ที่มา / ความรู้สึก]","ex":"I'm ย่อมาจาก I am ใช้บอกว่าเราเป็นใคร มาจากไหน หรือรู้สึกอย่างไร","examples":[{"en":"I'm Nok.","r":"ไอ(ม) นก","th":"ฉันชื่อนก"},{"en":"I'm from Chiang Mai.","r":"ไอ(ม) เฟริม เชียง ใหม่","th":"ฉันมาจากเชียงใหม่"},{"en":"I'm hungry.","r":"ไอ(ม) **ฮัง**-กรี","th":"ฉันหิว"}]},"sound":{"t":"เสียง m ท้าย I'm","d":"ปิดปากตอนจบเสียง ถ้าไม่ปิดปาก I'm จะกลายเป็น I เฉย ๆ","words":[{"en":"I'm","r":"ไอ(ม)"},{"en":"I","r":"ไอ"},{"en":"name","r":"เนม"}]},"trap":{"wrong":"I from Thailand.","right":"I'm from Thailand.","why":"ภาษาไทยไม่ต้องมีคำเชื่อม แต่ภาษาอังกฤษต้องมี am, is หรือ are"},"mission":{"task":"แนะนำตัว 3 ประโยค: ชื่อ มาจากไหน และถามชื่ออีกฝ่าย","model":[{"en":"Hi! I'm Nok.","r":"ไฮ! ไอ(ม) นก"},{"en":"I'm from Chiang Mai.","r":"ไอ(ม) เฟริม เชียง ใหม่"},{"en":"What's your name?","r":"วัท(ส) ยอ(ร) เนม?"}]},"teach":{"warm":"ประโยคภาษาอังกฤษประโยคแรกที่คุณเคยพูดกับชาวต่างชาติคืออะไร","A":"คุณเป็นพนักงานใหม่ แนะนำตัวกับเพื่อนร่วมงานชาวต่างชาติ บอกชื่อและบอกว่ามาจากไหน","B":"คุณเป็นครูชาวต่างชาติ ตอบ แล้วถามกลับว่าอีกฝ่ายมาจากไหน"}},{"n":2,"mod":1,"th":"คำสุภาพที่ใช้ทุกวัน","en":"Please, thank you, and sorry","goal":"ขอบคุณ ขอโทษ ขออนุญาต และตอบรับคำขอบคุณได้อย่างเป็นธรรมชาติ","scene":"หน้าห้องทำงานหัวหน้า","cast":{"A":{"name":"Nok","g":"f","role":"เจ้าหน้าที่"},"B":{"name":"Mr. Lee","g":"m","role":"หัวหน้าฝ่าย"}},"phrases":[{"en":"Thank you so much.","r":"แธง-คิว โซ มั(ช)","th":"ขอบคุณมาก","note":""},{"en":"You're welcome.","r":"ยัว(ร) **เว(ล)**-เคิม","th":"ด้วยความยินดี","note":"ตอบเมื่อมีคนขอบคุณ"},{"en":"No problem.","r":"โน **พรา**-เบลิม","th":"ไม่มีปัญหา","note":"ตอบคำขอบคุณแบบสบาย ๆ"},{"en":"I'm sorry. My mistake.","r":"ไอ(ม) **ซา**-รี. ไม มิ-**สเตก**","th":"ขอโทษ ฉันผิดเอง","note":""},{"en":"That's OK.","r":"แด็ท(ส) โอ-**เค**","th":"ไม่เป็นไร","note":"ตอบเมื่อมีคนขอโทษ"},{"en":"Excuse me.","r":"อิก-**สกิว(ซ)** มี","th":"ขอโทษนะ","note":"ใช้ขอทาง เรียกคน หรือก่อนถามอะไร"},{"en":"Please wait a moment.","r":"พลี(ซ) เวท อะ **โม**-เมิน(ท)","th":"กรุณารอสักครู่","note":""},{"en":"Can I come in?","r":"เคิน ไอ คัม อิน?","th":"ขอเข้าไปได้ไหม","note":""}],"dialogue":[{"who":"A","en":"Excuse me. Can I come in?","r":"อิก-**สกิว(ซ)** มี. เคิน ไอ คัม อิน?","th":"ขอโทษค่ะ ขอเข้าไปได้ไหมคะ"},{"who":"B","en":"Sure. Please come in.","r":"ชัว(ร). พลี(ซ) คัม อิน","th":"ได้เลยครับ เชิญเข้ามาครับ"},{"who":"A","en":"I'm sorry I'm a little late.","r":"ไอ(ม) **ซา**-รี ไอ(ม) อะ **ลิ**-เดิ(ล) เลท","th":"ขอโทษที่มาสายนิดหน่อยค่ะ"},{"who":"B","en":"That's OK.","r":"แด็ท(ส) โอ-**เค**","th":"ไม่เป็นไรครับ"},{"who":"A","en":"Here's the report.","r":"เฮีย(ร)(ซ) เดอะ รี-**พอ(ร)(ท)**","th":"นี่รายงานค่ะ"},{"who":"B","en":"Thank you so much.","r":"แธง-คิว โซ มั(ช)","th":"ขอบคุณมากครับ"},{"who":"A","en":"You're welcome.","r":"ยัว(ร) **เว(ล)**-เคิม","th":"ด้วยความยินดีค่ะ"}],"pattern":{"f":"Can I + [กริยา]?","ex":"ขออนุญาตทำอะไรบางอย่าง (…ได้ไหม)","examples":[{"en":"Can I come in?","r":"เคิน ไอ คัม อิน?","th":"ขอเข้าไปได้ไหม"},{"en":"Can I sit here?","r":"เคิน ไอ ซิท เฮีย(ร)?","th":"ขอนั่งตรงนี้ได้ไหม"},{"en":"Can I ask a question?","r":"เคิน ไอ แอส(ค) อะ **เควส**-เชิน?","th":"ขอถามคำถามได้ไหม"}]},"sound":{"t":"th ใน thank","d":"ปลายลิ้นแตะใต้ฟันบนเบา ๆ แล้วเป่าลมออก ไม่ใช่เสียง ต หรือ ท","words":[{"en":"thank","r":"แธง(ค)"},{"en":"think","r":"ธิง(ค)"},{"en":"three","r":"ธรี"}]},"trap":{"wrong":"Never mind. (ตอบคำขอบคุณ)","right":"You're welcome. / No problem.","why":"Never mind แปลว่า 'ช่างมันเถอะ ไม่ต้องสนใจ' ไม่ได้ใช้ตอบคำขอบคุณ"},"mission":{"task":"พูดให้ครบ 3 สถานการณ์: ขอบคุณ ขอโทษ และขออนุญาตนั่ง","model":[{"en":"Thank you so much.","r":"แธง-คิว โซ มั(ช)"},{"en":"I'm sorry. My mistake.","r":"ไอ(ม) **ซา**-รี. ไม มิ-**สเตก**"},{"en":"Excuse me. Can I sit here?","r":"อิก-**สกิว(ซ)** มี. เคิน ไอ ซิท เฮีย(ร)?"}]},"teach":{"warm":"คำว่า 'ไม่เป็นไร' ในภาษาไทยใช้ได้หลายสถานการณ์ แต่ละแบบภาษาอังกฤษควรพูดว่าอะไร","A":"คุณมาสายและต้องเข้าห้องประชุมที่เริ่มไปแล้ว","B":"คุณเป็นหัวหน้าที่ใจดี ตอบรับคำขอโทษ แล้วขอบคุณที่เอาเอกสารมาให้"}},{"n":3,"mod":1,"th":"ฟังไม่ทัน ทำยังไงดี","en":"When you don't understand","goal":"ขอให้พูดซ้ำ พูดช้าลง สะกด หรืออธิบายคำศัพท์ได้ เมื่อฟังไม่ทัน","scene":"เจ้าหน้าที่ชาวต่างชาติบอกเวลานัด","cast":{"A":{"name":"Ms. Green","g":"f","role":"เจ้าหน้าที่ชาวต่างชาติ"},"B":{"name":"Nok","g":"f","role":"ผู้มาติดต่อ"}},"phrases":[{"en":"Sorry, could you say that again?","r":"**ซา**-รี, คุ-จู เซ แด็ท อะ-**เก็น**?","th":"ขอโทษ ช่วยพูดอีกครั้งได้ไหม","note":""},{"en":"Could you speak more slowly, please?","r":"คุ-จู สปีก มอ(ร) **สโล**-ลี, พลี(ซ)?","th":"ช่วยพูดช้าลงหน่อยได้ไหม","note":""},{"en":"I don't understand.","r":"ไอ โดน(ท) อัน-เดอ(ร)-**สแตน(ด)**","th":"ฉันไม่เข้าใจ","note":""},{"en":"What does this word mean?","r":"วัท ดั(ซ) ดิส เวอ(ร)(ด) มีน?","th":"คำนี้แปลว่าอะไร","note":""},{"en":"How do you spell that?","r":"ฮาว ดู ยู สเป(ล) แด็ท?","th":"คำนั้นสะกดยังไง","note":""},{"en":"How do you say this in English?","r":"ฮาว ดู ยู เซ ดิส อิน **อิง**-กลิ(ช)?","th":"อันนี้ภาษาอังกฤษพูดว่าอะไร","note":""},{"en":"Do you mean this Thursday?","r":"ดู ยู มีน ดิส **เธอ(ร)(ซ)**-เด?","th":"หมายถึงพฤหัสนี้ใช่ไหม","note":"ใช้เช็กว่าเข้าใจถูก"},{"en":"Could you write it down, please?","r":"คุ-จู ไร(ท) อิท ดาว(น), พลี(ซ)?","th":"ช่วยเขียนให้หน่อยได้ไหม","note":""}],"dialogue":[{"who":"A","en":"Your appointment is on Thursday at two p.m.","r":"ยอ(ร) อะ-**พอย(น)**-เมิน(ท) อิ(ซ) อาน **เธอ(ร)(ซ)**-เด เอิท ทู พี-**เอ็ม**","th":"นัดของคุณคือวันพฤหัสบดี บ่ายสองโมงค่ะ"},{"who":"B","en":"Sorry, could you say that again?","r":"**ซา**-รี, คุ-จู เซ แด็ท อะ-**เก็น**?","th":"ขอโทษค่ะ ช่วยพูดอีกครั้งได้ไหมคะ"},{"who":"A","en":"Thursday at two p.m.","r":"**เธอ(ร)(ซ)**-เด เอิท ทู พี-**เอ็ม**","th":"วันพฤหัสบดี บ่ายสองโมงค่ะ"},{"who":"B","en":"Do you mean this Thursday?","r":"ดู ยู มีน ดิส **เธอ(ร)(ซ)**-เด?","th":"หมายถึงพฤหัสนี้ใช่ไหมคะ"},{"who":"A","en":"Yes, this Thursday.","r":"เยส, ดิส **เธอ(ร)(ซ)**-เด","th":"ใช่ค่ะ พฤหัสนี้"},{"who":"B","en":"Could you write it down, please?","r":"คุ-จู ไร(ท) อิท ดาว(น), พลี(ซ)?","th":"ช่วยเขียนให้หน่อยได้ไหมคะ"},{"who":"A","en":"Sure. Here you go.","r":"ชัว(ร). เฮีย(ร) ยู โก","th":"ได้ค่ะ นี่ค่ะ"}],"pattern":{"f":"Could you + [กริยา], please?","ex":"ขอให้อีกฝ่ายช่วยอย่างสุภาพ","examples":[{"en":"Could you say that again, please?","r":"คุ-จู เซ แด็ท อะ-**เก็น**, พลี(ซ)?","th":"ช่วยพูดอีกครั้งได้ไหม"},{"en":"Could you speak more slowly, please?","r":"คุ-จู สปีก มอ(ร) **สโล**-ลี, พลี(ซ)?","th":"ช่วยพูดช้าลงหน่อยได้ไหม"},{"en":"Could you help me, please?","r":"คุ-จู เฮ(ล)(พ) มี, พลี(ซ)?","th":"ช่วยฉันหน่อยได้ไหม"}]},"sound":{"t":"Could you พูดเชื่อมกัน","d":"เสียง d ท้าย could รวมกับ y ของ you กลายเป็นเสียงคล้าย จ ฟังเป็นธรรมชาติ","words":[{"en":"Could you","r":"คุ-จู"},{"en":"Would you","r":"วุ-จู"},{"en":"Did you","r":"ดิ-จู"}]},"trap":{"wrong":"What is mean?","right":"What does it mean? / What does this word mean?","why":"คำถามที่มีกริยาอื่นอยู่แล้ว (mean) ต้องใช้ does ช่วย ไม่ใช้ is"},"mission":{"task":"ฝึกขอให้พูดซ้ำ ขอให้พูดช้าลง และถามวิธีสะกด","model":[{"en":"Sorry, could you say that again?","r":"**ซา**-รี, คุ-จู เซ แด็ท อะ-**เก็น**?"},{"en":"Could you speak more slowly, please?","r":"คุ-จู สปีก มอ(ร) **สโล**-ลี, พลี(ซ)?"},{"en":"How do you spell that?","r":"ฮาว ดู ยู สเป(ล) แด็ท?"}]},"teach":{"warm":"เวลาฟังภาษาอังกฤษไม่ทัน ปกติคุณทำยังไง","A":"คุณเป็นเจ้าหน้าที่ บอกวันและเวลานัดเร็ว ๆ","B":"คุณฟังไม่ทัน ขอให้พูดซ้ำ ช้าลง และเขียนให้"}},{"n":4,"mod":1,"th":"ตัวเลข เวลา และวันที่","en":"Numbers, time, and dates","goal":"ถามเวลา บอกวันและวันที่ และบอกเบอร์โทรได้","scene":"นัดประชุมกับเพื่อนร่วมงาน","cast":{"A":{"name":"Ben","g":"m","role":"เพื่อนร่วมงาน"},"B":{"name":"Nok","g":"f","role":"เจ้าหน้าที่"}},"phrases":[{"en":"What time is it?","r":"วัท ไท(ม) อิ-ซิท?","th":"ตอนนี้กี่โมง","note":""},{"en":"It's nine thirty.","r":"อิท(ส) ไน(น) **เธอ(ร)**-ดี","th":"เก้าโมงครึ่ง","note":"เวลาไทยแบบ โมง/ทุ่ม ต้องแปลงก่อนพูด: สามโมงเช้า = nine a.m. · สองทุ่ม = eight p.m."},{"en":"What day is it today?","r":"วัท เด อิ-ซิท ทะ-**เด**?","th":"วันนี้วันอะไร","note":""},{"en":"It's Monday.","r":"อิท(ส) **มัน**-เด","th":"วันจันทร์","note":""},{"en":"What's the date today?","r":"วัท(ส) เดอะ เดท ทะ-**เด**?","th":"วันนี้วันที่เท่าไร","note":""},{"en":"It's March fifth.","r":"อิท(ส) มา(ร)(ช) ฟิ(ฟ)(ธ)","th":"วันที่ 5 มีนาคม","note":"US พูดเดือนก่อนวันที่"},{"en":"What's your phone number?","r":"วัท(ส) ยอ(ร) โฟน **นัม**-เบอ(ร)?","th":"เบอร์โทรของคุณเบอร์อะไร","note":""},{"en":"It's zero eight one, two three four, five six seven eight.","r":"อิท(ส) **ซิ**-โร เอท วัน, ทู ธรี ฟอ(ร), ไฟ(ฟ) ซิก(ส) **เซ**-เวิน เอท","th":"ศูนย์แปดหนึ่ง สองสามสี่ ห้าหกเจ็ดแปด","note":"อ่านทีละตัว เว้นจังหวะเป็นช่วง ๆ"}],"dialogue":[{"who":"A","en":"Are you free on Friday?","r":"อา(ร) ยู ฟรี อาน **ไฟร**-เด?","th":"วันศุกร์ว่างไหมครับ"},{"who":"B","en":"Yes. What time?","r":"เยส. วัท ไท(ม)?","th":"ว่างค่ะ กี่โมงคะ"},{"who":"A","en":"How about ten a.m.?","r":"ฮาว อะ-**บาว(ท)** เท็น เอ-**เอ็ม**?","th":"สิบโมงเช้าดีไหมครับ"},{"who":"B","en":"Ten a.m. is fine.","r":"เท็น เอ-**เอ็ม** อิ(ซ) ไฟ(น)","th":"สิบโมงเช้าได้ค่ะ"},{"who":"A","en":"What's your phone number?","r":"วัท(ส) ยอ(ร) โฟน **นัม**-เบอ(ร)?","th":"เบอร์โทรของคุณเบอร์อะไรครับ"},{"who":"B","en":"It's zero eight one, two three four, five six seven eight.","r":"อิท(ส) **ซิ**-โร เอท วัน, ทู ธรี ฟอ(ร), ไฟ(ฟ) ซิก(ส) **เซ**-เวิน เอท","th":"ศูนย์แปดหนึ่ง สองสามสี่ ห้าหกเจ็ดแปดค่ะ"},{"who":"A","en":"Great. See you on Friday.","r":"เกรท. ซี ยู อาน **ไฟร**-เด","th":"ดีครับ เจอกันวันศุกร์นะครับ"}],"pattern":{"f":"It's + [เวลา / วัน / วันที่]","ex":"ใช้ It's ตอบเรื่องเวลา วัน วันที่ และอากาศ","examples":[{"en":"It's ten o'clock.","r":"อิท(ส) เท็น อะ-**คลาก**","th":"สิบโมง"},{"en":"It's Friday.","r":"อิท(ส) **ไฟร**-เด","th":"วันศุกร์"},{"en":"It's hot today.","r":"อิท(ส) ฮาท ทะ-**เด**","th":"วันนี้อากาศร้อน"}]},"sound":{"t":"thirteen กับ thirty ต่างที่เสียงหนัก","d":"-teen ลงเสียงหนักพยางค์ท้าย ส่วน -ty ลงเสียงหนักพยางค์หน้า ฟังตัวหนาในคำอ่าน","words":[{"en":"thirteen","r":"เธอ(ร)-**ทีน**"},{"en":"thirty","r":"**เธอ(ร)**-ดี"},{"en":"fifteen","r":"ฟิ(ฟ)-**ทีน**"},{"en":"fifty","r":"**ฟิ(ฟ)**-ที"}]},"trap":{"wrong":"What time now?","right":"What time is it?","why":"คำถามภาษาอังกฤษต้องมี is it ไม่เรียงคำตามภาษาไทย"},"mission":{"task":"บอกเวลาตอนนี้ วันนี้วันอะไร และเบอร์โทรของคุณ","model":[{"en":"It's ten fifteen.","r":"อิท(ส) เท็น ฟิ(ฟ)-**ทีน**"},{"en":"It's Tuesday.","r":"อิท(ส) **ทู(ซ)**-เด"},{"en":"My phone number is zero nine one, five five five, one two three four.","r":"ไม โฟน **นัม**-เบอ(ร) อิ(ซ) **ซิ**-โร ไน(น) วัน, ไฟ(ฟ) ไฟ(ฟ) ไฟ(ฟ), วัน ทู ธรี ฟอ(ร)"}]},"teach":{"warm":"ตอนนี้กี่โมง ลองพูดเป็นภาษาอังกฤษ แล้วลองแปลง 'บ่ายสาม' และ 'สองทุ่ม'","A":"ชวนเพื่อนต่างชาติไปกินข้าว ตกลงวันและเวลา","B":"ตอบรับ และให้เบอร์โทรของคุณ"}},{"n":5,"mod":2,"th":"ถามทางและบอกทาง","en":"Asking for directions","goal":"ถามว่าสถานที่อยู่ตรงไหน และบอกทางง่าย ๆ ได้","scene":"นักท่องเที่ยวถามทางหน้าโรงเรียน","cast":{"A":{"name":"Mark","g":"m","role":"นักท่องเที่ยว"},"B":{"name":"Nok","g":"f","role":"คนในพื้นที่"}},"phrases":[{"en":"Excuse me, where's the restroom?","r":"อิก-**สกิว(ซ)** มี, แว(ร)(ซ) เดอะ **เรส**-ทรูม?","th":"ขอโทษนะ ห้องน้ำอยู่ที่ไหน","note":"restroom (US) สุภาพกว่า toilet"},{"en":"Is there a pharmacy near here?","r":"อิ(ซ) แด(ร) อะ **ฟา(ร)**-มะ-ซี เนีย(ร) เฮีย(ร)?","th":"แถวนี้มีร้านขายยาไหม","note":""},{"en":"Go straight.","r":"โก สเตรท","th":"ตรงไป","note":""},{"en":"Turn left at the corner.","r":"เทอ(ร)(น) เล(ฟ)(ท) เอิท เดอะ **คอ(ร)**-เนอ(ร)","th":"เลี้ยวซ้ายที่หัวมุม","note":""},{"en":"Turn right at the traffic light.","r":"เทอ(ร)(น) ไร(ท) เอิท เดอะ **แทร**-ฟิก ไล(ท)","th":"เลี้ยวขวาที่ไฟจราจร","note":""},{"en":"It's next to the bank.","r":"อิท(ส) เน็ก(ส)(ท) ทะ เดอะ แบง(ค)","th":"อยู่ข้างธนาคาร","note":""},{"en":"It's on the second floor.","r":"อิท(ส) อาน เดอะ **เซ**-เคิน(ด) ฟลอ(ร)","th":"อยู่ชั้นสอง","note":""},{"en":"Is it far from here?","r":"อิ-ซิท ฟา(ร) เฟริม เฮีย(ร)?","th":"ไกลจากที่นี่ไหม","note":""}],"dialogue":[{"who":"A","en":"Excuse me. Is there a pharmacy near here?","r":"อิก-**สกิว(ซ)** มี. อิ(ซ) แด(ร) อะ **ฟา(ร)**-มะ-ซี เนีย(ร) เฮีย(ร)?","th":"ขอโทษครับ แถวนี้มีร้านขายยาไหมครับ"},{"who":"B","en":"Yes. Go straight and turn left at the corner.","r":"เยส. โก สเตรท เอิน เทอ(ร)(น) เล(ฟ)(ท) เอิท เดอะ **คอ(ร)**-เนอ(ร)","th":"มีค่ะ ตรงไปแล้วเลี้ยวซ้ายที่หัวมุมค่ะ"},{"who":"A","en":"Is it far from here?","r":"อิ-ซิท ฟา(ร) เฟริม เฮีย(ร)?","th":"ไกลจากที่นี่ไหมครับ"},{"who":"B","en":"No. It's about five minutes on foot.","r":"โน. อิท(ส) อะ-**บาว(ท)** ไฟ(ฟ) **มิ**-เนิท(ส) อาน ฟุท","th":"ไม่ไกลค่ะ เดินประมาณห้านาที"},{"who":"A","en":"Is it next to the bank?","r":"อิ-ซิท เน็ก(ส)(ท) ทะ เดอะ แบง(ค)?","th":"อยู่ข้างธนาคารใช่ไหมครับ"},{"who":"B","en":"Yes, it's right next to the bank.","r":"เยส, อิท(ส) ไร(ท) เน็ก(ส)(ท) ทะ เดอะ แบง(ค)","th":"ใช่ค่ะ อยู่ติดกับธนาคารเลย"},{"who":"A","en":"Thank you!","r":"แธง-คิว!","th":"ขอบคุณครับ"}],"pattern":{"f":"Where's the + [สถานที่]?","ex":"ถามว่าสถานที่อยู่ตรงไหน (Where's = Where is)","examples":[{"en":"Where's the restroom?","r":"แว(ร)(ซ) เดอะ **เรส**-ทรูม?","th":"ห้องน้ำอยู่ที่ไหน"},{"en":"Where's the elevator?","r":"แว(ร)(ซ) ดิ **เอ**-ละ-เว-เดอ(ร)?","th":"ลิฟต์อยู่ที่ไหน"},{"en":"Where's the exit?","r":"แว(ร)(ซ) ดิ **เอ็ก**-ซิท?","th":"ทางออกอยู่ที่ไหน"}]},"sound":{"t":"r กับ l","d":"right (ขวา) ห่อปาก ม้วนลิ้นไม่แตะเพดาน · light (ไฟ) ปลายลิ้นแตะหลังฟันบน ถ้าพูดสลับกัน ความหมายเปลี่ยน","words":[{"en":"right","r":"ไร(ท)"},{"en":"light","r":"ไล(ท)"},{"en":"road","r":"โรด"},{"en":"load","r":"โลด"}]},"trap":{"wrong":"Where is toilet?","right":"Where's the restroom?","why":"ต้องมี the และใน US นิยมใช้ restroom หรือ bathroom ซึ่งสุภาพกว่า"},"mission":{"task":"ถามทางไปร้านกาแฟ แล้วลองบอกทาง 2 ขั้น","model":[{"en":"Excuse me, is there a coffee shop near here?","r":"อิก-**สกิว(ซ)** มี, อิ(ซ) แด(ร) อะ **คา**-ฟี ชาพ เนีย(ร) เฮีย(ร)?"},{"en":"Go straight and turn right at the traffic light.","r":"โก สเตรท เอิน เทอ(ร)(น) ไร(ท) เอิท เดอะ **แทร**-ฟิก ไล(ท)"},{"en":"It's next to the bank.","r":"อิท(ส) เน็ก(ส)(ท) ทะ เดอะ แบง(ค)"}]},"teach":{"warm":"จากที่ทำงานของคุณ ไปร้านกาแฟที่ใกล้ที่สุดยังไง ลองบอกเป็นภาษาไทยก่อน","A":"คุณเป็นนักท่องเที่ยว กำลังหาร้านขายยา","B":"คุณเป็นคนในพื้นที่ บอกทาง 2–3 ขั้น"}},{"n":6,"mod":2,"th":"สั่งอาหารและเครื่องดื่ม","en":"Ordering food and drinks","goal":"สั่งอาหารและเครื่องดื่ม บอกความต้องการพิเศษ และเช็กบิลได้","scene":"ร้านกาแฟ","cast":{"A":{"name":"Kate","g":"f","role":"พนักงานร้านกาแฟ"},"B":{"name":"Somchai","g":"m","role":"ลูกค้า"}},"phrases":[{"en":"Can I see the menu, please?","r":"เคิน ไอ ซี เดอะ **เม**-นิว, พลี(ซ)?","th":"ขอดูเมนูหน่อยได้ไหม","note":""},{"en":"I'd like a coffee, please.","r":"ไอ(ด) ไล(ค) อะ **คา**-ฟี, พลี(ซ)","th":"ขอกาแฟหนึ่งแก้ว","note":"I'd like สุภาพกว่า I want"},{"en":"Can I have this one, please?","r":"เคิน ไอ แฮ(ฟ) ดิส วัน, พลี(ซ)?","th":"ขออันนี้ได้ไหม","note":"ชี้ที่เมนูได้เลย"},{"en":"Not too spicy, please.","r":"นาท ทู **สไป**-ซี, พลี(ซ)","th":"ไม่เผ็ดมากนะ","note":""},{"en":"No ice, please.","r":"โน ไอ(ส), พลี(ซ)","th":"ไม่ใส่น้ำแข็ง","note":""},{"en":"For here or to go?","r":"เฟอ(ร) เฮีย(ร) ออ(ร) ทะ โก?","th":"ทานที่นี่หรือกลับบ้าน","note":"พนักงานเป็นคนถาม"},{"en":"To go, please.","r":"ทะ โก, พลี(ซ)","th":"กลับบ้าน","note":""},{"en":"Can I get the check, please?","r":"เคิน ไอ เก็ท เดอะ เช็ก, พลี(ซ)?","th":"ขอเช็กบิลด้วย","note":"US ใช้ check · UK ใช้ bill"}],"dialogue":[{"who":"A","en":"Hi! What can I get for you?","r":"ไฮ! วัท เคิน ไอ เก็ท เฟอ(ร) ยู?","th":"สวัสดีค่ะ รับอะไรดีคะ"},{"who":"B","en":"I'd like an iced latte, please.","r":"ไอ(ด) ไล(ค) เอิน ไอ(ส)(ท) **ลา**-เด, พลี(ซ)","th":"ขอลาเต้เย็นหนึ่งแก้วครับ"},{"who":"A","en":"Sure. What size?","r":"ชัว(ร). วัท ไซ(ซ)?","th":"ได้ค่ะ ขนาดไหนคะ"},{"who":"B","en":"Medium, please. Less sugar.","r":"**มี**-ดี-เอิม, พลี(ซ). เลส **ชุ**-เกอ(ร)","th":"ขนาดกลางครับ หวานน้อย"},{"who":"A","en":"For here or to go?","r":"เฟอ(ร) เฮีย(ร) ออ(ร) ทะ โก?","th":"ทานที่นี่หรือกลับบ้านคะ"},{"who":"B","en":"To go, please.","r":"ทะ โก, พลี(ซ)","th":"กลับบ้านครับ"},{"who":"A","en":"That's ninety baht.","r":"แด็ท(ส) **ไน(น)**-ที บาท","th":"เก้าสิบบาทค่ะ"}],"pattern":{"f":"I'd like + [สิ่งที่ต้องการ], please.","ex":"I'd like = I would like (ขอ…) สุภาพกว่า I want","examples":[{"en":"I'd like a coffee, please.","r":"ไอ(ด) ไล(ค) อะ **คา**-ฟี, พลี(ซ)","th":"ขอกาแฟหนึ่งแก้ว"},{"en":"I'd like some water, please.","r":"ไอ(ด) ไล(ค) ซัม **วอ**-เดอ(ร), พลี(ซ)","th":"ขอน้ำเปล่าหน่อย"},{"en":"I'd like the chicken, please.","r":"ไอ(ด) ไล(ค) เดอะ **ชิ**-เคิน, พลี(ซ)","th":"ขอเมนูไก่"}]},"sound":{"t":"I'd มีเสียง d เบา ๆ","d":"ถ้าเสียง d หาย I'd like (ขอ…) จะฟังเป็น I like (ฉันชอบ) ความหมายเปลี่ยนเลย","words":[{"en":"I'd like","r":"ไอ(ด) ไล(ค)"},{"en":"I like","r":"ไอ ไล(ค)"}]},"trap":{"wrong":"I want coffee.","right":"I'd like a coffee, please.","why":"I want ฟังห้วน ใช้ I'd like หรือ Can I have… จะสุภาพกว่า"},"mission":{"task":"สั่งเครื่องดื่ม 1 แก้ว บอกขนาด ความหวาน และทานที่นี่หรือกลับบ้าน","model":[{"en":"I'd like a green tea, please.","r":"ไอ(ด) ไล(ค) อะ กรีน ที, พลี(ซ)"},{"en":"Large, please. No sugar.","r":"ลา(ร)(จ), พลี(ซ). โน **ชุ**-เกอ(ร)"},{"en":"For here, please.","r":"เฟอ(ร) เฮีย(ร), พลี(ซ)"}]},"teach":{"warm":"เมนูที่คุณสั่งบ่อยที่สุดคืออะไร ภาษาอังกฤษเรียกว่าอะไร","A":"คุณเป็นพนักงานร้านกาแฟ ถามขนาด ความหวาน และทานที่นี่หรือกลับบ้าน","B":"คุณเป็นลูกค้า อยากได้หวานน้อยและไม่ใส่น้ำแข็ง"}},{"n":7,"mod":2,"th":"ซื้อของและจ่ายเงิน","en":"Shopping and paying","goal":"ถามราคา ขอดูไซซ์หรือสีอื่น และจ่ายเงินได้","scene":"ร้านเสื้อผ้า","cast":{"A":{"name":"Lisa","g":"f","role":"พนักงานขาย"},"B":{"name":"Ken","g":"m","role":"ลูกค้า"}},"phrases":[{"en":"How much is this?","r":"ฮาว มั(ช) อิ(ซ) ดิส?","th":"อันนี้ราคาเท่าไร","note":""},{"en":"How much are these?","r":"ฮาว มั(ช) อา(ร) ดี(ซ)?","th":"พวกนี้ราคาเท่าไร","note":"ของหลายชิ้นใช้ are"},{"en":"Do you have a smaller size?","r":"ดู ยู แฮ(ฟ) อะ **สมอ**-เลอ(ร) ไซ(ซ)?","th":"มีไซซ์เล็กกว่านี้ไหม","note":""},{"en":"Can I try it on?","r":"เคิน ไอ ไทร อิท อาน?","th":"ขอลองได้ไหม","note":"ใช้กับเสื้อผ้าและรองเท้า"},{"en":"I'm just looking, thanks.","r":"ไอ(ม) จัส(ท) **ลุ**-คิง, แธง(ค)(ส)","th":"แค่ดูเฉย ๆ ขอบคุณ","note":""},{"en":"Can I pay by card?","r":"เคิน ไอ เพ ไบ คา(ร)(ด)?","th":"จ่ายด้วยบัตรได้ไหม","note":""},{"en":"Can I get a receipt, please?","r":"เคิน ไอ เก็ท อะ ริ-**ซีท**, พลี(ซ)?","th":"ขอใบเสร็จด้วยได้ไหม","note":""},{"en":"I'll take it.","r":"ไอ(ล) เทก อิท","th":"เอาอันนี้","note":"ใช้ตอนตัดสินใจซื้อ"}],"dialogue":[{"who":"A","en":"Hi! Can I help you?","r":"ไฮ! เคิน ไอ เฮ(ล)(พ) ยู?","th":"สวัสดีค่ะ มีอะไรให้ช่วยไหมคะ"},{"who":"B","en":"I'm just looking, thanks.","r":"ไอ(ม) จัส(ท) **ลุ**-คิง, แธง(ค)(ส)","th":"แค่ดูเฉย ๆ ครับ ขอบคุณครับ"},{"who":"B","en":"Excuse me. How much is this shirt?","r":"อิก-**สกิว(ซ)** มี. ฮาว มั(ช) อิ(ซ) ดิส เชอ(ร)(ท)?","th":"ขอโทษครับ เสื้อตัวนี้ราคาเท่าไรครับ"},{"who":"A","en":"It's four hundred baht.","r":"อิท(ส) ฟอ(ร) **ฮัน**-เดริด บาท","th":"สี่ร้อยบาทค่ะ"},{"who":"B","en":"Do you have it in black?","r":"ดู ยู แฮ(ฟ) อิท อิน แบล็ก?","th":"มีสีดำไหมครับ"},{"who":"A","en":"Yes. Here you go.","r":"เยส. เฮีย(ร) ยู โก","th":"มีค่ะ นี่ค่ะ"},{"who":"B","en":"Great. I'll take it. Can I pay by card?","r":"เกรท. ไอ(ล) เทก อิท. เคิน ไอ เพ ไบ คา(ร)(ด)?","th":"ดีครับ เอาตัวนี้ครับ จ่ายด้วยบัตรได้ไหมครับ"}],"pattern":{"f":"How much is + [ของชิ้นเดียว]? / How much are + [ของหลายชิ้น]?","ex":"ถามราคา","examples":[{"en":"How much is this bag?","r":"ฮาว มั(ช) อิ(ซ) ดิส แบ็ก?","th":"กระเป๋าใบนี้ราคาเท่าไร"},{"en":"How much are these shoes?","r":"ฮาว มั(ช) อา(ร) ดี(ซ) ชู(ซ)?","th":"รองเท้าคู่นี้ราคาเท่าไร"},{"en":"How much is a ticket?","r":"ฮาว มั(ช) อิ(ซ) อะ **ทิ**-เคิท?","th":"ตั๋วราคาใบละเท่าไร"}]},"sound":{"t":"fifteen กับ fifty","d":"ฟังเสียงหนักให้ดีตอนฟังราคา: fifteen หนักพยางค์ท้าย fifty หนักพยางค์หน้า","words":[{"en":"fifteen","r":"ฟิ(ฟ)-**ทีน**"},{"en":"fifty","r":"**ฟิ(ฟ)**-ที"},{"en":"four hundred","r":"ฟอ(ร) **ฮัน**-เดริด"}]},"trap":{"wrong":"Can you discount?","right":"Can you give me a discount? / Is there a discount?","why":"discount ในประโยคนี้เป็นคำนาม ต้องพูดว่า give me a discount"},"mission":{"task":"ถามราคา ขอไซซ์ใหญ่กว่า และขอจ่ายด้วยบัตร","model":[{"en":"How much is this?","r":"ฮาว มั(ช) อิ(ซ) ดิส?"},{"en":"Do you have a bigger size?","r":"ดู ยู แฮ(ฟ) อะ **บิ**-เกอ(ร) ไซ(ซ)?"},{"en":"Can I pay by card?","r":"เคิน ไอ เพ ไบ คา(ร)(ด)?"}]},"teach":{"warm":"ของชิ้นล่าสุดที่คุณซื้อคืออะไร ราคาเท่าไร ลองพูดราคาเป็นภาษาอังกฤษ","A":"คุณเป็นคนขาย บอกราคาและเสนอสีอื่น","B":"คุณเป็นลูกค้า อยากได้ไซซ์ใหญ่กว่า และลองขอส่วนลด"}},{"n":8,"mod":2,"th":"เดินทาง","en":"Getting around","goal":"บอกที่หมายกับคนขับ ถามเวลาเดินทาง และซื้อตั๋วได้","scene":"นั่งแท็กซี่ไปสนามบิน","cast":{"A":{"name":"Anna","g":"f","role":"ผู้โดยสาร"},"B":{"name":"Driver","g":"m","role":"คนขับแท็กซี่"}},"phrases":[{"en":"Can you take me to the airport?","r":"เคิน ยู เทก มี ทะ ดิ **แอ(ร)**-พอ(ร)(ท)?","th":"ไปสนามบินได้ไหม","note":""},{"en":"Can you use the meter, please?","r":"เคิน ยู ยู(ซ) เดอะ **มี**-เดอ(ร), พลี(ซ)?","th":"ช่วยใช้มิเตอร์ด้วยได้ไหม","note":"ภาษาไทยพูดว่า 'เปิดมิเตอร์'"},{"en":"How long does it take?","r":"ฮาว ลอง ดั(ซ) อิท เทก?","th":"ใช้เวลานานเท่าไร","note":""},{"en":"Please stop here.","r":"พลี(ซ) สตาพ เฮีย(ร)","th":"จอดตรงนี้เลย","note":""},{"en":"Where can I buy a ticket?","r":"แว(ร) เคิน ไอ ไบ อะ **ทิ**-เคิท?","th":"ซื้อตั๋วได้ที่ไหน","note":""},{"en":"One ticket to Chiang Mai, please.","r":"วัน **ทิ**-เคิท ทะ เชียง ใหม่, พลี(ซ)","th":"ขอตั๋วไปเชียงใหม่หนึ่งใบ","note":""},{"en":"Does this bus go to the airport?","r":"ดั(ซ) ดิส บัส โก ทะ ดิ **แอ(ร)**-พอ(ร)(ท)?","th":"รถบัสคันนี้ไปสนามบินไหม","note":""},{"en":"What time does the train leave?","r":"วัท ไท(ม) ดั(ซ) เดอะ เทรน ลี(ฟ)?","th":"รถไฟออกกี่โมง","note":""}],"dialogue":[{"who":"A","en":"Hi. Can you take me to the airport?","r":"ไฮ. เคิน ยู เทก มี ทะ ดิ **แอ(ร)**-พอ(ร)(ท)?","th":"สวัสดีค่ะ ไปสนามบินได้ไหมคะ"},{"who":"B","en":"Sure. Please get in.","r":"ชัว(ร). พลี(ซ) เก็ท อิน","th":"ได้ครับ ขึ้นมาเลยครับ"},{"who":"A","en":"Can you use the meter, please?","r":"เคิน ยู ยู(ซ) เดอะ **มี**-เดอ(ร), พลี(ซ)?","th":"ช่วยใช้มิเตอร์ด้วยได้ไหมคะ"},{"who":"B","en":"Of course.","r":"เอิ(ฟ) คอ(ร)(ส)","th":"ได้เลยครับ"},{"who":"A","en":"How long does it take?","r":"ฮาว ลอง ดั(ซ) อิท เทก?","th":"ใช้เวลานานเท่าไรคะ"},{"who":"B","en":"About forty minutes. There's a lot of traffic.","r":"อะ-**บาว(ท)** **ฟอ(ร)**-ดี **มิ**-เนิท(ส). แด(ร)(ซ) อะ ลาท เอิ(ฟ) **แทร**-ฟิก","th":"ประมาณสี่สิบนาทีครับ รถติดมาก"},{"who":"A","en":"OK. Please take the expressway.","r":"โอ-**เค**. พลี(ซ) เทก ดิ อิก-**สเปรส**-เว","th":"โอเคค่ะ ขึ้นทางด่วนด้วยนะคะ"}],"pattern":{"f":"How long does it take to + [กริยา]?","ex":"ถามว่าทำอะไรใช้เวลานานเท่าไร","examples":[{"en":"How long does it take to get there?","r":"ฮาว ลอง ดั(ซ) อิท เทก ทะ เก็ท แด(ร)?","th":"ไปถึงที่นั่นใช้เวลานานเท่าไร"},{"en":"How long does it take to walk there?","r":"ฮาว ลอง ดั(ซ) อิท เทก ทะ วอก แด(ร)?","th":"เดินไปที่นั่นใช้เวลานานเท่าไร"},{"en":"How long does it take to get to the airport?","r":"ฮาว ลอง ดั(ซ) อิท เทก ทะ เก็ท ทะ ดิ **แอ(ร)**-พอ(ร)(ท)?","th":"ไปสนามบินใช้เวลานานเท่าไร"}]},"sound":{"t":"เสียงท้าย ch และ j","d":"much, change, watch ต้องมีเสียงท้ายเบา ๆ ห้ามตัดทิ้ง","words":[{"en":"much","r":"มั(ช)"},{"en":"change","r":"เชน(จ)"},{"en":"watch","r":"วา(ช)"}]},"trap":{"wrong":"Open meter, please.","right":"Can you use the meter, please?","why":"ภาษาอังกฤษไม่ 'เปิด' มิเตอร์ ใช้ use the meter หรือ turn on the meter"},"mission":{"task":"ขึ้นแท็กซี่ บอกที่หมาย ขอให้ใช้มิเตอร์ และให้จอด","model":[{"en":"Can you take me to the train station?","r":"เคิน ยู เทก มี ทะ เดอะ เทรน **สเต**-เชิน?"},{"en":"Can you use the meter, please?","r":"เคิน ยู ยู(ซ) เดอะ **มี**-เดอ(ร), พลี(ซ)?"},{"en":"Please stop here.","r":"พลี(ซ) สตาพ เฮีย(ร)"}]},"teach":{"warm":"คุณเคยเจอปัญหาอะไรตอนนั่งแท็กซี่บ้าง","A":"คุณเป็นผู้โดยสาร บอกที่หมายและขอให้ใช้มิเตอร์","B":"คุณเป็นคนขับ บอกว่ารถติดและใช้เวลานานเท่าไร"}},{"n":9,"mod":3,"th":"แนะนำงานของตัวเอง","en":"Talking about your job","goal":"บอกว่าทำงานที่ไหน ดูแลเรื่องอะไร และเล่าเรื่องงานสั้น ๆ ได้","scene":"วันแรกของครูใหม่","cast":{"A":{"name":"Tom","g":"m","role":"ครูภาษาอังกฤษคนใหม่"},"B":{"name":"Nok","g":"f","role":"เจ้าหน้าที่ฝ่ายวีซ่า"}},"phrases":[{"en":"What do you do?","r":"วัท ดู ยู ดู?","th":"คุณทำงานอะไร","note":"ถามอาชีพ ไม่ได้ถามว่ากำลังทำอะไรอยู่"},{"en":"I work at an international school.","r":"ไอ เวอ(ร)(ค) เอิท เอิน อิน-เทอ(ร)-**แน**-ชะ-เนิ(ล) สกู(ล)","th":"ฉันทำงานที่โรงเรียนนานาชาติ","note":""},{"en":"I'm in charge of student visas.","r":"ไอ(ม) อิน ชา(ร)(จ) เอิ(ฟ) **สตู**-เดิน(ท) **วี**-เซิ(ซ)","th":"ฉันดูแลเรื่องวีซ่านักเรียน","note":""},{"en":"I help students with their documents.","r":"ไอ เฮ(ล)(พ) **สตู**-เดิน(ท)(ส) วิ(ธ) แด(ร) **ดาก**-ยะ-เมิน(ท)(ส)","th":"ฉันช่วยนักเรียนเรื่องเอกสาร","note":""},{"en":"How long have you worked here?","r":"ฮาว ลอง แฮ(ฟ) ยู เวอ(ร)(ค)(ท) เฮีย(ร)?","th":"คุณทำงานที่นี่มานานแค่ไหนแล้ว","note":""},{"en":"I've worked here for two years.","r":"ไอ(ฟ) เวอ(ร)(ค)(ท) เฮีย(ร) เฟอ(ร) ทู เยีย(ร)(ซ)","th":"ฉันทำงานที่นี่มาสองปีแล้ว","note":""},{"en":"I usually start work at eight.","r":"ไอ **ยู**-ชะ-วะ-ลี สตา(ร)(ท) เวอ(ร)(ค) เอิท เอท","th":"ปกติฉันเริ่มงานแปดโมง","note":""},{"en":"It's busy, but I like it.","r":"อิท(ส) **บิ**-ซี, บัท ไอ ไล(ค) อิท","th":"งานยุ่ง แต่ฉันชอบ","note":""}],"dialogue":[{"who":"A","en":"Hi, I'm Tom. I'm the new English teacher.","r":"ไฮ, ไอ(ม) ทาม. ไอ(ม) เดอะ นู **อิง**-กลิ(ช) **ที**-เชอ(ร)","th":"สวัสดีครับ ผมทอม เป็นครูภาษาอังกฤษคนใหม่ครับ"},{"who":"B","en":"Welcome, Tom! I'm Nok.","r":"**เว(ล)**-เคิม, ทาม! ไอ(ม) นก","th":"ยินดีต้อนรับค่ะทอม ฉันชื่อนกค่ะ"},{"who":"A","en":"Nice to meet you, Nok. What do you do here?","r":"ไน(ส) ทะ มี-ชู, นก. วัท ดู ยู ดู เฮีย(ร)?","th":"ยินดีที่ได้รู้จักครับนก คุณทำงานอะไรที่นี่ครับ"},{"who":"B","en":"I'm in charge of student visas.","r":"ไอ(ม) อิน ชา(ร)(จ) เอิ(ฟ) **สตู**-เดิน(ท) **วี**-เซิ(ซ)","th":"ฉันดูแลเรื่องวีซ่านักเรียนค่ะ"},{"who":"A","en":"That sounds busy.","r":"แด็ท ซาว(น)(ด)(ซ) **บิ**-ซี","th":"ฟังดูยุ่งนะครับ"},{"who":"B","en":"It's busy, but I like it. If you have any questions, just ask me.","r":"อิท(ส) **บิ**-ซี, บัท ไอ ไล(ค) อิท. อิ(ฟ) ยู แฮ(ฟ) **เอ**-นี **เควส**-เชิน(ซ), จัส(ท) แอส(ค) มี","th":"ยุ่งค่ะ แต่ก็ชอบ ถ้ามีคำถาม ถามฉันได้เลยนะคะ"},{"who":"A","en":"Thanks. I will.","r":"แธง(ค)(ส). ไอ วิ(ล)","th":"ขอบคุณครับ จะถามแน่นอนครับ"}],"pattern":{"f":"I'm in charge of + [งาน / เรื่อง]","ex":"บอกว่าเรารับผิดชอบเรื่องอะไร","examples":[{"en":"I'm in charge of student visas.","r":"ไอ(ม) อิน ชา(ร)(จ) เอิ(ฟ) **สตู**-เดิน(ท) **วี**-เซิ(ซ)","th":"ฉันดูแลเรื่องวีซ่านักเรียน"},{"en":"I'm in charge of the front desk.","r":"ไอ(ม) อิน ชา(ร)(จ) เอิ(ฟ) เดอะ ฟรัน(ท) เดส(ค)","th":"ฉันดูแลเคาน์เตอร์ต้อนรับ"},{"en":"I'm in charge of school events.","r":"ไอ(ม) อิน ชา(ร)(จ) เอิ(ฟ) สกู(ล) อิ-**เว็น(ท)(ส)**","th":"ฉันดูแลกิจกรรมของโรงเรียน"}]},"sound":{"t":"work กับ walk","d":"work ม้วนลิ้นเสียง เออ(ร) · walk ไม่มีเสียง r และไม่ออกเสียง l","words":[{"en":"work","r":"เวอ(ร)(ค)"},{"en":"walk","r":"วอก"},{"en":"worked","r":"เวอ(ร)(ค)(ท)"}]},"trap":{"wrong":"I am work at a school.","right":"I work at a school.","why":"ประโยคที่มีกริยาอยู่แล้ว (work) ไม่ต้องใส่ am"},"mission":{"task":"แนะนำงานของตัวเอง 3 ประโยค: ทำที่ไหน ดูแลอะไร และชอบไหม","model":[{"en":"I work at a hospital.","r":"ไอ เวอ(ร)(ค) เอิท อะ **ฮาส**-พิ-เดิ(ล)"},{"en":"I'm in charge of the front desk.","r":"ไอ(ม) อิน ชา(ร)(จ) เอิ(ฟ) เดอะ ฟรัน(ท) เดส(ค)"},{"en":"It's busy, but I like it.","r":"อิท(ส) **บิ**-ซี, บัท ไอ ไล(ค) อิท"}]},"teach":{"warm":"ถ้าต้องอธิบายงานของคุณให้ชาวต่างชาติฟังใน 1 ประโยค จะพูดว่าอะไร","A":"คุณเป็นพนักงานใหม่ ถามว่าอีกฝ่ายทำงานอะไร","B":"คุณเป็นพนักงานเก่า อธิบายงานของคุณและเสนอความช่วยเหลือ"}},{"n":10,"mod":3,"th":"ขอความช่วยเหลือ","en":"Asking for help","goal":"ขอให้คนอื่นช่วยอย่างสุภาพ และตอบรับหรือปฏิเสธได้","scene":"ขอให้เพื่อนร่วมงานช่วยเช็กอีเมล","cast":{"A":{"name":"Nok","g":"f","role":"เจ้าหน้าที่"},"B":{"name":"Ben","g":"m","role":"เพื่อนร่วมงาน"}},"phrases":[{"en":"Can you help me, please?","r":"เคิน ยู เฮ(ล)(พ) มี, พลี(ซ)?","th":"ช่วยฉันหน่อยได้ไหม","note":""},{"en":"Do you have a minute?","r":"ดู ยู แฮ(ฟ) อะ **มิ**-เนิท?","th":"ว่างสักครู่ไหม","note":""},{"en":"Could you check this for me?","r":"คุ-จู เช็ก ดิส เฟอ(ร) มี?","th":"ช่วยเช็กอันนี้ให้หน่อยได้ไหม","note":""},{"en":"Could you send me the file?","r":"คุ-จู เซ็น(ด) มี เดอะ ไฟ(ล)?","th":"ช่วยส่งไฟล์ให้หน่อยได้ไหม","note":""},{"en":"Would you mind closing the door?","r":"วุ-จู ไม(น)(ด) **โคล**-ซิง เดอะ ดอ(ร)?","th":"รบกวนปิดประตูหน่อยได้ไหม","note":"สุภาพมาก ถ้าตอบว่า Not at all. แปลว่า 'ได้เลย'"},{"en":"Sure, no problem.","r":"ชัว(ร), โน **พรา**-เบลิม","th":"ได้เลย ไม่มีปัญหา","note":""},{"en":"Sorry, I'm busy right now.","r":"**ซา**-รี, ไอ(ม) **บิ**-ซี ไร(ท) นาว","th":"ขอโทษ ตอนนี้ยุ่งอยู่","note":""},{"en":"I can do it after lunch.","r":"ไอ เคิน ดู อิท **แอ(ฟ)**-เทอ(ร) ลัน(ช)","th":"ฉันทำให้ได้หลังพักเที่ยง","note":""}],"dialogue":[{"who":"A","en":"Hi, Ben. Do you have a minute?","r":"ไฮ, เบ็น. ดู ยู แฮ(ฟ) อะ **มิ**-เนิท?","th":"สวัสดีค่ะเบน ว่างสักครู่ไหมคะ"},{"who":"B","en":"Sure. What's up?","r":"ชัว(ร). วัท(ส) อัพ?","th":"ได้ครับ มีอะไรครับ"},{"who":"A","en":"Could you check this email for me?","r":"คุ-จู เช็ก ดิส **อี**-เม(ล) เฟอ(ร) มี?","th":"ช่วยเช็กอีเมลนี้ให้หน่อยได้ไหมคะ"},{"who":"B","en":"Of course. Let me see.","r":"เอิ(ฟ) คอ(ร)(ส). เล็ท มี ซี","th":"ได้เลยครับ ขอดูหน่อยครับ"},{"who":"B","en":"It looks good. Just fix this word here.","r":"อิท ลุก(ส) กุด. จัส(ท) ฟิก(ส) ดิส เวอ(ร)(ด) เฮีย(ร)","th":"ดูดีแล้วครับ แค่แก้คำนี้ตรงนี้"},{"who":"A","en":"Got it. Thank you so much!","r":"กาท อิท. แธง-คิว โซ มั(ช)!","th":"เข้าใจแล้วค่ะ ขอบคุณมากนะคะ"},{"who":"B","en":"Anytime.","r":"**เอ**-นี-ไท(ม)","th":"ยินดีเสมอครับ"}],"pattern":{"f":"Could you + [กริยา] + for me?","ex":"ขอให้ช่วยทำอะไรให้เรา","examples":[{"en":"Could you check this for me?","r":"คุ-จู เช็ก ดิส เฟอ(ร) มี?","th":"ช่วยเช็กอันนี้ให้หน่อยได้ไหม"},{"en":"Could you print this for me?","r":"คุ-จู พริน(ท) ดิส เฟอ(ร) มี?","th":"ช่วยพิมพ์อันนี้ให้หน่อยได้ไหม"},{"en":"Could you call him for me?","r":"คุ-จู คอ(ล) ฮิม เฟอ(ร) มี?","th":"ช่วยโทรหาเขาให้หน่อยได้ไหม"}]},"sound":{"t":"Would you พูดเชื่อมกัน","d":"d + you กลายเป็นเสียงคล้าย จ เหมือน Could you","words":[{"en":"Would you","r":"วุ-จู"},{"en":"Could you","r":"คุ-จู"},{"en":"Would you mind","r":"วุ-จู ไม(น)(ด)"}]},"trap":{"wrong":"Help me check this.","right":"Could you help me check this?","why":"ประโยคคำสั่งฟังห้วน ภาษาอังกฤษใช้รูปคำถามเพื่อขอร้องอย่างสุภาพ"},"mission":{"task":"ขอให้เพื่อนร่วมงานช่วย 2 อย่างอย่างสุภาพ","model":[{"en":"Do you have a minute?","r":"ดู ยู แฮ(ฟ) อะ **มิ**-เนิท?"},{"en":"Could you check this for me?","r":"คุ-จู เช็ก ดิส เฟอ(ร) มี?"},{"en":"Could you send me the file?","r":"คุ-จู เซ็น(ด) มี เดอะ ไฟ(ล)?"}]},"teach":{"warm":"เวลาขอให้หัวหน้าช่วย คนไทยพูดแบบไหน แล้วภาษาอังกฤษควรพูดยังไง","A":"ขอให้เพื่อนช่วยถ่ายเอกสาร 20 ชุด","B":"ปฏิเสธเพราะยุ่ง แล้วเสนอเวลาอื่น"}},{"n":11,"mod":3,"th":"นัดหมายและเลื่อนนัด","en":"Appointments and schedules","goal":"นัด เลื่อนนัด และแจ้งว่าจะไปสายได้","scene":"ขอเลื่อนประชุมทางโทรศัพท์","cast":{"A":{"name":"Nok","g":"f","role":"เจ้าหน้าที่"},"B":{"name":"Mr. Brown","g":"m","role":"ผู้ประสานงาน"}},"phrases":[{"en":"Are you free on Monday?","r":"อา(ร) ยู ฟรี อาน **มัน**-เด?","th":"วันจันทร์ว่างไหม","note":""},{"en":"Can we meet at two p.m.?","r":"เคิน วี มีท เอิท ทู พี-**เอ็ม**?","th":"เจอกันบ่ายสองโมงได้ไหม","note":""},{"en":"Can we reschedule?","r":"เคิน วี รี-**สเก**-จู(ล)?","th":"ขอเลื่อนนัดได้ไหม","note":""},{"en":"Something came up.","r":"**ซัม**-ธิง เคม อัพ","th":"มีธุระเข้ามา","note":"บอกเหตุผลแบบไม่ต้องลงรายละเอียด"},{"en":"I'm running late.","r":"ไอ(ม) **ระ**-นิง เลท","th":"ฉันจะไปสายนะ","note":"กำลังมาแต่ช้ากว่ากำหนด"},{"en":"I'll be there in ten minutes.","r":"ไอ(ล) บี แด(ร) อิน เท็น **มิ**-เนิท(ส)","th":"อีกสิบนาทีถึง","note":""},{"en":"How about next week?","r":"ฮาว อะ-**บาว(ท)** เน็ก(ส)(ท) วีก?","th":"สัปดาห์หน้าดีไหม","note":""},{"en":"See you then.","r":"ซี ยู เด็น","th":"แล้วเจอกัน","note":""}],"dialogue":[{"who":"A","en":"Hi, Mr. Brown. Can we reschedule our meeting?","r":"ไฮ, **มิส**-เทอ(ร) บราว(น). เคิน วี รี-**สเก**-จู(ล) **อาว**-เออ(ร) **มี**-ดิง?","th":"สวัสดีค่ะคุณบราวน์ ขอเลื่อนประชุมของเราได้ไหมคะ"},{"who":"B","en":"Sure. Is everything OK?","r":"ชัว(ร). อิ(ซ) **เอ(ฟ)**-รี-ธิง โอ-**เค**?","th":"ได้ครับ ทุกอย่างโอเคไหมครับ"},{"who":"A","en":"Yes. Something came up. Are you free on Thursday?","r":"เยส. **ซัม**-ธิง เคม อัพ. อา(ร) ยู ฟรี อาน **เธอ(ร)(ซ)**-เด?","th":"ค่ะ มีธุระเข้ามาค่ะ วันพฤหัสว่างไหมคะ"},{"who":"B","en":"Thursday afternoon is fine.","r":"**เธอ(ร)(ซ)**-เด แอ(ฟ)-เทอ(ร)-**นูน** อิ(ซ) ไฟ(น)","th":"บ่ายวันพฤหัสได้ครับ"},{"who":"A","en":"How about two p.m.?","r":"ฮาว อะ-**บาว(ท)** ทู พี-**เอ็ม**?","th":"บ่ายสองโมงดีไหมคะ"},{"who":"B","en":"Perfect. See you then.","r":"**เพอ(ร)**-ฟิก(ท). ซี ยู เด็น","th":"เยี่ยมครับ แล้วเจอกันครับ"},{"who":"A","en":"Thank you for understanding.","r":"แธง-คิว เฟอ(ร) อัน-เดอ(ร)-**สแตน**-ดิง","th":"ขอบคุณที่เข้าใจนะคะ"}],"pattern":{"f":"How about + [วัน / เวลา / กิจกรรม]?","ex":"เสนอทางเลือก (…ดีไหม)","examples":[{"en":"How about Monday?","r":"ฮาว อะ-**บาว(ท)** **มัน**-เด?","th":"วันจันทร์ดีไหม"},{"en":"How about three p.m.?","r":"ฮาว อะ-**บาว(ท)** ธรี พี-**เอ็ม**?","th":"บ่ายสามโมงดีไหม"},{"en":"How about lunch tomorrow?","r":"ฮาว อะ-**บาว(ท)** ลัน(ช) ทะ-**มา**-โร?","th":"พรุ่งนี้กินข้าวเที่ยงด้วยกันดีไหม"}]},"sound":{"t":"Tuesday กับ Thursday","d":"Tuesday ขึ้นต้นด้วยเสียง t ธรรมดา · Thursday ขึ้นต้นด้วย th (ลิ้นแตะฟัน) และม้วนลิ้นเสียง เออ(ร)","words":[{"en":"Tuesday","r":"**ทู(ซ)**-เด"},{"en":"Thursday","r":"**เธอ(ร)(ซ)**-เด"}]},"trap":{"wrong":"I will late.","right":"I'm going to be late. / I'm running late.","why":"late เป็นคำคุณศัพท์ ต้องมี be หรือ am อยู่ด้วย"},"mission":{"task":"ขอเลื่อนนัด บอกเหตุผลสั้น ๆ และเสนอเวลาใหม่","model":[{"en":"Can we reschedule?","r":"เคิน วี รี-**สเก**-จู(ล)?"},{"en":"Something came up.","r":"**ซัม**-ธิง เคม อัพ"},{"en":"How about Friday at ten a.m.?","r":"ฮาว อะ-**บาว(ท)** **ไฟร**-เด เอิท เท็น เอ-**เอ็ม**?"}]},"teach":{"warm":"ครั้งล่าสุดที่คุณต้องเลื่อนนัด คุณบอกเหตุผลว่าอะไร","A":"ขอเลื่อนนัดเพราะติดธุระ และเสนอวันใหม่","B":"ตอบรับ แต่ขอเปลี่ยนเวลาเล็กน้อย"}},{"n":12,"mod":3,"th":"ดูแลนักเรียนและผู้มาติดต่อ","en":"Helping students and visitors","goal":"ต้อนรับ ขอเอกสาร ให้กรอกแบบฟอร์ม และให้รอเรียกชื่อได้","scene":"วันยื่นวีซ่าของนักเรียน","cast":{"A":{"name":"Nok","g":"f","role":"เจ้าหน้าที่ฝ่ายวีซ่าของโรงเรียน"},"B":{"name":"Leo","g":"m","role":"นักเรียนต่างชาติ"}},"phrases":[{"en":"Please have a seat.","r":"พลี(ซ) แฮ(ฟ) อะ ซีท","th":"เชิญนั่งก่อน","note":""},{"en":"Please wait here.","r":"พลี(ซ) เวท เฮีย(ร)","th":"กรุณารอตรงนี้","note":""},{"en":"Please fill out this form.","r":"พลี(ซ) ฟิ(ล) อาว(ท) ดิส ฟอ(ร)(ม)","th":"กรุณากรอกแบบฟอร์มนี้","note":"UK ใช้ fill in"},{"en":"Please sign here.","r":"พลี(ซ) ไซ(น) เฮีย(ร)","th":"กรุณาเซ็นตรงนี้","note":""},{"en":"Do you have your passport?","r":"ดู ยู แฮ(ฟ) ยอ(ร) **แพส**-พอ(ร)(ท)?","th":"มีพาสปอร์ตมาไหม","note":""},{"en":"We need a copy of your passport.","r":"วี นีด อะ **คา**-พี เอิ(ฟ) ยอ(ร) **แพส**-พอ(ร)(ท)","th":"เราต้องใช้สำเนาพาสปอร์ตของคุณ","note":""},{"en":"The visa team will call your name.","r":"เดอะ **วี**-ซะ ทีม วิ(ล) คอ(ล) ยอ(ร) เนม","th":"ทีมวีซ่าจะเรียกชื่อคุณ","note":""},{"en":"Please follow me.","r":"พลี(ซ) **ฟา**-โล มี","th":"เชิญตามมาเลย","note":""}],"dialogue":[{"who":"A","en":"Good morning! Please have a seat.","r":"กุด **มอ(ร)**-นิง! พลี(ซ) แฮ(ฟ) อะ ซีท","th":"สวัสดีตอนเช้าค่ะ เชิญนั่งก่อนค่ะ"},{"who":"B","en":"Thank you.","r":"แธง-คิว","th":"ขอบคุณครับ"},{"who":"A","en":"Do you have your passport and two photos?","r":"ดู ยู แฮ(ฟ) ยอ(ร) **แพส**-พอ(ร)(ท) เอิน ทู **โฟ**-โด(ซ)?","th":"มีพาสปอร์ตและรูปถ่ายสองใบไหมคะ"},{"who":"B","en":"Yes. Here they are.","r":"เยส. เฮีย(ร) เด อา(ร)","th":"มีครับ นี่ครับ"},{"who":"A","en":"Great. Please fill out this form and sign here.","r":"เกรท. พลี(ซ) ฟิ(ล) อาว(ท) ดิส ฟอ(ร)(ม) เอิน ไซ(น) เฮีย(ร)","th":"ดีค่ะ กรุณากรอกแบบฟอร์มนี้แล้วเซ็นตรงนี้ค่ะ"},{"who":"B","en":"OK. What should I do next?","r":"โอ-**เค**. วัท ชุด ไอ ดู เน็ก(ส)(ท)?","th":"ครับ แล้วต้องทำอะไรต่อครับ"},{"who":"A","en":"Please wait here. The visa team will call your name.","r":"พลี(ซ) เวท เฮีย(ร). เดอะ **วี**-ซะ ทีม วิ(ล) คอ(ล) ยอ(ร) เนม","th":"กรุณารอตรงนี้ค่ะ ทีมวีซ่าจะเรียกชื่อคุณค่ะ"}],"pattern":{"f":"Please + [กริยา]","ex":"บอกให้ทำอะไรอย่างสุภาพ ใช้กับนักเรียน ลูกค้า และผู้มาติดต่อ","examples":[{"en":"Please have a seat.","r":"พลี(ซ) แฮ(ฟ) อะ ซีท","th":"เชิญนั่งก่อน"},{"en":"Please wait here.","r":"พลี(ซ) เวท เฮีย(ร)","th":"กรุณารอตรงนี้"},{"en":"Please sign here.","r":"พลี(ซ) ไซ(น) เฮีย(ร)","th":"กรุณาเซ็นตรงนี้"}]},"sound":{"t":"sign ไม่ออกเสียง g","d":"sign, design, foreign ตัว g ไม่ออกเสียง","words":[{"en":"sign","r":"ไซ(น)"},{"en":"design","r":"ดิ-**ไซ(น)**"},{"en":"foreign","r":"**ฟอ**-เริน"}]},"trap":{"wrong":"We need copy passport.","right":"We need a copy of your passport.","why":"ภาษาอังกฤษต้องบอกว่าสำเนา 'ของ' อะไร: a copy of your passport"},"mission":{"task":"ต้อนรับนักเรียน ขอพาสปอร์ต และบอกให้รอเรียกชื่อ","model":[{"en":"Good morning! Please have a seat.","r":"กุด **มอ(ร)**-นิง! พลี(ซ) แฮ(ฟ) อะ ซีท"},{"en":"Do you have your passport?","r":"ดู ยู แฮ(ฟ) ยอ(ร) **แพส**-พอ(ร)(ท)?"},{"en":"Please wait here. We'll call your name.","r":"พลี(ซ) เวท เฮีย(ร). วี(ล) คอ(ล) ยอ(ร) เนม"}]},"teach":{"warm":"ในงานของคุณ ประโยคไหนที่ต้องพูดกับชาวต่างชาติบ่อยที่สุด","A":"คุณเป็นเจ้าหน้าที่ ขอเอกสารและอธิบายขั้นตอน","B":"คุณเป็นนักเรียนต่างชาติ ลืมรูปถ่ายมา 1 ใบ"}},{"n":13,"mod":4,"th":"คุยเล่นเรื่องทั่วไป","en":"Small talk","goal":"ทัก ถามสารทุกข์สุกดิบ และเล่าเรื่องวันหยุดสั้น ๆ ได้","scene":"เช้าวันจันทร์ที่ออฟฟิศ","cast":{"A":{"name":"Nok","g":"f","role":"เจ้าหน้าที่"},"B":{"name":"Mike","g":"m","role":"เพื่อนร่วมงาน"}},"phrases":[{"en":"How's it going?","r":"ฮาว(ซ) อิท **โก**-อิง?","th":"เป็นไงบ้าง","note":"ทักแบบเป็นกันเอง"},{"en":"Not bad. How about you?","r":"นาท แบ็ด. ฮาว อะ-**บาว**-ชู?","th":"ก็ดีนะ แล้วคุณล่ะ","note":""},{"en":"How was your weekend?","r":"ฮาว วา(ซ) ยอ(ร) **วี**-เค็น(ด)?","th":"วันหยุดสุดสัปดาห์เป็นไงบ้าง","note":""},{"en":"It was great, thanks.","r":"อิท วา(ซ) เกรท, แธง(ค)(ส)","th":"ดีมากเลย ขอบคุณ","note":""},{"en":"It's so hot today!","r":"อิท(ส) โซ ฮาท ทะ-**เด**!","th":"วันนี้ร้อนมากเลย","note":""},{"en":"Have you had lunch yet?","r":"แฮ(ฟ) ยู แฮ็ด ลัน(ช) เย็ท?","th":"กินข้าวเที่ยงหรือยัง","note":""},{"en":"What did you do?","r":"วัท ดิ-จู ดู?","th":"ทำอะไรมาบ้าง","note":""},{"en":"Nothing much. I just stayed home.","r":"**นะ**-ธิง มั(ช). ไอ จัส(ท) สเตด โฮม","th":"ไม่ได้ทำอะไรมาก แค่อยู่บ้าน","note":""}],"dialogue":[{"who":"A","en":"Hi, Mike! How was your weekend?","r":"ไฮ, ไม(ค)! ฮาว วา(ซ) ยอ(ร) **วี**-เค็น(ด)?","th":"หวัดดีไมค์ วันหยุดเป็นไงบ้าง"},{"who":"B","en":"It was great, thanks. I went to the beach.","r":"อิท วา(ซ) เกรท, แธง(ค)(ส). ไอ เว็น(ท) ทะ เดอะ บี(ช)","th":"ดีมากเลย ขอบคุณ ไปทะเลมา"},{"who":"A","en":"Nice! Which beach?","r":"ไน(ส)! วิ(ช) บี(ช)?","th":"ดีจัง หาดไหน"},{"who":"B","en":"Hua Hin. How about you?","r":"หัว หิน. ฮาว อะ-**บาว**-ชู?","th":"หัวหิน แล้วคุณล่ะ"},{"who":"A","en":"Nothing much. I just stayed home and slept.","r":"**นะ**-ธิง มั(ช). ไอ จัส(ท) สเตด โฮม เอิน สเล็พ(ท)","th":"ไม่ได้ทำอะไรมาก แค่อยู่บ้านแล้วก็นอน"},{"who":"B","en":"Sounds relaxing!","r":"ซาว(น)(ด)(ซ) ริ-**แล็ก**-ซิง!","th":"ฟังดูได้พักผ่อนนะ"},{"who":"A","en":"It was. I needed it.","r":"อิท วา(ซ). ไอ **นี**-เดิด อิท","th":"ใช่เลย กำลังต้องการพอดี"}],"pattern":{"f":"How was your + [เรื่องที่ผ่านมา]?","ex":"ถามว่าเรื่องที่ผ่านไปแล้วเป็นอย่างไรบ้าง","examples":[{"en":"How was your weekend?","r":"ฮาว วา(ซ) ยอ(ร) **วี**-เค็น(ด)?","th":"วันหยุดสุดสัปดาห์เป็นไงบ้าง"},{"en":"How was your trip?","r":"ฮาว วา(ซ) ยอ(ร) ทริพ?","th":"ทริปเป็นไงบ้าง"},{"en":"How was your day?","r":"ฮาว วา(ซ) ยอ(ร) เด?","th":"วันนี้เป็นไงบ้าง"}]},"sound":{"t":"went กับ want","d":"went (ไปแล้ว) ใช้สระ เอะ สั้น ๆ · want (ต้องการ) ใช้สระ อา (US)","words":[{"en":"went","r":"เว็น(ท)"},{"en":"want","r":"วาน(ท)"}]},"trap":{"wrong":"Have you eaten rice yet?","right":"Have you had lunch yet?","why":"ภาษาอังกฤษไม่ใช้ rice แทนคำว่า 'ข้าว' ที่หมายถึงอาหาร ให้ใช้ชื่อมื้อ (breakfast, lunch, dinner)"},"mission":{"task":"เล่าวันหยุดของคุณ 2 ประโยค แล้วถามกลับ","model":[{"en":"It was great. I visited my family.","r":"อิท วา(ซ) เกรท. ไอ **วิ**-ซิ-ดิด ไม **แฟ**-มะ-ลี"},{"en":"We had a big dinner.","r":"วี แฮ็ด อะ บิก **ดิ**-เนอ(ร)"},{"en":"How about you?","r":"ฮาว อะ-**บาว**-ชู?"}]},"teach":{"warm":"วันหยุดที่ผ่านมาคุณทำอะไร พูดเป็นภาษาไทยก่อน แล้วลองภาษาอังกฤษ","A":"ทักเพื่อนร่วมงานเช้าวันจันทร์ ถามเรื่องวันหยุด","B":"เล่าว่าทำอะไร แล้วถามกลับ"}},{"n":14,"mod":4,"th":"งานอดิเรกและสิ่งที่ชอบ","en":"Hobbies and likes","goal":"บอกงานอดิเรก บอกว่าชอบหรือไม่ชอบอะไร และถามอีกฝ่ายได้","scene":"เพื่อนใหม่คุยกันช่วงพัก","cast":{"A":{"name":"Ken","g":"m","role":"ครู"},"B":{"name":"Ann","g":"f","role":"เพื่อนร่วมงาน"}},"phrases":[{"en":"What do you do in your free time?","r":"วัท ดู ยู ดู อิน ยอ(ร) ฟรี ไท(ม)?","th":"เวลาว่างคุณทำอะไร","note":""},{"en":"I like watching movies.","r":"ไอ ไล(ค) **วา**-ชิง **มู**-วี(ซ)","th":"ฉันชอบดูหนัง","note":""},{"en":"I love Korean food.","r":"ไอ ลั(ฟ) คอ-**รี**-เอิน ฟูด","th":"ฉันชอบอาหารเกาหลีมาก","note":""},{"en":"I don't really like sports.","r":"ไอ โดน(ท) **เรีย**-ลี ไล(ค) สปอ(ร)(ท)(ส)","th":"ฉันไม่ค่อยชอบกีฬา","note":""},{"en":"I'm into video games.","r":"ไอ(ม) **อิน**-ทู **วิ**-ดี-โอ เกม(ซ)","th":"ฉันอินกับวิดีโอเกม","note":"be into = ชอบมาก อิน"},{"en":"How often do you play?","r":"ฮาว **ออ**-เฟิน ดู ยู เพล?","th":"เล่นบ่อยแค่ไหน","note":""},{"en":"About three times a week.","r":"อะ-**บาว(ท)** ธรี ไท(ม)(ซ) อะ วีก","th":"ประมาณสัปดาห์ละสามครั้ง","note":""},{"en":"Me too!","r":"มี ทู!","th":"ฉันด้วย","note":""}],"dialogue":[{"who":"A","en":"What do you do in your free time?","r":"วัท ดู ยู ดู อิน ยอ(ร) ฟรี ไท(ม)?","th":"เวลาว่างคุณทำอะไรครับ"},{"who":"B","en":"I like cooking and watching movies. How about you?","r":"ไอ ไล(ค) **คุ**-คิง เอิน **วา**-ชิง **มู**-วี(ซ). ฮาว อะ-**บาว**-ชู?","th":"ฉันชอบทำอาหารกับดูหนังค่ะ แล้วคุณล่ะคะ"},{"who":"A","en":"I'm into video games. I play online with friends.","r":"ไอ(ม) **อิน**-ทู **วิ**-ดี-โอ เกม(ซ). ไอ เพล **ออน**-ไล(น) วิ(ธ) เฟร็น(ด)(ซ)","th":"ผมอินกับวิดีโอเกมครับ เล่นออนไลน์กับเพื่อน"},{"who":"B","en":"Cool! How often do you play?","r":"คู(ล)! ฮาว **ออ**-เฟิน ดู ยู เพล?","th":"เจ๋งเลย เล่นบ่อยแค่ไหนคะ"},{"who":"A","en":"Almost every night.","r":"**ออ(ล)**-โมส(ท) **เอ(ฟ)**-รี ไน(ท)","th":"แทบทุกคืนครับ"},{"who":"B","en":"Wow! I play sometimes, too.","r":"วาว! ไอ เพล **ซัม**-ไท(ม)(ซ), ทู","th":"ว้าว ฉันก็เล่นบ้างนะคะ"},{"who":"A","en":"Let's play together sometime!","r":"เล็ท(ส) เพล ทะ-**เก**-เดอ(ร) **ซัม**-ไท(ม)!","th":"ไว้มาเล่นด้วยกันนะครับ"}],"pattern":{"f":"I like + [กริยา-ing]","ex":"บอกสิ่งที่ชอบทำ หลัง like ใช้กริยาเติม -ing","examples":[{"en":"I like cooking.","r":"ไอ ไล(ค) **คุ**-คิง","th":"ฉันชอบทำอาหาร"},{"en":"I like reading.","r":"ไอ ไล(ค) **รี**-ดิง","th":"ฉันชอบอ่านหนังสือ"},{"en":"I like playing games.","r":"ไอ ไล(ค) **เพล**-อิง เกม(ซ)","th":"ฉันชอบเล่นเกม"}]},"sound":{"t":"-ing ท้ายคำ","d":"ลงท้ายด้วยเสียง ง ให้ชัด ไม่ใช่เสียง น","words":[{"en":"cooking","r":"**คุ**-คิง"},{"en":"watching","r":"**วา**-ชิง"},{"en":"playing","r":"**เพล**-อิง"}]},"trap":{"wrong":"I like play game.","right":"I like playing games.","why":"หลัง like ใช้กริยา -ing และถ้าหมายถึงเกมทั่วไปต้องเติม s"},"mission":{"task":"บอกงานอดิเรก 2 อย่าง และถามว่าอีกฝ่ายชอบอะไร","model":[{"en":"I like cooking.","r":"ไอ ไล(ค) **คุ**-คิง"},{"en":"I'm into Korean dramas.","r":"ไอ(ม) **อิน**-ทู คอ-**รี**-เอิน **ดรา**-เมิ(ซ)"},{"en":"What do you do in your free time?","r":"วัท ดู ยู ดู อิน ยอ(ร) ฟรี ไท(ม)?"}]},"teach":{"warm":"งานอดิเรก 3 อย่างของคุณคืออะไร","A":"ถามงานอดิเรกของเพื่อนใหม่ และถามว่าทำบ่อยแค่ไหน","B":"ตอบ และหาสิ่งที่ชอบเหมือนกัน (Me too!)"}},{"n":15,"mod":4,"th":"ชวน ตอบรับ และปฏิเสธ","en":"Invitations","goal":"ชวนคนอื่นไปทำอะไรด้วยกัน ตอบรับ หรือปฏิเสธอย่างสุภาพได้","scene":"ชวนไปกินข้าวเย็นหลังเลิกงาน","cast":{"A":{"name":"Mike","g":"m","role":"เพื่อนร่วมงาน"},"B":{"name":"Nok","g":"f","role":"เจ้าหน้าที่"}},"phrases":[{"en":"Do you want to get lunch?","r":"ดู ยู วาน(ท) ทะ เก็ท ลัน(ช)?","th":"ไปกินข้าวเที่ยงกันไหม","note":""},{"en":"Would you like to join us?","r":"วุ-จู ไล(ค) ทะ จอย(น) อัส?","th":"มาด้วยกันไหม","note":"สุภาพกว่า Do you want to"},{"en":"Sounds good!","r":"ซาว(น)(ด)(ซ) กุด!","th":"ดีเลย","note":""},{"en":"I'd love to.","r":"ไอ(ด) ลั(ฟ) ทู","th":"อยากไปมากเลย","note":"ตอบรับคำชวนอย่างเต็มใจ"},{"en":"Sorry, I can't. I have plans.","r":"**ซา**-รี, ไอ แคน(ท). ไอ แฮ(ฟ) แพลน(ซ)","th":"ขอโทษนะ ไปไม่ได้ มีนัดแล้ว","note":""},{"en":"Maybe next time.","r":"**เม**-บี เน็ก(ส)(ท) ไท(ม)","th":"ไว้คราวหน้านะ","note":""},{"en":"Where should we meet?","r":"แว(ร) ชุด วี มีท?","th":"เจอกันที่ไหนดี","note":""},{"en":"Let's meet at the station.","r":"เล็ท(ส) มีท เอิท เดอะ **สเต**-เชิน","th":"เจอกันที่สถานีนะ","note":""}],"dialogue":[{"who":"A","en":"We're going to a Thai restaurant tonight. Would you like to join us?","r":"เวีย(ร) **โก**-อิง ทู อะ ไท **เรส**-เทอ-ราน(ท) ทะ-**ไน(ท)**. วุ-จู ไล(ค) ทะ จอย(น) อัส?","th":"คืนนี้พวกเราจะไปร้านอาหารไทย มาด้วยกันไหม"},{"who":"B","en":"I'd love to! What time?","r":"ไอ(ด) ลั(ฟ) ทู! วัท ไท(ม)?","th":"อยากไปมากเลย กี่โมง"},{"who":"A","en":"Around seven.","r":"เออ-**ราว(น)(ด)** **เซ**-เวิน","th":"ประมาณหนึ่งทุ่ม"},{"who":"B","en":"Sounds good. Where should we meet?","r":"ซาว(น)(ด)(ซ) กุด. แว(ร) ชุด วี มีท?","th":"ดีเลย เจอกันที่ไหนดี"},{"who":"A","en":"Let's meet at the station.","r":"เล็ท(ส) มีท เอิท เดอะ **สเต**-เชิน","th":"เจอกันที่สถานีนะ"},{"who":"B","en":"OK. See you at seven!","r":"โอ-**เค**. ซี ยู เอิท **เซ**-เวิน!","th":"โอเค เจอกันหนึ่งทุ่มนะ"}],"pattern":{"f":"Do you want to + [กริยา]? / Would you like to + [กริยา]?","ex":"ชวนทำอะไรด้วยกัน (Would you like to สุภาพกว่า)","examples":[{"en":"Do you want to get coffee?","r":"ดู ยู วาน(ท) ทะ เก็ท **คา**-ฟี?","th":"ไปกินกาแฟกันไหม"},{"en":"Do you want to play tonight?","r":"ดู ยู วาน(ท) ทะ เพล ทะ-**ไน(ท)**?","th":"คืนนี้เล่นด้วยกันไหม"},{"en":"Would you like to join us?","r":"วุ-จู ไล(ค) ทะ จอย(น) อัส?","th":"มาด้วยกันไหม"}]},"sound":{"t":"want to พูดเร็วเป็น wanna","d":"ในภาษาพูด Do you want to… มักออกเสียงเป็น Do you wanna… ใช้กับเพื่อนได้ แต่ไม่ใช้เขียนในงาน","words":[{"en":"want to","r":"วาน(ท) ทู"},{"en":"wanna","r":"**วา**-นะ"}]},"trap":{"wrong":"Sorry, I'm not convenient.","right":"Sorry, it's not a good time for me. / Sorry, I can't make it.","why":"convenient ใช้กับเวลาหรือสิ่งของ ไม่ใช้บอกว่าคน 'ไม่สะดวก'"},"mission":{"task":"ชวนเพื่อนไปกินข้าว แล้วลองปฏิเสธอย่างสุภาพ","model":[{"en":"Do you want to get dinner on Friday?","r":"ดู ยู วาน(ท) ทะ เก็ท **ดิ**-เนอ(ร) อาน **ไฟร**-เด?"},{"en":"Sorry, I can't. I have plans.","r":"**ซา**-รี, ไอ แคน(ท). ไอ แฮ(ฟ) แพลน(ซ)"},{"en":"Maybe next time!","r":"**เม**-บี เน็ก(ส)(ท) ไท(ม)!"}]},"teach":{"warm":"ถ้าไม่อยากไป คนไทยมักปฏิเสธยังไงให้ไม่เสียน้ำใจ","A":"ชวนเพื่อนไปดูหนัง","B":"ปฏิเสธอย่างสุภาพ แล้วเสนอวันอื่น"}},{"n":16,"mod":4,"th":"แชตและเล่นเกมกับเพื่อน","en":"Chatting and gaming","goal":"ชวนเพื่อนเล่นเกม คุยระหว่างเล่น และชมเพื่อนได้","scene":"เล่นเกมออนไลน์กับเพื่อนต่างชาติผ่านวอยซ์แชต","cast":{"A":{"name":"Jay","g":"m","role":"เพื่อนในเกม"},"B":{"name":"Mint","g":"f","role":"ผู้เล่นชาวไทย"}},"phrases":[{"en":"Wanna team up?","r":"**วา**-นะ ที-มัพ?","th":"ไปเล่นด้วยกันไหม","note":"wanna = want to (ภาษาพูด)"},{"en":"Give me five minutes.","r":"กิ(ฟ) มี ไฟ(ฟ) **มิ**-เนิท(ส)","th":"ขอห้านาที","note":""},{"en":"Turn on your mic.","r":"เทอ(ร)(น) อาน ยอ(ร) ไม(ค)","th":"เปิดไมค์หน่อย","note":""},{"en":"Nice play!","r":"ไน(ส) เพล!","th":"เล่นดีมาก","note":""},{"en":"My bad.","r":"ไม แบ็ด","th":"ฉันพลาดเอง","note":"ขอโทษแบบสั้น ๆ ใช้กับเพื่อน"},{"en":"Watch your back!","r":"วา-เชอ(ร) แบ็ก!","th":"ระวังข้างหลัง","note":""},{"en":"Let's go again.","r":"เล็ท(ส) โก อะ-**เก็น**","th":"เอาใหม่อีกรอบ","note":""},{"en":"Good game, everyone.","r":"กุด เกม, **เอ(ฟ)**-รี-วัน","th":"เล่นกันดีมากทุกคน","note":"GG ย่อมาจาก good game"}],"dialogue":[{"who":"A","en":"Hey, wanna team up?","r":"เฮ, **วา**-นะ ที-มัพ?","th":"เฮ้ ไปเล่นด้วยกันไหม"},{"who":"B","en":"Sure! Give me five minutes.","r":"ชัว(ร)! กิ(ฟ) มี ไฟ(ฟ) **มิ**-เนิท(ส)","th":"ได้เลย ขอห้านาที"},{"who":"A","en":"OK. I'll send you an invite.","r":"โอ-**เค**. ไอ(ล) เซ็น-จู เอิน **อิน**-ไว(ท)","th":"โอเค เดี๋ยวส่งคำเชิญไปให้"},{"who":"B","en":"Got it. I'm in.","r":"กาท อิท. ไอ(ม) อิน","th":"ได้แล้ว เข้ามาแล้ว"},{"who":"A","en":"Nice play!","r":"ไน(ส) เพล!","th":"เล่นดีมาก"},{"who":"B","en":"Thanks! Sorry, my bad on that last fight.","r":"แธง(ค)(ส)! **ซา**-รี, ไม แบ็ด อาน แด็ท แลส(ท) ไฟ(ท)","th":"ขอบคุณ ขอโทษนะ ไฟต์เมื่อกี้พลาดเอง"},{"who":"A","en":"No worries. Let's go again.","r":"โน **เวอ**-รี(ซ). เล็ท(ส) โก อะ-**เก็น**","th":"ไม่เป็นไร เอาใหม่อีกรอบ"}],"pattern":{"f":"Let's + [กริยา]","ex":"ชวนทำอะไรด้วยกันทันที (มา…กันเถอะ)","examples":[{"en":"Let's go again.","r":"เล็ท(ส) โก อะ-**เก็น**","th":"เอาใหม่อีกรอบ"},{"en":"Let's play tonight.","r":"เล็ท(ส) เพล ทะ-**ไน(ท)**","th":"คืนนี้เล่นกันเถอะ"},{"en":"Let's take a break.","r":"เล็ท(ส) เทก อะ เบรก","th":"พักกันก่อนเถอะ"}]},"sound":{"t":"Let's มีเสียง s ท้าย","d":"ต้องมีเสียง ส เบา ๆ ท้ายคำ ถ้าหายจะกลายเป็น let","words":[{"en":"Let's","r":"เล็ท(ส)"},{"en":"let","r":"เล็ท"},{"en":"that's","r":"แด็ท(ส)"}]},"trap":{"wrong":"Open your mic.","right":"Turn on your mic.","why":"เปิด/ปิดเครื่องใช้ไฟฟ้าใช้ turn on / turn off ไม่ใช้ open / close"},"mission":{"task":"ชวนเพื่อนเล่นเกม ขอเวลา และชมเพื่อนตอนจบเกม","model":[{"en":"Wanna team up?","r":"**วา**-นะ ที-มัพ?"},{"en":"Give me five minutes.","r":"กิ(ฟ) มี ไฟ(ฟ) **มิ**-เนิท(ส)"},{"en":"Good game, everyone!","r":"กุด เกม, **เอ(ฟ)**-รี-วัน!"}]},"teach":{"warm":"เกมที่คุณเล่นบ่อยใช้ศัพท์ภาษาอังกฤษอะไรบ้าง","A":"ชวนเพื่อนเล่นเกม และขอให้เปิดไมค์","B":"ตอบรับ ขอเวลา 5 นาที แล้วชมเพื่อนตอนจบเกม"}},{"n":17,"mod":5,"th":"เล่าเรื่องที่ผ่านมา","en":"Talking about the past","goal":"เล่าว่าเมื่อวานหรือเมื่อก่อนทำอะไร และถามเรื่องที่ผ่านมาได้","scene":"ถามเพื่อนร่วมงานที่ดูเหนื่อย","cast":{"A":{"name":"Nok","g":"f","role":"เจ้าหน้าที่"},"B":{"name":"Ben","g":"m","role":"เพื่อนร่วมงาน"}},"phrases":[{"en":"What did you do yesterday?","r":"วัท ดิ-จู ดู **เยส**-เทอ(ร)-เด?","th":"เมื่อวานทำอะไร","note":""},{"en":"I went to the market.","r":"ไอ เว็น(ท) ทะ เดอะ **มา(ร)**-เคิท","th":"ฉันไปตลาดมา","note":"go → went"},{"en":"I had a busy day.","r":"ไอ แฮ็ด อะ **บิ**-ซี เด","th":"ฉันยุ่งทั้งวันเลย","note":"have → had"},{"en":"I didn't go to work.","r":"ไอ **ดิ**-เดิน(ท) โก ทะ เวอ(ร)(ค)","th":"ฉันไม่ได้ไปทำงาน","note":"ปฏิเสธเรื่องอดีต: didn't + กริยาช่อง 1"},{"en":"Did you see the news?","r":"ดิ-จู ซี เดอะ นู(ซ)?","th":"คุณเห็นข่าวไหม","note":""},{"en":"I saw it this morning.","r":"ไอ ซอ อิท ดิส **มอ(ร)**-นิง","th":"ฉันเห็นเมื่อเช้านี้","note":"see → saw"},{"en":"When did you arrive?","r":"เว็น ดิ-จู เออ-**ไร(ฟ)**?","th":"คุณมาถึงเมื่อไร","note":""},{"en":"I arrived last night.","r":"ไอ เออ-**ไร(ฟ)(ด)** แลส(ท) ไน(ท)","th":"ฉันมาถึงเมื่อคืน","note":""}],"dialogue":[{"who":"A","en":"You look tired. What did you do yesterday?","r":"ยู ลุก **ไท**-เออ(ร)(ด). วัท ดิ-จู ดู **เยส**-เทอ(ร)-เด?","th":"ดูเหนื่อยนะ เมื่อวานทำอะไรมา"},{"who":"B","en":"I moved to a new apartment.","r":"ไอ มู(ฟ)(ด) ทู อะ นู อะ-**พา(ร)(ท)**-เมิน(ท)","th":"ผมย้ายไปอพาร์ตเมนต์ใหม่"},{"who":"A","en":"Really? Did anyone help you?","r":"**เรีย**-ลี? ดิด **เอ**-นี-วัน เฮ(ล)(พ) ยู?","th":"จริงเหรอ มีใครช่วยไหม"},{"who":"B","en":"Yes. My friends came and helped me.","r":"เยส. ไม เฟร็น(ด)(ซ) เคม เอิน เฮ(ล)(พ)(ท) มี","th":"มีครับ เพื่อน ๆ มาช่วย"},{"who":"A","en":"How long did it take?","r":"ฮาว ลอง ดิด อิท เทก?","th":"ใช้เวลานานเท่าไร"},{"who":"B","en":"All day! I went to bed at midnight.","r":"ออ(ล) เด! ไอ เว็น(ท) ทะ เบ็ด เอิท **มิด**-ไน(ท)","th":"ทั้งวันเลย ผมเข้านอนตอนเที่ยงคืน"},{"who":"A","en":"You need some rest.","r":"ยู นีด ซัม เรส(ท)","th":"คุณต้องพักผ่อนแล้วล่ะ"}],"pattern":{"f":"I + [กริยาช่อง 2] … / Did you + [กริยาช่อง 1]?","ex":"เล่าเรื่องที่ผ่านไปแล้วใช้กริยาช่อง 2 · คำถามใช้ Did + กริยาช่อง 1","examples":[{"en":"I went home early.","r":"ไอ เว็น(ท) โฮม **เออ(ร)**-ลี","th":"ฉันกลับบ้านเร็ว"},{"en":"I watched a movie.","r":"ไอ วา(ช)(ท) อะ **มู**-วี","th":"ฉันดูหนัง"},{"en":"Did you eat breakfast?","r":"ดิ-จู อีท **เบร็ก**-เฟิส(ท)?","th":"คุณกินข้าวเช้าไหม"}]},"sound":{"t":"เสียง -ed ท้ายคำ","d":"watched ลงท้ายเสียง t · played ลงท้ายเสียง d · wanted มีพยางค์เพิ่ม","words":[{"en":"watched","r":"วา(ช)(ท)"},{"en":"played","r":"เพลด"},{"en":"wanted","r":"**วาน**-ทิด"}]},"trap":{"wrong":"Yesterday I go to the market.","right":"Yesterday I went to the market.","why":"แม้มีคำว่า yesterday แล้ว กริยาก็ต้องเปลี่ยนเป็นรูปอดีตด้วย"},"mission":{"task":"เล่าเรื่องเมื่อวาน 3 ประโยค","model":[{"en":"I got up at six.","r":"ไอ กาท อัพ เอิท ซิก(ส)"},{"en":"I went to work.","r":"ไอ เว็น(ท) ทะ เวอ(ร)(ค)"},{"en":"I watched a movie at night.","r":"ไอ วา(ช)(ท) อะ **มู**-วี เอิท ไน(ท)"}]},"teach":{"warm":"เมื่อวานคุณทำอะไรบ้าง 3 อย่าง","A":"ถามเพื่อนว่าเมื่อวานทำอะไร","B":"เล่า 3 อย่าง โดยใช้กริยาช่อง 2"}},{"n":18,"mod":5,"th":"แผนในอนาคต","en":"Future plans","goal":"บอกแผนที่ตั้งใจไว้ และสิ่งที่เพิ่งตัดสินใจจะทำได้","scene":"คุยเรื่องแผนวันหยุด","cast":{"A":{"name":"Ann","g":"f","role":"เพื่อนร่วมงาน"},"B":{"name":"Mike","g":"m","role":"เพื่อนร่วมงาน"}},"phrases":[{"en":"What are you doing this weekend?","r":"วัท อา(ร) ยู **ดู**-อิง ดิส **วี**-เค็น(ด)?","th":"สุดสัปดาห์นี้ทำอะไร","note":"ใช้ถามแผนที่นัดไว้แล้ว"},{"en":"I'm going to visit my parents.","r":"ไอ(ม) **โก**-อิง ทะ **วิ**-ซิท ไม **แพ**-เริน(ท)(ส)","th":"ฉันจะไปเยี่ยมพ่อแม่","note":""},{"en":"I'm meeting a friend tonight.","r":"ไอ(ม) **มี**-ดิง อะ เฟร็น(ด) ทะ-**ไน(ท)**","th":"คืนนี้ฉันนัดเพื่อนไว้","note":""},{"en":"I'll call you later.","r":"ไอ(ล) คอ(ล) ยู **เล**-เดอ(ร)","th":"เดี๋ยวฉันโทรหานะ","note":""},{"en":"I'm not sure yet.","r":"ไอ(ม) นาท ชัว(ร) เย็ท","th":"ยังไม่แน่ใจเลย","note":""},{"en":"Maybe I'll stay home.","r":"**เม**-บี ไอ(ล) สเต โฮม","th":"ฉันอาจจะอยู่บ้าน","note":""},{"en":"When will you be back?","r":"เว็น วิ(ล) ยู บี แบ็ก?","th":"คุณจะกลับมาเมื่อไร","note":""},{"en":"I'll be back by six.","r":"ไอ(ล) บี แบ็ก ไบ ซิก(ส)","th":"ฉันจะกลับมาไม่เกินหกโมง","note":"by = ภายใน ไม่เกิน"}],"dialogue":[{"who":"A","en":"What are you doing this weekend?","r":"วัท อา(ร) ยู **ดู**-อิง ดิส **วี**-เค็น(ด)?","th":"สุดสัปดาห์นี้ทำอะไร"},{"who":"B","en":"I'm going to visit my parents. How about you?","r":"ไอ(ม) **โก**-อิง ทะ **วิ**-ซิท ไม **แพ**-เริน(ท)(ส). ฮาว อะ-**บาว**-ชู?","th":"จะไปเยี่ยมพ่อแม่ แล้วคุณล่ะ"},{"who":"A","en":"I'm not sure yet. Maybe I'll stay home.","r":"ไอ(ม) นาท ชัว(ร) เย็ท. **เม**-บี ไอ(ล) สเต โฮม","th":"ยังไม่แน่ใจเลย อาจจะอยู่บ้าน"},{"who":"B","en":"You should come with me! My mom is a great cook.","r":"ยู ชุด คัม วิ(ธ) มี! ไม มาม อิ(ซ) อะ เกรท คุก","th":"มาด้วยกันสิ แม่ผมทำอาหารเก่งมาก"},{"who":"A","en":"Really? I'd love to!","r":"**เรีย**-ลี? ไอ(ด) ลั(ฟ) ทู!","th":"จริงเหรอ อยากไปมากเลย"},{"who":"B","en":"Great! I'll pick you up at eight.","r":"เกรท! ไอ(ล) พิก ยู อัพ เอิท เอท","th":"เยี่ยม เดี๋ยวผมไปรับแปดโมงนะ"}],"pattern":{"f":"I'm going to + [กริยา] / I'll + [กริยา]","ex":"I'm going to = ตั้งใจหรือวางแผนไว้แล้ว · I'll = เพิ่งตัดสินใจ หรือสัญญา","examples":[{"en":"I'm going to study English.","r":"ไอ(ม) **โก**-อิง ทะ **สตะ**-ดี **อิง**-กลิ(ช)","th":"ฉันจะเรียนภาษาอังกฤษ"},{"en":"I'm going to buy a new phone.","r":"ไอ(ม) **โก**-อิง ทะ ไบ อะ นู โฟน","th":"ฉันจะซื้อโทรศัพท์ใหม่"},{"en":"I'll help you.","r":"ไอ(ล) เฮ(ล)(พ) ยู","th":"เดี๋ยวฉันช่วย"}]},"sound":{"t":"going to พูดเร็วเป็น gonna","d":"ภาษาพูด I'm going to… มักออกเสียงเป็น I'm gonna… ใช้กับเพื่อนได้ แต่ไม่ใช้เขียนในงาน","words":[{"en":"going to","r":"**โก**-อิง ทู"},{"en":"gonna","r":"**กา**-นะ"}]},"trap":{"wrong":"Tomorrow I will to go.","right":"Tomorrow I'll go. / Tomorrow I'm going to go.","why":"หลัง will ใช้กริยาได้เลย ไม่มี to"},"mission":{"task":"บอกแผนสุดสัปดาห์ 2 ประโยค","model":[{"en":"I'm going to clean my room.","r":"ไอ(ม) **โก**-อิง ทะ คลีน ไม รูม"},{"en":"Maybe I'll watch a movie.","r":"**เม**-บี ไอ(ล) วา(ช) อะ **มู**-วี"}]},"teach":{"warm":"สุดสัปดาห์นี้คุณจะทำอะไร","A":"ถามแผนวันหยุดของเพื่อน","B":"เล่าแผน แล้วชวนอีกฝ่ายไปด้วย"}},{"n":19,"mod":5,"th":"ความรู้สึกและความคิดเห็น","en":"Feelings and opinions","goal":"บอกความคิดเห็น เห็นด้วยหรือไม่เห็นด้วยอย่างสุภาพ และแสดงความรู้สึกได้","scene":"วางแผนงานเลี้ยงของโรงเรียน","cast":{"A":{"name":"Nok","g":"f","role":"เจ้าหน้าที่"},"B":{"name":"Tom","g":"m","role":"ครู"}},"phrases":[{"en":"I think it's a good idea.","r":"ไอ ธิง(ค) อิท(ส) อะ กุด ไอ-**ดี**-อะ","th":"ฉันว่าเป็นความคิดที่ดี","note":""},{"en":"I don't think so.","r":"ไอ โดน(ท) ธิง(ค) โซ","th":"ฉันว่าไม่นะ","note":""},{"en":"I agree.","r":"ไอ อะ-**กรี**","th":"ฉันเห็นด้วย","note":""},{"en":"I'm not sure about that.","r":"ไอ(ม) นาท ชัว(ร) อะ-**บาว(ท)** แด็ท","th":"ฉันไม่แน่ใจเรื่องนั้นนะ","note":""},{"en":"What do you think?","r":"วัท ดู ยู ธิง(ค)?","th":"คุณคิดว่ายังไง","note":""},{"en":"I'm a little worried.","r":"ไอ(ม) อะ **ลิ**-เดิ(ล) **เวอ**-รีด","th":"ฉันกังวลนิดหน่อย","note":""},{"en":"I'm so happy for you!","r":"ไอ(ม) โซ **แฮ**-พี เฟอ(ร) ยู!","th":"ดีใจด้วยนะ","note":""},{"en":"That's too bad.","r":"แด็ท(ส) ทู แบ็ด","th":"แย่จัง","note":"ใช้แสดงความเห็นใจเมื่อได้ยินเรื่องไม่ดี"}],"dialogue":[{"who":"A","en":"Let's have the party outside. What do you think?","r":"เล็ท(ส) แฮ(ฟ) เดอะ **พา(ร)**-ดี อาว(ท)-**ไซ(ด)**. วัท ดู ยู ธิง(ค)?","th":"จัดปาร์ตี้ข้างนอกกันเถอะ คุณคิดว่ายังไงคะ"},{"who":"B","en":"I'm not sure about that. It might rain.","r":"ไอ(ม) นาท ชัว(ร) อะ-**บาว(ท)** แด็ท. อิท ไม(ท) เรน","th":"ผมไม่แน่ใจนะครับ ฝนอาจจะตก"},{"who":"A","en":"You're right. Let's have it inside, then.","r":"ยัว(ร) ไร(ท). เล็ท(ส) แฮ(ฟ) อิท อิน-**ไซ(ด)**, เด็น","th":"จริงด้วยค่ะ งั้นจัดข้างในแล้วกัน"},{"who":"B","en":"I agree. It's safer.","r":"ไอ อะ-**กรี**. อิท(ส) **เซ**-เฟอ(ร)","th":"เห็นด้วยครับ ปลอดภัยกว่า"},{"who":"A","en":"Can you help me decorate the room?","r":"เคิน ยู เฮ(ล)(พ) มี **เด**-เคอ-เรท เดอะ รูม?","th":"ช่วยฉันตกแต่งห้องได้ไหมคะ"},{"who":"B","en":"Sure! I think it's going to be fun.","r":"ชัว(ร)! ไอ ธิง(ค) อิท(ส) **โก**-อิง ทะ บี ฟัน","th":"ได้เลยครับ ผมว่าต้องสนุกแน่"}],"pattern":{"f":"I think + [ประโยค]","ex":"บอกความเห็นของเรา (ฉันว่า… / ฉันคิดว่า…)","examples":[{"en":"I think it's a good idea.","r":"ไอ ธิง(ค) อิท(ส) อะ กุด ไอ-**ดี**-อะ","th":"ฉันว่าเป็นความคิดที่ดี"},{"en":"I think he's right.","r":"ไอ ธิง(ค) ฮี(ซ) ไร(ท)","th":"ฉันว่าเขาพูดถูก"},{"en":"I think we're late.","r":"ไอ ธิง(ค) เวีย(ร) เลท","th":"ฉันว่าเราสายแล้ว"}]},"sound":{"t":"think กับ sink","d":"think (คิด) ลิ้นแตะฟันแล้วเป่าลม · sink (อ่างล้างจาน) เสียง ซ ธรรมดา","words":[{"en":"think","r":"ธิง(ค)"},{"en":"sink","r":"ซิง(ค)"},{"en":"thing","r":"ธิง"}]},"trap":{"wrong":"I am agree.","right":"I agree.","why":"agree เป็นกริยาอยู่แล้ว ไม่ต้องใส่ am"},"mission":{"task":"ให้ความเห็นเรื่องหนึ่ง พร้อมเหตุผลสั้น ๆ","model":[{"en":"I think it's a good idea.","r":"ไอ ธิง(ค) อิท(ส) อะ กุด ไอ-**ดี**-อะ"},{"en":"But I'm a little worried about the cost.","r":"บัท ไอ(ม) อะ **ลิ**-เดิ(ล) **เวอ**-รีด อะ-**บาว(ท)** เดอะ คาส(ท)"},{"en":"What do you think?","r":"วัท ดู ยู ธิง(ค)?"}]},"teach":{"warm":"ถ้าเพื่อนเสนอไอเดียที่คุณไม่เห็นด้วย คุณจะพูดยังไงให้สุภาพ","A":"เสนอไอเดียจัดกิจกรรม","B":"ไม่แน่ใจ ให้เหตุผล และเสนอทางอื่น"}},{"n":20,"mod":5,"th":"เปรียบเทียบและแนะนำ","en":"Comparing and suggesting","goal":"เปรียบเทียบของ 2 อย่าง บอกว่าชอบอันไหนมากกว่า และแนะนำคนอื่นได้","scene":"เลือกซื้อโทรศัพท์","cast":{"A":{"name":"Ken","g":"m","role":"ครู"},"B":{"name":"Nok","g":"f","role":"เจ้าหน้าที่"}},"phrases":[{"en":"This one is cheaper.","r":"ดิส วัน อิ(ซ) **ชี**-เพอ(ร)","th":"อันนี้ถูกกว่า","note":""},{"en":"That one is better.","r":"แด็ท วัน อิ(ซ) **เบ**-เดอ(ร)","th":"อันนั้นดีกว่า","note":"good → better"},{"en":"Which one do you prefer?","r":"วิ(ช) วัน ดู ยู พริ-**เฟอ(ร)**?","th":"คุณชอบอันไหนมากกว่า","note":""},{"en":"I prefer the blue one.","r":"ไอ พริ-**เฟอ(ร)** เดอะ บลู วัน","th":"ฉันชอบอันสีน้ำเงินมากกว่า","note":""},{"en":"You should try the green curry.","r":"ยู ชุด ไทร เดอะ กรีน **เคอ**-รี","th":"คุณควรลองแกงเขียวหวาน","note":""},{"en":"Why don't we take a taxi?","r":"ไว โดน(ท) วี เทก อะ **แท็ก**-ซี?","th":"นั่งแท็กซี่กันดีไหม","note":"ใช้เสนอความคิด ไม่ได้ถามเหตุผล"},{"en":"It's the best restaurant in town.","r":"อิท(ส) เดอะ เบส(ท) **เรส**-เทอ-ราน(ท) อิน ทาว(น)","th":"เป็นร้านอาหารที่ดีที่สุดในเมือง","note":""},{"en":"It's not as hot as yesterday.","r":"อิท(ส) นาท แอ(ซ) ฮาท แอ(ซ) **เยส**-เทอ(ร)-เด","th":"ไม่ร้อนเท่าเมื่อวาน","note":""}],"dialogue":[{"who":"A","en":"Which phone should I buy?","r":"วิ(ช) โฟน ชุด ไอ ไบ?","th":"ผมควรซื้อโทรศัพท์เครื่องไหนดีครับ"},{"who":"B","en":"This one is cheaper, but that one is better.","r":"ดิส วัน อิ(ซ) **ชี**-เพอ(ร), บัท แด็ท วัน อิ(ซ) **เบ**-เดอ(ร)","th":"เครื่องนี้ถูกกว่า แต่เครื่องนั้นดีกว่าค่ะ"},{"who":"A","en":"Which one do you prefer?","r":"วิ(ช) วัน ดู ยู พริ-**เฟอ(ร)**?","th":"คุณชอบเครื่องไหนมากกว่าครับ"},{"who":"B","en":"I prefer the black one. The camera is great.","r":"ไอ พริ-**เฟอ(ร)** เดอะ แบล็ก วัน. เดอะ **แค**-เมอ-ระ อิ(ซ) เกรท","th":"ฉันชอบเครื่องสีดำมากกว่า กล้องดีมากค่ะ"},{"who":"A","en":"Is it expensive?","r":"อิ-ซิท อิก-**สเป็น**-ซิ(ฟ)?","th":"แพงไหมครับ"},{"who":"B","en":"A little. You should check the prices online first.","r":"อะ **ลิ**-เดิ(ล). ยู ชุด เช็ก เดอะ **ไพร**-เซิ(ซ) **ออน**-ไล(น) เฟอ(ร)(ส)(ท)","th":"นิดหน่อยค่ะ คุณควรเช็กราคาออนไลน์ก่อนนะคะ"},{"who":"A","en":"Good idea. Thanks!","r":"กุด ไอ-**ดี**-อะ. แธง(ค)(ส)!","th":"ความคิดดีครับ ขอบคุณครับ"}],"pattern":{"f":"[คำคุณศัพท์ + er] + than","ex":"เปรียบเทียบ 2 อย่าง (…กว่า) คำสั้นเติม -er คำยาวใช้ more","examples":[{"en":"This one is cheaper than that one.","r":"ดิส วัน อิ(ซ) **ชี**-เพอ(ร) แดน แด็ท วัน","th":"อันนี้ถูกกว่าอันนั้น"},{"en":"Bangkok is bigger than Chiang Mai.","r":"แบง-**คาก** อิ(ซ) **บิ**-เกอ(ร) แดน เชียง ใหม่","th":"กรุงเทพฯ ใหญ่กว่าเชียงใหม่"},{"en":"This phone is more expensive.","r":"ดิส โฟน อิ(ซ) มอ(ร) อิก-**สเป็น**-ซิ(ฟ)","th":"โทรศัพท์เครื่องนี้แพงกว่า"}]},"sound":{"t":"เสียง -er ท้ายคำ (US)","d":"cheaper, bigger, better ท้ายคำม้วนลิ้นเสียง เออ(ร) เบา ๆ","words":[{"en":"cheaper","r":"**ชี**-เพอ(ร)"},{"en":"bigger","r":"**บิ**-เกอ(ร)"},{"en":"better","r":"**เบ**-เดอ(ร)"}]},"trap":{"wrong":"This one is more cheap.","right":"This one is cheaper.","why":"คำคุณศัพท์สั้น ๆ เติม -er ไม่ใช้ more"},"mission":{"task":"เปรียบเทียบของ 2 อย่าง แล้วแนะนำเพื่อน","model":[{"en":"This one is cheaper.","r":"ดิส วัน อิ(ซ) **ชี**-เพอ(ร)"},{"en":"But that one is better.","r":"บัท แด็ท วัน อิ(ซ) **เบ**-เดอ(ร)"},{"en":"You should buy the black one.","r":"ยู ชุด ไบ เดอะ แบล็ก วัน"}]},"teach":{"warm":"ร้านอาหารร้านไหนแถวนี้ที่คุณจะแนะนำให้ชาวต่างชาติ เพราะอะไร","A":"ขอคำแนะนำซื้อของ 2 ชิ้น","B":"เปรียบเทียบแล้วแนะนำ"}},{"n":21,"mod":6,"th":"ไม่สบายและร้านขายยา","en":"At the pharmacy","goal":"บอกอาการป่วย ถามหายา และถามวิธีทานยาได้","scene":"ร้านขายยา","cast":{"A":{"name":"Pharmacist","g":"m","role":"เภสัชกร"},"B":{"name":"Ann","g":"f","role":"ลูกค้า"}},"phrases":[{"en":"I don't feel well.","r":"ไอ โดน(ท) ฟี(ล) เว(ล)","th":"ฉันรู้สึกไม่สบาย","note":""},{"en":"I have a headache.","r":"ไอ แฮ(ฟ) อะ **เฮ**-เดก","th":"ฉันปวดหัว","note":""},{"en":"I have a fever.","r":"ไอ แฮ(ฟ) อะ **ฟี**-เวอ(ร)","th":"ฉันมีไข้","note":""},{"en":"My stomach hurts.","r":"ไม **สตะ**-เมิก เฮอ(ร)(ท)(ส)","th":"ฉันปวดท้อง","note":""},{"en":"Do you have anything for a cold?","r":"ดู ยู แฮ(ฟ) **เอ**-นี-ธิง เฟอ(ร) อะ โค(ล)(ด)?","th":"มียาแก้หวัดไหม","note":""},{"en":"How many times a day?","r":"ฮาว **เม**-นี ไท(ม)(ซ) อะ เด?","th":"วันละกี่ครั้ง","note":""},{"en":"Take one tablet after meals.","r":"เทก วัน **แท**-เบลิท **แอ(ฟ)**-เทอ(ร) มี(ล)(ซ)","th":"ทานครั้งละหนึ่งเม็ดหลังอาหาร","note":""},{"en":"I need to see a doctor.","r":"ไอ นีด ทะ ซี อะ **ดาก**-เทอ(ร)","th":"ฉันต้องไปหาหมอ","note":""}],"dialogue":[{"who":"A","en":"Hi. How can I help you?","r":"ไฮ. ฮาว เคิน ไอ เฮ(ล)(พ) ยู?","th":"สวัสดีครับ มีอะไรให้ช่วยครับ"},{"who":"B","en":"I have a sore throat and a fever.","r":"ไอ แฮ(ฟ) อะ ซอ(ร) โธรท เอิน อะ **ฟี**-เวอ(ร)","th":"ฉันเจ็บคอและมีไข้ค่ะ"},{"who":"A","en":"How long have you had it?","r":"ฮาว ลอง แฮ(ฟ) ยู แฮ็ด อิท?","th":"เป็นมานานเท่าไรแล้วครับ"},{"who":"B","en":"Since yesterday.","r":"ซิน(ส) **เยส**-เทอ(ร)-เด","th":"ตั้งแต่เมื่อวานค่ะ"},{"who":"A","en":"Take this medicine three times a day, after meals.","r":"เทก ดิส **เม**-ดะ-เซิน ธรี ไท(ม)(ซ) อะ เด, **แอ(ฟ)**-เทอ(ร) มี(ล)(ซ)","th":"ทานยานี้วันละสามครั้ง หลังอาหารครับ"},{"who":"B","en":"Anything else?","r":"**เอ**-นี-ธิง เอ(ล)(ส)?","th":"มีอะไรอีกไหมคะ"},{"who":"A","en":"Drink lots of water and get some rest.","r":"ดริง(ค) ลาท(ส) เอิ(ฟ) **วอ**-เดอ(ร) เอิน เก็ท ซัม เรส(ท)","th":"ดื่มน้ำเยอะ ๆ และพักผ่อนครับ"}],"pattern":{"f":"I have a + [อาการ]","ex":"บอกอาการป่วยใช้ have","examples":[{"en":"I have a headache.","r":"ไอ แฮ(ฟ) อะ **เฮ**-เดก","th":"ฉันปวดหัว"},{"en":"I have a cold.","r":"ไอ แฮ(ฟ) อะ โค(ล)(ด)","th":"ฉันเป็นหวัด"},{"en":"I have a cough.","r":"ไอ แฮ(ฟ) อะ คา(ฟ)","th":"ฉันไอ"}]},"sound":{"t":"ache อ่านเป็นเสียง k","d":"ch ในคำว่า ache, headache, stomachache ออกเสียงเป็น k","words":[{"en":"ache","r":"เอก"},{"en":"headache","r":"**เฮ**-เดก"},{"en":"stomachache","r":"**สตะ**-มะ-เคก"}]},"trap":{"wrong":"I'm headache.","right":"I have a headache.","why":"อาการป่วยใช้ have ไม่ใช้ am"},"mission":{"task":"บอกอาการ 2 อย่าง และถามวิธีทานยา","model":[{"en":"I have a headache.","r":"ไอ แฮ(ฟ) อะ **เฮ**-เดก"},{"en":"I have a fever, too.","r":"ไอ แฮ(ฟ) อะ **ฟี**-เวอ(ร), ทู"},{"en":"How many times a day?","r":"ฮาว **เม**-นี ไท(ม)(ซ) อะ เด?"}]},"teach":{"warm":"ครั้งล่าสุดที่ไม่สบาย คุณเป็นอะไร","A":"คุณเป็นเภสัชกร ถามอาการและบอกวิธีทานยา","B":"คุณเป็นลูกค้า บอกอาการ 2 อย่าง"}},{"n":22,"mod":6,"th":"แจ้งปัญหาอย่างสุภาพ","en":"Problems and polite complaints","goal":"แจ้งว่าของเสียหรือมีอะไรผิดพลาด และขอให้แก้ไขอย่างสุภาพได้","scene":"แจ้งปัญหาที่เคาน์เตอร์โรงแรม","cast":{"A":{"name":"Mark","g":"m","role":"แขกของโรงแรม"},"B":{"name":"Amy","g":"f","role":"พนักงานต้อนรับ"}},"phrases":[{"en":"Excuse me. There's a problem.","r":"อิก-**สกิว(ซ)** มี. แด(ร)(ซ) อะ **พรา**-เบลิม","th":"ขอโทษนะ มีปัญหาอยู่อย่างหนึ่ง","note":""},{"en":"The air conditioner isn't working.","r":"ดิ แอ(ร) เคิน-**ดิ**-ชะ-เนอ(ร) **อิ**-เซิน(ท) **เวอ(ร)**-คิง","th":"แอร์ไม่ทำงาน","note":""},{"en":"I lost my wallet.","r":"ไอ ลอส(ท) ไม **วอ**-เลิท","th":"ฉันทำกระเป๋าสตางค์หาย","note":""},{"en":"I think there's a mistake on the bill.","r":"ไอ ธิง(ค) แด(ร)(ซ) อะ มิ-**สเตก** อาน เดอะ บิ(ล)","th":"ฉันว่าบิลคิดเงินผิด","note":""},{"en":"Could you fix it, please?","r":"คุ-จู ฟิก(ส) อิท, พลี(ซ)?","th":"ช่วยแก้ให้หน่อยได้ไหม","note":""},{"en":"Could I speak to the manager?","r":"คุด ไอ สปีก ทะ เดอะ **แม**-นะ-เจอ(ร)?","th":"ขอคุยกับผู้จัดการได้ไหม","note":""},{"en":"Sorry for the trouble.","r":"**ซา**-รี เฟอ(ร) เดอะ **ทระ**-เบิ(ล)","th":"ขออภัยที่ทำให้ลำบาก","note":"พนักงานพูดกับลูกค้า"},{"en":"We'll fix it right away.","r":"วี(ล) ฟิก(ส) อิท ไร(ท) อะ-**เว**","th":"เราจะแก้ให้ทันที","note":""}],"dialogue":[{"who":"A","en":"Excuse me. The air conditioner in my room isn't working.","r":"อิก-**สกิว(ซ)** มี. ดิ แอ(ร) เคิน-**ดิ**-ชะ-เนอ(ร) อิน ไม รูม **อิ**-เซิน(ท) **เวอ(ร)**-คิง","th":"ขอโทษครับ แอร์ในห้องผมไม่ทำงานครับ"},{"who":"B","en":"I'm sorry about that. What's your room number?","r":"ไอ(ม) **ซา**-รี อะ-**บาว(ท)** แด็ท. วัท(ส) ยอ(ร) รูม **นัม**-เบอ(ร)?","th":"ขออภัยด้วยค่ะ ห้องหมายเลขอะไรคะ"},{"who":"A","en":"Three oh five.","r":"ธรี โอ ไฟ(ฟ)","th":"สามศูนย์ห้าครับ"},{"who":"B","en":"We'll send someone right away.","r":"วี(ล) เซ็น(ด) **ซัม**-วัน ไร(ท) อะ-**เว**","th":"เราจะส่งคนขึ้นไปทันทีค่ะ"},{"who":"A","en":"Thanks. Also, I think there's a mistake on my bill.","r":"แธง(ค)(ส). **ออ(ล)**-โซ, ไอ ธิง(ค) แด(ร)(ซ) อะ มิ-**สเตก** อาน ไม บิ(ล)","th":"ขอบคุณครับ แล้วก็ ผมว่าบิลของผมคิดเงินผิดครับ"},{"who":"B","en":"Let me check. You're right. I'll fix it now.","r":"เล็ท มี เช็ก. ยัว(ร) ไร(ท). ไอ(ล) ฟิก(ส) อิท นาว","th":"ขอตรวจสอบนะคะ ถูกต้องค่ะ จะแก้ให้เดี๋ยวนี้เลยค่ะ"},{"who":"A","en":"Thank you for your help.","r":"แธง-คิว เฟอ(ร) ยอ(ร) เฮ(ล)(พ)","th":"ขอบคุณที่ช่วยครับ"}],"pattern":{"f":"[สิ่งของ] + isn't working.","ex":"แจ้งว่าของเสียหรือใช้งานไม่ได้","examples":[{"en":"The Wi-Fi isn't working.","r":"เดอะ **ไว**-ไฟ **อิ**-เซิน(ท) **เวอ(ร)**-คิง","th":"ไวไฟใช้ไม่ได้"},{"en":"The TV isn't working.","r":"เดอะ ที-**วี** **อิ**-เซิน(ท) **เวอ(ร)**-คิง","th":"ทีวีใช้ไม่ได้"},{"en":"My key card isn't working.","r":"ไม คี คา(ร)(ด) **อิ**-เซิน(ท) **เวอ(ร)**-คิง","th":"คีย์การ์ดของฉันใช้ไม่ได้"}]},"sound":{"t":"isn't มีเสียง t เบา ๆ","d":"isn't (ไม่) ต้องมีเสียงท้ายเบา ๆ ถ้าหายจะฟังเป็น is ความหมายกลับกันเลย","words":[{"en":"isn't","r":"**อิ**-เซิน(ท)"},{"en":"is","r":"อิ(ซ)"},{"en":"wasn't","r":"**วา**-เซิน(ท)"}]},"trap":{"wrong":"The air is broken.","right":"The air conditioner isn't working.","why":"air แปลว่าอากาศ ต้องพูดว่า air conditioner หรือ AC"},"mission":{"task":"แจ้งปัญหาในห้องพัก 1 อย่าง และขอให้แก้","model":[{"en":"Excuse me. The Wi-Fi isn't working.","r":"อิก-**สกิว(ซ)** มี. เดอะ **ไว**-ไฟ **อิ**-เซิน(ท) **เวอ(ร)**-คิง"},{"en":"Could you fix it, please?","r":"คุ-จู ฟิก(ส) อิท, พลี(ซ)?"},{"en":"Thank you for your help.","r":"แธง-คิว เฟอ(ร) ยอ(ร) เฮ(ล)(พ)"}]},"teach":{"warm":"คุณเคยเจอปัญหาอะไรตอนพักโรงแรมหรือตอนซื้อของ","A":"คุณเป็นแขก แจ้งว่าแอร์ไม่ทำงานและบิลผิด","B":"คุณเป็นพนักงาน ขอโทษและแก้ปัญหา"}},{"n":23,"mod":6,"th":"คุยโทรศัพท์","en":"Phone calls","goal":"โทรหาคน ขอสาย ฝากข้อความ และขอให้โทรกลับได้","scene":"โทรหาผู้ปกครองของนักเรียน","cast":{"A":{"name":"Nok","g":"f","role":"เจ้าหน้าที่ฝ่ายธุรการ"},"B":{"name":"Kate","g":"f","role":"เลขานุการ"}},"phrases":[{"en":"Hello, this is Nok speaking.","r":"ฮะ-**โล**, ดิส อิ(ซ) นก **สปี**-คิง","th":"สวัสดี นกพูดสาย","note":""},{"en":"May I speak to Ms. Smith, please?","r":"เม ไอ สปีก ทะ มิ(ซ) สมิ(ธ), พลี(ซ)?","th":"ขอสายคุณสมิธได้ไหม","note":""},{"en":"Just a moment, please.","r":"จัส(ท) อะ **โม**-เมิน(ท), พลี(ซ)","th":"กรุณารอสักครู่","note":""},{"en":"She's not here right now.","r":"ชี(ซ) นาท เฮีย(ร) ไร(ท) นาว","th":"ตอนนี้เธอไม่อยู่","note":""},{"en":"Can I take a message?","r":"เคิน ไอ เทก อะ **เม**-ซิ(จ)?","th":"จะฝากข้อความไว้ไหม","note":""},{"en":"Could you ask him to call me back?","r":"คุ-จู แอส(ค) ฮิม ทะ คอ(ล) มี แบ็ก?","th":"ช่วยบอกให้เขาโทรกลับหาฉันได้ไหม","note":""},{"en":"Sorry, I can't hear you.","r":"**ซา**-รี, ไอ แคน(ท) เฮีย(ร) ยู","th":"ขอโทษ ไม่ได้ยินเลย","note":""},{"en":"May I ask who's calling?","r":"เม ไอ แอส(ค) ฮู(ซ) **คอ**-ลิง?","th":"ขอทราบได้ไหมว่าใครโทรมา","note":"ถามชื่อคนที่โทรมาอย่างสุภาพ"}],"dialogue":[{"who":"A","en":"Hello, this is Nok from the school office. May I speak to Mr. Davis, please?","r":"ฮะ-**โล**, ดิส อิ(ซ) นก เฟริม เดอะ สกู(ล) **ออ**-ฟิส. เม ไอ สปีก ทะ **มิส**-เทอ(ร) **เด**-เวิส, พลี(ซ)?","th":"สวัสดีค่ะ นกจากฝ่ายธุรการของโรงเรียนค่ะ ขอสายคุณเดวิสได้ไหมคะ"},{"who":"B","en":"Sorry, he's not here right now. Can I take a message?","r":"**ซา**-รี, ฮี(ซ) นาท เฮีย(ร) ไร(ท) นาว. เคิน ไอ เทก อะ **เม**-ซิ(จ)?","th":"ขอโทษค่ะ ตอนนี้เขาไม่อยู่ จะฝากข้อความไว้ไหมคะ"},{"who":"A","en":"Yes, please. Could you ask him to call me back?","r":"เยส, พลี(ซ). คุ-จู แอส(ค) ฮิม ทะ คอ(ล) มี แบ็ก?","th":"ค่ะ ช่วยบอกให้เขาโทรกลับหาฉันได้ไหมคะ"},{"who":"B","en":"Sure. What's your number?","r":"ชัว(ร). วัท(ส) ยอ(ร) **นัม**-เบอ(ร)?","th":"ได้ค่ะ เบอร์โทรอะไรคะ"},{"who":"A","en":"It's zero two, five five five, six seven eight nine.","r":"อิท(ส) **ซิ**-โร ทู, ไฟ(ฟ) ไฟ(ฟ) ไฟ(ฟ), ซิก(ส) **เซ**-เวิน เอท ไน(น)","th":"ศูนย์สอง ห้าห้าห้า หกเจ็ดแปดเก้าค่ะ"},{"who":"B","en":"Got it. I'll give him the message.","r":"กาท อิท. ไอ(ล) กิ(ฟ) ฮิม เดอะ **เม**-ซิ(จ)","th":"รับทราบค่ะ จะบอกเขาให้นะคะ"},{"who":"A","en":"Thank you. Goodbye.","r":"แธง-คิว. กุด-**ไบ**","th":"ขอบคุณค่ะ สวัสดีค่ะ"}],"pattern":{"f":"Could you ask + [him / her / them] + to + [กริยา]?","ex":"ฝากบอกให้คนอื่นทำอะไร","examples":[{"en":"Could you ask him to call me back?","r":"คุ-จู แอส(ค) ฮิม ทะ คอ(ล) มี แบ็ก?","th":"ช่วยบอกให้เขาโทรกลับหาฉันได้ไหม"},{"en":"Could you ask her to email me?","r":"คุ-จู แอส(ค) เฮอ(ร) ทู **อี**-เม(ล) มี?","th":"ช่วยบอกให้เธออีเมลหาฉันได้ไหม"},{"en":"Could you ask them to wait?","r":"คุ-จู แอส(ค) เดิม ทะ เวท?","th":"ช่วยบอกให้พวกเขารอได้ไหม"}]},"sound":{"t":"can กับ can't (US)","d":"can ในประโยคมักออกเสียงเบา ส่วน can't ออกเสียงเต็มและมีเสียง t เบา ๆ ท้าย","words":[{"en":"I can go.","r":"ไอ เคิน โก"},{"en":"I can't go.","r":"ไอ แคน(ท) โก"}]},"trap":{"wrong":"Who are you? (ถามคนที่โทรมา)","right":"May I ask who's calling?","why":"Who are you? ฟังห้วนและไม่สุภาพทางโทรศัพท์"},"mission":{"task":"โทรหาคน ฝากข้อความ และขอให้โทรกลับ","model":[{"en":"Hello, this is Nok. May I speak to Ms. Smith, please?","r":"ฮะ-**โล**, ดิส อิ(ซ) นก. เม ไอ สปีก ทะ มิ(ซ) สมิ(ธ), พลี(ซ)?"},{"en":"Could you ask her to call me back?","r":"คุ-จู แอส(ค) เฮอ(ร) ทะ คอ(ล) มี แบ็ก?"},{"en":"Thank you. Goodbye.","r":"แธง-คิว. กุด-**ไบ**"}]},"teach":{"warm":"เวลารับโทรศัพท์ที่ทำงาน คุณพูดประโยคแรกว่าอะไร","A":"โทรหาผู้ปกครองนักเรียน","B":"รับสายแทน จดข้อความและเบอร์โทร"}},{"n":24,"mod":6,"th":"ข้อความและอีเมลสั้น ๆ","en":"Short messages and emails","goal":"เขียนข้อความหรืออีเมลงานสั้น ๆ ที่สุภาพและเป็นธรรมชาติได้","scene":"แชตงานเรื่องตารางประชุม","cast":{"A":{"name":"Nok","g":"f","role":"เจ้าหน้าที่"},"B":{"name":"Tom","g":"m","role":"ครู"}},"phrases":[{"en":"Thanks for your email.","r":"แธง(ค)(ส) เฟอ(ร) ยอ(ร) **อี**-เม(ล)","th":"ขอบคุณสำหรับอีเมล","note":""},{"en":"Sorry for the late reply.","r":"**ซา**-รี เฟอ(ร) เดอะ เลท ริ-**ไพล**","th":"ขอโทษที่ตอบช้า","note":""},{"en":"I've attached the file.","r":"ไอ(ฟ) อะ-**แท(ช)(ท)** เดอะ ไฟ(ล)","th":"ฉันแนบไฟล์มาแล้ว","note":""},{"en":"Just a quick question.","r":"จัส(ท) อะ ควิก **เควส**-เชิน","th":"ขอถามอะไรนิดหนึ่ง","note":""},{"en":"Could you let me know by Friday?","r":"คุ-จู เล็ท มี โน ไบ **ไฟร**-เด?","th":"ช่วยแจ้งภายในวันศุกร์ได้ไหม","note":""},{"en":"Let me know if you have any questions.","r":"เล็ท มี โน อิ(ฟ) ยู แฮ(ฟ) **เอ**-นี **เควส**-เชิน(ซ)","th":"ถ้ามีคำถามอะไรบอกได้เลย","note":""},{"en":"Have a nice weekend!","r":"แฮ(ฟ) อะ ไน(ส) **วี**-เค็น(ด)!","th":"ขอให้มีความสุขในวันหยุดนะ","note":""},{"en":"Best regards,","r":"เบส(ท) ริ-**กา(ร)(ด)(ซ)**,","th":"ขอแสดงความนับถือ","note":"คำลงท้ายอีเมล"}],"dialogue":[{"who":"A","en":"Hi Tom, sorry for the late reply.","r":"ไฮ ทาม, **ซา**-รี เฟอ(ร) เดอะ เลท ริ-**ไพล**","th":"สวัสดีค่ะทอม ขอโทษที่ตอบช้านะคะ"},{"who":"A","en":"I've attached the schedule for next week.","r":"ไอ(ฟ) อะ-**แท(ช)(ท)** เดอะ **สเก**-จู(ล) เฟอ(ร) เน็ก(ส)(ท) วีก","th":"ฉันแนบตารางของสัปดาห์หน้ามาให้แล้วค่ะ"},{"who":"B","en":"Thanks, Nok! Just a quick question.","r":"แธง(ค)(ส), นก! จัส(ท) อะ ควิก **เควส**-เชิน","th":"ขอบคุณครับนก ขอถามอะไรนิดหนึ่งครับ"},{"who":"B","en":"Is the meeting on Monday or Tuesday?","r":"อิ(ซ) เดอะ **มี**-ดิง อาน **มัน**-เด ออ(ร) **ทู(ซ)**-เด?","th":"ประชุมวันจันทร์หรือวันอังคารครับ"},{"who":"A","en":"It's on Tuesday at ten a.m.","r":"อิท(ส) อาน **ทู(ซ)**-เด เอิท เท็น เอ-**เอ็ม**","th":"วันอังคาร สิบโมงเช้าค่ะ"},{"who":"B","en":"Perfect. See you then!","r":"**เพอ(ร)**-ฟิก(ท). ซี ยู เด็น!","th":"เยี่ยมเลยครับ แล้วเจอกันครับ"},{"who":"A","en":"See you! Have a nice weekend.","r":"ซี ยู! แฮ(ฟ) อะ ไน(ส) **วี**-เค็น(ด)","th":"แล้วเจอกันค่ะ ขอให้มีความสุขในวันหยุดนะคะ"}],"pattern":{"f":"Could you let me know + [เรื่อง / เวลา]?","ex":"ขอให้อีกฝ่ายแจ้งข้อมูลกลับมา","examples":[{"en":"Could you let me know by Friday?","r":"คุ-จู เล็ท มี โน ไบ **ไฟร**-เด?","th":"ช่วยแจ้งภายในวันศุกร์ได้ไหม"},{"en":"Could you let me know your address?","r":"คุ-จู เล็ท มี โน ยอ(ร) **แอ**-เดรส?","th":"ช่วยแจ้งที่อยู่ของคุณได้ไหม"},{"en":"Could you let me know if you can come?","r":"คุ-จู เล็ท มี โน อิ(ฟ) ยู เคิน คัม?","th":"ช่วยแจ้งด้วยได้ไหมว่ามาได้หรือเปล่า"}]},"sound":{"t":"schedule อ่านได้ 2 แบบ","d":"US ขึ้นต้นด้วยเสียง sk (คำอ่านในแอปเป็นแบบ US) · UK มักขึ้นต้นด้วยเสียง sh ทั้งสองแบบถูก","words":[{"en":"schedule","r":"**สเก**-จู(ล)"}]},"trap":{"wrong":"Please be informed that the meeting is on Tuesday.","right":"Just a reminder: the meeting is on Tuesday.","why":"Please be informed that… ฟังแข็งและล้าสมัย อีเมลงานสมัยนี้เขียนสั้นและตรง"},"mission":{"task":"เขียนข้อความสั้นถึงเพื่อนร่วมงาน 3 บรรทัด: ทัก ส่งไฟล์ และขอคำตอบ","model":[{"en":"Hi Ben,","r":"ไฮ เบ็น,"},{"en":"I've attached the report.","r":"ไอ(ฟ) อะ-**แท(ช)(ท)** เดอะ รี-**พอ(ร)(ท)**"},{"en":"Could you let me know by Friday? Thanks!","r":"คุ-จู เล็ท มี โน ไบ **ไฟร**-เด? แธง(ค)(ส)!"}]},"teach":{"warm":"อีเมลหรือข้อความงานภาษาอังกฤษที่คุณต้องเขียนบ่อยที่สุดคืออะไร","A":"ส่งข้อความแนบไฟล์ และขอคำตอบภายในวันศุกร์","B":"ตอบรับ และถามคำถาม 1 ข้อ"}}]};
+const $ = (s, el = document) => el.querySelector(s);
+const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+const bold = s => esc(s).replace(/\*\*(.+?)\*\*/g, '<b>$1</b>');
+const shuffle = a => { const b = a.slice(); for (let i = b.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [b[i], b[j]] = [b[j], b[i]]; } return b; };
+const LESSONS = DATA.lessons;
+const byN = n => LESSONS.find(l => l.n === n);
+const MOD = Object.fromEntries(DATA.modules.map(m => [m[0], m]));
+
+/* ---------------- progress: this browser, plus the viewer's own account when available ---------------- */
+const LS_KEY = 'nse-progress-v1', OPT_KEY = 'nse-options-v1';
+function lsGet(k) { try { return JSON.parse(localStorage.getItem(k) || 'null'); } catch (e) { return null; } }
+function lsSet(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) { /* storage blocked */ } }
+function emptyProgress() { return { done: {}, quiz: {}, mission: {}, known: {} }; }
+function merge(a, b) {
+  const out = emptyProgress();
+  for (const src of [a || {}, b || {}]) {
+    for (const k of ['done', 'mission', 'known']) for (const [key, v] of Object.entries(src[k] || {})) if (v === true) out[k][key] = true;
+    for (const [key, v] of Object.entries(src.quiz || {})) if (typeof v === 'number') out.quiz[key] = Math.max(out.quiz[key] || 0, v);
+  }
+  return out;
+}
+let P = merge(emptyProgress(), lsGet(LS_KEY));
+const OPT = Object.assign({ reading: true, meaning: true }, lsGet(OPT_KEY) || {});
+let remote = null, syncNote = 'local', saveTimer = null, saving = Promise.resolve(), dirty = false;
+function save() {
+  lsSet(LS_KEY, P);
+  if (!remote) return;
+  dirty = true;
+  clearTimeout(saveTimer);
+  saveTimer = setTimeout(flush, 800);
+}
+function flush() {
+  if (!dirty || !remote) return;
+  dirty = false;
+  const body = JSON.parse(JSON.stringify(Object.assign({ v: 1 }, P)));
+  saving = saving.then(() => remote && remote.set(body)).catch(e => {
+    const c = e && e.code;
+    if (c === 'invalid_argument' || c === 'revoked' || c === 'not_granted' || c === 'capability_disabled') { remote = null; syncNote = 'local'; renderSync(); }
+  });
+}
+async function initRemote() {
+  if (!window.claude || typeof window.claude.use !== 'function') return;
+  try {
+    const [db, user] = await Promise.all([window.claude.use('db'), window.claude.use('user')]);
+    if (!db || !user) return;
+    const id = await user.id();
+    if (!id) return;
+    const ref = db.doc('data/users/' + id + '/progress');
+    const snap = await Promise.race([ref.get(), new Promise(r => setTimeout(() => r('timeout'), 10000))]);
+    if (snap === 'timeout') { syncNote = 'slow'; renderSync(); return; }
+    if (snap.exists) P = merge(P, snap.data());
+    lsSet(LS_KEY, P);
+    remote = ref; syncNote = 'account';
+    const h = location.hash.replace('#', '');
+    if (h === '' || h === 'home') renderHome(); else renderSync();
+  } catch (e) { /* keep local progress */ }
+}
+function renderSync() {
+  const el = $('#syncNote'); if (!el) return;
+  el.textContent = syncNote === 'account' ? 'ความคืบหน้าบันทึกในบัญชีของคุณ เปิดจากเครื่องอื่นก็เรียนต่อได้'
+    : syncNote === 'slow' ? 'ยังเชื่อมต่อบัญชีไม่ได้ ความคืบหน้าบันทึกไว้ในเบราว์เซอร์นี้ก่อน'
+    : 'ความคืบหน้าบันทึกไว้ในเบราว์เซอร์นี้';
+}
+
+/* ---------------- speech (device voices, US English) ---------------- */
+const TTS = {
+  ok: typeof window.speechSynthesis !== 'undefined' && typeof window.SpeechSynthesisUtterance !== 'undefined',
+  voices: [],
+  load() {
+    if (!this.ok) return;
+    try {
+      const all = window.speechSynthesis.getVoices() || [];
+      const us = all.filter(v => /^en[-_]US/i.test(v.lang));
+      this.voices = us.length ? us : all.filter(v => /^en/i.test(v.lang));
+    } catch (e) { this.voices = []; }
+  },
+  stop() { if (this.ok) try { window.speechSynthesis.cancel(); } catch (e) {} },
+  say(text, opts = {}) {
+    if (!this.ok) { if (opts.onend) opts.onend(); return; }
+    try {
+      const u = new SpeechSynthesisUtterance(text);
+      u.lang = 'en-US';
+      const second = opts.who === 'B';
+      const v = this.voices[second && this.voices.length > 1 ? 1 : 0];
+      if (v) u.voice = v;
+      u.pitch = second && this.voices.length < 2 ? 0.8 : 1;
+      u.rate = opts.slow ? 0.62 : 0.92;
+      if (opts.onend) { u.onend = opts.onend; u.onerror = opts.onend; }
+      window.speechSynthesis.speak(u);
+    } catch (e) { if (opts.onend) opts.onend(); }
+  },
+};
+TTS.load();
+if (TTS.ok && 'onvoiceschanged' in window.speechSynthesis) window.speechSynthesis.onvoiceschanged = () => TTS.load();
+const SPEAK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M18.5 5.5a9 9 0 0 1 0 13"/></svg>';
+const SLOW = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4z"/><path d="M16 12h5"/></svg>';
+const PLAY = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>';
+const SPEAKTEXT = {};
+let sayId = 0;
+function sayBtns(text, cls = 'iconbtn') {
+  if (!TTS.ok) return '';
+  const id = 's' + (++sayId); SPEAKTEXT[id] = text;
+  return `<button class="${cls}" data-say="${id}" aria-label="ฟังเสียง">${SPEAK}</button><button class="${cls}" data-say="${id}" data-slow="1" aria-label="ฟังเสียงช้า">${SLOW}</button>`;
+}
+document.addEventListener('click', e => {
+  const b = e.target.closest('[data-say]');
+  if (!b) return;
+  TTS.stop(); clearPlaying();
+  TTS.say(SPEAKTEXT[b.dataset.say], { slow: b.dataset.slow === '1', who: b.dataset.who });
+});
+
+/* ---------------- shared bits ---------------- */
+function lineHTML(en, r, th, note) {
+  return `<div class="line"><p class="say en">${esc(en)}</p><p class="reading">${bold(r)}</p>${th ? `<p class="th">${esc(th)}</p>` : ''}${note ? `<p class="note">${esc(note)}</p>` : ''}<div class="acts">${sayBtns(en)}</div></div>`;
+}
+function readToggles() {
+  return `<div class="toolbar"><div class="row"><label class="toggle"><input type="checkbox" id="optReading" ${OPT.reading ? 'checked' : ''}> แสดงคำอ่านไทย</label>
+    <label class="toggle"><input type="checkbox" id="optMeaning" ${OPT.meaning ? 'checked' : ''}> แสดงความหมาย</label></div></div>`;
+}
+function bindToggles() {
+  const r = $('#optReading'), m = $('#optMeaning');
+  if (r) r.onchange = () => { OPT.reading = r.checked; lsSet(OPT_KEY, OPT); applyOpts(); };
+  if (m) m.onchange = () => { OPT.meaning = m.checked; lsSet(OPT_KEY, OPT); applyOpts(); };
+  applyOpts();
+}
+function applyOpts() { const app = $('#app'); app.classList.toggle('hide-reading', !OPT.reading); app.classList.toggle('hide-th', !OPT.meaning); }
+function legendHTML() {
+  return `<section class="card legend" aria-label="วิธีอ่านคำอ่านไทย"><p><strong>วิธีอ่าน</strong> คำอ่านไทยเป็นเสียงโดยประมาณ (สำเนียงอเมริกัน) ใช้ฝึกได้แต่แทนเสียงจริงไม่ได้ 100% กดฟังทุกครั้ง</p>
+    <p><b>ตัวหนา</b> = ลงเสียงหนัก · (ส) (ล) (ท) (ร) = เสียงท้ายเบา ๆ ที่ต้องออก · - = แบ่งพยางค์</p>
+    ${TTS.ok ? '<p class="muted">ปุ่มลำโพงใช้เสียงอ่านของเครื่องคุณ ถ้าไม่มีเสียงหรือเสียงไม่ใช่ภาษาอังกฤษ ให้เพิ่มเสียงภาษาอังกฤษในการตั้งค่าเครื่อง หรือเปิดใน Chrome หรือ Safari</p>'
+      : '<p class="warn">เบราว์เซอร์นี้อ่านออกเสียงไม่ได้ ลองเปิดใน Chrome หรือ Safari</p>'}
+    <p class="sync" id="syncNote"></p></section>`;
+}
+let playToken = 0;
+function clearPlaying() { playToken++; document.querySelectorAll('.dline.playing').forEach(x => x.classList.remove('playing')); }
+function setNav(which) {
+  $('#navHome').toggleAttribute('aria-current', which === 'home'); if (which === 'home') $('#navHome').setAttribute('aria-current', 'page');
+  $('#navReview').toggleAttribute('aria-current', which === 'review'); if (which === 'review') $('#navReview').setAttribute('aria-current', 'page');
+}
+
+/* ---------------- home ---------------- */
+function renderHome() {
+  setNav('home');
+  const done = LESSONS.filter(l => P.done[l.n]).length;
+  const missions = LESSONS.filter(l => P.mission[l.n]).length;
+  const next = LESSONS.find(l => !P.done[l.n]);
+  let html = `<section class="hero"><h1>พูดอังกฤษให้สื่อสารได้ ทีละบท</h1><p>${esc(DATA.course.intro)}</p>
+    <div class="stats"><span><b>${done}</b>/24 บทที่เรียนจบ</span><span><b>${missions}</b>/24 ภารกิจพูด</span><span><b>${Object.keys(P.known).length}</b> ประโยคที่จำได้</span></div>
+    <div class="meter" aria-hidden="true"><i style="width:${(done / 24) * 100}%"></i></div>
+    <div class="row">${next ? `<a class="btn primary" href="#lesson-${next.n}">${done ? 'เรียนต่อ' : 'เริ่มบทที่ 1'}: ${esc(next.th)}</a>` : '<span class="chip ok">เรียนครบทั้ง 24 บทแล้ว</span>'}
+      <a class="btn" href="#start">บทเริ่มต้น: เสียงที่คนไทยมักพลาด</a></div></section>`;
+  for (const [m, th, en] of DATA.modules) {
+    html += `<section class="module"><div class="module-head"><h2>หมวด ${m}: ${esc(th)}</h2><span class="en">${esc(en)}</span></div><div class="lessons">`;
+    for (const l of LESSONS.filter(x => x.mod === m)) {
+      const chips = [];
+      if (P.done[l.n]) chips.push('<span class="chip ok">เรียนแล้ว</span>');
+      if (P.quiz[l.n] != null) chips.push(`<span class="chip">แบบฝึก ${P.quiz[l.n]}/10</span>`);
+      if (P.mission[l.n]) chips.push('<span class="chip ok">ภารกิจพูด</span>');
+      html += `<a class="lesson-card${P.done[l.n] ? ' done' : ''}" href="#lesson-${l.n}"><span class="num">${l.n}</span><h3>${esc(l.th)}</h3><span class="en">${esc(l.en)}</span><span class="small muted">${esc(l.goal)}</span>${chips.length ? `<span class="chips" style="grid-column:2">${chips.join('')}</span>` : ''}</a>`;
+    }
+    html += '</div></section>';
+  }
+  html += `<section class="card"><h2 style="font-size:1.05rem">สำหรับผู้สอน</h2><p class="muted small" style="margin:6px 0 0">ทุกบทมีแผนการสอน 45 นาที คำถามอุ่นเครื่อง และการ์ดบทบาทสมมติ A/B อยู่ในแท็บ <strong>ผู้สอน</strong> ของแต่ละบท ใช้สอนเป็นกลุ่มหรือจับคู่ฝึกได้</p></section>`;
+  html += legendHTML();
+  $('#main').innerHTML = html;
+  renderSync();
+}
+
+/* ---------------- lesson 0: sounds ---------------- */
+function renderStart() {
+  setNav('home');
+  const L0 = DATA.lesson0;
+  let html = `<div class="crumb"><a href="#home">บทเรียน</a><span>›</span><span>บทเริ่มต้น</span></div>
+    <section class="lesson-head"><h1>${esc(L0.title)}</h1><div class="goal"><b>หลังจบบทนี้:</b> อ่านคำอ่านไทยในคอร์สได้ และได้ยินความต่างของเสียงที่คนไทยมักพลาด</div></section>
+    <section class="card legend">${L0.how.map(h => `<p>${bold(h)}</p>`).join('')}</section>`;
+  html += `<section class="card"><h2 style="font-size:1.1rem;margin-bottom:10px">7 เสียงที่ต้องฟังให้ออก</h2><div class="pairs">`;
+  DATA.sounds.forEach((g, gi) => {
+    html += `<div><h3 style="font-size:1rem">${gi + 1}. ${esc(g.t)}</h3><p class="muted small" style="margin:2px 0 8px">${esc(g.d)}</p>`;
+    for (const p of g.pairs) {
+      html += `<div class="pair" style="margin-bottom:8px">
+        <button class="pairbtn" data-say="${regSay(p.a)}" aria-label="ฟัง ${esc(p.a)}"><span class="en">${esc(p.a)}</span><span class="r">${bold(p.ar)}</span><span class="m">${esc(p.am)}</span></button>
+        <button class="pairbtn" data-say="${regSay(p.b)}" aria-label="ฟัง ${esc(p.b)}"><span class="en">${esc(p.b)}</span><span class="r">${bold(p.br)}</span><span class="m">${esc(p.bm)}</span></button></div>`;
+    }
+    html += '</div>';
+  });
+  html += `</div></section><section class="card" id="earGame"></section>${legendHTML()}`;
+  $('#main').innerHTML = html;
+  renderSync();
+  earGame();
+}
+function regSay(text) { const id = 's' + (++sayId); SPEAKTEXT[id] = text; return id; }
+function earGame() {
+  const box = $('#earGame');
+  if (!TTS.ok) { box.innerHTML = '<h2 style="font-size:1.1rem">เกมฝึกหู</h2><p class="warn">เบราว์เซอร์นี้อ่านออกเสียงไม่ได้ จึงเล่นเกมฟังไม่ได้</p>'; return; }
+  const pairs = DATA.sounds.flatMap(g => g.pairs);
+  const rounds = shuffle(pairs).slice(0, 10).map(p => ({ p, pick: Math.random() < 0.5 ? 'a' : 'b' }));
+  let i = 0, score = 0;
+  const draw = (answered, chosen) => {
+    if (i >= rounds.length) {
+      box.innerHTML = `<div class="result"><p class="muted">จบเกมฝึกหู</p><h2>ได้ ${score} จาก ${rounds.length}</h2><p class="muted small">เสียงคู่ไหนยังแยกไม่ออก ให้กดฟังคู่นั้นซ้ำด้านบนหลาย ๆ รอบ</p><button class="btn primary" id="earAgain">เล่นอีกรอบ</button></div>`;
+      $('#earAgain').onclick = earGame; return;
+    }
+    const { p, pick } = rounds[i];
+    const word = pick === 'a' ? p.a : p.b;
+    box.innerHTML = `<div class="qhead"><span>เกมฝึกหู ข้อ ${i + 1}/${rounds.length}</span><span>ถูก ${score}</span></div>
+      <p class="qtitle">ฟังแล้วเลือกคำที่ได้ยิน</p>
+      <div class="big-listen"><button class="btn primary" data-say="${regSay(word)}">${SPEAK}ฟังอีกครั้ง</button><button class="btn" data-say="${regSay(word)}" data-slow="1">${SLOW}ฟังช้า</button></div>
+      <div class="opts">${['a', 'b'].map(k => {
+        const w = k === 'a' ? p.a : p.b, m = k === 'a' ? p.am : p.bm;
+        let cls = 'opt en'; if (answered) { if (k === pick) cls += ' correct'; else if (k === chosen) cls += ' wrongpick'; }
+        return `<button class="${cls}" data-k="${k}" ${answered ? 'disabled' : ''}>${esc(w)} <span class="muted small">(${esc(m)})</span></button>`;
+      }).join('')}</div>
+      ${answered ? `<div class="feedback ${chosen === pick ? 'ok' : 'no'}"><p class="verdict">${chosen === pick ? 'ถูกต้อง' : 'ยังไม่ใช่'}</p><p>เสียงที่เล่นคือ <span class="en">${esc(word)}</span></p></div><div class="nextbar" style="margin-top:10px"><button class="btn primary" id="earNext">ข้อต่อไป</button></div>` : ''}`;
+    box.querySelectorAll('[data-k]').forEach(b => b.onclick = () => { const k = b.dataset.k; if (k === pick) score++; draw(true, k); });
+    const nb = $('#earNext'); if (nb) { nb.onclick = () => { i++; draw(false); const r = rounds[i]; if (r) TTS.say(r.pick === 'a' ? r.p.a : r.p.b); }; nb.focus(); }
+  };
+  box.innerHTML = '<h2 style="font-size:1.1rem">เกมฝึกหู</h2><p class="muted small">ระบบจะเล่นเสียง 1 คำจากคู่ด้านบน ให้เลือกว่าได้ยินคำไหน 10 ข้อ</p><button class="btn primary" id="earStart">เริ่มเกม</button>';
+  $('#earStart').onclick = () => { draw(false); TTS.say(rounds[0].pick === 'a' ? rounds[0].p.a : rounds[0].p.b); };
+}
+
+/* ---------------- lesson ---------------- */
+const TABS = [['phrases', 'ประโยคหลัก'], ['dialogue', 'บทสนทนา'], ['pattern', 'สูตรประโยค'], ['sound', 'ออกเสียงและจุดพลาด'], ['quiz', 'แบบฝึก'], ['mission', 'ภารกิจพูด'], ['teach', 'ผู้สอน']];
+let curTab = 'phrases';
+function renderLesson(n) {
+  setNav('home');
+  const L = byN(n);
+  if (!L) { location.hash = '#home'; return; }
+  const m = MOD[L.mod];
+  $('#main').innerHTML = `<div class="crumb"><a href="#home">บทเรียน</a><span>›</span><span>หมวด ${m[0]}: ${esc(m[1])}</span></div>
+    <section class="lesson-head"><span class="muted small">บทที่ ${L.n} จาก 24</span><h1>${esc(L.th)}</h1><div class="en-title">${esc(L.en)}</div>
+      <div class="goal"><b>หลังจบบทนี้:</b> ${esc(L.goal)}</div></section>
+    <nav class="tabs" role="tablist" aria-label="ส่วนของบทเรียน">${TABS.map(([k, t]) => `<button class="tab" role="tab" data-tab="${k}" aria-selected="${k === curTab}">${t}</button>`).join('')}</nav>
+    <section class="card" id="panel" role="tabpanel"></section>
+    <div class="nextbar">${L.n > 1 ? `<a class="btn" href="#lesson-${L.n - 1}">← บทที่ ${L.n - 1}</a>` : '<a class="btn" href="#start">← บทเริ่มต้น</a>'}${L.n < 24 ? `<a class="btn" href="#lesson-${L.n + 1}">บทที่ ${L.n + 1} →</a>` : ''}</div>
+    ${legendHTML()}`;
+  document.querySelectorAll('.tab').forEach(b => b.onclick = () => { TTS.stop(); clearPlaying(); curTab = b.dataset.tab; document.querySelectorAll('.tab').forEach(x => x.setAttribute('aria-selected', String(x === b))); renderPanel(L); b.scrollIntoView({ block: 'nearest', inline: 'center' }); });
+  renderPanel(L);
+  renderSync();
+}
+function nextTabBtn(L) {
+  const i = TABS.findIndex(t => t[0] === curTab);
+  const nx = TABS[i + 1];
+  if (!nx || nx[0] === 'teach') return '';
+  return `<div class="nextbar" style="margin-top:14px"><button class="btn primary" data-goto="${nx[0]}">ต่อไป: ${nx[1]} →</button></div>`;
+}
+function bindGoto(L) {
+  document.querySelectorAll('[data-goto]').forEach(b => b.onclick = () => {
+    curTab = b.dataset.goto;
+    document.querySelectorAll('.tab').forEach(x => x.setAttribute('aria-selected', String(x.dataset.tab === curTab)));
+    renderPanel(L);
+    $('.tabs').scrollIntoView({ block: 'start' });
+  });
+}
+function renderPanel(L) {
+  const box = $('#panel');
+  let html = '';
+  if (curTab === 'phrases') {
+    html = readToggles() + '<div style="margin-top:12px">' + L.phrases.map(p => lineHTML(p.en, p.r, p.th, p.note)).join('') + '</div>';
+  } else if (curTab === 'dialogue') {
+    const cast = Object.entries(L.cast).map(([k, c]) => `<span class="row" style="gap:6px"><span class="who ${k}">${k}</span>${esc(c.name === 'Driver' ? 'คนขับ' : c.name === 'Pharmacist' ? 'เภสัชกร' : c.name)} · ${esc(c.role)}</span>`).join('');
+    html = `<p class="scene">สถานการณ์: ${esc(L.scene)}</p><div class="cast">${cast}</div>${readToggles()}
+      <div class="row" style="margin:12px 0">${TTS.ok ? `<button class="btn primary" id="playAll">${PLAY}เล่นทั้งบท</button>` : ''}<label class="toggle"><input type="checkbox" id="practiceB"> ฝึกพูดเป็น B (ปิดบทพูดของ B)</label></div>
+      <div id="dlines">${L.dialogue.map((d, i) => `<div class="dline" data-i="${i}" data-who="${d.who}"><span class="who ${d.who}">${d.who}</span><div class="body"><p class="say">${esc(d.en)}</p><p class="reading">${bold(d.r)}</p><p class="th">${esc(d.th)}</p><span class="reveal-hint" hidden>แตะเพื่อดูประโยคของ B</span></div><div class="row" style="flex-direction:column">${TTS.ok ? `<button class="iconbtn" data-say="${regSay(d.en)}" data-who="${d.who}" aria-label="ฟังเสียง">${SPEAK}</button>` : ''}</div></div>`).join('')}</div>`;
+  } else if (curTab === 'pattern') {
+    const f = esc(L.pattern.f).replace(/\[([^\]]+)\]/g, '<mark>[$1]</mark>');
+    html = `<p class="label">สูตรประโยค</p><div class="formula">${f}</div><p style="margin:10px 0 4px">${esc(L.pattern.ex)}</p>
+      <p class="label" style="margin-top:14px">ตัวอย่าง</p>${L.pattern.examples.map(x => lineHTML(x.en, x.r, x.th)).join('')}
+      <p class="muted small" style="margin-top:12px">ลองเปลี่ยนส่วนที่ไฮไลต์ แล้วพูดประโยคใหม่ของคุณเองออกเสียงดัง ๆ อย่างน้อย 2 ประโยค</p>`;
+  } else if (curTab === 'sound') {
+    html = `<p class="label">ออกเสียง</p><h2 style="font-size:1.1rem;margin:2px 0 4px">${esc(L.sound.t)}</h2><p style="margin:0 0 10px">${esc(L.sound.d)}</p>
+      <div class="wordchips">${L.sound.words.map(w => `<button class="wordchip" data-say="${regSay(w.en)}" aria-label="ฟัง ${esc(w.en)}"><span class="en">${esc(w.en)}</span><span class="r">${bold(w.r)}</span></button>`).join('')}</div>
+      <div class="trap" style="margin-top:22px"><p class="label">จุดที่คนไทยมักพลาด</p>
+        <p class="wrong">${esc(L.trap.wrong)}</p><p class="right">${esc(L.trap.right)}</p><p style="margin:0">${esc(L.trap.why)}</p></div>`;
+  } else if (curTab === 'quiz') {
+    box.innerHTML = '<div id="quizBox"></div>';
+    startQuiz(L);
+    return;
+  } else if (curTab === 'mission') {
+    html = `<p class="label">ภารกิจพูด</p><h2 style="font-size:1.1rem;margin:2px 0 8px">${esc(L.mission.task)}</h2>
+      <p class="muted small">พูดออกเสียงดัง ๆ ด้วยประโยคของคุณเองก่อน แล้วค่อยกดดูตัวอย่าง</p>
+      <button class="btn" id="showModel">ดูตัวอย่างคำตอบ</button><div id="model" hidden style="margin-top:10px">${L.mission.model.map(x => lineHTML(x.en, x.r, '')).join('')}</div>
+      <div class="row" style="margin-top:14px"><label class="toggle"><input type="checkbox" id="missionDone" ${P.mission[L.n] ? 'checked' : ''}> ทำภารกิจพูดของบทนี้แล้ว</label></div>`;
+  } else if (curTab === 'teach') {
+    const steps = DATA.steps.map(([t, min, d]) => `<li><span class="t">${min} นาที</span><b>${esc(t)}</b><span class="small">${esc(t === 'อุ่นเครื่อง' ? d + ' · คำถาม: ' + L.teach.warm : d)}</span></li>`).join('');
+    const key = L.phrases.slice(0, 4).map(p => `<li class="en small">${esc(p.en)}</li>`).join('');
+    html = `<p class="label">แผนการสอน 45 นาที</p><ol class="steps">${steps}</ol>
+      <p class="label" style="margin-top:18px">การ์ดบทบาทสมมติ (ให้ผู้เรียนคนละใบ แล้วสลับกัน)</p>
+      <div class="rolecards"><div class="rolecard"><h3><span class="who A">A</span>บทบาท A</h3><p style="margin:0">${esc(L.teach.A)}</p></div>
+        <div class="rolecard"><h3><span class="who B">B</span>บทบาท B</h3><p style="margin:0">${esc(L.teach.B)}</p></div></div>
+      <p class="label" style="margin-top:18px">ประโยคที่ผู้เรียนควรใช้ได้</p><ul style="margin:6px 0 0;padding-left:20px">${key}</ul>
+      <p class="label" style="margin-top:18px">เช็กลิสต์ท้ายบท</p><p style="margin:4px 0 0">${esc(L.goal)}</p>`;
+  }
+  box.innerHTML = html + nextTabBtn(L);
+  bindToggles(); bindGoto(L);
+  if (curTab === 'dialogue') bindDialogue(L);
+  if (curTab === 'mission') {
+    $('#showModel').onclick = () => { $('#model').hidden = false; $('#showModel').hidden = true; };
+    $('#missionDone').onchange = e => { if (e.target.checked) P.mission[L.n] = true; else delete P.mission[L.n]; save(); };
+  }
+}
+function bindDialogue(L) {
+  const lines = [...document.querySelectorAll('.dline')];
+  const pb = $('#practiceB');
+  pb.onchange = () => lines.forEach(el => {
+    const isB = el.dataset.who === 'B';
+    el.classList.toggle('covered', pb.checked && isB);
+    $('.reveal-hint', el).hidden = !(pb.checked && isB);
+  });
+  lines.forEach(el => el.addEventListener('click', e => { if (!e.target.closest('button') && el.classList.contains('covered')) { el.classList.remove('covered'); $('.reveal-hint', el).hidden = true; } }));
+  const btn = $('#playAll');
+  if (btn) btn.onclick = () => {
+    TTS.stop(); clearPlaying();
+    const token = playToken;
+    let i = 0;
+    const step = () => {
+      if (token !== playToken) return;
+      lines.forEach(x => x.classList.remove('playing'));
+      if (i >= L.dialogue.length) return;
+      const d = L.dialogue[i], el = lines[i];
+      el.classList.add('playing');
+      el.scrollIntoView({ block: 'nearest' });
+      i++;
+      TTS.say(d.en, { who: d.who, onend: () => setTimeout(step, 350) });
+    };
+    step();
+  };
+}
+
+/* ---------------- quiz ---------------- */
+const STOP = new Set(['the', 'a', 'an', 'to', 'of', 'and', 'or', 'in', 'on', 'at', 'is', 'are', 'it', 'you', 'your', 'i', 'me', 'my', 'we', 'he', 'she', 'they', 'this', 'that', 'for', 'be', 'do', 'please']);
+const clean = s => s.replace(/[.,!?]/g, '').trim();
+function buildQuiz(L) {
+  const lines = []; const seen = new Set();
+  for (const x of L.phrases.concat(L.dialogue)) if (!seen.has(x.en)) { seen.add(x.en); lines.push(x); }
+  const thPool = [...new Set(lines.map(x => x.th))];
+  const pickTh = (right) => shuffle([right, ...shuffle(thPool.filter(t => t !== right)).slice(0, 3)]);
+  const pickEn = (right, pool) => shuffle([right, ...shuffle(pool.filter(t => t !== right)).slice(0, 3)]);
+  const qs = [];
+  shuffle(lines).slice(0, 3).forEach(x => qs.push({ type: TTS.ok ? 'listen' : 'readmean', item: x, opts: pickTh(x.th) }));
+  const enPool = [...new Set(lines.map(x => x.en))];
+  shuffle(L.phrases).slice(0, 3).forEach(x => qs.push({ type: 'th2en', item: x, opts: pickEn(x.en, enPool) }));
+  const orderable = L.phrases.concat(L.pattern.examples).filter(x => { const n = clean(x.en).split(/\s+/).length; return n >= 3 && n <= 8 && !/\d/.test(x.en); });
+  shuffle(orderable).slice(0, 2).forEach(x => qs.push({ type: 'order', item: x }));
+  const fillable = L.pattern.examples.concat(L.phrases).map(x => {
+    const words = clean(x.en).split(/\s+/);
+    const cands = words.filter(w => /^[A-Za-z']{3,}$/.test(w) && !STOP.has(w.toLowerCase()));
+    return cands.length ? { x, word: cands.sort((a, b) => b.length - a.length)[0] } : null;
+  }).filter(Boolean);
+  if (fillable.length) {
+    const f = shuffle(fillable)[0];
+    const others = [...new Set(lines.flatMap(y => clean(y.en).split(/\s+/)).filter(w => /^[A-Za-z']{3,}$/.test(w) && w.toLowerCase() !== f.word.toLowerCase() && !STOP.has(w.toLowerCase())))];
+    qs.push({ type: 'fill', item: f.x, word: f.word, opts: shuffle([f.word, ...shuffle(others).slice(0, 3)]) });
+  }
+  const pairs = [];
+  for (let i = 0; i + 1 < L.dialogue.length; i++) if (L.dialogue[i].who !== L.dialogue[i + 1].who && clean(L.dialogue[i + 1].en).split(/\s+/).length >= 3) pairs.push([L.dialogue[i], L.dialogue[i + 1]]);
+  if (pairs.length) {
+    const [a, b] = shuffle(pairs)[0];
+    const pool = LESSONS.filter(o => o.mod !== L.mod).flatMap(o => o.dialogue).map(d => d.en).filter(t => clean(t).split(/\s+/).length >= 4 && t !== b.en);
+    qs.push({ type: 'reply', item: a, answer: b, opts: shuffle([b.en, ...shuffle(pool).slice(0, 3)]) });
+  }
+  return shuffle(qs).slice(0, 10);
+}
+function startQuiz(L) {
+  const qs = buildQuiz(L);
+  const marks = [];
+  let i = 0, right = 0;
+  const box = $('#quizBox');
+  const finish = () => {
+    P.quiz[L.n] = Math.max(P.quiz[L.n] || 0, Math.round(right * 10 / qs.length));
+    P.done[L.n] = true;
+    save();
+    box.innerHTML = `<div class="result"><p class="muted">จบแบบฝึกของบทที่ ${L.n}</p><h2>ได้ ${right} จาก ${qs.length}</h2>
+      <p class="muted small">บันทึกว่าเรียนบทนี้แล้ว คะแนนที่ดีที่สุด ${P.quiz[L.n]}/10</p>
+      <div class="row"><button class="btn primary" id="again">ทำอีกรอบ</button><button class="btn" data-goto="mission">ต่อไป: ภารกิจพูด →</button></div></div>`;
+    $('#again').onclick = () => startQuiz(L);
+    bindGoto(L);
+  };
+  const show = () => {
+    if (i >= qs.length) return finish();
+    const q = qs[i];
+    const dots = qs.map((_, k) => `<i class="${k < marks.length ? (marks[k] ? 'ok' : 'no') : k === i ? 'on' : ''}"></i>`).join('');
+    let head = `<div class="qhead"><span>ข้อ ${i + 1}/${qs.length}</span><span class="dots" aria-hidden="true">${dots}</span></div>`;
+    let body = '';
+    if (q.type === 'listen') {
+      body = `<p class="qtitle">ฟังแล้วเลือกความหมาย</p><div class="big-listen"><button class="btn primary" data-say="${regSay(q.item.en)}">${SPEAK}ฟังอีกครั้ง</button><button class="btn" data-say="${regSay(q.item.en)}" data-slow="1">${SLOW}ฟังช้า</button></div>
+        <div class="opts">${q.opts.map(o => `<button class="opt" data-v="${esc(o)}">${esc(o)}</button>`).join('')}</div>`;
+    } else if (q.type === 'readmean') {
+      body = `<p class="qtitle">ประโยคนี้แปลว่าอะไร</p><p class="qprompt en">${esc(q.item.en)}</p><div class="opts">${q.opts.map(o => `<button class="opt" data-v="${esc(o)}">${esc(o)}</button>`).join('')}</div>`;
+    } else if (q.type === 'th2en') {
+      body = `<p class="qtitle">พูดเป็นภาษาอังกฤษว่าอะไร</p><p class="qprompt">${esc(q.item.th)}</p><div class="opts">${q.opts.map(o => `<button class="opt en" data-v="${esc(o)}">${esc(o)}</button>`).join('')}</div>`;
+    } else if (q.type === 'fill') {
+      const shown = esc(q.item.en).replace(new RegExp('\\b' + q.word.replace(/'/g, "'") + '\\b'), '_____');
+      body = `<p class="qtitle">เติมคำในช่องว่าง</p><p class="qprompt en">${shown}</p><p class="th muted small" style="margin:-6px 0 12px">${esc(q.item.th)}</p><div class="opts">${q.opts.map(o => `<button class="opt en" data-v="${esc(o)}">${esc(o)}</button>`).join('')}</div>`;
+    } else if (q.type === 'reply') {
+      body = `<p class="qtitle">ถ้าอีกฝ่ายพูดแบบนี้ ควรตอบว่าอะไร</p><p class="qprompt en">${esc(q.item.en)}</p><p class="th muted small" style="margin:-6px 0 12px">${esc(q.item.th)}</p><div class="opts">${q.opts.map(o => `<button class="opt en" data-v="${esc(o)}">${esc(o)}</button>`).join('')}</div>`;
+    } else if (q.type === 'order') {
+      const words = clean(q.item.en).split(/\s+/);
+      q.tiles = q.tiles || shuffle(words.map((w, k) => ({ w, k })));
+      q.picked = q.picked || [];
+      body = `<p class="qtitle">เรียงคำให้เป็นประโยค</p><p class="qprompt">${esc(q.item.th)}</p>
+        <div class="answer-line" id="ans" aria-live="polite">${q.picked.map(t => `<button class="tile" data-back="${t.k}">${esc(t.w)}</button>`).join('')}</div>
+        <div class="tiles">${q.tiles.map(t => `<button class="tile${q.picked.includes(t) ? ' used' : ''}" data-k="${t.k}">${esc(t.w)}</button>`).join('')}</div>
+        <div class="row" style="margin-top:10px"><button class="btn primary" id="check" ${q.picked.length === words.length ? '' : 'disabled'}>ตรวจคำตอบ</button><button class="btn ghost" id="reset">เริ่มเรียงใหม่</button></div>`;
+    }
+    box.innerHTML = head + body;
+    if (q.type === 'order') {
+      box.querySelectorAll('.tiles .tile').forEach(b => b.onclick = () => { const t = q.tiles.find(x => String(x.k) === b.dataset.k); if (!q.picked.includes(t)) { q.picked.push(t); show(); } });
+      box.querySelectorAll('#ans .tile').forEach(b => b.onclick = () => { q.picked = q.picked.filter(t => String(t.k) !== b.dataset.back); show(); });
+      $('#reset').onclick = () => { q.picked = []; show(); };
+      $('#check').onclick = () => {
+        const ok = q.picked.map(t => t.w).join(' ').toLowerCase() === clean(q.item.en).toLowerCase();
+        answer(ok, q.item);
+      };
+    } else {
+      box.querySelectorAll('.opt').forEach(b => b.onclick = () => {
+        const v = b.dataset.v;
+        const correct = q.type === 'listen' || q.type === 'readmean' ? q.item.th : q.type === 'th2en' ? q.item.en : q.type === 'fill' ? q.word : q.answer.en;
+        const ok = v === correct;
+        box.querySelectorAll('.opt').forEach(x => { x.disabled = true; if (x.dataset.v === correct) x.classList.add('correct'); else if (x === b) x.classList.add('wrongpick'); });
+        answer(ok, q.type === 'reply' ? q.answer : q.item);
+      });
+    }
+  };
+  const answer = (ok, item) => {
+    marks.push(ok); if (ok) right++;
+    const fb = document.createElement('div');
+    fb.className = 'feedback ' + (ok ? 'ok' : 'no');
+    fb.innerHTML = `<p class="verdict">${ok ? 'ถูกต้อง' : 'ยังไม่ใช่ ประโยคที่ถูกคือ'}</p><p class="say">${esc(item.en)}</p><p class="reading">${bold(item.r)}</p><p class="th">${esc(item.th)}</p>
+      <div class="row">${sayBtns(item.en, 'btn')}<button class="btn primary" id="qnext">${i + 1 < qs.length ? 'ข้อต่อไป' : 'ดูผล'}</button></div>`;
+    box.appendChild(fb);
+    const cb = $('#check'); if (cb) cb.disabled = true;
+    box.querySelectorAll('.tile').forEach(t => t.disabled = true);
+    const nb = $('#qnext');
+    nb.onclick = () => { i++; show(); const q = qs[i]; if (q && q.type === 'listen') TTS.say(q.item.en); };
+    nb.focus();
+  };
+  box.innerHTML = `<p class="qtitle">แบบฝึกบทที่ ${L.n}</p><p style="margin:0 0 12px">10 ข้อ ผสมกัน: ฟังแล้วเลือกความหมาย · เลือกประโยคภาษาอังกฤษ · เรียงคำ · เติมคำ · เลือกคำตอบในบทสนทนา</p><button class="btn primary" id="qstart">เริ่มทำแบบฝึก</button>`;
+  $('#qstart').onclick = () => { show(); const q = qs[0]; if (q && q.type === 'listen') TTS.say(q.item.en); };
+}
+
+/* ---------------- review ---------------- */
+function renderReview() {
+  setNav('review');
+  const doneSet = LESSONS.filter(l => P.done[l.n]);
+  const src = doneSet.length ? doneSet : [];
+  let pool = src.flatMap(l => l.phrases.map((p, k) => Object.assign({ key: l.n + '-' + k, n: l.n }, p)));
+  $('#main').innerHTML = `<section class="hero"><h1>ทบทวนประโยค</h1><p>สุ่มประโยคหลักจากบทที่เรียนจบแล้ว ดูภาษาไทยแล้วพูดเป็นภาษาอังกฤษ จากนั้นกดดูคำตอบ ประโยคที่ยังจำไม่ได้จะกลับมาให้ฝึกก่อน</p></section>
+    <section class="card" id="rv"></section>${legendHTML()}`;
+  renderSync();
+  const box = $('#rv');
+  if (!pool.length) {
+    box.innerHTML = `<p style="margin:0 0 10px">ยังไม่มีบทที่เรียนจบ (ทำแบบฝึกของบทให้ครบ 1 รอบก่อน) หรือจะลองทบทวนทุกประโยคเลยก็ได้</p><div class="row"><a class="btn primary" href="#lesson-1">เริ่มบทที่ 1</a><button class="btn" id="rvAll">ทบทวนทุกประโยค</button></div>`;
+    $('#rvAll').onclick = () => run(LESSONS.flatMap(l => l.phrases.map((p, k) => Object.assign({ key: l.n + '-' + k, n: l.n }, p))));
+    return;
+  }
+  run(pool);
+  function run(items) {
+    const queue = shuffle(items.filter(x => !P.known[x.key])).concat(shuffle(items.filter(x => P.known[x.key])));
+    let i = 0, shown = false;
+    const draw = () => {
+      if (i >= queue.length) { box.innerHTML = `<p style="margin:0 0 10px">ครบทุกประโยคในรอบนี้แล้ว (${queue.length} ประโยค)</p><button class="btn primary" id="rvAgain">สุ่มรอบใหม่</button>`; $('#rvAgain').onclick = () => run(items); return; }
+      const x = queue[i];
+      const known = Object.keys(P.known).length;
+      box.innerHTML = `<div class="qhead"><span>ประโยคที่ ${i + 1}/${queue.length} · จากบทที่ ${x.n}</span><span>จำได้แล้ว ${known}</span></div>
+        <p class="qtitle">พูดเป็นภาษาอังกฤษ</p><p class="qprompt">${esc(x.th)}</p>
+        ${shown ? `<div class="feedback ok" style="background:var(--accent-soft)"><p class="say">${esc(x.en)}</p><p class="reading">${bold(x.r)}</p><div class="row">${sayBtns(x.en, 'btn')}</div></div>
+          <div class="row" style="margin-top:12px"><button class="btn" id="rvNo">ยังจำไม่ได้</button><button class="btn primary" id="rvYes">จำได้แล้ว</button></div>`
+          : '<button class="btn primary" id="rvShow">ดูคำตอบ</button>'}`;
+      if (!shown) { $('#rvShow').onclick = () => { shown = true; draw(); TTS.say(x.en); }; return; }
+      $('#rvYes').onclick = () => { P.known[x.key] = true; save(); i++; shown = false; draw(); };
+      $('#rvNo').onclick = () => { if (P.known[x.key]) { delete P.known[x.key]; save(); } queue.push(x); i++; shown = false; draw(); };
+    };
+    draw();
+  }
+}
+
+/* ---------------- router ---------------- */
+function route() {
+  TTS.stop(); clearPlaying();
+  const h = location.hash.replace('#', '');
+  const m = /^lesson-(\d+)$/.exec(h);
+  if (m) { const n = Number(m[1]); if (renderLesson.last !== n) curTab = 'phrases'; renderLesson.last = n; renderLesson(n); }
+  else if (h === 'start') renderStart();
+  else if (h === 'review') renderReview();
+  else renderHome();
+  applyOpts();
+}
+window.addEventListener('hashchange', () => { route(); window.scrollTo(0, 0); });
+const setTop = () => document.documentElement.style.setProperty('--toph', $('.top').offsetHeight + 'px');
+window.addEventListener('resize', setTop);
+setTop();
+route();
+initRemote();
+</script>
