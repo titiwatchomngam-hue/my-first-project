@@ -1,6 +1,35 @@
-# What changed from the PDF "Ultimate Master Prompts" (v1) to the master prompt (v2)
+# What changed: from the PDF (v1) to คัมภีร์แปล 5 ภาษา (v2.1)
 
-v1 is the PDF *คัมภีร์พรอมต์แปลภาษาและโค้ชสอนภาษาฉบับสมบูรณ์*: a universal prompt (§0), four language prompts (§1 EN, §2 JP, §3 KR, §4 CN), and three add-on modes (§5). v2 is [`master-prompt.md`](master-prompt.md).
+v1 is the PDF *คัมภีร์พรอมต์แปลภาษาและโค้ชสอนภาษาฉบับสมบูรณ์*: a universal prompt (§0), four language prompts (§1 EN, §2 JP, §3 KR, §4 CN), and three add-on modes (§5). v2 turned it into one master prompt for Claude Projects. v2.1 (this round) is the same prompt reviewed again and made ready for a Gemini Gem: [`master-prompt.md`](master-prompt.md).
+
+## v2.1: Gemini Gem edition
+
+**Errors found in a second review and corrected**
+- 辛苦了 was glossed "ขอบคุณที่เหนื่อย", which isn't natural Thai. Now: "เหนื่อยหน่อยนะ / ขอบคุณที่ทุ่มเท".
+- For an unknown speaker, v2 said to write ครับ/ค่ะ everywhere, which is misspelled in questions. Now: ครับ/ค่ะ in statements, ครับ/คะ in questions.
+- The repeat mark was written without spaces (เบาๆ, จริงๆ). It now follows the Royal Society spacing (เบา ๆ, จริง ๆ), matching the prompt's own spelling rule.
+- The Japanese old-man speech style ("ข้า…นะ เจ้าหนุ่ม style") was unclear. Now: ข้า/เจ้า in an elder's voice (…หรอก, เจ้าหนุ่ม).
+- The Japanese k/t/p rule now covers ち too: ช at the start of a word, จ inside one (こんにちは คน-นิ-จิ-วะ).
+- エモい, ガチ, and ぴえん had no Thai gloss. Added.
+
+**Carried over from your แปลชัวร์ Gem, which was tested in Gemini**
+- Brackets: the letters outside the brackets must read correctly on their own: feel → ฟี(ล) (ฟีล would be read ฟีน), like → ไล(ค).
+- Bold stress on every English reading line, in every format.
+- No ์ anywhere in a reading (v2 banned it only on sounds that must be heard).
+- No ครับ/ค่ะ in the Gem's own explanations. If you want them back, see the README.
+- No phone numbers, websites, prices, or agency policies unless they were verified in that chat. Scam warnings explain only from the signs in the text and never offer reply options.
+- Every → meaning line must match its sentence exactly: nothing added, nothing dropped.
+- Thai traps: ไม่ต้อง means "no need to", not "must not" (that's ห้าม); น่าจะ about the past is "should have" or "probably has"; ไม่น่าจะ = probably not; หมื่นห้า = 15,000, แสนสอง = 120,000; 24.00 น. = midnight.
+- `แปลด่วน` keeps any ⚠️ line.
+
+**Gem packaging**
+- The Gem name (คัมภีร์แปล 5 ภาษา) is in the first line and in §1. The name, the Description, the setup steps, and a fallback for Gemini's instruction box (moving §10 into a Knowledge file) are in the README.
+- The wording works on both platforms: "Knowledge or project files", "if you can search the web".
+- Two new tests: the English bracket and bold rules, and ไม่ต้อง.
+
+---
+
+The rest of this file describes v1 → v2.
 
 ## What was kept
 
