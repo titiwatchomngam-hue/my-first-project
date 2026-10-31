@@ -1,0 +1,1373 @@
+# NativeSense Polyglot: Reference (Knowledge file)
+
+For: NativeSense Polyglot, Complete Edition, rev. 3 (TH · EN · JP · KR · CN)
+File version: rev. 3, 31 October 2026
+
+## How to use this file
+
+- This file spells out, in detail, the rules in your instructions for Thai readings (§9–§10), numbers and dates (§7), and common terms. Use it for every reading and every term choice.
+- The tables and the 30 checked sentences (section 11) were produced with the same rules and checked by hand. When you write a reading, follow the same patterns letter for letter.
+- If this file and your instructions ever disagree, your instructions win. Glossaries and term lists the user adds later (in Knowledge or in the chat) win over both.
+- This file is your own house style, not an outside source. Don't mention it unless the user asks, and don't cite it as a source for facts about the world.
+- Thai readings are approximations for learners. Give the legend (§9 of your instructions) the first time, as usual.
+
+## Contents
+
+1. Thai reading marks (every language)
+2. English
+3. Japanese
+4. Korean
+5. Chinese (Mandarin)
+6. Numbers, dates, and times
+7. Glossary: address and titles
+8. Glossary: school, visa, and office
+9. Glossary: games
+10. Traps: false friends, calques, and etiquette
+11. Checked examples: 30 sentences in 4 languages
+12. Known mistakes (wrong → right)
+
+# 1. Thai reading marks (every language)
+
+## 1.1 Layout
+
+- `-` joins the syllables of one word. A space separates words.
+- Sounds that link across words are written together: check it out → เช็ก-กิ-**ดาว(ท)** · Could you → คุ-จู · team up → ที-มัพ.
+- **Bold** = the stressed syllable. English only, in every word of two or more syllables. Bold the whole syllable, brackets included: อะ-**บาว(ท)** · อิก-**สกิว(ซ)** · **เอ(ฟ)**-รี-วัน · **แพส**-พอ(ร)(ท).
+- Punctuation: copy the punctuation of the romanization line (`,` `?` `!` `—`). Keep a full stop between two sentences and drop the one at the very end: ฮะ-จิ-เมะ-มะ-ชิ-เตะ. โยะ-โระ-ชิ-กุ โอะ-เนะ-ไก ชิ-มัส
+- Never use ์ (การันต์) anywhere in a reading, including ร์.
+
+## 1.2 Why brackets exist: how Thai readers say a written final letter
+
+| Written Thai final | Thai readers say | What this means for a foreign final sound |
+|---|---|---|
+| ก ข ค | -k | k → ก (แบ็ก) |
+| ด ต ท ศ ษ ส ซ จ ช | -t | t → ท (เย็ท), Korean ㄷ → ด (인터넫 → อิน-ทอ-เน็ด); s, z, sh, ch, j need brackets |
+| บ ป พ ฟ | -p | p → พ (English) or บ (Korean); f and v need brackets |
+| ม | -m | m → ม |
+| น ญ ณ ร ล ฬ | -n | n → น; l and r need brackets |
+| ง | -ng | ng → ง |
+| ย / ว | -i / -u glide | ย / ว |
+
+## 1.3 Bracket rules
+
+- A bracket after a syllable holds a final sound to say lightly that the Thai letters alone would drop or change. The letters outside the brackets must read correctly on their own.
+- Always bracket these final sounds: l (ล), American r (ร), f and v (ฟ), th (ธ), z (ซ), sh and ch (ช), j/dge (จ).
+- Before a bracketed final, use the short Thai vowel form where Thai has one (มั(ช) much · บั(ฟ) buff · อิ(ฟ) if · พุ(ช) push); otherwise the open form (แฮ(ฟ) have · เว(ล) well · คอ(ล) call).
+- ไ ใ เ-า ำ can't take a final consonant, so any final after them goes in brackets: ไอ(ม) · ไท(ม) · ไน(ส) · ไร(ท) · ไล(ค) · ไล(น) · Japanese ないんだ ไน(น)-ดะ.
+- A second (third…) final sound goes in its own bracket, in order: แธง(ค)(ส) · **แพส**-พอ(ร)(ท) · **ดาก**-ยะ-เมิน(ท)(ส) · ซีท(ส) · เน็ก(ส).
+- Inside a bracket: k is (ค), t is (ท), d is (ด), p is (พ): แอส(ค) · ไล(ค) · ลอส(ท) · ไท(พ).
+- Never bracket a final that Thai already reads correctly (ม น ง, k as ก, t as ท or ด, p as พ or บ): team → ทีม (not ที(ม)) · yet → เย็ท · done → ดัน.
+- House rule for English s: right after the vowel, s may be written ส without brackets, as Thai loanwords do (บัส, แก๊ส): จัส(ท) · แอส(ค) · ลอส(ท) · **แพส**-พอ(ร)(ท) · **เรส**-ทรูม · **เควส**-เชิน. After ไ ใ เ-า ำ or after another final, s goes in brackets: ไน(ส) · ซีท(ส) · เน็ก(ส). English z is always bracketed: อิ(ซ) · พลี(ซ) · เนม(ซ).
+- Korean ㄹ at the end of a syllable is always (ล): 서울 ซอ-อุ(ล) · 빨리 ปา(ล)-ลี.
+- Chinese er and erhua are (ร): 二 èr เอ้อ(ร) · 一点儿 yìdiǎnr อี้-เตี่ย(ร).
+- Why ล and ร never stand as finals: Thai reads them as น, so ฟีล would be read ฟีน. That's also why apologize is อะ-**พา**-ละ-ไจ(ซ), not อะ-พอล-ละ-ไจ(ซ).
+
+## 1.4 Mouth tips for sounds Thai letters can't show (give once per chat, in Thai)
+
+- EN v: ฟันบนแตะริมฝีปากล่างเบา ๆ แล้วออกเสียงให้คอสั่น (ไม่ห่อปากแบบ ว)
+- EN th ใน the, this, there: ปลายลิ้นแตะใต้ฟันบนเบา ๆ แล้วออกเสียงให้คอสั่น · th ใน think, thank: ท่าเดียวกันแต่มีแค่ลม คอไม่สั่น
+- EN z: เสียง ซ ที่คอสั่น เหมือนเสียงผึ้ง zzz
+- EN r: ห่อปากเล็กน้อย ม้วนปลายลิ้นขึ้นโดยไม่แตะเพดาน · l: ปลายลิ้นแตะปุ่มเหงือกหลังฟันบน
+- EN final sounds: ออกเสียงท้ายเบา ๆ แต่ต้องมี เพราะเปลี่ยนความหมาย (cat ≠ cats, play ≠ played)
+- JP ふ: เป่าลมผ่านริมฝีปากที่เปิดเล็กน้อย ฟันไม่แตะปาก (ไม่ใช่ f แบบอังกฤษ)
+- JP つ: ท กับ ซ ติดกันเป็นเสียงเดียว (ts)
+- JP ら り る れ ろ: ปลายลิ้นดีดเพดานเบา ๆ ครั้งเดียว อยู่ระหว่าง ร กับ ล
+- JP เสียงยาว: ลากเสียงยาวเป็นสองจังหวะ เพราะเปลี่ยนความหมาย (おばさん ป้า ≠ おばあさん ยาย)
+- KR ㅓ กับ ㅗ: ㅓ อ้าปาก ไม่ห่อ (ออ แบบปากกว้าง) · ㅗ ห่อปากกลม (โอ)
+- KR ㅡ: ฉีกปากเหมือนยิ้ม แล้วออกเสียง อือ
+- KR ㄲ ㄸ ㅃ ㅉ ㅆ (เสียงตึง): เกร็งคอ ไม่มีลมออก เสียงแข็งและสั้น
+- KR ㅋ ㅌ ㅍ ㅊ (เสียงมีลม): ลมพุ่งออกแรง (ถือกระดาษไว้หน้าปาก กระดาษต้องไหว) · ㄱ ㄷ ㅂ ㅈ ต้นคำ: มีลมเบากว่า
+- CN zh, ch: ม้วนปลายลิ้นขึ้นไปแตะหลังปุ่มเหงือกแล้วปล่อย (zh ไม่มีลม · ch มีลม) · sh, r: ม้วนลิ้นแบบเดียวกันแต่ไม่แตะ
+- CN ü (เขียน yu, ju, qu, xu, nü, lü): ทำปากจู๋เหมือนจะพูด อู แล้วพูด อี
+- CN วรรณยุกต์: 1 สูงและเรียบ (สูงกว่าเสียงสามัญของไทยนิดหน่อย) · 2 ขึ้น · 3 ต่ำ (เมื่ออยู่ท้ายวลีจะลงแล้วขึ้น) · 4 ลงแรงและสั้น · เสียงเบา: สั้นและเบา
+
+# 2. English
+
+English gets only a Thai reading (no romanization). Default US; show UK only where it really differs (§10.1 of your instructions).
+
+## 2.1 Vowels
+
+| Sound (IPA) | Examples | Thai |
+|---|---|---|
+| iː | see, team, please | อี: ซี · ทีม · พลี(ซ) |
+| ɪ | it, minute, visit | อิ: อิท · **มิ**-นิท · **วิ**-ซิท |
+| e | yet, ten, ready | เอ็ / เอ: เย็ท · เท็น · **เร**-ดี |
+| æ | back, have, thanks | แอ: แบ็ก · แฮ(ฟ) · แธง(ค)(ส) |
+| ʌ | done, come, much | อะ/อั: ดัน · คัม · มั(ช) |
+| ɑː (and US "short o") | watch, hot (US), sorry (US) | อา: วา(ช) · ฮาท · **ซา**-รี |
+| ɒ (UK "short o") | hot, sorry, doctor | อ็อ: ฮ็อท · **ซ็อ**-รี · **ด็อก**-เทอะ |
+| ɔː | all, call, talk | ออ: ออ(ล) · คอ(ล) · ทอก |
+| ʊ | good, could, book | อุ: กุด · คุด · บุก |
+| uː | you, soon, through | อู: ยู · ซูน · ธรู |
+| ɝː (US) / ɜː (UK) | her, work, person | เออ: เฮอ(ร) · เวอ(ร)(ค) · **เพอ(ร)**-เซิน |
+| ə | the, about, to | เออะ/อะ: เดอะ · อะ-**บาว(ท)** · ทะ |
+| ɚ (US) / ə (UK), unstressed | teacher, over | เออ(ร) / เออะ: **ที**-เชอ(ร) / **ที**-เชอะ · **โอ**-เวอ(ร) |
+| ən, əl (unstressed) | eaten, little, level | เอิน, เอิ(ล): **อี**-เทิน · **ลิ**-เดิ(ล) · **เล**-เวิ(ล) |
+| eɪ | okay, name, play | เอ: โอ-**เค** · เนม · เพล |
+| aɪ | I, time, nice | ไอ: ไอ · ไท(ม) · ไน(ส) |
+| ɔɪ | boy, point | ออย: บอย · พอย(น)(ท) |
+| aʊ | now, how, about | อาว: นาว · ฮาว · อะ-**บาว(ท)** |
+| oʊ (US) / əʊ (UK) | go, no, slowly | โอ: โก · โน · **สโล**-ลี |
+| ɪr / ɪə | here, really | เอีย: เฮีย(ร) · **เรีย**-ลี |
+| er / eə | there, where | แอ: แด(ร) · แว(ร) |
+| ʊr / ʊə | sure, tour | อัว: ชัว(ร) · ทัว(ร) |
+| ɑːr | car, start | อา: คา(ร) · สตา(ร)(ท) |
+| ɔːr | more, your, for | ออ: มอ(ร) · ยอ(ร) · ฟอ(ร) |
+
+## 2.2 Consonants
+
+- At the start of a syllable: p พ · b บ · t ท · d ด · k ค · g ก · f ฟ · v ว · th (think) ธ · th (the) ด · s ซ · z ซ · sh ช · ch ช · j จ · h ฮ · m ม · n น · l ล · r ร · w ว · y ย.
+- s before another consonant is ส: speak สปีก · slowly **สโล**-ลี · excuse อิก-**สกิว(ซ)** · student **สตู**-เดิน(ท).
+- Clusters keep both letters: please พลี(ซ) · through ธรู · restroom **เรส**-ทรูม · dropped ดราพ(ท).
+- Final sounds:
+
+| Final sound | Thai | Examples |
+|---|---|---|
+| p | พ (bracketed after ไ etc.) | ดราพ(ท) · ที-มัพ · ไท(พ) |
+| b | บ | เว็บ |
+| t | ท | เย็ท · เก็ท · ฮาท · ไร(ท) · ลอส(ท) |
+| d | ด | เพลด · กุด · นีด |
+| k | ก, or (ค) in brackets | แบ็ก · สปีก · ทอก · ไล(ค) · แอส(ค) |
+| g | ก | บิก · แล็ก |
+| m | ม | ทีม · คัม · ไท(ม) |
+| n | น | ดัน · ซูน · ไล(น) |
+| ng | ง | **เพล**-อิง · ธิง(ค) |
+| l | (ล) | ฟี(ล) · คอ(ล) · วิ(ล) |
+| r (US) | (ร) | มอ(ร) · ยอ(ร) · แด(ร) |
+| f, v | (ฟ) | อิ(ฟ) · แฮ(ฟ) · ไล(ฟ) |
+| th | (ธ) | มัน(ธ) |
+| s | ส right after the vowel, otherwise (ส) | จัส(ท) · แอส(ค) · ไน(ส) · ซีท(ส) |
+| z | (ซ) | อิ(ซ) · พลี(ซ) · เนม(ซ) |
+| sh, ch | (ช) | มั(ช) · พุ(ช) · วา(ช) |
+| j, dge | (จ) | เพ(จ) · **แด**-มิ(จ) |
+
+## 2.3 US vs UK: the only reading differences to show
+
+| Where | US | UK |
+|---|---|---|
+| r after a vowel | teacher **ที**-เชอ(ร) · your ยอ(ร) · more มอ(ร) | **ที**-เชอะ · ยอ · มอ |
+| t between vowels | water **วอ**-เดอ(ร) · better **เบ**-เดอ(ร) · little **ลิ**-เดิ(ล) | **วอ**-เทอะ · **เบ**-เทอะ · **ลิ**-เทิ(ล) |
+| o in hot, doctor | ฮาท · **ดาก**-เทอ(ร) · sorry **ซา**-รี · copy **คา**-พี | ฮ็อท · **ด็อก**-เทอะ · **ซ็อ**-รี · **ค็อ**-พี |
+| a in can't, ask, pass, staff | แคน(ท) · แอส(ค) · **แพส**-พอ(ร)(ท) · สแต(ฟ) | คาน(ท) · อาส(ค) · **พาส**-พอ(ท) · สตา(ฟ) |
+
+Other real US/UK differences (write UK only when the user asked for UK or it matters):
+- Words: restroom / toilets · line / queue · fill out / fill in (a form) · vacation / holiday · apartment / flat · cell phone / mobile (phone) · check / bill (restaurant) · schedule / timetable (school, trains) · principal / head teacher · homeroom teacher / form tutor.
+- Spelling: color / colour · center / centre · organize / organise · traveling / travelling · license / licence (noun) · program / programme (TV; a computer program is "program" in both).
+- Dates: April 3, 2026 (said "April third") / 3 April 2026 ("the third of April").
+
+## 2.4 Natural speed: weak forms and linking
+
+Use weak forms for unstressed little words in natural-speed readings:
+
+| Word | Careful | Natural speed |
+|---|---|---|
+| the | ดี | เดอะ (ดิ before a vowel sound, optional) |
+| a / an | เอ / แอน | อะ / เอิน |
+| and | แอน(ด) | เอิน |
+| to | ทู | ทะ |
+| for | ฟอ(ร) | เฟอ(ร) |
+| of | อั(ฟ) | เอิ(ฟ) |
+| can | แคน | เคิน |
+| at | แอท | เอิท |
+| from | ฟรัม | เฟริม |
+| them | เด็ม | เดิม |
+| you / your | ยู / ยอ(ร) | ยะ / เยอ(ร) (fast casual speech only) |
+
+Linking:
+- Consonant + vowel: team up ที-มัพ · pick it up พิ-กิ-**ดัพ** · check it out เช็ก-กิ-**ดาว(ท)** · is it อิ-ซิท · hold on โฮ(ล)-ดาน.
+- t/d + you: could you คุ-จู · meet you มี-ชู · did you ดิ-จู · watch your วา-เชอ(ร).
+- US flap t (t between vowels → ด): it'll **อิ**-เดิ(ล) · a little อะ **ลิ**-เดิ(ล) · photo **โฟ**-โด.
+
+## 2.5 Words (US first; UK only if different)
+
+| Word | US | UK | Note |
+|---|---|---|---|
+| passport | **แพส**-พอ(ร)(ท) | **พาส**-พอ(ท) | |
+| visa | **วี**-ซะ | | |
+| document(s) | **ดาก**-ยะ-เมิน(ท)(ส) | **ด็อก**-ยะ-เมิน(ท)(ส) | |
+| application | แอ-พลิ-**เค**-เชิน | | |
+| form | ฟอ(ร)(ม) | ฟอม | |
+| signature | **ซิก**-นะ-เชอ(ร) | **ซิก**-นะ-เชอะ | |
+| appointment | อะ-**พอย(น)**-เมิน(ท) | | the t is usually silent |
+| interview | **อิน**-เทอ(ร)-วิว | **อิน**-เทอะ-วิว | |
+| schedule | **สเก็**-จู(ล) | **เช็**-จู(ล) | many UK speakers also say สเก็-จู(ล) |
+| deadline | **เด็ด**-ไล(น) | | |
+| staff | สแต(ฟ) | สตา(ฟ) | |
+| student | **สตู**-เดิน(ท) | **สติว**-เดิน(ท) | |
+| teacher | **ที**-เชอ(ร) | **ที**-เชอะ | |
+| principal | **พริน**-ซะ-เพิ(ล) | | UK schools: head teacher |
+| parents | **แพ**-เริน(ท)(ส) | | |
+| embassy | **เอ็ม**-บะ-ซี | | |
+| immigration | อิ-มะ-**เกร**-เชิน | | |
+| extension | อิก-**สเต็น**-เชิน | | |
+| certificate | เซอ(ร)-**ทิ**-ฟิ-เคิท | เซอะ-**ทิ**-ฟิ-เคิท | |
+| copy | **คา**-พี | **ค็อ**-พี | |
+| receipt | ริ-**ซีท** | | the p is silent |
+| photo | **โฟ**-โด | **โฟ**-โท | |
+| restroom | **เรส**-ทรูม | | UK: toilets **ทอย**-เลิท(ส) |
+| question | **เควส**-เชิน | | |
+| Wednesday | **เว็น(ซ)**-เด | | the first d is silent |
+| carry | **แค**-รี | | |
+| support | เซอะ-**พอ(ร)(ท)** | เซอะ-**พอ(ท)** | |
+| heal | ฮี(ล) | | |
+| tank | แทง(ค) | | |
+| damage | **แด**-มิ(จ) | | |
+| level | **เล**-เวิ(ล) | | |
+| update | noun **อัพ**-เดท · verb อัพ-**เดท** | | stress moves |
+| event | อิ-**เว็น(ท)** | | |
+| server | **เซอ(ร)**-เวอ(ร) | **เซอ**-เวอะ | |
+| ranked | แรง(ค)(ท) | | |
+| nerf | เนอ(ร)(ฟ) | เนอ(ฟ) | |
+| buff | บั(ฟ) | | |
+| patch | แพ(ช) | | |
+| lag | แล็ก | | |
+| skin | สกิน | | |
+| noob | นูบ | | |
+| GG | จี-จี | | |
+
+# 3. Japanese
+
+## 3.1 Line format and kana table
+
+- Line: `🔊 kana · Hepburn · Thai`, e.g. `🔊 きょうは ひま？ · Kyō wa hima? · เคียว วะ ฮิ-มะ?`.
+- Hepburn: macrons for long a, u, o, and ee (Tōkyō, kūkō, onēsan) and for every katakana ー (chīmu, sapōto); ii and ei stay as written (oishii, kiite, sensei, yotei).
+- Each cell: kana · Hepburn · Thai. Where two Thai forms are given, the first is for the start of a word and the second for inside a word.
+
+| | -a | -i | -u | -e | -o |
+|---|---|---|---|---|---|
+| (vowel) | あ a อะ | い i อิ | う u อุ | え e เอะ | お o โอะ |
+| k | か ka คะ / กะ | き ki คิ / กิ | く ku คุ / กุ | け ke เคะ / เกะ | こ ko โคะ / โกะ |
+| g | が ga กะ | ぎ gi กิ | ぐ gu กุ | げ ge เกะ | ご go โกะ |
+| s | さ sa ซะ | し shi ชิ | す su ซุ | せ se เซะ | そ so โซะ |
+| z | ざ za ซะ | じ ji จิ | ず zu ซุ | ぜ ze เซะ | ぞ zo โซะ |
+| t | た ta ทะ / ตะ | ち chi ชิ / จิ | つ tsu สึ | て te เทะ / เตะ | と to โทะ / โตะ |
+| d | だ da ดะ | ぢ ji จิ | づ zu ซุ | で de เดะ | ど do โดะ |
+| n | な na นะ | に ni นิ | ぬ nu นุ | ね ne เนะ | の no โนะ |
+| h | は ha ฮะ | ひ hi ฮิ | ふ fu ฟุ | へ he เฮะ | ほ ho โฮะ |
+| b | ば ba บะ | び bi บิ | ぶ bu บุ | べ be เบะ | ぼ bo โบะ |
+| p | ぱ pa พะ / ปะ | ぴ pi พิ / ปิ | ぷ pu พุ / ปุ | ぺ pe เพะ / เปะ | ぽ po โพะ / โปะ |
+| m | ま ma มะ | み mi มิ | む mu มุ | め me เมะ | も mo โมะ |
+| y | や ya ยะ |  | ゆ yu ยุ |  | よ yo โยะ |
+| r | ら ra ระ | り ri ริ | る ru รุ | れ re เระ | ろ ro โระ |
+| w | わ wa วะ |  |  |  | を o โอะ |
+
+ん: see 3.2 (ม / ง / น). を is the particle o: โอะ.
+
+### Combined kana (ゃ ゅ ょ)
+
+| | -ya | -yu | -yo |
+|---|---|---|---|
+| ky | きゃ kya เคียะ / เกียะ | きゅ kyu คิว / กิว | きょ kyo เคียว / เกียว |
+| gy | ぎゃ gya เกียะ | ぎゅ gyu กิว | ぎょ gyo เกียว |
+| sh | しゃ sha ชะ | しゅ shu ชุ | しょ sho โชะ |
+| j | じゃ ja จะ | じゅ ju จุ | じょ jo โจะ |
+| ch | ちゃ cha ชะ / จะ | ちゅ chu ชุ / จุ | ちょ cho โชะ / โจะ |
+| ny | にゃ nya เนียะ | にゅ nyu นิว | にょ nyo เนียว |
+| hy | ひゃ hya เฮียะ | ひゅ hyu ฮิว | ひょ hyo เฮียว |
+| by | びゃ bya เบียะ | びゅ byu บิว | びょ byo เบียว |
+| py | ぴゃ pya เพียะ / เปียะ | ぴゅ pyu พิว / ปิว | ぴょ pyo เพียว / เปียว |
+| my | みゃ mya เมียะ | みゅ myu มิว | みょ myo เมียว |
+| ry | りゃ rya เรียะ | りゅ ryu ริว | りょ ryo เรียว |
+
+### Katakana for foreign sounds
+
+ファ fa ฟะ · フィ fi ฟิ · フェ fe เฟะ · フォ fo โฟะ · ティ ti ทิ / ติ · ディ di ดิ · トゥ tu ทุ / ตุ · ドゥ du ดุ · ウィ wi วิ · ウェ we เวะ · ウォ wo โวะ · ヴァ va วะ · ヴィ vi วิ · シェ she เชะ · ジェ je เจะ · チェ che เชะ / เจะ · ツァ tsa สะ
+
+## 3.2 Rules in one place (with checked examples)
+
+- k t p ch: ค ท พ ช at the start of a word, ก ต ป จ inside one: たかい ทะ-ไก · ちょっと ช็อต-โตะ · こんにちは คน-นิ-จิ-วะ. Particles count as inside a word: か กะ · と โตะ · から กะ-ระ · けど เกะ-โดะ.
+- g is ก everywhere: が กะ · ご โกะ · ぎ กิ.
+- r = ร, never ล: ら ระ · りょ เรียว.
+- つ = สึ. After an open vowel, also close that syllable with ต: まつり มัต-สึ-ริ · あつい อัต-สึ-อิ · ふつか ฟุต-สึ-กะ · おつかれ อ็อต-สึ-กะ-เระ. The romaji doesn't change (matsuri, atsui).
+- す = ซุ (すみません ซุ-มิ-มะ-เซ็ง); ず and づ = ซุ.
+- Long vowels become Thai long vowels and short ones stay short: おばさん โอะ-บะ-ซัง vs おばあさん โอะ-บา-ซัง · ビル บิ-รุ vs ビール บี-รุ. えい is a long เ- (せんせい เซ็น-เซ); いい is ี (おいしい โอะ-อิ-ชี).
+- Thai can't show length in ゃ ゅ ょ combinations: きょ and きょう are both เคียว. The romaji shows it (kyo / kyō).
+- ai becomes ไ-: たかい ทะ-ไก · おてあらい โอะ-เตะ-อะ-ไร. A final after ไ goes in brackets: ないんだ ไน(น)-ดะ.
+- っ closes the syllable before it: ก before k/g, ป before p/b/f, ส before s/sh/z/j, ต before t/ch/ts/d: がっこう กัก-โก · いっぷん อิป-ปุง · いっしょ อิส-โชะ · ちょっと ช็อต-โตะ · マッチ มัต-จิ. A closed o is written ็อ: もどって โมะ-ด็อต-เตะ.
+- ん: ม before m/b/p (さんぽ ซัม-โปะ · ぜんぶ เซ็ม-บุ); ง before k/g (りんご ริง-โกะ) and at the end of a word (にほん นิ-ฮง · すみません ซุ-มิ-มะ-เซ็ง); น everywhere else (ほんとう ฮน-โต · せんせい เซ็น-เซ · えんりょ เอ็น-เรียว). Hepburn writes n' before a vowel or y inside a word: げんいん gen'in เก็น-อิง.
+- Whispered u at the end: です เดส · ます มัส (ですか → เดส กะ · います → อิ-มัส). Other whispered vowels stay written: した ชิ-ตะ · すき ซุ-กิ.
+- Particles: は = wa วะ · へ = e เอะ · を = o โอะ (in both romaji and Thai).
+- Set spellings: こんにちは konnichiwa คน-นิ-จิ-วะ · こんばんは konbanwa คม-บัง-วะ.
+- Write the kana line by words, with particles attached to the word before (せきに もどって ください。), and make the romaji match it syllable for syllable.
+
+## 3.3 Words (checked)
+
+| Word | Kana | Hepburn | Thai | Meaning |
+|---|---|---|---|---|
+| 学校 | がっこう | gakkō | กัก-โก | โรงเรียน |
+| 学生 | がくせい | gakusei | กะ-กุ-เซ | นักเรียน, นักศึกษา |
+| 留学生 | りゅうがくせい | ryūgakusei | ริว-กะ-กุ-เซ | นักเรียนต่างชาติ |
+| 先生 | せんせい | sensei | เซ็น-เซ | ครู, อาจารย์, หมอ |
+| 校長 | こうちょう | kōchō | โค-โจ | ผู้อำนวยการโรงเรียน |
+| 担任 | たんにん | tannin | ทัน-นิง | ครูประจำชั้น |
+| 保護者 | ほごしゃ | hogosha | โฮะ-โกะ-ชะ | ผู้ปกครอง |
+| パスポート | パスポート | pasupōto | พะ-ซุ-โป-โตะ | พาสปอร์ต |
+| ビザ | ビザ | biza | บิ-ซะ | วีซ่า |
+| 書類 | しょるい | shorui | โชะ-รุ-อิ | เอกสาร |
+| 申請書 | しんせいしょ | shinseisho | ชิน-เซ-โชะ | ใบคำร้อง |
+| 証明写真 | しょうめいしゃしん | shōmeishashin | โช-เม-ชะ-ชิง | รูปติดบัตร |
+| コピー | コピー | kopī | โคะ-ปี | สำเนา |
+| 署名 | しょめい | shomei | โชะ-เม | ลายเซ็น |
+| 予約 | よやく | yoyaku | โยะ-ยะ-กุ | การจอง, นัดหมาย |
+| 面接 | めんせつ | mensetsu | เม็น-เซ็ต-สึ | สัมภาษณ์ |
+| 大使館 | たいしかん | taishikan | ไท-ชิ-กัง | สถานทูต |
+| 締め切り | しめきり | shimekiri | ชิ-เมะ-กิ-ริ | กำหนดส่ง |
+| 提出 | ていしゅつ | teishutsu | เท-ชุต-สึ | การยื่น, ส่ง |
+| 手数料 | てすうりょう | tesūryō | เทะ-ซู-เรียว | ค่าธรรมเนียม |
+| 領収書 | りょうしゅうしょ | ryōshūsho | เรียว-ชู-โชะ | ใบเสร็จ |
+| お手洗い | おてあらい | otearai | โอะ-เตะ-อะ-ไร | ห้องน้ำ (สุภาพ) |
+| 待合室 | まちあいしつ | machiaishitsu | มะ-จิ-ไอ-ชิต-สึ | ห้องรอ |
+| ガチャ | ガチャ | gacha | กะ-จะ | กาชา |
+| 課金 | かきん | kakin | คะ-กิง | เติมเงิน |
+| 天井 | てんじょう | tenjō | เท็น-โจ | การันตี (แปลตรงตัว: เพดาน) |
+| 回復 | かいふく | kaifuku | ไค-ฟุ-กุ | ฮีล, ฟื้นฟู |
+| キャリー | キャリー | kyarī | เคียะ-รี | แบก |
+| ドンマイ | ドンマイ | donmai | ดม-ไม | ไม่เป็นไรนะ (จาก don't mind) |
+| ランクマッチ | ランクマッチ | rankumatchi | รัง-กุ-มัต-จิ | แรงก์ |
+| イベント | イベント | ibento | อิ-เบ็น-โตะ | อีเวนต์ |
+| アップデート | アップデート | appudēto | อัป-ปุ-เด-โตะ | อัปเดต |
+| 回線落ち | かいせん おち | kaisen ochi | ไค-เซ็ง โอะ-จิ | เน็ตหลุด |
+
+### Set phrases
+
+| Phrase | Kana | Hepburn | Thai | Use |
+|---|---|---|---|---|
+| お疲れ様です。 | おつかれさま です。 | Otsukaresama desu. | อ็อต-สึ-กะ-เระ-ซะ-มะ เดส | ทักเพื่อนร่วมงาน (เหนื่อยหน่อยนะ) |
+| 失礼します。 | しつれい します。 | Shitsurei shimasu. | ชิต-สึ-เร ชิ-มัส | ขออนุญาต (เข้า-ออกห้อง, วางสาย) |
+| 少々お待ちください。 | しょうしょう おまち ください。 | Shōshō omachi kudasai. | โช-โช โอะ-มะ-จิ คุ-ดะ-ไซ | กรุณารอสักครู่ (สุภาพ) |
+| こちらへどうぞ。 | こちらへ どうぞ。 | Kochira e dōzo. | โคะ-จิ-ระ เอะ โด-โซะ | เชิญทางนี้ |
+| お世話になっております。 | おせわに なって おります。 | Osewa ni natte orimasu. | โอะ-เซะ-วะ นิ นัต-เตะ โอะ-ริ-มัส | ประโยคเปิดอีเมลธุรกิจ |
+| よろしくお願いいたします。 | よろしく おねがい いたします。 | Yoroshiku onegai itashimasu. | โยะ-โระ-ชิ-กุ โอะ-เนะ-ไก อิ-ตะ-ชิ-มัส | ฝากด้วยนะครับ/คะ (สุภาพมาก) |
+| かしこまりました。 | かしこまりました。 | Kashikomarimashita. | คะ-ชิ-โกะ-มะ-ริ-มะ-ชิ-ตะ | รับทราบ (กับลูกค้า) |
+| 承知しました。 | しょうち しました。 | Shōchi shimashita. | โช-จิ ชิ-มะ-ชิ-ตะ | รับทราบ (กับหัวหน้า) |
+
+## 3.4 Established Thai names vs readings
+
+In Thai text, use the established Thai spelling; the 🔊 line still follows the rules above.
+
+| Name | Thai text | 🔊 reading |
+|---|---|---|
+| 東京 | โตเกียว | とうきょう · Tōkyō · โท-เกียว |
+| 大阪 | โอซากะ | おおさか · Ōsaka · โอ-ซะ-กะ |
+| 京都 | เกียวโต | きょうと · Kyōto · เคียว-โตะ |
+| 北海道 | ฮอกไกโด | ほっかいどう · Hokkaidō · ฮ็อก-ไก-โด |
+| 沖縄 | โอกินาวะ | おきなわ · Okinawa · โอะ-กิ-นะ-วะ |
+
+# 4. Korean
+
+## 4.1 How a Korean reading is built
+
+- Line: `🔊 [pronounced Hangul] romanization · Thai`. The brackets appear only when the pronunciation differs from the spelling: `🔊 [감사함니다] gam-sa-ham-ni-da · คัม-ซา-ฮัม-นี-ดา`, but `🔊 bi-ja · พี-จา` for 비자.
+- Romanization = Revised Romanization of the bracketed sound, with hyphens between syllables. Because it follows the brackets, it shows tensing (학교 [학꾜] hak-kkyo); official RR on signs leaves tensing out (hakgyo). Names, places, and brands keep their official spelling (Seoul, Busan, Hyundai, Samsung).
+- A "word" is a written word between spaces, and each word starts fresh, even inside a phrase: 다시 와 주세요 → ทา-ชี วา ชู-เซ-โย · 궁금한 게 → คุง-กึม-ฮัน เค. Sound changes across a space still go in the brackets: 밥 먹었어요 [밤 머거써요] · 부를 거예요 [부를 꺼에요].
+- Base the Thai on the brackets only; the brackets use only the 7 final sounds (ㄱ ㄴ ㄷ ㄹ ㅁ ㅂ ㅇ).
+
+## 4.2 Consonants
+
+| Letter | Romanization | Thai at the start of a word | Thai inside a word | As a final sound |
+|---|---|---|---|---|
+| ㄱ | g (k as a final) | ค | ก | ก |
+| ㄲ | kk | ก | ก, and it closes an open syllable before it with ก | ก |
+| ㅋ | k | ค | ค | ก |
+| ㄷ | d (t as a final) | ท | ด | ด |
+| ㄸ | tt | ต | ต, closing an open syllable before it with ต | — |
+| ㅌ | t | ท | ท | ด |
+| ㅂ | b (p as a final) | พ | บ | บ |
+| ㅃ | pp | ป | ป, closing an open syllable before it with ป | — |
+| ㅍ | p | พ | พ | บ |
+| ㅈ | j | ช | จ | ด |
+| ㅉ | jj | จ | จ, closing an open syllable before it with ต | — |
+| ㅊ | ch | ช | ช | ด |
+| ㅅ | s | ซ; ช before ㅣ, ㅟ and y-vowels | same | ด |
+| ㅆ | ss | ซ (sharper; never closes the syllable before it) | ซ | ด |
+| ㄴ | n | น | น | น |
+| ㅁ | m | ม | ม | ม |
+| ㅇ | (silent) / ng | อ | อ | ง |
+| ㄹ | r / l | ร | ร; ล right after a ㄹ final | (ล) |
+| ㅎ | h | ฮ | ฮ | — |
+
+- Closing examples: 오빠 โอป-ปา · 씨께 ซีก-เก · 여꿔늘 ย็อก-กวอ-นึ(ล) · 저쪼기에요 ช็อต-โจ-กี-เอ-โย. ㅆ doesn't close: 이써요 อี-ซอ-โย.
+- After ㅅ ㅆ ㅈ ㅊ ㅉ (Thai ช/จ), a y-vowel loses its ย: 셔 ชอ · 쇼 โช · 져 จอ · 포지션 โพ-จี-ช็อน.
+- Consonant + ㅑ ㅕ ㅠ: consonant + ย + vowel (며 มยอ · 명동 มย็อง-ดง · 류 รยู · 뉴비 นยู-บี). Consonant + ㅛ ㅖ ㅒ: the consonant goes before the vowel sign (효 ฮโย · 학꾜 ฮัก-กโย · 계 คเย · 걔 คแย).
+- Consonant + w-vowel: 과 ควา · 괜 แควน · 권 คว็อน · 귀 ควี. ㅚ and ㅞ: 외 เว · 최 ชเว · 죄송 ชเว-ซง.
+
+## 4.3 Vowels: open syllable · closed syllable (with ㄴ) · before a final ㄹ
+
+| Vowel | Romanization | Alone | Closed | Before (ล) | With ㄱ at the start of a word | With ㅎ |
+|---|---|---|---|---|---|---|
+| ㅏ | a | 아 อา | 안 อัน | 알 อา(ล) | 가 คา | 하 ฮา |
+| ㅓ | eo | 어 ออ | 언 อ็อน | 얼 ออ(ล) | 거 คอ | 허 ฮอ |
+| ㅗ | o | 오 โอ | 온 อน | 올 โอ(ล) | 고 โค | 호 โฮ |
+| ㅜ | u | 우 อู | 운 อุน | 울 อุ(ล) | 구 คู | 후 ฮู |
+| ㅡ | eu | 으 อือ | 은 อึน | 을 อึ(ล) | 그 คือ | 흐 ฮือ |
+| ㅣ | i | 이 อี | 인 อิน | 일 อิ(ล) | 기 คี | 히 ฮี |
+| ㅐ | ae | 애 แอ | 앤 แอน | 앨 แอ(ล) | 개 แค | 해 แฮ |
+| ㅔ | e | 에 เอ | 엔 เอ็น | 엘 เอ(ล) | 게 เค | 헤 เฮ |
+| ㅑ | ya | 야 ยา | 얀 ยัน | 얄 ยา(ล) | 갸 คยา | 햐 ฮยา |
+| ㅕ | yeo | 여 ยอ | 연 ย็อน | 열 ยอ(ล) | 겨 คยอ | 혀 ฮยอ |
+| ㅛ | yo | 요 โย | 욘 ยน | 욜 โย(ล) | 교 คโย | 효 ฮโย |
+| ㅠ | yu | 유 ยู | 윤 ยุน | 율 ยุ(ล) | 규 คยู | 휴 ฮยู |
+| ㅒ | yae | 얘 แย | 얜 แยน | 얠 แย(ล) | 걔 คแย | 햬 ฮแย |
+| ㅖ | ye | 예 เย | 옌 เย็น | 옐 เย(ล) | 계 คเย | 혜 ฮเย |
+| ㅘ | wa | 와 วา | 완 วัน | 왈 วา(ล) | 과 ควา | 화 ฮวา |
+| ㅙ | wae | 왜 แว | 왠 แวน | 왤 แว(ล) | 괘 แคว | 홰 แฮว |
+| ㅚ | oe | 외 เว | 왼 เว็น | 욀 เว(ล) | 괴 คเว | 회 ฮเว |
+| ㅝ | wo | 워 วอ | 원 ว็อน | 월 วอ(ล) | 궈 ควอ | 훠 ฮวอ |
+| ㅞ | we | 웨 เว | 웬 เว็น | 웰 เว(ล) | 궤 คเว | 훼 ฮเว |
+| ㅟ | wi | 위 วี | 윈 วิน | 윌 วิ(ล) | 귀 ควี | 휘 ฮวี |
+| ㅢ | ui | 의 อึย | — | — | 긔 คี (said [기]) | 희 ฮี (said [히]) |
+
+- Closed ㅓ, ㅔ, ㅕ, ㅝ, ㅖ, ㅚ, ㅞ take ็ (อ็อน · เอ็น · ย็อน · ว็อน); closed ㅗ is written without a vowel sign (온 อน · 송 ซง).
+- Before (ล), ㅜ ㅠ ㅡ ㅣ ㅟ are written short (울 อุ(ล) · 율 ยุ(ล) · 을 อึ(ล) · 일 อิ(ล) · 윌 วิ(ล)); the others keep the open form (알 อา(ล) · 얼 ออ(ล) · 올 โอ(ล)).
+
+## 4.4 Sound changes (checked examples)
+
+| Change | Written | Said | Romanization | Thai |
+|---|---|---|---|---|
+| 연음 liaison | 한국어 | [한구거] | han-gu-geo | ฮัน-กู-กอ |
+| 연음 liaison | 음악 | [으막] | eu-mak | อือ-มัก |
+| 연음 liaison | 있어요 | [이써요] | i-sseo-yo | อี-ซอ-โย |
+| 연음 liaison | 읽어요 | [일거요] | il-geo-yo | อิ(ล)-กอ-โย |
+| 연음 liaison | 앉으세요 | [안즈세요] | an-jeu-se-yo | อัน-จือ-เซ-โย |
+| 연음 liaison | 맛있어요 | [마시써요] | ma-si-sseo-yo | มา-ชี-ซอ-โย |
+| 비음화 nasalization | 감사합니다 | [감사함니다] | gam-sa-ham-ni-da | คัม-ซา-ฮัม-นี-ดา |
+| 비음화 nasalization | 국물 | [궁물] | gung-mul | คุง-มุ(ล) |
+| 비음화 nasalization | 작년 | [장년] | jang-nyeon | ชัง-นย็อน |
+| 비음화 nasalization | 한국말 | [한궁말] | han-gung-mal | ฮัน-กุง-มา(ล) |
+| 비음화 nasalization | 있는 | [인는] | in-neun | อิน-นึน |
+| 비음화 nasalization | 먹는 | [멍는] | meong-neun | ม็อง-นึน |
+| 비음화 nasalization | 정류장 | [정뉴장] | jeong-nyu-jang | ช็อง-นยู-จัง |
+| 비음화 nasalization | 독립 | [동닙] | dong-nip | ทง-นิบ |
+| 유음화 ㄴ+ㄹ → ㄹㄹ | 연락 | [열락] | yeol-lak | ยอ(ล)-ลัก |
+| 유음화 ㄴ+ㄹ → ㄹㄹ | 신라 | [실라] | sil-la | ชิ(ล)-ลา |
+| 유음화 ㄴ+ㄹ → ㄹㄹ | 설날 | [설랄] | seol-lal | ซอ(ล)-ลา(ล) |
+| 유음화 ㄴ+ㄹ → ㄹㄹ | 한류 | [할류] | hal-lyu | ฮา(ล)-ลยู |
+| 경음화 tensing | 학교 | [학꾜] | hak-kkyo | ฮัก-กโย |
+| 경음화 tensing | 식당 | [식땅] | sik-ttang | ชิก-ตัง |
+| 경음화 tensing | 학생 | [학쌩] | hak-ssaeng | ฮัก-แซง |
+| 경음화 tensing | 잡지 | [잡찌] | jap-jji | ชับ-จี |
+| 경음화 tensing | 할게요 | [할께요] | hal-kke-yo | ฮา(ล)-เก-โย |
+| 경음화 tensing | 여권 | [여꿘] | yeo-kkwon | ย็อก-กว็อน |
+| 경음화 tensing | 문법 | [문뻡] | mun-ppeop | มุน-ป็อบ |
+| 경음화 tensing | 갈 거예요 | [갈 꺼에요] | gal kkeo-e-yo | คา(ล) กอ-เอ-โย |
+| 격음화 aspiration | 축하해요 | [추카해요] | chu-ka-hae-yo | ชู-คา-แฮ-โย |
+| 격음화 aspiration | 좋다 | [조타] | jo-ta | โช-ทา |
+| 격음화 aspiration | 입학 | [이팍] | i-pak | อี-พัก |
+| 격음화 aspiration | 못해요 | [모태요] | mo-tae-yo | โม-แท-โย |
+| 격음화 aspiration | 많다 | [만타] | man-ta | มัน-ทา |
+| ㅎ 탈락 silent ㅎ | 좋아요 | [조아요] | jo-a-yo | โช-อา-โย |
+| ㅎ 탈락 silent ㅎ | 괜찮아요 | [괜차나요] | gwaen-cha-na-yo | แควน-ชา-นา-โย |
+| ㅎ 탈락 silent ㅎ | 많이 | [마니] | ma-ni | มา-นี |
+| ㅎ 탈락 silent ㅎ | 싫어요 | [시러요] | si-reo-yo | ชี-รอ-โย |
+| 구개음화 palatalization | 같이 | [가치] | ga-chi | คา-ชี |
+| 구개음화 palatalization | 굳이 | [구지] | gu-ji | คู-จี |
+| 7 final sounds | 꽃 | [꼳] | kkot | กด |
+| 7 final sounds | 앞 | [압] | ap | อับ |
+| 7 final sounds | 부엌 | [부억] | bu-eok | พู-อ็อก |
+| 7 final sounds | 옷 | [옫] | ot | อด |
+| 7 final sounds | 있다 | [읻따] | it-tta | อิด-ตา |
+| 겹받침 double finals | 앉다 | [안따] | an-tta | อัน-ตา |
+| 겹받침 double finals | 닭 | [닥] | dak | ทัก |
+| 겹받침 double finals | 읽다 | [익따] | ik-tta | อิก-ตา |
+| 겹받침 double finals | 읽고 | [일꼬] | il-kko | อิ(ล)-โก |
+| 겹받침 double finals | 삶 | [삼] | sam | ซัม |
+| 겹받침 double finals | 여덟 | [여덜] | yeo-deol | ยอ-ดอ(ล) |
+| 겹받침 double finals | 밟다 | [밥따] | bap-tta | พับ-ตา |
+| 겹받침 double finals | 없다 | [업따] | eop-tta | อ็อบ-ตา |
+| 겹받침 double finals | 값 | [갑] | gap | คับ |
+| 겹받침 double finals | 싫다 | [실타] | sil-ta | ชิ(ล)-ทา |
+| ㄴ 첨가 n insertion | 할 일 | [할릴] | hal-lil | ฮา(ล)-ลิ(ล) |
+| ㄴ 첨가 n insertion | 무슨 일 | [무슨닐] | mu-seun-nil | มู-ซึน-นิ(ล) |
+| ㄴ 첨가 n insertion | 꽃잎 | [꼰닙] | kkon-nip | กน-นิบ |
+| ㄴ 첨가 n insertion | 색연필 | [생년필] | saeng-nyeon-pil | แซง-นย็อน-พิ(ล) |
+
+- Double finals: ㄳ→ㄱ, ㄵ→ㄴ, ㄶ→ㄴ, ㄺ→ㄱ (but ㄹ before ㄱ: 읽고 [일꼬]), ㄻ→ㅁ, ㄼ→ㄹ (but 밟다 [밥따]), ㄽ ㄾ ㅀ→ㄹ, ㄿ→ㅂ, ㅄ→ㅂ. When a vowel follows, the second letter moves over (앉으세요 [안즈세요], 읽어요 [일거요]).
+
+## 4.5 Pronunciation choices used in this style
+
+- -예요 / -이에요: write the everyday [에요]: 거예요 [거에요] · 몇 시예요 [멷 씨에요]. [예요] is also correct.
+- ㅖ after a consonant other than ㄹ may be said [ㅔ]: 시계 [시게] · 지혜 [지헤] (both are standard). 례 and 예 keep [ㅖ].
+- 의: อึย at the start of a word (의사 อึย-ซา); [이] after a consonant (희망 [히망]) and allowed in later syllables (회의 [회이]); [에] as the particle "of" (우리의 [우리에]).
+- ㅐ and ㅔ sound the same in modern Seoul speech; keep แอ / เอ so the reading matches the spelling. ㅚ, ㅙ, ㅞ also sound almost the same (เว/แว).
+- 맛있어요: [마시써요] (also standard: [마디써요]).
+
+## 4.6 Words and set phrases (checked)
+
+| Word | Said | Romanization | Thai | Meaning |
+|---|---|---|---|---|
+| 학교 | [학꾜] | hak-kkyo | ฮัก-กโย | โรงเรียน |
+| 학생 | [학쌩] | hak-ssaeng | ฮัก-แซง | นักเรียน |
+| 유학생 | [유학쌩] | yu-hak-ssaeng | ยู-ฮัก-แซง | นักเรียนต่างชาติ |
+| 선생님 | — | seon-saeng-nim | ซ็อน-แซง-นิม | ครู |
+| 교장 선생님 | — | gyo-jang seon-saeng-nim | คโย-จัง ซ็อน-แซง-นิม | ผู้อำนวยการโรงเรียน |
+| 담임 선생님 | [다밈 선생님] | da-mim seon-saeng-nim | ทา-มิม ซ็อน-แซง-นิม | ครูประจำชั้น |
+| 학부모 | [학뿌모] | hak-ppu-mo | ฮัก-ปู-โม | ผู้ปกครอง |
+| 여권 | [여꿘] | yeo-kkwon | ย็อก-กว็อน | พาสปอร์ต |
+| 비자 | — | bi-ja | พี-จา | วีซ่า |
+| 서류 | — | seo-ryu | ซอ-รยู | เอกสาร |
+| 신청서 | — | sin-cheong-seo | ชิน-ช็อง-ซอ | ใบคำร้อง |
+| 증명사진 | — | jeung-myeong-sa-jin | ชึง-มย็อง-ซา-จิน | รูปติดบัตร |
+| 사본 | — | sa-bon | ซา-บน | สำเนา |
+| 서명 | — | seo-myeong | ซอ-มย็อง | ลายเซ็น |
+| 예약 | — | ye-yak | เย-ยัก | การจอง, นัดหมาย |
+| 면접 | — | myeon-jeop | มย็อน-จ็อบ | สัมภาษณ์ |
+| 대사관 | — | dae-sa-gwan | แท-ซา-กวัน | สถานทูต |
+| 마감 | — | ma-gam | มา-กัม | กำหนดส่ง |
+| 제출 | — | je-chul | เช-ชุ(ล) | การยื่น, ส่ง |
+| 수수료 | — | su-su-ryo | ซู-ซู-รโย | ค่าธรรมเนียม |
+| 영수증 | — | yeong-su-jeung | ย็อง-ซู-จึง | ใบเสร็จ |
+| 화장실 | — | hwa-jang-sil | ฮวา-จัง-ชิ(ล) | ห้องน้ำ |
+| 대기실 | — | dae-gi-sil | แท-กี-ชิ(ล) | ห้องรอ |
+| 캐리 | — | kae-ri | แค-รี | แบก |
+| 힐 | — | hil | ฮิ(ล) | ฮีล |
+| 탱커 | — | taeng-keo | แทง-คอ | แทงก์ |
+| 서포터 | — | seo-po-teo | ซอ-โพ-ทอ | ซัพพอร์ต |
+| 정글 | — | jeong-geul | ช็อง-กึ(ล) | ป่า (เกม MOBA) |
+| 원딜 | — | won-dil | ว็อน-ดิ(ล) | สายยิง (ADC) |
+| 렉 | — | rek | เร็ก | แลค |
+| 뉴비 | — | nyu-bi | นยู-บี | มือใหม่ |
+| 현질 | — | hyeon-jil | ฮย็อน-จิ(ล) | เติมเงิน |
+| 천장 | — | cheon-jang | ช็อน-จัง | การันตี (แปลตรงตัว: เพดาน) |
+| 상향 | — | sang-hyang | ซัง-ฮยัง | บัฟ |
+| 하향 | — | ha-hyang | ฮา-ฮยัง | เนิร์ฟ |
+| 수고하셨습니다. | [수고하셛씀니다.] | Su-go-ha-syeot-sseum-ni-da. | ซู-โก-ฮา-ช็อด-ซึม-นี-ดา | เหนื่อยหน่อยนะครับ/คะ (หลังงานเสร็จ) |
+| 잠시만 기다려 주세요. | — | Jam-si-man gi-da-ryeo ju-se-yo. | ชัม-ชี-มัน คี-ดา-รยอ ชู-เซ-โย | กรุณารอสักครู่ |
+| 이쪽으로 오세요. | [이쪼그로 오세요.] | I-jjo-geu-ro o-se-yo. | อีต-โจ-กือ-โร โอ-เซ-โย | เชิญทางนี้ |
+| 알겠습니다. | [알겓씀니다.] | Al-get-sseum-ni-da. | อา(ล)-เก็ด-ซึม-นี-ดา | รับทราบครับ/ค่ะ |
+| 실례합니다. | [실례함니다.] | Sil-lye-ham-ni-da. | ชิ(ล)-ลเย-ฮัม-นี-ดา | ขออนุญาต, ขอโทษนะครับ/คะ |
+| 죄송합니다. | [죄송함니다.] | Joe-song-ham-ni-da. | ชเว-ซง-ฮัม-นี-ดา | ขอโทษครับ/ค่ะ (สุภาพ) |
+| 잘 부탁드립니다. | [잘 부탁뜨림니다.] | Jal bu-tak-tteu-rim-ni-da. | ชา(ล) พู-ทัก-ตือ-ริม-นี-ดา | ฝากเนื้อฝากตัวด้วยครับ/ค่ะ |
+
+## 4.7 Established Thai names vs readings
+
+In Thai text, use the established Thai spelling; the 🔊 line still follows the rules (official romanization for the name itself).
+
+| Name | Official romanization | Thai text | 🔊 Thai reading |
+|---|---|---|---|
+| 서울 | Seoul | โซล | ซอ-อุ(ล) |
+| 부산 | Busan | ปูซาน | พู-ซัน |
+| 인천 | Incheon | อินช็อน | อิน-ช็อน |
+| 제주 | Jeju | เชจู | เช-จู |
+| 대구 | Daegu | แทกู | แท-กู |
+
+# 5. Chinese (Mandarin)
+
+## 5.1 Line format
+
+- `🔊 Pinyin with tone marks · Thai ↪ เสียงเปลี่ยน: … ↪ ม้วนลิ้น: …`
+- 一 and 不 are written in the pinyin with the tone actually said (yí ge, bú shì, yìqǐ). A 3rd + 3rd change is NOT written in the pinyin; it goes at the end of the line (↪ เสียงเปลี่ยน: nǐ → ní), and the Thai follows the tone actually said (你好 → หนี ห่าว).
+- Every syllable with zh, ch, sh, or r goes in ↪ ม้วนลิ้น, written as in the pinyin.
+- Spell each syllable the same way every time it carries the same tone: 我 wǒ หว่อ (said wó before another 3rd tone: หวอ) · 是 shì ซื่อ · 好 hǎo ห่าว.
+
+## 5.2 Tones → Thai tone marks, by the Thai letter's class
+
+| Thai initial letter | 1st (ā) | 2nd (á) | 3rd (ǎ) | 4th (à) | Neutral |
+|---|---|---|---|---|---|
+| Mid class (ป ต ก จ อ) | no mark: ปา | ๋ : ป๋า | ่ : ป่า | ้ : ป้า | short: ปะ |
+| Paired low (พ ฟ ท ค ฮ ช ซ) | low letter, no mark: พา | high partner (ผ ฝ ถ ข ห ฉ ส), no mark: ผา | high partner + ่ : ผ่า | low letter + ่ : พ่า | short: พะ |
+| Single low (ม น ล ร ย ว) | no mark: มา | ห + letter: หมา | ห + letter + ่ : หม่า | letter + ่ : ม่า | short: มะ |
+
+- Neutral tone: a final -a is written ะ (吗 ma มะ), a final -e is เ-อะ (的 de เตอะ · 了 le เลอะ · 么 me เมอะ); every other neutral syllable uses its 1st-tone spelling (子 zi จือ · 们 men เมิน · 谢谢 xièxie เซี่ย-เซีย · 东西 dōngxi ตง-ซี). Say it short and light.
+- Thai can't tell a neutral tone from a 1st tone in those other syllables (东西 dōngxi "ของ" and dōngxī "ตะวันออก-ตะวันตก" are both ตง-ซี). The pinyin shows the difference; mention it when it matters.
+
+## 5.3 Initials
+
+| Pinyin | Thai letter | Class | 1st · 2nd · 3rd · 4th · neutral |
+|---|---|---|---|
+| b | ป | mid | bā ปา · bá ป๋า · bǎ ป่า · bà ป้า · ba ปะ |
+| p | พ | paired low (high partner ผ) | pā พา · pá ผา · pǎ ผ่า · pà พ่า · pa พะ |
+| m | ม | single low | mā มา · má หมา · mǎ หม่า · mà ม่า · ma มะ |
+| f | ฟ | paired low (high partner ฝ) | fā ฟา · fá ฝา · fǎ ฝ่า · fà ฟ่า · fa ฟะ |
+| d | ต | mid | dā ตา · dá ต๋า · dǎ ต่า · dà ต้า · da ตะ |
+| t | ท | paired low (high partner ถ) | tā ทา · tá ถา · tǎ ถ่า · tà ท่า · ta ทะ |
+| n | น | single low | nā นา · ná หนา · nǎ หน่า · nà น่า · na นะ |
+| l | ล | single low | lā ลา · lá หลา · lǎ หล่า · là ล่า · la ละ |
+| g | ก | mid | gē เกอ · gé เก๋อ · gě เก่อ · gè เก้อ · ge เกอะ |
+| k | ค | paired low (high partner ข) | kē เคอ · ké เขอ · kě เข่อ · kè เค่อ · ke เคอะ |
+| h | ฮ | paired low (high partner ห) | hē เฮอ · hé เหอ · hě เห่อ · hè เฮ่อ · he เฮอะ |
+| j | จ | mid | jī จี · jí จี๋ · jǐ จี่ · jì จี้ · ji จี |
+| q | ช | paired low (high partner ฉ) | qī ชี · qí ฉี · qǐ ฉี่ · qì ชี่ · qi ชี |
+| x | ซ | paired low (high partner ส) | xī ซี · xí สี · xǐ สี่ · xì ซี่ · xi ซี |
+| zh | จ | mid | zhī จือ · zhí จื๋อ · zhǐ จื่อ · zhì จื้อ · zhi จือ |
+| ch | ช | paired low (high partner ฉ) | chī ชือ · chí ฉือ · chǐ ฉื่อ · chì ชื่อ · chi ชือ |
+| sh | ซ | paired low (high partner ส) | shī ซือ · shí สือ · shǐ สื่อ · shì ซื่อ · shi ซือ |
+| r | ร | single low | rī รือ · rí หรือ · rǐ หรื่อ · rì รื่อ · ri รือ |
+| z | จ | mid | zī จือ · zí จื๋อ · zǐ จื่อ · zì จื้อ · zi จือ |
+| c | ช | paired low (high partner ฉ) | cī ชือ · cí ฉือ · cǐ ฉื่อ · cì ชื่อ · ci ชือ |
+| s | ซ | paired low (high partner ส) | sī ซือ · sí สือ · sǐ สื่อ · sì ซื่อ · si ซือ |
+| y | ย | single low | yā ยา · yá หยา · yǎ หย่า · yà ย่า · ya ยะ |
+| w | ว | single low | wā วา · wá หวา · wǎ หว่า · wà ว่า · wa วะ |
+| (none) | อ | mid | ā อา · á อ๋า · ǎ อ่า · à อ้า · a อะ |
+
+Thai can't separate z/zh, c/ch, s/sh (จ ช ซ for both); the pinyin does, and ↪ ม้วนลิ้น marks zh/ch/sh/r. j/q/x are always followed by i or ü.
+
+## 5.4 Finals (house spellings: always use these)
+
+| Final | Example | Pinyin | Thai |
+|---|---|---|---|
+| a | 他 | tā | ทา |
+| o | 波 | bō | ปอ |
+| e | 喝 | hē | เฮอ |
+| -i after z c s | 四 | sì | ซื่อ |
+| -i after zh ch sh r | 日 | rì | รื่อ |
+| er | 二 | èr | เอ้อ(ร) |
+| ai | 来 | lái | ไหล |
+| ei | 北 | běi | เป่ย |
+| ao | 好 | hǎo | ห่าว |
+| ou | 都 | dōu | โตว |
+| an | 看 | kàn | คั่น |
+| en | 很 | hěn | เหิ่น |
+| ang | 忙 | máng | หมัง |
+| eng | 冷 | lěng | เหลิ่ง |
+| ong | 中 | zhōng | จง |
+| i | 你 | nǐ | หนี่ |
+| ia | 家 | jiā | เจีย |
+| ie | 谢 | xiè | เซี่ย |
+| iao | 小 | xiǎo | เสี่ยว |
+| iu (iou) | 六 | liù | ลิ่ว |
+| ian | 天 | tiān | เทียน |
+| in | 心 | xīn | ซิน |
+| iang | 想 | xiǎng | เสี่ยง |
+| ing | 请 | qǐng | ฉิ่ง |
+| iong | 熊 | xióng | สง |
+| u | 不 | bù | ปู้ |
+| ua | 话 | huà | ฮว่า |
+| uo | 国 | guó | กั๋ว |
+| uai | 快 | kuài | คว่าย |
+| ui (uei) | 对 | duì | ตุ้ย |
+| uan | 关 | guān | กวน |
+| un (uen) | 准 | zhǔn | จุ่น |
+| uang | 光 | guāng | กวง |
+| ü | 女 | nǚ | หนวี่ |
+| u after j q x (= ü) | 去 | qù | ชวี่ |
+| üe (ue after j q x) | 学 | xué | เสวีย |
+| üan (uan after j q x) | 选 | xuǎn | เสวี่ยน |
+| ün (un after j q x) | 军 | jūn | จวิน |
+
+- iong is simplified to -ง (熊 xióng สง); say a light y before the vowel.
+- ai after a consonant is ไ- (来 ไหล); with no initial it is อ้าย (爱 ài).
+
+## 5.5 Syllables written with y- and w- (no initial consonant)
+
+| Spelling | Example | Pinyin | Thai |
+|---|---|---|---|
+| yi | 一 | yī | อี |
+| ya | 呀 | yā | ยา |
+| ye | 也 | yě | เหย่ |
+| yao | 要 | yào | เย่า |
+| you | 有 | yǒu | โหย่ว |
+| yan | 眼 | yǎn | เหยี่ยน |
+| yin | 音 | yīn | อิน |
+| yang | 羊 | yáng | หยัง |
+| ying | 英 | yīng | อิง |
+| yong | 用 | yòng | ย่ง |
+| yu | 鱼 | yú | อวี๋ |
+| yue | 月 | yuè | เยวี่ย |
+| yuan | 元 | yuán | เหยวียน |
+| yun | 云 | yún | อวิ๋น |
+| wu | 五 | wǔ | อู่ |
+| wa | 哇 | wā | วา |
+| wo | 我 | wǒ | หว่อ |
+| wai | 外 | wài | ไว่ |
+| wei | 为 | wèi | เว่ย |
+| wan | 晚 | wǎn | หวั่น |
+| wen | 问 | wèn | เวิ่น |
+| wang | 王 | wáng | หวัง |
+| weng | 翁 | wēng | เวิง |
+| a, ai, an… (no initial) | 爱 | ài | อ้าย |
+
+- 元 as the currency is หยวน in Thai text; the 🔊 reading of yuán is เหยวียน.
+
+## 5.6 Tone changes
+
+- 3rd + 3rd: the first becomes 2nd. Not written in the pinyin; shown at the end of the line, and the Thai follows it: 你好 Nǐ hǎo · หนี ห่าว ↪ เสียงเปลี่ยน: nǐ → ní. In a run of 3rd tones, the change depends on how the words group; in quick speech usually all but the last change (我也很好 wǒ yě hěn hǎo is often said wó yé hén hǎo).
+- 一: yí before a 4th tone (一个 yí ge · 一下 yíxià · 一样 yíyàng); yì before 1st, 2nd, 3rd (一起 yìqǐ · 一天 yìtiān · 一点 yìdiǎn); yī when counting, in numbers and dates, and at the end of a word (第一 dì-yī · 十一 shíyī · 统一 tǒngyī). Write the tone actually said.
+- 不: bú before a 4th tone (不是 bú shì · 不错 búcuò · 不客气 bú kèqi); bù everywhere else (不好 bù hǎo · 不来 bù lái). Write the tone actually said.
+- Neutral-tone syllables have no mark (妈妈 māma · 我们 wǒmen · 东西 dōngxi). See 5.7.
+
+## 5.7 Neutral-tone words (no mark on the second syllable)
+
+| Word | Pinyin | Thai | Meaning |
+|---|---|---|---|
+| 谢谢 | xièxie | เซี่ย-เซีย | ขอบคุณ |
+| 东西 | dōngxi | ตง-ซี | ของ |
+| 朋友 | péngyou | เผิง-โยว | เพื่อน |
+| 先生 | xiānsheng | เซียน-เซิง ↪ ม้วนลิ้น: sheng | คุณ (ผู้ชาย), สามี |
+| 知道 | zhīdao | จือ-ตาว ↪ ม้วนลิ้น: zhī | รู้ |
+| 喜欢 | xǐhuan | สี่-ฮวน | ชอบ |
+| 麻烦 | máfan | หมา-ฟัน | ยุ่งยาก, รบกวน |
+| 客气 | kèqi | เค่อ-ชี | เกรงใจ |
+| 名字 | míngzi | หมิง-จือ | ชื่อ |
+| 我们 | wǒmen | หว่อ-เมิน | พวกเรา |
+| 什么 | shénme | เสิน-เมอะ ↪ ม้วนลิ้น: shén | อะไร |
+| 怎么 | zěnme | เจิ่น-เมอะ | อย่างไร |
+| 认识 | rènshi | เริ่น-ซือ ↪ ม้วนลิ้น: rèn, shi | รู้จัก |
+| 意思 | yìsi | อี้-ซือ | ความหมาย |
+| 关系 | guānxi | กวน-ซี | ความสัมพันธ์ |
+| 时候 | shíhou | สือ-โฮว ↪ ม้วนลิ้น: shí | ตอน, เวลา |
+| 漂亮 | piàoliang | เพี่ยว-เลียง | สวย |
+| 衣服 | yīfu | อี-ฟู | เสื้อผ้า |
+| 告诉 | gàosu | ก้าว-ซู | บอก |
+| 休息 | xiūxi | ซิว-ซี | พักผ่อน |
+| 学生 | xuésheng | เสวีย-เซิง ↪ ม้วนลิ้น: sheng | นักเรียน |
+
+## 5.8 Erhua (儿化), mostly northern speech
+
+Write the r as (ร). A final -n or -i drops before it: 一点儿 yìdiǎnr อี้-เตี่ย(ร) · 这儿 zhèr เจ้อ(ร) · 那儿 nàr น่า(ร) · 哪儿 nǎr หน่า(ร) · 玩儿 wánr หวา(ร). Taiwan speech rarely uses erhua (Taiwan: 一點 yìdiǎn, 這裡 zhèlǐ).
+
+## 5.9 Words and set phrases (checked)
+
+| Word | Pinyin | Thai | Meaning |
+|---|---|---|---|
+| 学校 | xuéxiào | เสวีย-เซี่ยว | โรงเรียน |
+| 老师 | lǎoshī | หล่าว-ซือ ↪ ม้วนลิ้น: shī | ครู |
+| 校长 | xiàozhǎng | เซี่ยว-จั่ง ↪ ม้วนลิ้น: zhǎng | ผู้อำนวยการโรงเรียน |
+| 班主任 | bānzhǔrèn | ปัน-จู่-เริ่น ↪ ม้วนลิ้น: zhǔ, rèn | ครูประจำชั้น |
+| 家长 | jiāzhǎng | เจีย-จั่ง ↪ ม้วนลิ้น: zhǎng | ผู้ปกครอง |
+| 护照 | hùzhào | ฮู่-จ้าว ↪ ม้วนลิ้น: zhào | พาสปอร์ต |
+| 签证 | qiānzhèng | เชียน-เจิ้ง ↪ ม้วนลิ้น: zhèng | วีซ่า |
+| 材料 | cáiliào | ไฉ-เลี่ยว | เอกสาร (ที่ต้องยื่น) |
+| 申请表 | shēnqǐngbiǎo | เซิน-ฉิง-เปี่ยว ↪ เสียงเปลี่ยน: qǐng → qíng ↪ ม้วนลิ้น: shēn | ใบคำร้อง |
+| 证件照 | zhèngjiànzhào | เจิ้ง-เจี้ยน-จ้าว ↪ ม้วนลิ้น: zhèng, zhào | รูปติดบัตร |
+| 复印件 | fùyìnjiàn | ฟู่-อิ้น-เจี้ยน | สำเนา |
+| 签名 | qiānmíng | เชียน-หมิง | ลายเซ็น |
+| 预约 | yùyuē | อวี้-เยวีย | นัดหมาย |
+| 面试 | miànshì | เมี่ยน-ซื่อ ↪ ม้วนลิ้น: shì | สัมภาษณ์ |
+| 大使馆 | dàshǐguǎn | ต้า-สือ-ก่วน ↪ เสียงเปลี่ยน: shǐ → shí ↪ ม้วนลิ้น: shǐ | สถานทูต |
+| 截止日期 | jiézhǐ rìqī | เจี๋ย-จื่อ รื่อ-ชี ↪ ม้วนลิ้น: zhǐ, rì | กำหนดส่ง |
+| 提交 | tíjiāo | ถี-เจียว | ยื่น, ส่ง |
+| 手续费 | shǒuxùfèi | โส่ว-ซวี่-เฟ่ย ↪ ม้วนลิ้น: shǒu | ค่าธรรมเนียม |
+| 收据 | shōujù | โซว-จวี้ ↪ ม้วนลิ้น: shōu | ใบเสร็จ |
+| 洗手间 | xǐshǒujiān | สี-โส่ว-เจียน ↪ เสียงเปลี่ยน: xǐ → xí ↪ ม้วนลิ้น: shǒu | ห้องน้ำ |
+| 等候区 | děnghòuqū | เติ่ง-โฮ่ว-ชวี | ที่รอ |
+| 带飞 | dàifēi | ไต้-เฟย | แบก |
+| 奶妈 | nǎimā | ไหน่-มา | สายฮีล (สแลง) |
+| 坦克 | tǎnkè | ถั่น-เค่อ | แทงก์ |
+| 辅助 | fǔzhù | ฝู่-จู้ ↪ ม้วนลิ้น: zhù | ซัพพอร์ต |
+| 打野 | dǎyě | ต๋า-เหย่ ↪ เสียงเปลี่ยน: dǎ → dá | ป่า (เกม MOBA) |
+| 射手 | shèshǒu | เซ่อ-โส่ว ↪ ม้วนลิ้น: shè, shǒu | สายยิง |
+| 掉线 | diàoxiàn | เตี้ยว-เซี่ยน | เน็ตหลุด |
+| 挂机 | guàjī | กว้า-จี | AFK |
+| 开黑 | kāihēi | ไค-เฮย | จัดตี้เล่นกับเพื่อน |
+| 排位 | páiwèi | ไผ-เว่ย | แรงก์ |
+| 皮肤 | pífū | ผี-ฟู | สกิน |
+| 抽卡 | chōukǎ | โชว-ข่า ↪ ม้วนลิ้น: chōu | สุ่มกาชา |
+| 保底 | bǎodǐ | ป๋าว-ตี่ ↪ เสียงเปลี่ยน: bǎo → báo | การันตี |
+| 氪金 | kèjīn | เค่อ-จิน | เติมเงิน |
+| 萌新 | méngxīn | เหมิง-ซิน | มือใหม่ |
+| 大佬 | dàlǎo | ต้า-หล่าว | โปร, เทพ |
+| 小号 | xiǎohào | เสี่ยว-ฮ่าว | ไอดีรอง |
+| 辛苦了。 | Xīnkǔ le. | ซิน-ขู่ เลอะ | เหนื่อยหน่อยนะ / ขอบคุณที่ทุ่มเท |
+| 请稍等。 | Qǐng shāo děng. | ฉิ่ง ซาว เติ่ง ↪ ม้วนลิ้น: shāo | กรุณารอสักครู่ |
+| 这边请。 | Zhèbiān qǐng. | เจ้อ-เปียน ฉิ่ง ↪ ม้วนลิ้น: zhè | เชิญทางนี้ |
+| 麻烦您了。 | Máfan nín le. | หมา-ฟัน หนิน เลอะ | รบกวนด้วยนะครับ/คะ |
+| 好的。 | Hǎo de. | ห่าว เตอะ | ได้ครับ/ค่ะ |
+| 收到。 | Shōudào. | โซว-ต้าว ↪ ม้วนลิ้น: shōu | รับทราบ (ในแชต) |
+| 不好意思。 | Bù hǎoyìsi. | ปู้ ห่าว-อี้-ซือ | ขอโทษนะ, ขอรบกวน |
+
+## 5.10 Established Thai names vs readings
+
+In Thai text, use the established Thai spelling; the 🔊 line still follows the rules.
+
+| Name | Thai text | 🔊 reading |
+|---|---|---|
+| 北京 | ปักกิ่ง | Běijīng · เป่ย-จิง |
+| 上海 | เซี่ยงไฮ้ | Shànghǎi · ซั่ง-ไห่ ↪ ม้วนลิ้น: shàng |
+| 广州 | กวางโจว | Guǎngzhōu · ก่วง-โจว ↪ ม้วนลิ้น: zhōu |
+| 香港 | ฮ่องกง | Xiānggǎng · เซียง-กั่ง |
+| 台湾 | ไต้หวัน | Táiwān · ไถ-วัน |
+| 泰国 | ประเทศไทย | Tàiguó · ไท่-กั๋ว |
+| 曼谷 | กรุงเทพฯ | Màngǔ · มั่น-กู่ |
+| 清迈 | เชียงใหม่ | Qīngmài · ชิง-ไม่ |
+| 普吉 | ภูเก็ต | Pǔjí · ผู่-จี๋ |
+| 芭提雅 | พัทยา | Bātíyǎ · ปา-ถี-หย่า |
+
+# 6. Numbers, dates, and times
+
+## 6.1 Thai clock → 24-hour time (for Thai source text)
+
+| Thai | 24-hour | English |
+|---|---|---|
+| ตีหนึ่ง · ตีสอง · ตีสาม · ตีสี่ · ตีห้า | 01:00 · 02:00 · 03:00 · 04:00 · 05:00 | 1 a.m. … 5 a.m. |
+| หกโมงเช้า (ย่ำรุ่ง) | 06:00 | 6 a.m. |
+| เจ็ดโมงเช้า = โมงเช้า | 07:00 | 7 a.m. |
+| แปดโมงเช้า = สองโมงเช้า | 08:00 | 8 a.m. |
+| เก้าโมงเช้า = สามโมงเช้า | 09:00 | 9 a.m. (not 3 a.m.) |
+| สิบโมงเช้า = สี่โมงเช้า | 10:00 | 10 a.m. |
+| สิบเอ็ดโมงเช้า = ห้าโมงเช้า | 11:00 | 11 a.m. |
+| เที่ยง (เที่ยงวัน) | 12:00 | noon |
+| บ่ายโมง | 13:00 | 1 p.m. |
+| บ่ายสองโมง | 14:00 | 2 p.m. |
+| บ่ายสามโมง | 15:00 | 3 p.m. |
+| บ่ายสี่โมง = สี่โมงเย็น | 16:00 | 4 p.m. |
+| ห้าโมงเย็น | 17:00 | 5 p.m. |
+| หกโมงเย็น (ย่ำค่ำ) | 18:00 | 6 p.m. |
+| หนึ่งทุ่ม · สองทุ่ม · สามทุ่ม · สี่ทุ่ม · ห้าทุ่ม | 19:00 · 20:00 · 21:00 · 22:00 · 23:00 | 7 p.m. … 11 p.m. |
+| เที่ยงคืน (สองยาม) | 00:00 | midnight |
+
+- ครึ่ง = half past: บ่ายสองโมงครึ่ง = 14:30. Official Thai uses the 24-hour clock with นาฬิกา or น.: 14.30 น. = 14:30 · 24.00 น. = midnight.
+
+## 6.2 Big numbers
+
+| Thai | Number | Japanese | Korean | Chinese | English |
+|---|---|---|---|---|---|
+| หมื่น | 10,000 | 1万 (いちまん) | 만 (never 일만) | 一万 yíwàn | ten thousand |
+| แสน | 100,000 | 10万 (じゅうまん) | 십만 | 十万 shíwàn | a hundred thousand |
+| ล้าน | 1,000,000 | 100万 (ひゃくまん) | 백만 | 一百万 yìbǎi wàn | a million |
+| สิบล้าน | 10,000,000 | 1000万 (せんまん / いっせんまん) | 천만 | 一千万 yìqiān wàn | ten million |
+| ร้อยล้าน | 100,000,000 | 1億 (いちおく) | 1억 (일억) | 一亿 yíyì | a hundred million |
+| พันล้าน | 1,000,000,000 | 10億 (じゅうおく) | 10억 (십억) | 十亿 shíyì | a billion |
+| ล้านล้าน | 1,000,000,000,000 | 1兆 (いっちょう) | 1조 (일조) | 一万亿 yíwàn yì (Mainland) / 一兆 (Taiwan) | a trillion |
+
+Examples: 1.5 แสนบาท = THB 150,000 = 15万バーツ = 15만 바트 = 15万泰铢. 3億円 = 300 ล้านเยน.
+
+## 6.3 Years
+
+- Thai BE = CE + 543: พ.ศ. 2569 = 2026 · ปี 69 = 2026.
+- Japan: 令和N年 = 2018 + N (令和8年 = 2026; 令和 started on 1 May 2019) · 平成N年 = 1988 + N (平成31年 = 2019, January to April).
+- Taiwan: 民國N年 = 1911 + N (民國115年 = 2026).
+- Keep the original year in brackets in official documents.
+
+## 6.4 Japanese counters with irregular readings
+
+| Counter | Readings |
+|---|---|
+| 時 (o'clock) | 1 いちじ · 4 よじ (not よんじ) · 7 しちじ · 9 くじ (not きゅうじ) |
+| 分 (minutes) | 1 いっぷん · 3 さんぷん · 4 よんぷん · 6 ろっぷん · 8 はっぷん (also はちふん) · 10 じゅっぷん / じっぷん |
+| 人 (people) | 1 ひとり · 2 ふたり · 3 さんにん · 4 よにん (not よんにん) |
+| 日 (dates) | 1 ついたち · 2 ふつか · 3 みっか · 4 よっか · 5 いつか · 6 むいか · 7 なのか · 8 ようか · 9 ここのか · 10 とおか · 14 じゅうよっか · 20 はつか · 24 にじゅうよっか |
+| 月 (months) | 4 しがつ · 7 しちがつ · 9 くがつ |
+| 歳 (age) | 20 はたち (also にじゅっさい) |
+
+Readings: いちじ Ichiji อิ-จิ-จิ · よじ Yoji โยะ-จิ · くじ Kuji คุ-จิ · じゅっぷん Juppun จุป-ปุง · ふたり Futari ฟุ-ตะ-ริ · よにん Yonin โยะ-นิง · ついたち Tsuitachi สึ-อิ-ตะ-จิ · ふつか Futsuka ฟุต-สึ-กะ · はつか Hatsuka ฮัต-สึ-กะ · しがつ Shigatsu ชิ-กัต-สึ · はたち Hatachi ฮะ-ตะ-จิ.
+
+## 6.5 Korean: native numbers or Sino-Korean numbers
+
+- Native numbers (하나 둘 셋 넷 … 스물) with 시 (o'clock), 명/사람 (people), 개 (things), 살 (age), 번 (times), 시간 (hours of duration). Before a counter: 하나 → 한, 둘 → 두, 셋 → 세, 넷 → 네, 스물 → 스무: 한 시 (1 o'clock) · 두 명 · 스무 살 (20 years old) · 세 번 (three times).
+- Sino-Korean numbers (일 이 삼 사 …) with 분 (minutes), 초, 년, 월, 일, 원 (won), 층 (floor), 번 meaning "number" (3번 = No. 3), and phone numbers: 2시 30분 = 두 시 삼십 분 (= 두 시 반) · 5,000원 = 오천 원.
+- Months 6 and 10 are irregular: 6월 = 유월 (not 육월) · 10월 = 시월 (not 십월).
+
+## 6.6 Chinese numbers
+
+- 两 liǎng before measure words and for 2 o'clock: 两个人 · 两天 · 两点 (2 o'clock) · 两千 (2,000). 二 èr when counting, in digits, ordinals, and months: 第二 · 十二 · 二十 · 二月.
+- In phone, room, and bus numbers, 1 is often said yāo: 110 = yāo yāo líng.
+- Time: 点 diǎn (o'clock) · 分 fēn (minutes) · 半 bàn (half past) · 一刻 yí kè (quarter past) · 三刻 sān kè (quarter to). 上午 a.m. · 下午 p.m. · 晚上 evening.
+- Dates: 4月3日 in writing; 4月3号 (hào) in speech.
+- Money: 元 yuán (written) = 块 kuài (spoken) · 角 jiǎo = 毛 máo (0.1) · 分 fēn (0.01). In Thai, the currency is หยวน.
+
+# 7. Glossary: address and titles
+
+| Thai | English | Japanese | Korean | Chinese |
+|---|---|---|---|---|
+| คุณ + ชื่อ | the first name; "Khun + name" for Thai colleagues (Khun Ing-Ing); Mr./Ms. + surname in formal English | 名前 + さん | 이름 + 씨 (peers and juniors) · 이름 + 님 (customers, formal, online) | 姓 + 先生/女士 (formal: 王先生, 李女士) · 小 + 姓 (younger, casual: 小王) |
+| พี่ (at work or school) | the person's name | 名前 + さん · 先輩 (せんぱい, senior at school or work) | 선배(님) · 이름 + 씨/님 | 姓/名 + 哥/姐 (casual) · 前辈 qiánbèi (senior in a field) |
+| น้อง (at work or school) | the person's name | 名前 + くん/ちゃん (casual) · さん (neutral) | 이름 + 씨 · 이름 alone (반말) | 小 + 名 |
+| ครู / อาจารย์ | Mr./Ms. + surname (school) · Professor + surname (university) | 先生 (せんせい) | 선생님 · 교수님 (university) | 老师 lǎoshī |
+| ผอ. (ผู้อำนวยการโรงเรียน) | principal (US) / head teacher (UK) | 校長 (こうちょう) | 교장 선생님 | 校长 xiàozhǎng |
+| ลูกค้า | customer, client | お客様 (おきゃくさま) | 고객님 · 손님 | 顾客 gùkè · 客户 kèhù |
+| เจ้าหน้าที่ / ผู้รับผิดชอบ | staff member · the person in charge | 係の人 (かかりのひと) · 担当者 (たんとうしゃ) | 직원 · 담당자 | 工作人员 gōngzuò rényuán · 负责人 fùzérén |
+| ท่าน (very formal) | sir / ma'am | 様 (さま) · 方 (かた) | 님 · 분 | 您 nín |
+
+- English school culture: students say Mr./Ms. + surname, not "Teacher" (international schools in Thailand may use Ms. + first name; follow the school). Thai workplace English: Khun + first name or nickname, or just the name.
+- Japanese: never add さん to your own name. To outsiders, drop さん for your own colleagues (担当の〇〇が…); see §10.2 of your instructions.
+- Korean: 씨 is never for seniors; 님 after a title (부장님, 선생님). 오빠/형/언니/누나 depend on both genders and closeness.
+- Chinese: 你 vs 您 carries the politeness; 小姐 to call a waitress can sound off in mainland China (use 服务员 or 你好).
+
+# 8. Glossary: school, visa, and office
+
+| Thai | English | Japanese (reading) | Korean | Chinese (pinyin) |
+|---|---|---|---|---|
+| พาสปอร์ต, หนังสือเดินทาง | passport | パスポート · 旅券 (りょけん, formal) | 여권 [여꿘] | 护照 hùzhào |
+| วีซ่า | visa | ビザ · 査証 (さしょう, formal) | 비자 · 사증 (formal) | 签证 qiānzhèng |
+| วีซ่านักเรียน | student visa | 留学ビザ (りゅうがくビザ) | 유학 비자 · 학생 비자 | 留学签证 liúxué qiānzhèng · 学生签证 |
+| ต่อวีซ่า | extend a visa | ビザを延長する (えんちょうする) | 비자를 연장하다 | 续签 xùqiān · 签证延期 qiānzhèng yánqī |
+| สถานทูต | embassy | 大使館 (たいしかん) | 대사관 | 大使馆 dàshǐguǎn |
+| สถานกงสุล | consulate | 領事館 (りょうじかん) | 영사관 | 领事馆 lǐngshìguǎn |
+| ตม. (สำนักงานตรวจคนเข้าเมือง) | immigration office | 入国管理局 (にゅうこくかんりきょく) · イミグレ (casual) | 출입국관리사무소 · 이민국 | 移民局 yímínjú |
+| ใบคำร้อง, ใบสมัคร | application form | 申請書 (しんせいしょ) | 신청서 | 申请表 shēnqǐngbiǎo |
+| กรอก (แบบฟอร์ม) | fill out (US) / fill in (UK) | 記入する (きにゅうする) | 작성하다 | 填写 tiánxiě |
+| รูปติดบัตร | ID photo, passport photo | 証明写真 (しょうめいしゃしん) | 증명사진 · 여권 사진 | 证件照 zhèngjiànzhào |
+| สำเนา | copy | コピー · 写し (うつし) | 사본 · 복사본 | 复印件 fùyìnjiàn |
+| เอกสาร | documents | 書類 (しょるい) | 서류 | 材料 cáiliào (to submit) · 文件 wénjiàn |
+| ลายเซ็น · เซ็นชื่อ | signature · sign | 署名 (しょめい) · サイン | 서명 · 사인 | 签名 qiānmíng · 签字 qiānzì |
+| นัดหมาย | appointment | 予約 (よやく) · アポ (business) | 예약 | 预约 yùyuē |
+| สัมภาษณ์ | interview | 面接 (めんせつ) | 면접 · 인터뷰 | 面试 miànshì · 面签 miànqiān (visa interview) |
+| ใบรับรองการเป็นนักเรียน | certificate of enrollment | 在学証明書 (ざいがくしょうめいしょ) | 재학증명서 | 在读证明 zàidú zhèngmíng |
+| ทรานสคริปต์ | transcript | 成績証明書 (せいせきしょうめいしょ) | 성적증명서 | 成绩单 chéngjìdān |
+| ค่าเทอม | tuition, school fees | 学費 (がくひ) · 授業料 (じゅぎょうりょう) | 학비 · 등록금 | 学费 xuéfèi |
+| หอพัก | dorm(itory) | 寮 (りょう) | 기숙사 | 宿舍 sùshè |
+| ครูประจำชั้น | homeroom teacher (US) / form tutor (UK) | 担任 (たんにん) | 담임 선생님 | 班主任 bānzhǔrèn |
+| ผู้ปกครอง | parents, guardians | 保護者 (ほごしゃ) | 학부모 · 보호자 | 家长 jiāzhǎng · 监护人 jiānhùrén |
+| นักเรียนแลกเปลี่ยน | exchange student | 交換留学生 (こうかんりゅうがくせい) | 교환학생 | 交换生 jiāohuànshēng |
+| กำหนดส่ง | deadline | 締め切り (しめきり) | 마감 · 마감일 | 截止日期 jiézhǐ rìqī |
+| ยื่น, ส่ง (เอกสาร) | submit | 提出する (ていしゅつする) | 제출하다 | 提交 tíjiāo · 递交 dìjiāo |
+| บัตรคิว | queue number, ticket | 整理券 (せいりけん) · 番号札 (ばんごうふだ) | 번호표 | 排队号码 páiduì hàomǎ · 取号 qǔhào (take a number) |
+| ที่รอ, ห้องรอ | waiting area | 待合室 (まちあいしつ) | 대기실 | 等候区 děnghòuqū |
+| ค่าธรรมเนียม | fee | 手数料 (てすうりょう) | 수수료 | 手续费 shǒuxùfèi |
+| ใบเสร็จ | receipt | 領収書 (りょうしゅうしょ) · レシート | 영수증 | 收据 shōujù · 发票 fāpiào (official invoice) |
+| หลักฐานทางการเงิน | proof of funds | 残高証明書 (ざんだかしょうめいしょ) | 잔고증명서 | 存款证明 cúnkuǎn zhèngmíng |
+| ตราประทับเข้าเมือง | entry stamp | 入国スタンプ (にゅうこくスタンプ) | 입국 도장 | 入境章 rùjìngzhāng |
+| เจ้าหน้าที่ | staff | スタッフ · 職員 (しょくいん) · 係員 (かかりいん) | 직원 · 스태프 | 工作人员 gōngzuò rényuán |
+| ห้องน้ำ | restroom (US) / toilets (UK) | お手洗い (おてあらい, polite) · トイレ | 화장실 | 洗手间 xǐshǒujiān · 卫生间 wèishēngjiān · 厕所 cèsuǒ (plain) |
+
+- Japan's own immigration agency is 出入国在留管理庁 (since 2019). For Thailand's immigration office, Japanese residents usually say イミグレ or 入国管理局.
+- 材料 in Chinese visa and school paperwork means "the documents you submit", not "materials".
+
+# 9. Glossary: games
+
+| Thai gamer word | English | Japanese | Korean | Chinese |
+|---|---|---|---|---|
+| แบก | carry | キャリー | 캐리 | 带飞 dàifēi (being carried: 躺赢 tǎngyíng) |
+| ฮีล · สายฮีล | heal · healer | 回復 (かいふく) · ヒーラー | 힐 · 힐러 | 奶 nǎi · 奶妈 nǎimā (slang) · 治疗 zhìliáo |
+| แทงก์ | tank | タンク | 탱커 · 탱 | 坦克 tǎnkè · 坦 tǎn |
+| ซัพ, ซัพพอร์ต | support | サポート · サポ | 서포터 · 서폿 | 辅助 fǔzhù |
+| ป่า | jungle(r) | ジャングル · ジャングラー | 정글 | 打野 dǎyě |
+| สายดาเมจ | DPS, damage dealer | アタッカー · DPS | 딜러 | 输出 shūchū |
+| บัฟ · เนิร์ฟ (balance) | buff · nerf | 上方修正 (じょうほうしゅうせい) · 下方修正 (かほうしゅうせい) | 상향 · 하향 | 加强 jiāqiáng · 削弱 xuēruò |
+| เมต้า | meta | 環境 (かんきょう) · メタ | 메타 | 版本答案 bǎnběn dá'àn (the meta pick) |
+| อัปเดต · แพตช์ | update · patch | アップデート · アプデ · パッチ | 업데이트 · 패치 | 更新 gēngxīn · 版本更新 |
+| แลค, แล็ก | lag | ラグ | 렉 | 卡 kǎ · 卡顿 kǎdùn |
+| เน็ตหลุด | disconnect (DC) | 回線落ち (かいせんおち) | 튕기다 · 튕김 | 掉线 diàoxiàn |
+| AFK | AFK | 放置 (ほうち) · 離席 (りせき) | 잠수 | 挂机 guàjī |
+| มือใหม่ | newbie (neutral) · noob (teasing) | 初心者 (しょしんしゃ) | 뉴비 · 초보 | 萌新 méngxīn · 菜鸟 càiniǎo (teasing) |
+| เทพ, โปร | pro, cracked | 上手い (うまい) · 神 (かみ) | 고수 | 大佬 dàlǎo · 大神 dàshén |
+| ตี้, จัดตี้ | party up, team up | パーティーを組む (くむ) · 一緒にやる | 파티 · 같이 하다 | 组队 zǔduì · 开黑 kāihēi (with friends, voice chat) |
+| แรงก์ | ranked | ランクマッチ · ランク | 랭크 · 랭겜 | 排位 páiwèi |
+| สกิน | skin | スキン | 스킨 | 皮肤 pífū |
+| กาชา, สุ่ม | gacha, pull | ガチャ (を引く, ひく) | 가챠 · 뽑기 | 抽卡 chōukǎ |
+| การันตี | pity | 天井 (てんじょう) | 천장 | 保底 bǎodǐ |
+| เติมเงิน | spend real money | 課金 (かきん) | 현질 | 氪金 kèjīn |
+| อีเวนต์ | event | イベント | 이벤트 | 活动 huódòng |
+| ยอมแพ้ (โหวต) | surrender, FF | 降参 (こうさん) · サレンダー | 항복 · 서렌 | 投降 tóuxiáng |
+| ไอดีรอง | alt account, smurf | サブ垢 (サブあか) | 부캐 | 小号 xiǎohào |
+| ฟาร์ม | farm, grind | 周回 (しゅうかい) · 稼ぐ (かせぐ) | 파밍 · 노가다 | 刷 shuā · 肝 gān |
+| เกิดใหม่ | respawn | リスポーン | 리스폰 · 부활 | 复活 fùhuó |
+| GG | GG | GG · お疲れ (おつかれ) | 지지 · 수고 | GG |
+
+- Game slang moves fast and varies by game and server. When a term isn't in this table or in the instructions, say how sure you are (§5).
+- Official localized names of games, characters, skills, and items: never guess; check or mark them (§5).
+
+# 10. Traps: false friends, calques, and etiquette
+
+## 10.1 Japanese ↔ Chinese false friends (same characters, different meaning)
+
+| Characters | Japanese | Chinese |
+|---|---|---|
+| 大丈夫 | だいじょうぶ: ไม่เป็นไร, โอเค | dàzhàngfu: ลูกผู้ชายตัวจริง |
+| 先生 | せんせい: ครู, หมอ, อาจารย์ | xiānsheng: คุณ (ผู้ชาย), สามี |
+| 勉強 / 勉强 | べんきょう: เรียนหนังสือ | miǎnqiǎng: ฝืนใจ, จำใจ |
+| 手紙 / 手纸 | てがみ: จดหมาย | shǒuzhǐ: กระดาษชำระ |
+| 汽車 / 汽车 | きしゃ: รถไฟ (หัวรถจักรไอน้ำ) | qìchē: รถยนต์ |
+| 新聞 / 新闻 | しんぶん: หนังสือพิมพ์ | xīnwén: ข่าว |
+| 走る / 走 | はしる: วิ่ง | zǒu: เดิน, ไป, ออกไป |
+| 丈夫 | じょうぶ: แข็งแรง, ทนทาน | zhàngfu: สามี |
+| 娘 | むすめ: ลูกสาว | niáng: แม่ (ภาษาพูด/ถิ่น) · 姑娘 gūniang = หญิงสาว |
+| 愛人 / 爱人 | あいじん: ชู้ | àiren: คู่สมรส (Mainland) |
+| 床 | ゆか: พื้น | chuáng: เตียง |
+| 湯 / 汤 | ゆ: น้ำร้อน | tāng: ซุป |
+| 高校 | こうこう: ม.ปลาย | gāoxiào: มหาวิทยาลัย, สถาบันอุดมศึกษา |
+| 工作 | こうさく: งานประดิษฐ์ · การวางแผนเบื้องหลัง | gōngzuò: งาน, ทำงาน |
+| 留守 | るす: ไม่อยู่บ้าน | liúshǒu: อยู่เฝ้า (留守儿童 = เด็กที่พ่อแม่ไปทำงานต่างถิ่น) |
+| 心中 | しんじゅう: การฆ่าตัวตายพร้อมกัน | xīnzhōng: ในใจ |
+| 十分 | じゅうぶん: เพียงพอ · じゅっぷん: สิบนาที | shífēn: มาก, อย่างยิ่ง · 十分钟 shí fēnzhōng: สิบนาที |
+
+## 10.2 Thai → English calques to avoid
+
+| Thai | Not | Natural English |
+|---|---|---|
+| เปิด/ปิดไฟ, แอร์, ทีวี | open/close the light | turn on/off the light (the AC, the TV) |
+| ถ่ายเอกสาร | take a document | make a copy, photocopy |
+| กรอกฟอร์ม | write the form | fill out (US) / fill in (UK) the form |
+| ยื่นเอกสาร | give documents | submit the documents |
+| ต่อวีซ่า | continue the visa | extend (or renew) the visa |
+| เลื่อนนัด | move the appointment | reschedule (the appointment) |
+| ลางาน · ลาป่วย | leave work | take a day off · call in sick, take sick leave |
+| เล่นเฟซบุ๊ก | play Facebook | be on Facebook, scroll Facebook |
+| เหมือนกัน (same same) | same same | the same, similar |
+| PIC (ผู้รับผิดชอบ) | PIC | the person in charge, point of contact |
+| เรียก "ครู" | Teacher! | Mr./Ms. + surname |
+| ไปเที่ยว | go to travel | go on a trip, travel, go out |
+
+Also from your instructions: I am agree → I agree · discuss about → discuss · I'm boring → I'm bored · can able to → can / be able to · very like → really like.
+
+## 10.3 Etiquette traps
+
+- Japanese: ご苦労様 is for people below you; to anyone else use お疲れ様です. 了解です to a boss sounds casual; use 承知しました or かしこまりました. Don't call people あなた; use name + さん.
+- Korean: 당신 is not a polite "you" (§10.3 of your instructions). 수고하세요 / 수고하셨습니다 to a superior sounds wrong to some people; 감사합니다 is always safe. 저기요 gets a stranger's attention; 아저씨/아줌마 can sound rude.
+- Chinese: 你 vs 您 is the politeness switch. 吃了吗 as a greeting sounds old-fashioned. 555 means crying, not laughing.
+- English: "Dear Sir/Madam" only when you don't know the name; otherwise Dear + Mr./Ms. + surname (formal) or Hi + first name (email).
+
+# 11. Checked examples: 30 sentences in 4 languages
+
+Context: the speaker is a Thai school staff member looking after students at a visa appointment (sentences 1–10), everyday polite speech (11–20), and casual online gaming with friends (21–30). Each line is in the one-line 🔊 format.
+
+## 11.1 รบกวนกลับไปนั่งที่เดิมนะครับ (งานดูแลนักเรียนและวีซ่า)
+
+- EN: Please go back to your seats.
+  คำอ่าน: พลี(ซ) โก แบ็ก ทะ ยอ(ร) ซีท(ส)
+- JP: 席に戻ってください。
+  🔊 せきに もどって ください。 · Seki ni modotte kudasai. · เซะ-กิ นิ โมะ-ด็อต-เตะ คุ-ดะ-ไซ
+- KR: 자리로 돌아가 주세요.
+  🔊 [자리로 도라가 주세요.] Ja-ri-ro do-ra-ga ju-se-yo. · ชา-รี-โร โท-รา-กา ชู-เซ-โย
+- CN: 请回到座位上。
+  🔊 Qǐng huídào zuòwèi shang. · ฉิ่ง หุย-ต้าว จั้ว-เว่ย ซัง ↪ ม้วนลิ้น: shang
+
+## 11.2 อย่าเพิ่งไปไหนนะครับ (งานดูแลนักเรียนและวีซ่า)
+
+- EN: Please don't go anywhere yet.
+  คำอ่าน: พลี(ซ) โดน(ท) โก **เอ**-นี-แว(ร) เย็ท
+- JP: まだどこにも行かないでください。
+  🔊 まだ どこにも いかないで ください。 · Mada doko ni mo ikanaide kudasai. · มะ-ดะ โดะ-โกะ นิ โมะ อิ-กะ-ไน-เดะ คุ-ดะ-ไซ
+- KR: 아직 아무 데도 가지 마세요.
+  🔊 A-jik a-mu de-do ga-ji ma-se-yo. · อา-จิก อา-มู เท-โด คา-จี มา-เซ-โย
+- CN: 请先别走开。
+  🔊 Qǐng xiān bié zǒukāi. · ฉิ่ง เซียน เปี๋ย โจ่ว-ไค
+
+## 11.3 ทีมวีซ่าจะเรียกชื่อทีละคนครับ (งานดูแลนักเรียนและวีซ่า)
+
+- EN: The visa team will call your names one by one.
+  คำอ่าน: เดอะ **วี**-ซะ ทีม วิ(ล) คอ(ล) ยอ(ร) เนม(ซ) วัน บาย วัน
+- JP: ビザチームが一人ずつ名前を呼びます。
+  🔊 ビザ チームが ひとりずつ なまえを よびます。 · Biza chīmu ga hitori zutsu namae o yobimasu. · บิ-ซะ ชี-มุ กะ ฮิ-โตะ-ริ ซุต-สึ นะ-มะ-เอะ โอะ โยะ-บิ-มัส
+- KR: 비자팀이 한 명씩 이름을 부를 거예요.
+  🔊 [비자티미 한 명씩 이르믈 부를 꺼에요.] Bi-ja-ti-mi han myeong-ssik i-reu-meul bu-reul kkeo-e-yo. · พี-จา-ที-มี ฮัน มย็อง-ซิก อี-รือ-มึ(ล) พู-รึ(ล) กอ-เอ-โย
+- CN: 签证组会一个一个叫名字。
+  🔊 Qiānzhèng zǔ huì yíge yíge jiào míngzi. · เชียน-เจิ้ง จู่ ฮุ่ย อี๋-เกอะ อี๋-เกอะ เจี้ยว หมิง-จือ ↪ ม้วนลิ้น: zhèng
+- 💡 เกาหลี: 부를 거예요 อ่านว่า [부를 꺼에요] เพราะหลัง -ㄹ เสียง ㄱ จะกลายเป็นเสียงตึง
+
+## 11.4 รบกวนเตรียมพาสปอร์ตไว้ให้พร้อมนะครับ (งานดูแลนักเรียนและวีซ่า)
+
+- EN: Please have your passport ready.
+  คำอ่าน: พลี(ซ) แฮ(ฟ) ยอ(ร) **แพส**-พอ(ร)(ท) **เร**-ดี
+- JP: パスポートを用意しておいてください。
+  🔊 パスポートを ようい して おいて ください。 · Pasupōto o yōi shite oite kudasai. · พะ-ซุ-โป-โตะ โอะ โย-อิ ชิ-เตะ โอะ-อิ-เตะ คุ-ดะ-ไซ
+- KR: 여권을 준비해 주세요.
+  🔊 [여꿔늘 준비해 주세요.] Yeo-kkwo-neul jun-bi-hae ju-se-yo. · ย็อก-กวอ-นึ(ล) ชุน-บี-แฮ ชู-เซ-โย
+- CN: 请准备好护照。
+  🔊 Qǐng zhǔnbèi hǎo hùzhào. · ฉิง จุ่น-เป้ย ห่าว ฮู่-จ้าว ↪ เสียงเปลี่ยน: qǐng → qíng ↪ ม้วนลิ้น: zhǔn, zhào
+- 💡 เกาหลี: 여권 อ่านว่า [여꿘] (เสียงตึง) ไม่ใช่ [여권]
+
+## 11.5 เอกสารครบหรือยังครับ (งานดูแลนักเรียนและวีซ่า)
+
+- EN: Do you have all your documents?
+  คำอ่าน: ดู ยู แฮ(ฟ) ออ(ล) ยอ(ร) **ดาก**-ยะ-เมิน(ท)(ส)
+- JP: 書類は全部そろっていますか。
+  🔊 しょるいは ぜんぶ そろって いますか。 · Shorui wa zenbu sorotte imasu ka. · โชะ-รุ-อิ วะ เซ็ม-บุ โซะ-ร็อต-เตะ อิ-มัส กะ
+- KR: 서류는 다 챙겼어요?
+  🔊 [서류는 다 챙겨써요?] Seo-ryu-neun da chaeng-gyeo-sseo-yo? · ซอ-รยู-นึน ทา แชง-กยอ-ซอ-โย?
+- CN: 材料都带齐了吗？
+  🔊 Cáiliào dōu dài qí le ma? · ไฉ-เลี่ยว โตว ไต้ ฉี เลอะ มะ?
+- 💡 จีน: 材料 ในงานเอกสารแปลว่า "เอกสารที่ต้องยื่น"
+
+## 11.6 ถ้ามีคำถาม ถามผมได้เลยนะครับ (งานดูแลนักเรียนและวีซ่า)
+
+- EN: If you have any questions, just ask me.
+  คำอ่าน: อิ(ฟ) ยู แฮ(ฟ) **เอ**-นี **เควส**-เชิน(ซ), จัส(ท) แอส(ค) มี
+- JP: 何か質問があれば、遠慮なく聞いてください。
+  🔊 なにか しつもんが あれば、えんりょ なく きいて ください。 · Nanika shitsumon ga areba, enryo naku kiite kudasai. · นะ-นิ-กะ ชิต-สึ-มง กะ อะ-เระ-บะ, เอ็น-เรียว นะ-กุ คี-เตะ คุ-ดะ-ไซ
+- KR: 궁금한 게 있으면 편하게 물어보세요.
+  🔊 [궁금한 게 이쓰면 편하게 무러보세요.] Gung-geum-han ge i-sseu-myeon pyeon-ha-ge mu-reo-bo-se-yo. · คุง-กึม-ฮัน เค อี-ซือ-มย็อน พย็อน-ฮา-เก มู-รอ-โบ-เซ-โย
+- CN: 有问题的话可以随时问我。
+  🔊 Yǒu wèntí de huà kěyǐ suíshí wèn wǒ. · โหย่ว เวิ่น-ถี เตอะ ฮว่า เขอ-อี่ สุย-สือ เวิ่น หว่อ ↪ เสียงเปลี่ยน: kě → ké ↪ ม้วนลิ้น: shí
+
+## 11.7 ห้องน้ำอยู่ทางโน้นครับ (งานดูแลนักเรียนและวีซ่า)
+
+- EN: The restroom is over there.
+  คำอ่าน: เดอะ **เรส**-ทรูม อิ(ซ) **โอ**-เวอ(ร) แด(ร)
+- JP: お手洗いはあちらです。
+  🔊 おてあらいは あちら です。 · Otearai wa achira desu. · โอะ-เตะ-อะ-ไร วะ อะ-จิ-ระ เดส
+- KR: 화장실은 저쪽이에요.
+  🔊 [화장시른 저쪼기에요.] Hwa-jang-si-reun jeo-jjo-gi-e-yo. · ฮวา-จัง-ชี-รึน ช็อต-โจ-กี-เอ-โย
+- CN: 洗手间在那边。
+  🔊 Xǐshǒujiān zài nàbiān. · สี-โส่ว-เจียน ไจ้ น่า-เปียน ↪ เสียงเปลี่ยน: xǐ → xí ↪ ม้วนลิ้น: shǒu
+- 💡 ญี่ปุ่น: お手洗い สุภาพกว่า トイレ เหมาะกับพูดกับแขก
+
+## 11.8 อีกประมาณสิบนาทีครับ (งานดูแลนักเรียนและวีซ่า)
+
+- EN: It'll be about ten more minutes.
+  คำอ่าน: **อิ**-เดิ(ล) บี อะ-**บาว(ท)** เท็น มอ(ร) **มิ**-นิท(ส)
+- JP: あと10分ぐらいです。
+  🔊 あと じゅっぷん ぐらい です。 · Ato juppun gurai desu. · อะ-โตะ จุป-ปุง กุ-ไร เดส
+- KR: 10분 정도 더 걸려요.
+  🔊 [십 뿐 정도 더 걸려요.] Sip ppun jeong-do deo geol-lyeo-yo. · ชิบ ปุน ช็อง-โด ทอ คอ(ล)-ลยอ-โย
+- CN: 大概还要十分钟。
+  🔊 Dàgài hái yào shí fēnzhōng. · ต้า-ไก้ ไห เย่า สือ เฟิน-จง ↪ ม้วนลิ้น: shí, zhōng
+- 💡 ญี่ปุ่น: 10分 (สิบนาที) อ่าน じゅっぷん หรือ じっぷん ก็ได้ ระวังสับสนกับ 十分 じゅうぶん ที่แปลว่า "เพียงพอ"
+
+## 11.9 ตามผมมาเลยครับ (งานดูแลนักเรียนและวีซ่า)
+
+- EN: Please follow me.
+  คำอ่าน: พลี(ซ) **ฟา**-โล มี
+- JP: ついてきてください。
+  🔊 ついて きて ください。 · Tsuite kite kudasai. · สึ-อิ-เตะ คิ-เตะ คุ-ดะ-ไซ
+- KR: 저를 따라오세요.
+  🔊 Jeo-reul tta-ra-o-se-yo. · ชอ-รึ(ล) ตา-รา-โอ-เซ-โย
+- CN: 请跟我来。
+  🔊 Qǐng gēn wǒ lái. · ฉิ่ง เกิน หว่อ ไหล
+
+## 11.10 เสร็จแล้วกลับมาที่นี่นะครับ (งานดูแลนักเรียนและวีซ่า)
+
+- EN: When you're done, please come back here.
+  คำอ่าน: เว็น ยอ(ร) ดัน, พลี(ซ) คัม แบ็ก เฮีย(ร)
+- JP: 終わったら、ここに戻ってきてください。
+  🔊 おわったら、ここに もどって きて ください。 · Owattara, koko ni modotte kite kudasai. · โอะ-วัต-ตะ-ระ, โคะ-โกะ นิ โมะ-ด็อต-เตะ คิ-เตะ คุ-ดะ-ไซ
+- KR: 끝나면 여기로 다시 와 주세요.
+  🔊 [끈나면 여기로 다시 와 주세요.] Kkeun-na-myeon yeo-gi-ro da-si wa ju-se-yo. · กึน-นา-มย็อน ยอ-กี-โร ทา-ชี วา ชู-เซ-โย
+- CN: 办完以后请回到这里。
+  🔊 Bàn wán yǐhòu qǐng huídào zhèlǐ. · ปั้น หวัน อี่-โฮ่ว ฉิ่ง หุย-ต้าว เจ้อ-หลี่ ↪ ม้วนลิ้น: zhè
+
+## 11.11 สวัสดีครับ ยินดีที่ได้รู้จัก (ชีวิตประจำวัน)
+
+- EN: Hi, nice to meet you.
+  คำอ่าน: ไฮ, ไน(ส) ทะ มี-ชู
+- JP: はじめまして。よろしくお願いします。
+  🔊 はじめまして。よろしく おねがい します。 · Hajimemashite. Yoroshiku onegai shimasu. · ฮะ-จิ-เมะ-มะ-ชิ-เตะ. โยะ-โระ-ชิ-กุ โอะ-เนะ-ไก ชิ-มัส
+- KR: 처음 뵙겠습니다. 반갑습니다.
+  🔊 [처음 뵙껟씀니다. 반갑씀니다.] Cheo-eum boep-kket-sseum-ni-da. Ban-gap-sseum-ni-da. · ชอ-อึม พเว็บ-เก็ด-ซึม-นี-ดา. พัน-กับ-ซึม-นี-ดา
+- CN: 你好，很高兴认识你。
+  🔊 Nǐ hǎo, hěn gāoxìng rènshi nǐ. · หนี ห่าว, เหิ่น กาว-ซิ่ง เริ่น-ซือ หนี่ ↪ เสียงเปลี่ยน: nǐ → ní ↪ ม้วนลิ้น: rèn, shi
+- 💡 เกาหลี: 처음 뵙겠습니다 สุภาพมาก ใช้ตอนเจอกันครั้งแรก
+
+## 11.12 ขอบคุณมากครับ (ชีวิตประจำวัน)
+
+- EN: Thank you very much.
+  คำอ่าน: แธง-คิว **เว**-รี มั(ช)
+- JP: どうもありがとうございます。
+  🔊 どうも ありがとう ございます。 · Dōmo arigatō gozaimasu. · โด-โมะ อะ-ริ-กะ-โต โกะ-ไซ-มัส
+- KR: 정말 감사합니다.
+  🔊 [정말 감사함니다.] Jeong-mal gam-sa-ham-ni-da. · ช็อง-มา(ล) คัม-ซา-ฮัม-นี-ดา
+- CN: 非常感谢。
+  🔊 Fēicháng gǎnxiè. · เฟย-ฉัง กั่น-เซี่ย ↪ ม้วนลิ้น: cháng
+
+## 11.13 ไม่เป็นไรครับ (ชีวิตประจำวัน)
+
+- EN: That's okay.
+  คำอ่าน: แดท(ส) โอ-**เค**
+- JP: 大丈夫ですよ。
+  🔊 だいじょうぶ ですよ。 · Daijōbu desu yo. · ได-โจ-บุ เดส โยะ
+- KR: 괜찮아요.
+  🔊 [괜차나요.] Gwaen-cha-na-yo. · แควน-ชา-นา-โย
+- CN: 没关系。
+  🔊 Méi guānxi. · เหมย กวน-ซี
+- 💡 ระวัง: 大丈夫 ในภาษาจีน (dàzhàngfu) แปลว่า "ลูกผู้ชายตัวจริง" ไม่ใช่ "ไม่เป็นไร"
+
+## 11.14 ขอโทษครับ ขอผ่านหน่อยนะครับ (ชีวิตประจำวัน)
+
+- EN: Excuse me, may I get through?
+  คำอ่าน: อิก-**สกิว(ซ)** มี, เม ไอ เก็ท ธรู
+- JP: すみません、ちょっと通してください。
+  🔊 すみません、ちょっと とおして ください。 · Sumimasen, chotto tōshite kudasai. · ซุ-มิ-มะ-เซ็ง, ช็อต-โตะ โท-ชิ-เตะ คุ-ดะ-ไซ
+- KR: 죄송한데 좀 지나갈게요.
+  🔊 [죄송한데 좀 지나갈께요.] Joe-song-han-de jom ji-na-gal-kke-yo. · ชเว-ซง-ฮัน-เด ชม ชี-นา-กา(ล)-เก-โย
+- CN: 不好意思，借过一下。
+  🔊 Bù hǎoyìsi, jièguò yíxià. · ปู้ ห่าว-อี้-ซือ, เจี้ย-กั้ว อี๋-เซี่ย
+
+## 11.15 ตอนนี้กี่โมงแล้วครับ (ชีวิตประจำวัน)
+
+- EN: What time is it now?
+  คำอ่าน: วัท ไท(ม) อิ-ซิท นาว
+- JP: 今何時ですか。
+  🔊 いま なんじ ですか。 · Ima nanji desu ka. · อิ-มะ นัน-จิ เดส กะ
+- KR: 지금 몇 시예요?
+  🔊 [지금 멷 씨에요?] Ji-geum myeot ssi-e-yo? · ชี-กึม มย็อด ซี-เอ-โย?
+- CN: 现在几点了？
+  🔊 Xiànzài jǐ diǎn le? · เซี่ยน-ไจ้ จี๋ เตี่ยน เลอะ? ↪ เสียงเปลี่ยน: jǐ → jí
+
+## 11.16 ช่วยพูดช้าลงอีกนิดได้ไหมครับ (ชีวิตประจำวัน)
+
+- EN: Could you speak a little more slowly?
+  คำอ่าน: คุ-จู สปีก อะ **ลิ**-เดิ(ล) มอ(ร) **สโล**-ลี
+- JP: もう少しゆっくり話していただけますか。
+  🔊 もう すこし ゆっくり はなして いただけますか。 · Mō sukoshi yukkuri hanashite itadakemasu ka. · โม ซุ-โกะ-ชิ ยุก-กุ-ริ ฮะ-นะ-ชิ-เตะ อิ-ตะ-ดะ-เกะ-มัส กะ
+- KR: 조금만 천천히 말씀해 주시겠어요?
+  🔊 [조금만 천천히 말씀해 주시게써요?] Jo-geum-man cheon-cheon-hi mal-sseum-hae ju-si-ge-sseo-yo? · โช-กึม-มัน ช็อน-ช็อน-ฮี มา(ล)-ซึม-แฮ ชู-ชี-เก-ซอ-โย?
+- CN: 你能说慢一点吗？
+  🔊 Nǐ néng shuō màn yìdiǎn ma? · หนี่ เหนิง ซัว มั่น อี้-เตี่ยน มะ? ↪ ม้วนลิ้น: shuō
+
+## 11.17 กินข้าวหรือยังครับ (ชีวิตประจำวัน)
+
+- EN: Have you eaten yet?
+  คำอ่าน: แฮ(ฟ) ยู **อี**-เทิน เย็ท
+- JP: もうご飯食べましたか。
+  🔊 もう ごはん たべましたか。 · Mō gohan tabemashita ka. · โม โกะ-ฮัง ทะ-เบะ-มะ-ชิ-ตะ กะ
+- KR: 밥 먹었어요?
+  🔊 [밤 머거써요?] Bam meo-geo-sseo-yo? · พัม มอ-กอ-ซอ-โย?
+- CN: 你吃饭了吗？
+  🔊 Nǐ chī fàn le ma? · หนี่ ชือ ฟั่น เลอะ มะ? ↪ ม้วนลิ้น: chī
+- 💡 เกาหลี: 밥 먹었어요? ใช้ทักแบบห่วงใยได้ · จีน: 吃了吗 เป็นคำทักแบบดั้งเดิม ปัจจุบันมักใช้ถามจริงมากกว่า · ญี่ปุ่น: ใช้ถามจริงเท่านั้น ไม่ใช้ทักทาย
+
+## 11.18 เดี๋ยวผมติดต่อกลับนะครับ (ชีวิตประจำวัน)
+
+- EN: I'll get back to you soon.
+  คำอ่าน: ไอ(ล) เก็ท แบ็ก ทะ ยู ซูน
+- JP: 後でまた連絡します。
+  🔊 あとで また れんらく します。 · Ato de mata renraku shimasu. · อะ-โตะ เดะ มะ-ตะ เร็น-ระ-กุ ชิ-มัส
+- KR: 나중에 다시 연락드릴게요.
+  🔊 [나중에 다시 열락뜨릴께요.] Na-jung-e da-si yeol-lak-tteu-ril-kke-yo. · นา-จุง-เอ ทา-ชี ยอ(ล)-ลัก-ตือ-ริ(ล)-เก-โย
+- CN: 我等一下再联系你。
+  🔊 Wǒ děng yíxià zài liánxì nǐ. · หวอ เติ่ง อี๋-เซี่ย ไจ้ เหลียน-ซี่ หนี่ ↪ เสียงเปลี่ยน: wǒ → wó
+
+## 11.19 วันนี้ร้อนมากเลย (ชีวิตประจำวัน)
+
+- EN: It's really hot today.
+  คำอ่าน: อิท(ส) **เรีย**-ลี ฮาท ทะ-**เด**
+- JP: 今日はすごく暑いですね。
+  🔊 きょうは すごく あつい ですね。 · Kyō wa sugoku atsui desu ne. · เคียว วะ ซุ-โกะ-กุ อัต-สึ-อิ เดส เนะ
+- KR: 오늘 정말 덥네요.
+  🔊 [오늘 정말 덤네요.] O-neul jeong-mal deom-ne-yo. · โอ-นึ(ล) ช็อง-มา(ล) ท็อม-เน-โย
+- CN: 今天好热啊。
+  🔊 Jīntiān hǎo rè a. · จิน-เทียน ห่าว เร่อ อะ ↪ ม้วนลิ้น: rè
+
+## 11.20 ไว้เจอกันใหม่นะ (ชีวิตประจำวัน)
+
+- EN: See you next time.
+  คำอ่าน: ซี ยู เน็ก(ส) ไท(ม)
+- JP: また今度会いましょう。
+  🔊 また こんど あいましょう。 · Mata kondo aimashō. · มะ-ตะ คน-โดะ ไอ-มะ-โช
+- KR: 다음에 또 만나요.
+  🔊 [다으메 또 만나요.] Da-eu-me tto man-na-yo. · ทา-อือ-เม โต มัน-นา-โย
+- CN: 下次见。
+  🔊 Xià cì jiàn. · เซี่ย ชื่อ เจี้ยน
+
+## 11.21 ตาเมื่อกี้ ขอบคุณที่แบกนะ (เล่นเกมกับเพื่อน)
+
+- EN: Thanks for carrying that last game!
+  คำอ่าน: แธง(ค)(ส) เฟอ(ร) **แค**-รี-อิง แดท แลส(ท) เกม
+- JP: さっきの試合、キャリーありがとう！
+  🔊 さっきの しあい、キャリー ありがとう！ · Sakki no shiai, kyarī arigatō! · ซัก-กิ โนะ ชิ-ไอ, เคียะ-รี อะ-ริ-กะ-โต!
+- KR: 방금 판 캐리해 줘서 고마워!
+  🔊 Bang-geum pan kae-ri-hae jwo-seo go-ma-wo! · พัง-กึม พัน แค-รี-แฮ ชวอ-ซอ โค-มา-วอ!
+- CN: 刚才那局谢谢你带飞！
+  🔊 Gāngcái nà jú xièxie nǐ dàifēi! · กัง-ไฉ น่า จวี๋ เซี่ย-เซีย หนี่ ไต้-เฟย!
+- 💡 จีน: 带飞 = แบก (พาเพื่อนชนะ)
+
+## 11.22 รอแป๊บ เดี๋ยวกลับมา (เล่นเกมกับเพื่อน)
+
+- EN: Hold on, be right back.
+  คำอ่าน: โฮ(ล)-ดาน, บี ไร(ท) แบ็ก
+- JP: ちょっと待って、すぐ戻る。
+  🔊 ちょっと まって、すぐ もどる。 · Chotto matte, sugu modoru. · ช็อต-โตะ มัต-เตะ, ซุ-กุ โมะ-โดะ-รุ
+- KR: 잠깐만, 금방 올게.
+  🔊 [잠깐만, 금방 올께.] Jam-kkan-man, geum-bang ol-kke. · ชัม-กัน-มัน, คึม-บัง โอ(ล)-เก
+- CN: 等一下，马上回来。
+  🔊 Děng yíxià, mǎshàng huílái. · เติ่ง อี๋-เซี่ย, หม่า-ซั่ง หุย-ไหล ↪ ม้วนลิ้น: shàng
+
+## 11.23 ไปเล่นด้วยกันไหม (เล่นเกมกับเพื่อน)
+
+- EN: Wanna team up?
+  คำอ่าน: **วา**-นะ ที-มัพ
+- JP: 一緒にやらない？
+  🔊 いっしょに やらない？ · Issho ni yaranai? · อิส-โชะ นิ ยะ-ระ-ไน?
+- KR: 같이 할래?
+  🔊 [가치 할래?] Ga-chi hal-lae? · คา-ชี ฮา(ล)-แล?
+- CN: 一起开黑吗？
+  🔊 Yìqǐ kāihēi ma? · อี้-ฉี่ ไค-เฮย มะ?
+- 💡 จีน: 开黑 = จัดตี้เล่นกับเพื่อน (สแลงเกม)
+
+## 11.24 ฮีลให้หน่อย! (เล่นเกมกับเพื่อน)
+
+- EN: Heal me, please!
+  คำอ่าน: ฮี(ล) มี, พลี(ซ)
+- JP: 回復お願い！
+  🔊 かいふく おねがい！ · Kaifuku onegai! · ไค-ฟุ-กุ โอะ-เนะ-ไก!
+- KR: 힐 좀 해 줘!
+  🔊 Hil jom hae jwo! · ฮิ(ล) ชม แฮ ชวอ!
+- CN: 奶我一下！
+  🔊 Nǎi wǒ yíxià! · ไหน หว่อ อี๋-เซี่ย! ↪ เสียงเปลี่ยน: nǎi → nái
+- 💡 จีน: 奶 เป็นสแลงเกม แปลว่า ฮีล (มาจาก 奶妈 = สายฮีล)
+
+## 11.25 เล่นดีมาก! (เล่นเกมกับเพื่อน)
+
+- EN: Nice play!
+  คำอ่าน: ไน(ส) เพล
+- JP: ナイス！
+  🔊 ナイス！ · Naisu! · ไน-ซุ!
+- KR: 잘했어!
+  🔊 [잘해써!] Jal-hae-sseo! · ชา(ล)-แฮ-ซอ!
+- CN: 666！
+  🔊 Liù liù liù! · ลิ่ว ลิ่ว ลิ่ว!
+- 💡 จีน: 666 อ่าน liù liù liù แปลว่า "เทพมาก" (สแลง)
+
+## 11.26 ระวังข้างหลัง! (เล่นเกมกับเพื่อน)
+
+- EN: Watch your back!
+  คำอ่าน: วา-เชอ(ร) แบ็ก
+- JP: 後ろ気をつけて！
+  🔊 うしろ きを つけて！ · Ushiro ki o tsukete! · อุ-ชิ-โระ คิ โอะ สึ-เกะ-เตะ!
+- KR: 뒤 조심해!
+  🔊 Dwi jo-sim-hae! · ทวี โช-ชิม-แฮ!
+- CN: 小心后面！
+  🔊 Xiǎoxīn hòumiàn! · เสี่ยว-ซิน โฮ่ว-เมี่ยน!
+
+## 11.27 แพ้แล้วไม่เป็นไร ตาหน้าเอาใหม่! (เล่นเกมกับเพื่อน)
+
+- EN: We lost, but no worries—let's go again.
+  คำอ่าน: วี ลอส(ท), บัท โน **เวอ**-รี(ซ) — เล็ท(ส) โก อะ-**เก็น**
+- JP: 負けたけど、ドンマイ！次いこう。
+  🔊 まけたけど、ドンマイ！つぎ いこう。 · Maketa kedo, donmai! Tsugi ikō. · มะ-เกะ-ตะ เกะ-โดะ, ดม-ไม! สึ-กิ อิ-โก
+- KR: 졌지만 괜찮아, 다음 판 가자!
+  🔊 [젇찌만 괜차나, 다음 판 가자!] Jeot-jji-man gwaen-cha-na, da-eum pan ga-ja! · ช็อด-จี-มัน แควน-ชา-นา, ทา-อึม พัน คา-จา!
+- CN: 输了没关系，下一局再来！
+  🔊 Shū le méi guānxi, xià yì jú zài lái! · ซู เลอะ เหมย กวน-ซี, เซี่ย อี้ จวี๋ ไจ้ ไหล! ↪ ม้วนลิ้น: shū
+- 💡 ญี่ปุ่น: ドンマイ มาจาก don't mind = ไม่เป็นไร
+
+## 11.28 GG ทุกคน เล่นดีมาก (เล่นเกมกับเพื่อน)
+
+- EN: GG, everyone—well played.
+  คำอ่าน: จี-จี, **เอ(ฟ)**-รี-วัน — เว(ล) เพลด
+- JP: みんなお疲れ！ナイスゲーム。
+  🔊 みんな おつかれ！ナイス ゲーム。 · Minna otsukare! Naisu gēmu. · มิน-นะ อ็อต-สึ-กะ-เระ! ไน-ซุ เก-มุ
+- KR: 다들 수고했어! 굿 게임.
+  🔊 [다들 수고해써! 굳 께임.] Da-deul su-go-hae-sseo! Gut kke-im. · ทา-ดึ(ล) ซู-โก-แฮ-ซอ! คุด เก-อิม
+- CN: GG，大家打得不错！
+  🔊 GG, dàjiā dǎ de búcuò! · จี-จี, ต้า-เจีย ต่า เตอะ ปู๋-ชั่ว!
+- 💡 ญี่ปุ่น お疲れ / เกาหลี 수고했어 = เหนื่อยหน่อยนะ ใช้ได้ทั้งที่ทำงานและในเกม
+
+## 11.29 ขอโทษ เน็ตหลุด (เล่นเกมกับเพื่อน)
+
+- EN: Sorry, my internet dropped.
+  คำอ่าน: **ซา**-รี, ไม **อิน**-เทอ(ร)-เน็ท ดราพ(ท)
+- JP: ごめん、回線落ちた。
+  🔊 ごめん、かいせん おちた。 · Gomen, kaisen ochita. · โกะ-เม็ง, ไค-เซ็ง โอะ-จิ-ตะ
+- KR: 미안, 인터넷 끊겼어.
+  🔊 [미안, 인터넫 끈켜써.] Mi-an, in-teo-net kkeun-kyeo-sseo. · มี-อัน, อิน-ทอ-เน็ด กึน-คยอ-ซอ
+- CN: 抱歉，我掉线了。
+  🔊 Bàoqiàn, wǒ diàoxiàn le. · ป้าว-เชี่ยน, หว่อ เตี้ยว-เซี่ยน เลอะ
+
+## 11.30 ใครเล่นตำแหน่งไหน (เล่นเกมกับเพื่อน)
+
+- EN: Who's playing what role?
+  คำอ่าน: ฮู(ซ) **เพล**-อิง วัท โร(ล)
+- JP: 誰がどのロールやる？
+  🔊 だれが どの ロール やる？ · Dare ga dono rōru yaru? · ดะ-เระ กะ โดะ-โนะ โร-รุ ยะ-รุ?
+- KR: 누가 무슨 포지션 할래?
+  🔊 Nu-ga mu-seun po-ji-syeon hal-lae? · นู-กา มู-ซึน โพ-จี-ช็อน ฮา(ล)-แล?
+- CN: 谁打什么位置？
+  🔊 Shéi dǎ shénme wèizhi? · เสย ต่า เสิน-เมอะ เว่ย-จือ? ↪ ม้วนลิ้น: shéi, shén, zhi
+
+# 12. Known mistakes (wrong → right)
+
+| Wrong | Right | Rule |
+|---|---|---|
+| แพส-พอร์ท / แพส-พอร์(ท) | **แพส**-พอ(ร)(ท) | No ์ anywhere; an r before another final goes in brackets |
+| อะ-พอล-ละ-ไจ(ซ) (apologize) | อะ-**พา**-ละ-ไจ(ซ) | ล can't be a final (Thai reads it น) |
+| ที(ม) (team) | ทีม | Don't bracket a final Thai reads correctly |
+| ไนน (わからないんだ) | วะ-กะ-ระ-ไน(น)-ดะ | ไ can't take a final |
+| kuwashī · kīte | kuwashii · kiite | ii stays ii in Hepburn |
+| wakarain da | wakaranai n da | Romaji matches the kana syllable for syllable |
+| が written งะ next to ご written โกะ | が กะ · ご โกะ | Japanese g = ก everywhere |
+| [보조 직원] | [보조 지권] bo-jo ji-gwon | Liaison: a final consonant moves to a following ㅇ |
+| [열락드릴께요] | [열락뜨릴께요] | Tensing after a ㄱ final (락 + 드 → 락뜨) |
+| 我 spelled อั่ว, then หวั๋ว | 我 wǒ หว่อ every time (หวอ only when said wó before a 3rd tone) | One spelling per syllable and tone |
+| "zh and ch don't touch" | zh, ch touch; sh, r don't | §10.4 of your instructions |
+| A memory hook presented as the real origin of a character | Label it วิธีจำ | §12 of your instructions |
+| Could everyone please return to your seats? | …to their seats? / Everyone, please return to your seats. | Pronoun agreement |
+| Ms. Ing-Ing | Khun Ing-Ing (or Ing-Ing) | Thai names in English |
+| Main translation uses さん for your own colleague to an outsider while 💡 says drop it | Decide per listener; the translation and 💡 must agree | §10.2 of your instructions |
+| → meaning adds words (ผมแค่มาช่วยดูแลนักเรียน) | ผมแค่มาดูแลนักเรียน | The → line adds nothing and drops nothing |
+| Blocks named "กริยาที่ 1/2" | Name blocks by their job | Thai learners read it as กริยาช่อง 1/2 |
+| "until ใช้ present simple เสมอ" | Present simple for the future; past for the past | State a rule's real scope |
+| "details ต้องเติม s เสมอ" | the details (plural) · in detail (no s) | No "always" when there are exceptions |
+| เบา(ท) for about | อะ-**บาว(ท)** | aʊ is always อาว |
+
+— End of reference —

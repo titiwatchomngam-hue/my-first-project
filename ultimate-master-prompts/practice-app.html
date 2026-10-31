@@ -1,0 +1,552 @@
+<title>NativeSense ฝึกพูด</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anuphan:wght@500;600;700&family=IBM+Plex+Sans+Thai:wght@400;500;600&family=IBM+Plex+Sans:ital,wght@0,400;0,500;1,400&display=swap">
+<style>
+/* Layout: one column "passport page" under a sticky language bar; card, quiz and list share the same sheet. */
+:root {
+  --paper: #EEF1F5;
+  --sheet: #FFFFFF;
+  --ink: #17202C;
+  --ink-2: #4B5666;
+  --ink-3: #6B7686;
+  --line: #D7DDE6;
+  --good: #1D7A4C;
+  --good-soft: #E1F3E8;
+  --bad: #B3261E;
+  --bad-soft: #FBE6E4;
+  --stamp: #9E1C4B;
+  --acc-en: #2B59C3; --acc-en-soft: #E5ECFB;
+  --acc-jp: #B4364A; --acc-jp-soft: #F9E5E8;
+  --acc-kr: #10776A; --acc-kr-soft: #DEF1EE;
+  --acc-cn: #A0601A; --acc-cn-soft: #F6EADA;
+  --accent: var(--acc-en); --accent-soft: var(--acc-en-soft);
+  --font-display: "Anuphan", "IBM Plex Sans Thai", "Sarabun", system-ui, sans-serif;
+  --font-body: "IBM Plex Sans Thai", "Sarabun", "Leelawadee UI", system-ui, sans-serif;
+  --font-roman: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+  --font-ja: "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", "Noto Sans CJK JP", "Noto Sans JP", sans-serif;
+  --font-ko: "Apple SD Gothic Neo", "Malgun Gothic", "Noto Sans CJK KR", "Noto Sans KR", sans-serif;
+  --font-zh: "PingFang SC", "Microsoft YaHei", "Noto Sans CJK SC", "Noto Sans SC", sans-serif;
+  --radius: 14px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #0E131A; --sheet: #17202B; --ink: #E7ECF3; --ink-2: #AEB8C6; --ink-3: #8D98A8; --line: #2B3646;
+    --good: #5CCB8E; --good-soft: #15301F; --bad: #FF8A80; --bad-soft: #3A1715; --stamp: #F07AA5;
+    --acc-en: #8DAEFF; --acc-en-soft: #1C2944; --acc-jp: #F28B9B; --acc-jp-soft: #3A1C23;
+    --acc-kr: #5ACDBB; --acc-kr-soft: #11322D; --acc-cn: #E8B566; --acc-cn-soft: #3A2B15;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #0E131A; --sheet: #17202B; --ink: #E7ECF3; --ink-2: #AEB8C6; --ink-3: #8D98A8; --line: #2B3646;
+  --good: #5CCB8E; --good-soft: #15301F; --bad: #FF8A80; --bad-soft: #3A1715; --stamp: #F07AA5;
+  --acc-en: #8DAEFF; --acc-en-soft: #1C2944; --acc-jp: #F28B9B; --acc-jp-soft: #3A1C23;
+  --acc-kr: #5ACDBB; --acc-kr-soft: #11322D; --acc-cn: #E8B566; --acc-cn-soft: #3A2B15;
+  color-scheme: dark;
+}
+.app[data-lang="en"] { --accent: var(--acc-en); --accent-soft: var(--acc-en-soft); }
+.app[data-lang="jp"] { --accent: var(--acc-jp); --accent-soft: var(--acc-jp-soft); }
+.app[data-lang="kr"] { --accent: var(--acc-kr); --accent-soft: var(--acc-kr-soft); }
+.app[data-lang="cn"] { --accent: var(--acc-cn); --accent-soft: var(--acc-cn-soft); }
+
+* { box-sizing: border-box; }
+html, body { background: var(--paper); }
+body { color: var(--ink); font-family: var(--font-body); font-size: 16px; line-height: 1.6; -webkit-text-size-adjust: 100%; }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--sheet); }
+button, input { font: inherit; color: inherit; }
+button { cursor: pointer; }
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; border-radius: 8px; }
+
+.wrap { max-width: 760px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+
+/* header */
+.top { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--sheet); border-bottom: 1px solid var(--line); }
+.top-inner { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px 20px; padding-block: 12px; }
+.brand h1 { margin: 0; font-family: var(--font-display); font-weight: 700; font-size: 1.3rem; line-height: 1.2; letter-spacing: 0.01em; }
+.brand h1 span { color: var(--accent); }
+.brand p { margin: 2px 0 0; color: var(--ink-3); font-size: 0.82rem; }
+.langs { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 4px; background: var(--paper); border: 1px solid var(--line); border-radius: 12px; padding: 4px; flex: 1 1 320px; max-width: 420px; }
+.langs button { border: 0; background: transparent; border-radius: 9px; padding: 6px 4px; display: flex; flex-direction: column; align-items: center; line-height: 1.15; color: var(--ink-2); min-height: 44px; justify-content: center; }
+.langs button .code { font-family: var(--font-roman); font-weight: 500; font-size: 0.78rem; letter-spacing: 0.08em; }
+.langs button .nm { font-size: 0.85rem; }
+.langs button[aria-selected="true"] { background: var(--sheet); color: var(--accent); box-shadow: 0 1px 3px rgba(0,0,0,0.12); font-weight: 600; }
+
+main.wrap { padding-block: 16px 40px; display: grid; gap: 14px; }
+
+/* controls */
+.controls { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; justify-content: space-between; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chip { border: 1px solid var(--line); background: var(--sheet); border-radius: 999px; padding: 6px 13px; font-size: 0.9rem; color: var(--ink-2); min-height: 38px; }
+.chip[aria-pressed="true"] { border-color: var(--accent); background: var(--accent-soft); color: var(--accent); font-weight: 600; }
+.seg { display: inline-flex; background: var(--sheet); border: 1px solid var(--line); border-radius: 10px; padding: 3px; gap: 3px; }
+.seg button { border: 0; background: transparent; border-radius: 7px; padding: 6px 12px; color: var(--ink-2); font-size: 0.9rem; min-height: 36px; }
+.seg button[aria-pressed="true"], .seg button[aria-selected="true"] { background: var(--accent); color: var(--sheet); font-weight: 600; }
+
+.bar { display: flex; flex-wrap: wrap; gap: 8px 12px; align-items: center; justify-content: space-between; }
+.toggle { display: inline-flex; align-items: center; gap: 6px; font-size: 0.88rem; color: var(--ink-2); }
+.toggle input { width: 18px; height: 18px; accent-color: var(--accent); }
+.ghost { border: 1px solid var(--line); background: var(--sheet); border-radius: 9px; padding: 6px 12px; font-size: 0.88rem; color: var(--ink-2); min-height: 36px; }
+
+/* card (passport page) */
+.sheet { position: relative; background: var(--sheet); border: 1px solid var(--line); border-radius: var(--radius); padding: 18px; overflow: hidden; }
+.sheet::before { content: ""; position: absolute; inset: 0 auto 0 0; width: 5px; background: var(--accent); }
+.card-head { display: flex; justify-content: space-between; align-items: center; gap: 8px; color: var(--ink-3); font-size: 0.82rem; }
+.tag { display: inline-block; border: 1px dashed var(--accent); color: var(--accent); border-radius: 6px; padding: 1px 8px; font-size: 0.78rem; letter-spacing: 0.02em; }
+.count { font-family: var(--font-roman); font-variant-numeric: tabular-nums; }
+.prompt { margin: 14px 0 6px; font-family: var(--font-display); font-weight: 600; font-size: clamp(1.25rem, 4.6vw, 1.6rem); line-height: 1.45; text-wrap: balance; }
+.prompt.fx { font-weight: 500; }
+.prompt-sub { color: var(--ink-3); font-size: 0.85rem; margin: 0 0 10px; }
+.reveal { width: 100%; border: 1.5px dashed var(--accent); background: var(--accent-soft); color: var(--accent); border-radius: 11px; padding: 12px; font-weight: 600; min-height: 48px; }
+.answer { display: grid; gap: 10px; border-top: 1px solid var(--line); padding-top: 12px; margin-top: 6px; }
+
+.target { font-size: clamp(1.2rem, 4.4vw, 1.5rem); line-height: 1.5; font-weight: 500; margin: 0; }
+.roman { font-family: var(--font-roman); color: var(--ink-2); margin: 0; overflow-wrap: anywhere; }
+.roman .kana { font-family: var(--font-ja); font-style: normal; color: var(--ink-2); }
+.roman .pron { font-family: var(--font-ko); }
+.reading { margin: 0; font-size: 1.05rem; overflow-wrap: anywhere; }
+.reading .lab { color: var(--ink-3); font-size: 0.8rem; margin-right: 6px; }
+.reading b { color: var(--accent); }
+.extra { margin: 0; color: var(--ink-3); font-size: 0.85rem; font-family: var(--font-roman); }
+.meaning { margin: 0; font-weight: 500; }
+.note { margin: 0; background: var(--accent-soft); border-radius: 10px; padding: 9px 12px; font-size: 0.9rem; color: var(--ink); }
+.note .lab { font-weight: 600; color: var(--accent); margin-right: 4px; }
+.speak { display: flex; gap: 8px; flex-wrap: wrap; }
+.btn { border: 1px solid var(--line); background: var(--sheet); border-radius: 10px; padding: 8px 14px; min-height: 42px; display: inline-flex; align-items: center; gap: 6px; font-weight: 500; }
+.btn.primary { background: var(--accent); border-color: var(--accent); color: var(--sheet); }
+.btn svg { width: 18px; height: 18px; flex: none; }
+.btn[disabled] { opacity: 0.45; cursor: not-allowed; }
+
+.stamp { display: inline-block; transform: rotate(-7deg); border: 2.5px solid var(--stamp); color: var(--stamp); border-radius: 8px; padding: 2px 10px; font-family: var(--font-display); font-weight: 700; font-size: 0.95rem; letter-spacing: 0.04em; opacity: 0.85; pointer-events: none; }
+
+.nav { display: grid; grid-template-columns: 1fr auto 1fr; gap: 8px; align-items: center; }
+.nav .btn { justify-content: center; }
+.nav .know[aria-pressed="true"] { border-color: var(--stamp); color: var(--stamp); background: transparent; }
+.progress { margin: 0; color: var(--ink-3); font-size: 0.86rem; text-align: center; }
+.meter { height: 6px; background: var(--line); border-radius: 99px; overflow: hidden; }
+.meter i { display: block; height: 100%; width: 0; background: var(--accent); transition: width .3s ease; }
+
+/* quiz */
+.options { display: grid; gap: 8px; margin-top: 12px; }
+.opt { text-align: left; border: 1.5px solid var(--line); background: var(--sheet); border-radius: 11px; padding: 11px 13px; min-height: 48px; line-height: 1.45; }
+.opt:hover:not([disabled]) { border-color: var(--accent); }
+.opt.correct { border-color: var(--good); background: var(--good-soft); }
+.opt.wrong { border-color: var(--bad); background: var(--bad-soft); }
+.opt[disabled] { cursor: default; }
+.verdict { font-weight: 600; margin: 0; }
+.verdict.ok { color: var(--good); }
+.verdict.no { color: var(--bad); }
+.listen-big { display: flex; flex-direction: column; align-items: center; gap: 8px; margin: 14px 0 4px; }
+.listen-big .btn { min-height: 56px; padding: 10px 22px; font-size: 1.05rem; }
+.score { font-family: var(--font-roman); font-variant-numeric: tabular-nums; color: var(--ink-2); font-size: 0.9rem; }
+.result h2 { margin: 6px 0; font-family: var(--font-display); font-size: 1.5rem; }
+.missed { display: grid; gap: 10px; margin: 12px 0 0; padding: 0; list-style: none; }
+.missed li { border-top: 1px solid var(--line); padding-top: 10px; display: grid; gap: 4px; }
+
+/* list */
+.search { width: 100%; border: 1px solid var(--line); background: var(--sheet); border-radius: 11px; padding: 10px 13px; min-height: 46px; }
+.plist { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.plist li { display: grid; gap: 7px; background: var(--sheet); border: 1px solid var(--line); border-radius: 12px; padding: 14px; }
+.plist .num { font-family: var(--font-roman); font-variant-numeric: tabular-nums; color: var(--ink-3); font-size: 0.8rem; }
+.plist .th { font-weight: 600; margin: 0; }
+.plist .known-mark { color: var(--stamp); font-size: 0.8rem; font-weight: 600; margin-left: 6px; }
+.empty { color: var(--ink-3); text-align: center; padding: 18px; }
+
+.legend { background: var(--sheet); border: 1px solid var(--line); border-radius: var(--radius); padding: 13px 15px; font-size: 0.86rem; color: var(--ink-2); display: grid; gap: 6px; }
+.legend p { margin: 0; }
+.legend .lab { font-weight: 600; color: var(--ink); }
+.voice-warn { color: var(--bad); }
+footer { color: var(--ink-3); font-size: 0.8rem; text-align: center; }
+
+.app :lang(ja) { font-family: var(--font-ja); }
+.app :lang(ko) { font-family: var(--font-ko); }
+.app :lang(zh) { font-family: var(--font-zh); }
+.missed .th { font-weight: 600; }
+
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
+@media (max-width: 420px) {
+  .sheet { padding: 15px 14px; }
+  .seg button { padding: 6px 9px; }
+}
+</style>
+
+<div class="app" id="app" data-lang="en">
+  <header class="top">
+    <div class="wrap top-inner">
+      <div class="brand">
+        <h1>NativeSense <span>ฝึกพูด</span></h1>
+        <p>30 ประโยคที่ตรวจแล้ว พร้อมคำอ่านไทยและเสียงอ่าน</p>
+      </div>
+      <nav class="langs" role="tablist" aria-label="เลือกภาษา" id="langs">
+        <button role="tab" data-lang="en" aria-selected="true"><span class="code">EN</span><span class="nm">อังกฤษ</span></button>
+        <button role="tab" data-lang="jp" aria-selected="false"><span class="code">JP</span><span class="nm">ญี่ปุ่น</span></button>
+        <button role="tab" data-lang="kr" aria-selected="false"><span class="code">KR</span><span class="nm">เกาหลี</span></button>
+        <button role="tab" data-lang="cn" aria-selected="false"><span class="code">CN</span><span class="nm">จีน</span></button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="controls" aria-label="ตัวเลือก">
+      <div class="chips" id="cats" role="group" aria-label="หมวด">
+        <button class="chip" data-cat="all" aria-pressed="true">ทั้งหมด</button>
+        <button class="chip" data-cat="work" aria-pressed="false">งาน · วีซ่า</button>
+        <button class="chip" data-cat="daily" aria-pressed="false">ชีวิตประจำวัน</button>
+        <button class="chip" data-cat="game" aria-pressed="false">เกม</button>
+      </div>
+      <div class="seg" id="modes" role="tablist" aria-label="โหมด">
+        <button role="tab" data-mode="card" aria-selected="true">การ์ด</button>
+        <button role="tab" data-mode="quiz" aria-selected="false">ควิซ</button>
+        <button role="tab" data-mode="list" aria-selected="false">รายการ</button>
+      </div>
+    </section>
+
+    <!-- CARD -->
+    <section id="view-card" aria-label="การ์ดคำศัพท์" style="display:grid;gap:12px">
+      <div class="bar">
+        <div class="seg" id="dirs" role="group" aria-label="ทิศทาง">
+          <button data-dir="th" aria-pressed="true">ไทย → <span class="lname">อังกฤษ</span></button>
+          <button data-dir="fx" aria-pressed="false"><span class="lname">อังกฤษ</span> → ไทย</button>
+        </div>
+        <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
+          <label class="toggle"><input type="checkbox" id="hideKnown"> ซ่อนที่จำได้แล้ว</label>
+          <button class="ghost" id="shuffleBtn" aria-pressed="false">สลับลำดับ</button>
+        </div>
+      </div>
+      <article class="sheet" id="card" aria-live="polite">
+        <div class="card-head"><span class="tag" id="cardCat"></span><span style="display:inline-flex;gap:10px;align-items:center"><span class="stamp" id="stamp" hidden>จำได้แล้ว</span><span class="count" id="cardCount"></span></span></div>
+        <div id="cardBody"></div>
+      </article>
+      <div class="nav">
+        <button class="btn" id="prevBtn" aria-label="ประโยคก่อนหน้า">← ก่อนหน้า</button>
+        <button class="btn know" id="knowBtn" aria-pressed="false">จำได้แล้ว</button>
+        <button class="btn" id="nextBtn" aria-label="ประโยคถัดไป">ถัดไป →</button>
+      </div>
+      <div class="meter" aria-hidden="true"><i id="meterBar"></i></div>
+      <p class="progress" id="progress"></p>
+    </section>
+
+    <!-- QUIZ -->
+    <section id="view-quiz" aria-label="ควิซ" hidden style="display:grid;gap:12px">
+      <div class="bar">
+        <div class="seg" id="qtypes" role="group" aria-label="แบบควิซ">
+          <button data-qtype="read" aria-pressed="true">อ่านไทย เลือกคำแปล</button>
+          <button data-qtype="listen" aria-pressed="false">ฟังแล้วเลือกความหมาย</button>
+        </div>
+        <span class="score" id="quizScore"></span>
+      </div>
+      <article class="sheet" id="quizCard" aria-live="polite"></article>
+    </section>
+
+    <!-- LIST -->
+    <section id="view-list" aria-label="รายการประโยค" hidden style="display:grid;gap:12px">
+      <input class="search" type="search" id="search" placeholder="ค้นหาจากภาษาไทยหรือภาษาที่เลือก" aria-label="ค้นหาประโยค">
+      <ol class="plist" id="plist"></ol>
+    </section>
+
+    <aside class="legend" aria-label="วิธีอ่าน">
+      <p><span class="lab">วิธีอ่าน</span> คำอ่านไทยเป็นเสียงโดยประมาณ ใช้ฝึกได้แต่แทนเสียงจริงไม่ได้ 100% ควรฟังเสียงเจ้าของภาษาประกอบ · <b>ตัวหนา</b> = ลงเสียงหนัก (อังกฤษ) · (ส) (ล) (ท) (ร) = เสียงท้ายเบา ๆ ที่ต้องออก · - = แบ่งพยางค์</p>
+      <p id="legendLang"></p>
+      <p id="voiceInfo"></p>
+    </aside>
+    <footer>ข้อมูลชุดเดียวกับไฟล์อ้างอิง NativeSense Polyglot rev. 3 · ความคืบหน้าเก็บไว้ในเบราว์เซอร์เครื่องนี้เท่านั้น</footer>
+  </main>
+</div>
+
+<script>
+const DATA = [{"n":1,"cat":"work","th":"รบกวนกลับไปนั่งที่เดิมนะครับ","en":["Please go back to your seats.","พลี(ซ) โก แบ็ก ทะ ยอ(ร) ซีท(ส)"],"jp":["席に戻ってください。","せきに もどって ください。","Seki ni modotte kudasai.","เซะ-กิ นิ โมะ-ด็อต-เตะ คุ-ดะ-ไซ"],"kr":["자리로 돌아가 주세요.","자리로 도라가 주세요.","Ja-ri-ro do-ra-ga ju-se-yo.","ชา-รี-โร โท-รา-กา ชู-เซ-โย"],"cn":["请回到座位上。","Qǐng huídào zuòwèi shang.","ฉิ่ง หุย-ต้าว จั้ว-เว่ย ซัง",[],["shang"],""],"note":"","noteLangs":[]},{"n":2,"cat":"work","th":"อย่าเพิ่งไปไหนนะครับ","en":["Please don't go anywhere yet.","พลี(ซ) โดน(ท) โก **เอ**-นี-แว(ร) เย็ท"],"jp":["まだどこにも行かないでください。","まだ どこにも いかないで ください。","Mada doko ni mo ikanaide kudasai.","มะ-ดะ โดะ-โกะ นิ โมะ อิ-กะ-ไน-เดะ คุ-ดะ-ไซ"],"kr":["아직 아무 데도 가지 마세요.","","A-jik a-mu de-do ga-ji ma-se-yo.","อา-จิก อา-มู เท-โด คา-จี มา-เซ-โย"],"cn":["请先别走开。","Qǐng xiān bié zǒukāi.","ฉิ่ง เซียน เปี๋ย โจ่ว-ไค",[],[],""],"note":"","noteLangs":[]},{"n":3,"cat":"work","th":"ทีมวีซ่าจะเรียกชื่อทีละคนครับ","en":["The visa team will call your names one by one.","เดอะ **วี**-ซะ ทีม วิ(ล) คอ(ล) ยอ(ร) เนม(ซ) วัน บาย วัน"],"jp":["ビザチームが一人ずつ名前を呼びます。","ビザ チームが ひとりずつ なまえを よびます。","Biza chīmu ga hitori zutsu namae o yobimasu.","บิ-ซะ ชี-มุ กะ ฮิ-โตะ-ริ ซุต-สึ นะ-มะ-เอะ โอะ โยะ-บิ-มัส"],"kr":["비자팀이 한 명씩 이름을 부를 거예요.","비자티미 한 명씩 이르믈 부를 꺼에요.","Bi-ja-ti-mi han myeong-ssik i-reu-meul bu-reul kkeo-e-yo.","พี-จา-ที-มี ฮัน มย็อง-ซิก อี-รือ-มึ(ล) พู-รึ(ล) กอ-เอ-โย"],"cn":["签证组会一个一个叫名字。","Qiānzhèng zǔ huì yíge yíge jiào míngzi.","เชียน-เจิ้ง จู่ ฮุ่ย อี๋-เกอะ อี๋-เกอะ เจี้ยว หมิง-จือ",[],["zhèng"],""],"note":"เกาหลี: 부를 거예요 อ่านว่า [부를 꺼에요] เพราะหลัง -ㄹ เสียง ㄱ จะกลายเป็นเสียงตึง","noteLangs":["kr"]},{"n":4,"cat":"work","th":"รบกวนเตรียมพาสปอร์ตไว้ให้พร้อมนะครับ","en":["Please have your passport ready.","พลี(ซ) แฮ(ฟ) ยอ(ร) **แพส**-พอ(ร)(ท) **เร**-ดี"],"jp":["パスポートを用意しておいてください。","パスポートを ようい して おいて ください。","Pasupōto o yōi shite oite kudasai.","พะ-ซุ-โป-โตะ โอะ โย-อิ ชิ-เตะ โอะ-อิ-เตะ คุ-ดะ-ไซ"],"kr":["여권을 준비해 주세요.","여꿔늘 준비해 주세요.","Yeo-kkwo-neul jun-bi-hae ju-se-yo.","ย็อก-กวอ-นึ(ล) ชุน-บี-แฮ ชู-เซ-โย"],"cn":["请准备好护照。","Qǐng zhǔnbèi hǎo hùzhào.","ฉิง จุ่น-เป้ย ห่าว ฮู่-จ้าว",["qǐng → qíng"],["zhǔn","zhào"],""],"note":"เกาหลี: 여권 อ่านว่า [여꿘] (เสียงตึง) ไม่ใช่ [여권]","noteLangs":["kr"]},{"n":5,"cat":"work","th":"เอกสารครบหรือยังครับ","en":["Do you have all your documents?","ดู ยู แฮ(ฟ) ออ(ล) ยอ(ร) **ดาก**-ยะ-เมิน(ท)(ส)"],"jp":["書類は全部そろっていますか。","しょるいは ぜんぶ そろって いますか。","Shorui wa zenbu sorotte imasu ka.","โชะ-รุ-อิ วะ เซ็ม-บุ โซะ-ร็อต-เตะ อิ-มัส กะ"],"kr":["서류는 다 챙겼어요?","서류는 다 챙겨써요?","Seo-ryu-neun da chaeng-gyeo-sseo-yo?","ซอ-รยู-นึน ทา แชง-กยอ-ซอ-โย?"],"cn":["材料都带齐了吗？","Cáiliào dōu dài qí le ma?","ไฉ-เลี่ยว โตว ไต้ ฉี เลอะ มะ?",[],[],""],"note":"จีน: 材料 ในงานเอกสารแปลว่า \"เอกสารที่ต้องยื่น\"","noteLangs":["cn"]},{"n":6,"cat":"work","th":"ถ้ามีคำถาม ถามผมได้เลยนะครับ","en":["If you have any questions, just ask me.","อิ(ฟ) ยู แฮ(ฟ) **เอ**-นี **เควส**-เชิน(ซ), จัส(ท) แอส(ค) มี"],"jp":["何か質問があれば、遠慮なく聞いてください。","なにか しつもんが あれば、えんりょ なく きいて ください。","Nanika shitsumon ga areba, enryo naku kiite kudasai.","นะ-นิ-กะ ชิต-สึ-มง กะ อะ-เระ-บะ, เอ็น-เรียว นะ-กุ คี-เตะ คุ-ดะ-ไซ"],"kr":["궁금한 게 있으면 편하게 물어보세요.","궁금한 게 이쓰면 편하게 무러보세요.","Gung-geum-han ge i-sseu-myeon pyeon-ha-ge mu-reo-bo-se-yo.","คุง-กึม-ฮัน เค อี-ซือ-มย็อน พย็อน-ฮา-เก มู-รอ-โบ-เซ-โย"],"cn":["有问题的话可以随时问我。","Yǒu wèntí de huà kěyǐ suíshí wèn wǒ.","โหย่ว เวิ่น-ถี เตอะ ฮว่า เขอ-อี่ สุย-สือ เวิ่น หว่อ",["kě → ké"],["shí"],""],"note":"","noteLangs":[]},{"n":7,"cat":"work","th":"ห้องน้ำอยู่ทางโน้นครับ","en":["The restroom is over there.","เดอะ **เรส**-ทรูม อิ(ซ) **โอ**-เวอ(ร) แด(ร)"],"jp":["お手洗いはあちらです。","おてあらいは あちら です。","Otearai wa achira desu.","โอะ-เตะ-อะ-ไร วะ อะ-จิ-ระ เดส"],"kr":["화장실은 저쪽이에요.","화장시른 저쪼기에요.","Hwa-jang-si-reun jeo-jjo-gi-e-yo.","ฮวา-จัง-ชี-รึน ช็อต-โจ-กี-เอ-โย"],"cn":["洗手间在那边。","Xǐshǒujiān zài nàbiān.","สี-โส่ว-เจียน ไจ้ น่า-เปียน",["xǐ → xí"],["shǒu"],""],"note":"ญี่ปุ่น: お手洗い สุภาพกว่า トイレ เหมาะกับพูดกับแขก","noteLangs":["jp"]},{"n":8,"cat":"work","th":"อีกประมาณสิบนาทีครับ","en":["It'll be about ten more minutes.","**อิ**-เดิ(ล) บี อะ-**บาว(ท)** เท็น มอ(ร) **มิ**-นิท(ส)"],"jp":["あと10分ぐらいです。","あと じゅっぷん ぐらい です。","Ato juppun gurai desu.","อะ-โตะ จุป-ปุง กุ-ไร เดส"],"kr":["10분 정도 더 걸려요.","십 뿐 정도 더 걸려요.","Sip ppun jeong-do deo geol-lyeo-yo.","ชิบ ปุน ช็อง-โด ทอ คอ(ล)-ลยอ-โย"],"cn":["大概还要十分钟。","Dàgài hái yào shí fēnzhōng.","ต้า-ไก้ ไห เย่า สือ เฟิน-จง",[],["shí","zhōng"],""],"note":"ญี่ปุ่น: 10分 (สิบนาที) อ่าน じゅっぷん หรือ じっぷん ก็ได้ ระวังสับสนกับ 十分 じゅうぶん ที่แปลว่า \"เพียงพอ\"","noteLangs":["jp"]},{"n":9,"cat":"work","th":"ตามผมมาเลยครับ","en":["Please follow me.","พลี(ซ) **ฟา**-โล มี"],"jp":["ついてきてください。","ついて きて ください。","Tsuite kite kudasai.","สึ-อิ-เตะ คิ-เตะ คุ-ดะ-ไซ"],"kr":["저를 따라오세요.","","Jeo-reul tta-ra-o-se-yo.","ชอ-รึ(ล) ตา-รา-โอ-เซ-โย"],"cn":["请跟我来。","Qǐng gēn wǒ lái.","ฉิ่ง เกิน หว่อ ไหล",[],[],""],"note":"","noteLangs":[]},{"n":10,"cat":"work","th":"เสร็จแล้วกลับมาที่นี่นะครับ","en":["When you're done, please come back here.","เว็น ยอ(ร) ดัน, พลี(ซ) คัม แบ็ก เฮีย(ร)"],"jp":["終わったら、ここに戻ってきてください。","おわったら、ここに もどって きて ください。","Owattara, koko ni modotte kite kudasai.","โอะ-วัต-ตะ-ระ, โคะ-โกะ นิ โมะ-ด็อต-เตะ คิ-เตะ คุ-ดะ-ไซ"],"kr":["끝나면 여기로 다시 와 주세요.","끈나면 여기로 다시 와 주세요.","Kkeun-na-myeon yeo-gi-ro da-si wa ju-se-yo.","กึน-นา-มย็อน ยอ-กี-โร ทา-ชี วา ชู-เซ-โย"],"cn":["办完以后请回到这里。","Bàn wán yǐhòu qǐng huídào zhèlǐ.","ปั้น หวัน อี่-โฮ่ว ฉิ่ง หุย-ต้าว เจ้อ-หลี่",[],["zhè"],""],"note":"","noteLangs":[]},{"n":11,"cat":"daily","th":"สวัสดีครับ ยินดีที่ได้รู้จัก","en":["Hi, nice to meet you.","ไฮ, ไน(ส) ทะ มี-ชู"],"jp":["はじめまして。よろしくお願いします。","はじめまして。よろしく おねがい します。","Hajimemashite. Yoroshiku onegai shimasu.","ฮะ-จิ-เมะ-มะ-ชิ-เตะ. โยะ-โระ-ชิ-กุ โอะ-เนะ-ไก ชิ-มัส"],"kr":["처음 뵙겠습니다. 반갑습니다.","처음 뵙껟씀니다. 반갑씀니다.","Cheo-eum boep-kket-sseum-ni-da. Ban-gap-sseum-ni-da.","ชอ-อึม พเว็บ-เก็ด-ซึม-นี-ดา. พัน-กับ-ซึม-นี-ดา"],"cn":["你好，很高兴认识你。","Nǐ hǎo, hěn gāoxìng rènshi nǐ.","หนี ห่าว, เหิ่น กาว-ซิ่ง เริ่น-ซือ หนี่",["nǐ → ní"],["rèn","shi"],""],"note":"เกาหลี: 처음 뵙겠습니다 สุภาพมาก ใช้ตอนเจอกันครั้งแรก","noteLangs":["kr"]},{"n":12,"cat":"daily","th":"ขอบคุณมากครับ","en":["Thank you very much.","แธง-คิว **เว**-รี มั(ช)"],"jp":["どうもありがとうございます。","どうも ありがとう ございます。","Dōmo arigatō gozaimasu.","โด-โมะ อะ-ริ-กะ-โต โกะ-ไซ-มัส"],"kr":["정말 감사합니다.","정말 감사함니다.","Jeong-mal gam-sa-ham-ni-da.","ช็อง-มา(ล) คัม-ซา-ฮัม-นี-ดา"],"cn":["非常感谢。","Fēicháng gǎnxiè.","เฟย-ฉัง กั่น-เซี่ย",[],["cháng"],""],"note":"","noteLangs":[]},{"n":13,"cat":"daily","th":"ไม่เป็นไรครับ","en":["That's okay.","แดท(ส) โอ-**เค**"],"jp":["大丈夫ですよ。","だいじょうぶ ですよ。","Daijōbu desu yo.","ได-โจ-บุ เดส โยะ"],"kr":["괜찮아요.","괜차나요.","Gwaen-cha-na-yo.","แควน-ชา-นา-โย"],"cn":["没关系。","Méi guānxi.","เหมย กวน-ซี",[],[],""],"note":"ระวัง: 大丈夫 ในภาษาจีน (dàzhàngfu) แปลว่า \"ลูกผู้ชายตัวจริง\" ไม่ใช่ \"ไม่เป็นไร\"","noteLangs":["jp","cn"]},{"n":14,"cat":"daily","th":"ขอโทษครับ ขอผ่านหน่อยนะครับ","en":["Excuse me, may I get through?","อิก-**สกิว(ซ)** มี, เม ไอ เก็ท ธรู"],"jp":["すみません、ちょっと通してください。","すみません、ちょっと とおして ください。","Sumimasen, chotto tōshite kudasai.","ซุ-มิ-มะ-เซ็ง, ช็อต-โตะ โท-ชิ-เตะ คุ-ดะ-ไซ"],"kr":["죄송한데 좀 지나갈게요.","죄송한데 좀 지나갈께요.","Joe-song-han-de jom ji-na-gal-kke-yo.","ชเว-ซง-ฮัน-เด ชม ชี-นา-กา(ล)-เก-โย"],"cn":["不好意思，借过一下。","Bù hǎoyìsi, jièguò yíxià.","ปู้ ห่าว-อี้-ซือ, เจี้ย-กั้ว อี๋-เซี่ย",[],[],""],"note":"","noteLangs":[]},{"n":15,"cat":"daily","th":"ตอนนี้กี่โมงแล้วครับ","en":["What time is it now?","วัท ไท(ม) อิ-ซิท นาว"],"jp":["今何時ですか。","いま なんじ ですか。","Ima nanji desu ka.","อิ-มะ นัน-จิ เดส กะ"],"kr":["지금 몇 시예요?","지금 멷 씨에요?","Ji-geum myeot ssi-e-yo?","ชี-กึม มย็อด ซี-เอ-โย?"],"cn":["现在几点了？","Xiànzài jǐ diǎn le?","เซี่ยน-ไจ้ จี๋ เตี่ยน เลอะ?",["jǐ → jí"],[],""],"note":"","noteLangs":[]},{"n":16,"cat":"daily","th":"ช่วยพูดช้าลงอีกนิดได้ไหมครับ","en":["Could you speak a little more slowly?","คุ-จู สปีก อะ **ลิ**-เดิ(ล) มอ(ร) **สโล**-ลี"],"jp":["もう少しゆっくり話していただけますか。","もう すこし ゆっくり はなして いただけますか。","Mō sukoshi yukkuri hanashite itadakemasu ka.","โม ซุ-โกะ-ชิ ยุก-กุ-ริ ฮะ-นะ-ชิ-เตะ อิ-ตะ-ดะ-เกะ-มัส กะ"],"kr":["조금만 천천히 말씀해 주시겠어요?","조금만 천천히 말씀해 주시게써요?","Jo-geum-man cheon-cheon-hi mal-sseum-hae ju-si-ge-sseo-yo?","โช-กึม-มัน ช็อน-ช็อน-ฮี มา(ล)-ซึม-แฮ ชู-ชี-เก-ซอ-โย?"],"cn":["你能说慢一点吗？","Nǐ néng shuō màn yìdiǎn ma?","หนี่ เหนิง ซัว มั่น อี้-เตี่ยน มะ?",[],["shuō"],""],"note":"","noteLangs":[]},{"n":17,"cat":"daily","th":"กินข้าวหรือยังครับ","en":["Have you eaten yet?","แฮ(ฟ) ยู **อี**-เทิน เย็ท"],"jp":["もうご飯食べましたか。","もう ごはん たべましたか。","Mō gohan tabemashita ka.","โม โกะ-ฮัง ทะ-เบะ-มะ-ชิ-ตะ กะ"],"kr":["밥 먹었어요?","밤 머거써요?","Bam meo-geo-sseo-yo?","พัม มอ-กอ-ซอ-โย?"],"cn":["你吃饭了吗？","Nǐ chī fàn le ma?","หนี่ ชือ ฟั่น เลอะ มะ?",[],["chī"],""],"note":"เกาหลี: 밥 먹었어요? ใช้ทักแบบห่วงใยได้ · จีน: 吃了吗 เป็นคำทักแบบดั้งเดิม ปัจจุบันมักใช้ถามจริงมากกว่า · ญี่ปุ่น: ใช้ถามจริงเท่านั้น ไม่ใช้ทักทาย","noteLangs":["jp","kr","cn"]},{"n":18,"cat":"daily","th":"เดี๋ยวผมติดต่อกลับนะครับ","en":["I'll get back to you soon.","ไอ(ล) เก็ท แบ็ก ทะ ยู ซูน"],"jp":["後でまた連絡します。","あとで また れんらく します。","Ato de mata renraku shimasu.","อะ-โตะ เดะ มะ-ตะ เร็น-ระ-กุ ชิ-มัส"],"kr":["나중에 다시 연락드릴게요.","나중에 다시 열락뜨릴께요.","Na-jung-e da-si yeol-lak-tteu-ril-kke-yo.","นา-จุง-เอ ทา-ชี ยอ(ล)-ลัก-ตือ-ริ(ล)-เก-โย"],"cn":["我等一下再联系你。","Wǒ děng yíxià zài liánxì nǐ.","หวอ เติ่ง อี๋-เซี่ย ไจ้ เหลียน-ซี่ หนี่",["wǒ → wó"],[],""],"note":"","noteLangs":[]},{"n":19,"cat":"daily","th":"วันนี้ร้อนมากเลย","en":["It's really hot today.","อิท(ส) **เรีย**-ลี ฮาท ทะ-**เด**"],"jp":["今日はすごく暑いですね。","きょうは すごく あつい ですね。","Kyō wa sugoku atsui desu ne.","เคียว วะ ซุ-โกะ-กุ อัต-สึ-อิ เดส เนะ"],"kr":["오늘 정말 덥네요.","오늘 정말 덤네요.","O-neul jeong-mal deom-ne-yo.","โอ-นึ(ล) ช็อง-มา(ล) ท็อม-เน-โย"],"cn":["今天好热啊。","Jīntiān hǎo rè a.","จิน-เทียน ห่าว เร่อ อะ",[],["rè"],""],"note":"","noteLangs":[]},{"n":20,"cat":"daily","th":"ไว้เจอกันใหม่นะ","en":["See you next time.","ซี ยู เน็ก(ส) ไท(ม)"],"jp":["また今度会いましょう。","また こんど あいましょう。","Mata kondo aimashō.","มะ-ตะ คน-โดะ ไอ-มะ-โช"],"kr":["다음에 또 만나요.","다으메 또 만나요.","Da-eu-me tto man-na-yo.","ทา-อือ-เม โต มัน-นา-โย"],"cn":["下次见。","Xià cì jiàn.","เซี่ย ชื่อ เจี้ยน",[],[],""],"note":"","noteLangs":[]},{"n":21,"cat":"game","th":"ตาเมื่อกี้ ขอบคุณที่แบกนะ","en":["Thanks for carrying that last game!","แธง(ค)(ส) เฟอ(ร) **แค**-รี-อิง แดท แลส(ท) เกม"],"jp":["さっきの試合、キャリーありがとう！","さっきの しあい、キャリー ありがとう！","Sakki no shiai, kyarī arigatō!","ซัก-กิ โนะ ชิ-ไอ, เคียะ-รี อะ-ริ-กะ-โต!"],"kr":["방금 판 캐리해 줘서 고마워!","","Bang-geum pan kae-ri-hae jwo-seo go-ma-wo!","พัง-กึม พัน แค-รี-แฮ ชวอ-ซอ โค-มา-วอ!"],"cn":["刚才那局谢谢你带飞！","Gāngcái nà jú xièxie nǐ dàifēi!","กัง-ไฉ น่า จวี๋ เซี่ย-เซีย หนี่ ไต้-เฟย!",[],[],""],"note":"จีน: 带飞 = แบก (พาเพื่อนชนะ)","noteLangs":["cn"]},{"n":22,"cat":"game","th":"รอแป๊บ เดี๋ยวกลับมา","en":["Hold on, be right back.","โฮ(ล)-ดาน, บี ไร(ท) แบ็ก"],"jp":["ちょっと待って、すぐ戻る。","ちょっと まって、すぐ もどる。","Chotto matte, sugu modoru.","ช็อต-โตะ มัต-เตะ, ซุ-กุ โมะ-โดะ-รุ"],"kr":["잠깐만, 금방 올게.","잠깐만, 금방 올께.","Jam-kkan-man, geum-bang ol-kke.","ชัม-กัน-มัน, คึม-บัง โอ(ล)-เก"],"cn":["等一下，马上回来。","Děng yíxià, mǎshàng huílái.","เติ่ง อี๋-เซี่ย, หม่า-ซั่ง หุย-ไหล",[],["shàng"],""],"note":"","noteLangs":[]},{"n":23,"cat":"game","th":"ไปเล่นด้วยกันไหม","en":["Wanna team up?","**วา**-นะ ที-มัพ"],"jp":["一緒にやらない？","いっしょに やらない？","Issho ni yaranai?","อิส-โชะ นิ ยะ-ระ-ไน?"],"kr":["같이 할래?","가치 할래?","Ga-chi hal-lae?","คา-ชี ฮา(ล)-แล?"],"cn":["一起开黑吗？","Yìqǐ kāihēi ma?","อี้-ฉี่ ไค-เฮย มะ?",[],[],""],"note":"จีน: 开黑 = จัดตี้เล่นกับเพื่อน (สแลงเกม)","noteLangs":["cn"]},{"n":24,"cat":"game","th":"ฮีลให้หน่อย!","en":["Heal me, please!","ฮี(ล) มี, พลี(ซ)"],"jp":["回復お願い！","かいふく おねがい！","Kaifuku onegai!","ไค-ฟุ-กุ โอะ-เนะ-ไก!"],"kr":["힐 좀 해 줘!","","Hil jom hae jwo!","ฮิ(ล) ชม แฮ ชวอ!"],"cn":["奶我一下！","Nǎi wǒ yíxià!","ไหน หว่อ อี๋-เซี่ย!",["nǎi → nái"],[],""],"note":"จีน: 奶 เป็นสแลงเกม แปลว่า ฮีล (มาจาก 奶妈 = สายฮีล)","noteLangs":["cn"]},{"n":25,"cat":"game","th":"เล่นดีมาก!","en":["Nice play!","ไน(ส) เพล"],"jp":["ナイス！","ナイス！","Naisu!","ไน-ซุ!"],"kr":["잘했어!","잘해써!","Jal-hae-sseo!","ชา(ล)-แฮ-ซอ!"],"cn":["666！","Liù liù liù!","ลิ่ว ลิ่ว ลิ่ว!",[],[],"六六六"],"note":"จีน: 666 อ่าน liù liù liù แปลว่า \"เทพมาก\" (สแลง)","noteLangs":["cn"]},{"n":26,"cat":"game","th":"ระวังข้างหลัง!","en":["Watch your back!","วา-เชอ(ร) แบ็ก"],"jp":["後ろ気をつけて！","うしろ きを つけて！","Ushiro ki o tsukete!","อุ-ชิ-โระ คิ โอะ สึ-เกะ-เตะ!"],"kr":["뒤 조심해!","","Dwi jo-sim-hae!","ทวี โช-ชิม-แฮ!"],"cn":["小心后面！","Xiǎoxīn hòumiàn!","เสี่ยว-ซิน โฮ่ว-เมี่ยน!",[],[],""],"note":"","noteLangs":[]},{"n":27,"cat":"game","th":"แพ้แล้วไม่เป็นไร ตาหน้าเอาใหม่!","en":["We lost, but no worries—let's go again.","วี ลอส(ท), บัท โน **เวอ**-รี(ซ) — เล็ท(ส) โก อะ-**เก็น**"],"jp":["負けたけど、ドンマイ！次いこう。","まけたけど、ドンマイ！つぎ いこう。","Maketa kedo, donmai! Tsugi ikō.","มะ-เกะ-ตะ เกะ-โดะ, ดม-ไม! สึ-กิ อิ-โก"],"kr":["졌지만 괜찮아, 다음 판 가자!","젇찌만 괜차나, 다음 판 가자!","Jeot-jji-man gwaen-cha-na, da-eum pan ga-ja!","ช็อด-จี-มัน แควน-ชา-นา, ทา-อึม พัน คา-จา!"],"cn":["输了没关系，下一局再来！","Shū le méi guānxi, xià yì jú zài lái!","ซู เลอะ เหมย กวน-ซี, เซี่ย อี้ จวี๋ ไจ้ ไหล!",[],["shū"],""],"note":"ญี่ปุ่น: ドンマイ มาจาก don't mind = ไม่เป็นไร","noteLangs":["jp"]},{"n":28,"cat":"game","th":"GG ทุกคน เล่นดีมาก","en":["GG, everyone—well played.","จี-จี, **เอ(ฟ)**-รี-วัน — เว(ล) เพลด"],"jp":["みんなお疲れ！ナイスゲーム。","みんな おつかれ！ナイス ゲーム。","Minna otsukare! Naisu gēmu.","มิน-นะ อ็อต-สึ-กะ-เระ! ไน-ซุ เก-มุ"],"kr":["다들 수고했어! 굿 게임.","다들 수고해써! 굳 께임.","Da-deul su-go-hae-sseo! Gut kke-im.","ทา-ดึ(ล) ซู-โก-แฮ-ซอ! คุด เก-อิม"],"cn":["GG，大家打得不错！","GG, dàjiā dǎ de búcuò!","จี-จี, ต้า-เจีย ต่า เตอะ ปู๋-ชั่ว!",[],[],""],"note":"ญี่ปุ่น お疲れ / เกาหลี 수고했어 = เหนื่อยหน่อยนะ ใช้ได้ทั้งที่ทำงานและในเกม","noteLangs":["jp","kr"]},{"n":29,"cat":"game","th":"ขอโทษ เน็ตหลุด","en":["Sorry, my internet dropped.","**ซา**-รี, ไม **อิน**-เทอ(ร)-เน็ท ดราพ(ท)"],"jp":["ごめん、回線落ちた。","ごめん、かいせん おちた。","Gomen, kaisen ochita.","โกะ-เม็ง, ไค-เซ็ง โอะ-จิ-ตะ"],"kr":["미안, 인터넷 끊겼어.","미안, 인터넫 끈켜써.","Mi-an, in-teo-net kkeun-kyeo-sseo.","มี-อัน, อิน-ทอ-เน็ด กึน-คยอ-ซอ"],"cn":["抱歉，我掉线了。","Bàoqiàn, wǒ diàoxiàn le.","ป้าว-เชี่ยน, หว่อ เตี้ยว-เซี่ยน เลอะ",[],[],""],"note":"","noteLangs":[]},{"n":30,"cat":"game","th":"ใครเล่นตำแหน่งไหน","en":["Who's playing what role?","ฮู(ซ) **เพล**-อิง วัท โร(ล)"],"jp":["誰がどのロールやる？","だれが どの ロール やる？","Dare ga dono rōru yaru?","ดะ-เระ กะ โดะ-โนะ โร-รุ ยะ-รุ?"],"kr":["누가 무슨 포지션 할래?","","Nu-ga mu-seun po-ji-syeon hal-lae?","นู-กา มู-ซึน โพ-จี-ช็อน ฮา(ล)-แล?"],"cn":["谁打什么位置？","Shéi dǎ shénme wèizhi?","เสย ต่า เสิน-เมอะ เว่ย-จือ?",[],["shéi","shén","zhi"],""],"note":"","noteLangs":[]}];
+
+const LANGS = {
+  en: { name: 'อังกฤษ', tts: 'en-US', html: 'en' },
+  jp: { name: 'ญี่ปุ่น', tts: 'ja-JP', html: 'ja' },
+  kr: { name: 'เกาหลี', tts: 'ko-KR', html: 'ko' },
+  cn: { name: 'จีน', tts: 'zh-CN', html: 'zh-CN' },
+};
+const CATS = { work: 'งาน · วีซ่า', daily: 'ชีวิตประจำวัน', game: 'เกม' };
+const LEGEND = {
+  en: 'อังกฤษ: มีแต่คำอ่านไทย สำเนียงอเมริกัน (US)',
+  jp: 'ญี่ปุ่น: บรรทัดแรกเป็นคานะกับโรมาจิแบบเฮปเบิร์น (ā ō ū = เสียงยาว)',
+  kr: 'เกาหลี: [วงเล็บ] = เสียงที่ออกจริงเมื่อไม่ตรงกับตัวสะกด ตามด้วยตัวโรมันของเสียงนั้น',
+  cn: 'จีน: พินอินมีเครื่องหมายวรรณยุกต์ · ↪ เสียงเปลี่ยน = วรรณยุกต์ที่เปลี่ยนตอนพูด · ↪ ม้วนลิ้น = zh ch sh r',
+};
+
+/* ---------- state (per-viewer convenience only) ---------- */
+const KEY = 'nativesense-practice-v1';
+const state = { lang: 'en', cat: 'all', mode: 'card', dir: 'th', qtype: 'read', hideKnown: false, shuffle: false, known: { en: [], jp: [], kr: [], cn: [] } };
+try {
+  const saved = JSON.parse(localStorage.getItem(KEY) || 'null');
+  if (saved && typeof saved === 'object') {
+    for (const k of ['lang', 'cat', 'mode', 'dir', 'qtype']) if (typeof saved[k] === 'string') state[k] = saved[k];
+    state.hideKnown = !!saved.hideKnown;
+    if (saved.known) for (const l of Object.keys(LANGS)) if (Array.isArray(saved.known[l])) state.known[l] = saved.known[l].filter(n => Number.isInteger(n));
+  }
+} catch (e) { /* storage unavailable: start fresh */ }
+if (!LANGS[state.lang]) state.lang = 'en';
+if (!['all', 'work', 'daily', 'game'].includes(state.cat)) state.cat = 'all';
+if (!['card', 'quiz', 'list'].includes(state.mode)) state.mode = 'card';
+function save() {
+  try { localStorage.setItem(KEY, JSON.stringify({ lang: state.lang, cat: state.cat, mode: state.mode, dir: state.dir, qtype: state.qtype, hideKnown: state.hideKnown, known: state.known })); } catch (e) { /* ignore */ }
+}
+const isKnown = n => state.known[state.lang].includes(n);
+function setKnown(n, on) {
+  const arr = state.known[state.lang];
+  const i = arr.indexOf(n);
+  if (on && i < 0) arr.push(n);
+  if (!on && i >= 0) arr.splice(i, 1);
+  save();
+}
+
+/* ---------- helpers ---------- */
+const $ = id => document.getElementById(id);
+const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+const bold = s => esc(s).replace(/\*\*(.+?)\*\*/g, '<b>$1</b>');
+function shuffled(a) { const b = a.slice(); for (let i = b.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [b[i], b[j]] = [b[j], b[i]]; } return b; }
+const filtered = () => DATA.filter(p => state.cat === 'all' || p.cat === state.cat);
+function targetText(p, lang = state.lang) { return p[lang][0]; }
+function ttsText(p, lang = state.lang) { return lang === 'cn' && p.cn[5] ? p.cn[5] : p[lang][0]; }
+
+/* ---------- text to speech (device voices) ---------- */
+const TTS = {
+  ok: typeof window.speechSynthesis !== 'undefined' && typeof window.SpeechSynthesisUtterance !== 'undefined',
+  voices: [],
+  load() { if (!this.ok) return; try { this.voices = window.speechSynthesis.getVoices() || []; } catch (e) { this.voices = []; } },
+  voiceFor(lang) {
+    const want = LANGS[lang].tts.toLowerCase();
+    const base = want.slice(0, 2);
+    const norm = v => (v.lang || '').toLowerCase().replace('_', '-');
+    let v = this.voices.find(v => norm(v) === want);
+    if (!v) v = this.voices.find(v => norm(v).startsWith(base) && !/hk|yue/.test(norm(v)));
+    return v || null;
+  },
+  speak(text, lang, slow) {
+    if (!this.ok) return;
+    try {
+      window.speechSynthesis.cancel();
+      const u = new SpeechSynthesisUtterance(text);
+      u.lang = LANGS[lang].tts;
+      const v = this.voiceFor(lang);
+      if (v) u.voice = v;
+      u.rate = slow ? 0.6 : 0.92;
+      window.speechSynthesis.speak(u);
+    } catch (e) { /* ignore */ }
+  },
+};
+TTS.load();
+if (TTS.ok && 'onvoiceschanged' in window.speechSynthesis) window.speechSynthesis.onvoiceschanged = () => { TTS.load(); renderVoiceInfo(); };
+
+const ICON_SPEAK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M18.5 5.5a9 9 0 0 1 0 13"/></svg>';
+const ICON_SLOW = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4z"/><path d="M16 12h5"/></svg>';
+function speakButtons(p) {
+  if (!TTS.ok) return '';
+  return `<div class="speak"><button class="btn primary" data-say="${p.n}" data-slow="0">${ICON_SPEAK}ฟัง</button><button class="btn" data-say="${p.n}" data-slow="1">${ICON_SLOW}ฟังช้า</button></div>`;
+}
+document.addEventListener('click', e => {
+  const b = e.target.closest('[data-say]');
+  if (!b) return;
+  const p = DATA.find(x => x.n === Number(b.dataset.say));
+  if (p) TTS.speak(ttsText(p), state.lang, b.dataset.slow === '1');
+});
+
+/* ---------- phrase block ---------- */
+function readingBlock(p, lang = state.lang) {
+  const L = LANGS[lang];
+  let roman = '', extra = '';
+  if (lang === 'jp') roman = `<p class="roman"><span class="kana" lang="ja">${esc(p.jp[1])}</span> · <i>${esc(p.jp[2])}</i></p>`;
+  if (lang === 'kr') roman = `<p class="roman">${p.kr[1] ? `<span class="pron" lang="ko">[${esc(p.kr[1])}]</span> ` : ''}<i>${esc(p.kr[2])}</i></p>`;
+  if (lang === 'cn') {
+    roman = `<p class="roman"><i>${esc(p.cn[1])}</i></p>`;
+    const parts = [];
+    if (p.cn[3].length) parts.push('↪ เสียงเปลี่ยน: ' + p.cn[3].map(esc).join(', '));
+    if (p.cn[4].length) parts.push('↪ ม้วนลิ้น: ' + p.cn[4].map(esc).join(', '));
+    if (parts.length) extra = `<p class="extra">${parts.join(' &nbsp; ')}</p>`;
+  }
+  const read = lang === 'en' ? p.en[1] : lang === 'jp' ? p.jp[3] : lang === 'kr' ? p.kr[3] : p.cn[2];
+  return `${roman}<p class="reading"><span class="lab">คำอ่าน</span>${bold(read)}</p>${extra}`;
+}
+function noteBlock(p, lang = state.lang) {
+  return p.note && p.noteLangs.includes(lang) ? `<p class="note"><span class="lab">ข้อสังเกต</span>${esc(p.note)}</p>` : '';
+}
+
+/* ---------- card mode ---------- */
+let deck = [], pos = 0, revealed = false;
+function buildDeck(keepCurrent) {
+  const cur = deck[pos];
+  let items = filtered();
+  if (state.hideKnown) items = items.filter(p => !isKnown(p.n));
+  if (state.shuffle) items = shuffled(items);
+  deck = items;
+  pos = keepCurrent && cur ? Math.max(0, deck.findIndex(p => p.n === cur.n)) : 0;
+  revealed = false;
+}
+function renderCard() {
+  const L = LANGS[state.lang];
+  document.querySelectorAll('.lname').forEach(el => el.textContent = L.name);
+  const body = $('cardBody');
+  const total = filtered().length;
+  const knownHere = filtered().filter(p => isKnown(p.n)).length;
+  $('meterBar').style.width = total ? (100 * knownHere / total) + '%' : '0';
+  $('progress').textContent = `จำได้แล้ว ${knownHere} จาก ${total} ประโยค (ภาษา${L.name}${state.cat === 'all' ? '' : ' · ' + CATS[state.cat]})`;
+  if (!deck.length) {
+    $('cardCat').textContent = state.cat === 'all' ? 'ทั้งหมด' : CATS[state.cat];
+    $('cardCount').textContent = '';
+    $('stamp').hidden = true;
+    body.innerHTML = `<p class="empty">จำได้ครบทุกประโยคในหมวดนี้แล้ว<br><button class="btn" id="showAllBtn" style="margin-top:10px">แสดงทั้งหมดอีกครั้ง</button></p>`;
+    $('showAllBtn').onclick = () => { state.hideKnown = false; $('hideKnown').checked = false; save(); buildDeck(false); renderCard(); };
+    ['prevBtn', 'nextBtn', 'knowBtn'].forEach(id => $(id).disabled = true);
+    return;
+  }
+  ['prevBtn', 'nextBtn', 'knowBtn'].forEach(id => $(id).disabled = false);
+  const p = deck[pos];
+  $('cardCat').textContent = CATS[p.cat];
+  $('cardCount').textContent = `${pos + 1} / ${deck.length}`;
+  $('stamp').hidden = !isKnown(p.n);
+  $('knowBtn').setAttribute('aria-pressed', String(isKnown(p.n)));
+  $('knowBtn').textContent = isKnown(p.n) ? 'จำได้แล้ว ✓' : 'จำได้แล้ว';
+  let html;
+  if (state.dir === 'th') {
+    html = `<p class="prompt">${esc(p.th)}</p><p class="prompt-sub">พูดเป็นภาษา${L.name}ให้ได้ก่อน แล้วค่อยดูคำตอบ</p>`;
+    html += revealed
+      ? `<div class="answer"><p class="target" lang="${L.html}">${esc(targetText(p))}</p>${readingBlock(p)}${speakButtons(p)}${noteBlock(p)}</div>`
+      : `<button class="reveal" id="revealBtn">ดูคำตอบ</button>`;
+  } else {
+    html = `<p class="prompt fx" lang="${L.html}">${esc(targetText(p))}</p>${speakButtons(p)}<p class="prompt-sub" style="margin-top:8px">แปลเป็นไทยในใจก่อน แล้วค่อยดูคำตอบ</p>`;
+    html += revealed
+      ? `<div class="answer"><p class="meaning">${esc(p.th)}</p>${readingBlock(p)}${noteBlock(p)}</div>`
+      : `<button class="reveal" id="revealBtn">ดูความหมายและคำอ่าน</button>`;
+  }
+  body.innerHTML = html;
+  const rb = $('revealBtn');
+  if (rb) rb.onclick = () => { revealed = true; renderCard(); const t = document.querySelector('#cardBody .answer'); if (t) t.setAttribute('tabindex', '-1'); };
+}
+function move(d) { if (!deck.length) return; pos = (pos + d + deck.length) % deck.length; revealed = false; renderCard(); }
+$('prevBtn').onclick = () => move(-1);
+$('nextBtn').onclick = () => move(1);
+$('knowBtn').onclick = () => {
+  const p = deck[pos]; if (!p) return;
+  setKnown(p.n, !isKnown(p.n));
+  if (state.hideKnown && isKnown(p.n)) { deck.splice(pos, 1); if (pos >= deck.length) pos = 0; revealed = false; }
+  renderCard();
+};
+$('hideKnown').onchange = e => { state.hideKnown = e.target.checked; save(); buildDeck(true); renderCard(); };
+$('shuffleBtn').onclick = e => { state.shuffle = !state.shuffle; e.currentTarget.setAttribute('aria-pressed', String(state.shuffle)); e.currentTarget.textContent = state.shuffle ? 'เรียงตามลำดับ' : 'สลับลำดับ'; buildDeck(false); renderCard(); };
+document.querySelectorAll('#dirs button').forEach(b => b.onclick = () => { state.dir = b.dataset.dir; save(); revealed = false; syncButtons(); renderCard(); });
+
+/* ---------- quiz mode ---------- */
+let quiz = null;
+function newQuiz() {
+  const pool = shuffled(filtered());
+  quiz = { items: pool.slice(0, Math.min(10, pool.length)), i: 0, right: 0, answered: false, missed: [], opts: [] };
+  renderQuiz(true);
+}
+function quizOptions(p) {
+  const same = shuffled(DATA.filter(x => x.n !== p.n && x.cat === p.cat));
+  const others = shuffled(DATA.filter(x => x.n !== p.n && x.cat !== p.cat));
+  return shuffled([p, ...same.concat(others).slice(0, 3)]);
+}
+function renderQuiz(speakNow) {
+  const box = $('quizCard');
+  const L = LANGS[state.lang];
+  if (!quiz || !quiz.items.length) { box.innerHTML = '<p class="empty">ยังไม่มีประโยคในหมวดนี้</p>'; $('quizScore').textContent = ''; return; }
+  if (quiz.i >= quiz.items.length) {
+    $('quizScore').textContent = '';
+    const missed = quiz.missed.map(p => `<li><span class="th">${esc(p.th)}</span><span lang="${L.html}">${esc(targetText(p))}</span>${readingBlock(p)}</li>`).join('');
+    box.innerHTML = `<div class="result"><p class="prompt-sub">จบรอบแล้ว</p><h2>ได้ ${quiz.right} จาก ${quiz.items.length}</h2>
+      <button class="btn primary" id="againBtn">เล่นอีกรอบ</button>
+      ${missed ? `<p style="margin:14px 0 0;font-weight:600">ข้อที่ควรทบทวน</p><ul class="missed">${missed}</ul>` : '<p>ถูกครบทุกข้อ</p>'}</div>`;
+    $('againBtn').onclick = newQuiz;
+    return;
+  }
+  const p = quiz.items[quiz.i];
+  if (!quiz.answered) quiz.opts = quizOptions(p);
+  $('quizScore').textContent = `ข้อ ${quiz.i + 1}/${quiz.items.length} · ถูก ${quiz.right}`;
+  const listen = state.qtype === 'listen';
+  const canHear = TTS.ok;
+  let head = '';
+  if (!listen) head = `<p class="prompt-sub">ประโยคนี้พูดเป็นภาษา${L.name}ว่าอะไร</p><p class="prompt">${esc(p.th)}</p>`;
+  else if (canHear) head = `<p class="prompt-sub">ฟังแล้วเลือกความหมาย</p><div class="listen-big"><button class="btn primary" data-say="${p.n}" data-slow="0">${ICON_SPEAK}ฟังอีกครั้ง</button><button class="btn" data-say="${p.n}" data-slow="1">${ICON_SLOW}ฟังช้า</button></div>`;
+  else head = `<p class="prompt-sub">เครื่องนี้เล่นเสียงไม่ได้ จึงแสดงเป็นตัวอักษรแทน</p><p class="prompt fx" lang="${L.html}">${esc(targetText(p))}</p>`;
+  const opts = quiz.opts.map((o, k) => {
+    const label = listen ? esc(o.th) : `<span lang="${L.html}">${esc(targetText(o))}</span>`;
+    let cls = 'opt';
+    if (quiz.answered) { if (o.n === p.n) cls += ' correct'; else if (o.n === quiz.picked) cls += ' wrong'; }
+    return `<button class="${cls}" data-opt="${o.n}" ${quiz.answered ? 'disabled' : ''}>${label}</button>`;
+  }).join('');
+  let fb = '';
+  if (quiz.answered) {
+    const ok = quiz.picked === p.n;
+    fb = `<div class="answer" style="margin-top:12px"><p class="verdict ${ok ? 'ok' : 'no'}">${ok ? 'ถูกต้อง' : 'ยังไม่ใช่'}</p>
+      ${listen ? `<p class="target" lang="${L.html}">${esc(targetText(p))}</p>` : `<p class="meaning">${esc(p.th)}</p>`}
+      ${readingBlock(p)}${listen ? '' : speakButtons(p)}${noteBlock(p)}
+      <button class="btn primary" id="quizNext">${quiz.i + 1 < quiz.items.length ? 'ข้อต่อไป' : 'ดูผล'}</button></div>`;
+  }
+  box.innerHTML = `${head}<div class="options">${opts}</div>${fb}`;
+  box.querySelectorAll('[data-opt]').forEach(b => b.onclick = () => {
+    quiz.answered = true; quiz.picked = Number(b.dataset.opt);
+    if (quiz.picked === p.n) quiz.right++; else quiz.missed.push(p);
+    renderQuiz(false);
+    const nb = $('quizNext'); if (nb) nb.focus();
+  });
+  const nb = $('quizNext');
+  if (nb) nb.onclick = () => { quiz.i++; quiz.answered = false; quiz.picked = null; renderQuiz(true); };
+  if (listen && canHear && speakNow) TTS.speak(ttsText(p), state.lang, false);
+}
+document.querySelectorAll('#qtypes button').forEach(b => b.onclick = () => { state.qtype = b.dataset.qtype; save(); syncButtons(); newQuiz(); });
+
+/* ---------- list mode ---------- */
+function renderList() {
+  const L = LANGS[state.lang];
+  const q = $('search').value.trim().toLowerCase();
+  const items = filtered().filter(p => !q || p.th.toLowerCase().includes(q) || targetText(p).toLowerCase().includes(q));
+  $('plist').innerHTML = items.length ? items.map(p => `<li>
+      <div class="card-head"><span class="tag">${CATS[p.cat]}</span><span class="num">#${p.n}${isKnown(p.n) ? '<span class="known-mark">จำได้แล้ว</span>' : ''}</span></div>
+      <p class="th">${esc(p.th)}</p>
+      <p class="target" lang="${L.html}">${esc(targetText(p))}</p>
+      ${readingBlock(p)}${speakButtons(p)}${noteBlock(p)}</li>`).join('')
+    : '<li class="empty">ไม่พบประโยคที่ตรงกับคำค้น</li>';
+}
+$('search').oninput = renderList;
+
+/* ---------- shell ---------- */
+function syncButtons() {
+  document.querySelectorAll('#langs button').forEach(b => b.setAttribute('aria-selected', String(b.dataset.lang === state.lang)));
+  document.querySelectorAll('#cats button').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.cat === state.cat)));
+  document.querySelectorAll('#modes button').forEach(b => b.setAttribute('aria-selected', String(b.dataset.mode === state.mode)));
+  document.querySelectorAll('#dirs button').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.dir === state.dir)));
+  document.querySelectorAll('#qtypes button').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.qtype === state.qtype)));
+  $('hideKnown').checked = state.hideKnown;
+  $('app').dataset.lang = state.lang;
+  document.documentElement.lang = 'th';
+  $('view-card').hidden = state.mode !== 'card';
+  $('view-quiz').hidden = state.mode !== 'quiz';
+  $('view-list').hidden = state.mode !== 'list';
+  $('legendLang').textContent = LEGEND[state.lang];
+}
+function renderVoiceInfo() {
+  const el = $('voiceInfo');
+  const L = LANGS[state.lang];
+  if (!TTS.ok) { el.innerHTML = '<span class="voice-warn">เบราว์เซอร์นี้ไม่มีระบบอ่านออกเสียง ลองเปิดใน Chrome หรือ Safari</span>'; return; }
+  if (TTS.voices.length && !TTS.voiceFor(state.lang)) { el.innerHTML = `<span class="voice-warn">ไม่พบเสียงภาษา${L.name}ในเครื่องนี้ ลองเพิ่มเสียงในการตั้งค่าเครื่อง (ภาษาและการป้อนข้อมูล → อ่านออกเสียง) หรือเปิดใน Chrome</span>`; return; }
+  el.textContent = 'ปุ่มฟังใช้เสียงอ่านของเครื่องคุณ น้ำเสียงจึงต่างกันไปตามมือถือหรือคอมพิวเตอร์';
+}
+function renderAll(resetDeck = true) {
+  syncButtons();
+  renderVoiceInfo();
+  if (resetDeck) buildDeck(false);
+  if (state.mode === 'card') renderCard();
+  if (state.mode === 'quiz') newQuiz();
+  if (state.mode === 'list') renderList();
+}
+document.querySelectorAll('#langs button').forEach(b => b.onclick = () => { state.lang = b.dataset.lang; save(); if (TTS.ok) window.speechSynthesis.cancel(); renderAll(true); });
+document.querySelectorAll('#cats button').forEach(b => b.onclick = () => { state.cat = b.dataset.cat; save(); renderAll(true); });
+document.querySelectorAll('#modes button').forEach(b => b.onclick = () => { state.mode = b.dataset.mode; save(); if (TTS.ok) window.speechSynthesis.cancel(); renderAll(false); });
+
+document.addEventListener('keydown', e => {
+  if (state.mode !== 'card' || e.target.closest('input, textarea')) return;
+  if (e.key === 'ArrowRight') { move(1); e.preventDefault(); }
+  else if (e.key === 'ArrowLeft') { move(-1); e.preventDefault(); }
+  else if ((e.key === ' ' || e.key === 'Enter') && !revealed && !e.target.closest('button')) { revealed = true; renderCard(); e.preventDefault(); }
+});
+
+renderAll(true);
+</script>

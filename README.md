@@ -7,7 +7,7 @@ A Gemini Gem that translates between Thai and English so the result sounds like 
 | [`gem-instructions.md`](gem-instructions.md) | The finished instructions, ready to paste into a Gem |
 | [`CHANGES.md`](CHANGES.md) | Every error fixed and upgrade made compared with v1 ("NativeSense TH–EN Master") |
 
-> **Also in this repo:** [`ultimate-master-prompts/`](ultimate-master-prompts/) is **NativeSense Polyglot**, a 5-language (TH · EN · JP · KR · CN) translator and language-coach prompt for a Gemini Gem or a Claude Project.
+> **Also in this repo:** [`ultimate-master-prompts/`](ultimate-master-prompts/) is **NativeSense Polyglot**, a 5-language (TH · EN · JP · KR · CN) translator and language-coach prompt for a Gemini Gem or a Claude Project, with a Knowledge reference file and a practice app.
 
 ---
 
